@@ -24,15 +24,14 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg-primary);color:va
 .header-en{font-family:'Cinzel',serif;font-size:41px;font-weight:500;letter-spacing:4px;color:var(--heading-gold);margin-left:6px;text-transform:uppercase;}
 .header-subtitle{font-family:'Noto Serif SC',serif;font-size:22px;font-weight:600;color:var(--heading-gold);margin-top:14px;line-height:2;letter-spacing:2px;}
 
-/* ═══ Neoclassical Divider: line — dot — line ═══ */
+/* ═══ Neoclassical Divider ═══ */
 .neo-divider{display:flex;align-items:center;justify-content:center;gap:16px;padding:6px 0;width:50%;max-width:400px;margin:0 auto;}
 .neo-divider .nd-line{flex:1;height:1px;background:var(--gold);opacity:0.5;}
 .neo-divider .nd-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);opacity:0.6;flex-shrink:0;}
 
-/* ═══ Tabs ═══ */
+/* ═══ Tabs — CHANGED: flex-wrap for auto line break ═══ */
 .tabs-container{position:sticky;top:0;z-index:100;background:rgba(250,248,243,0.95);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
-.tabs-bar{display:flex;justify-content:center;max-width:960px;margin:0 auto;overflow-x:auto;scrollbar-width:none;}
-.tabs-bar::-webkit-scrollbar{display:none;}
+.tabs-bar{display:flex;flex-wrap:wrap;justify-content:center;max-width:960px;margin:0 auto;}
 .tab-btn{padding:15px 24px;border:none;background:transparent;font-family:'Noto Serif SC',serif;font-size:19px;font-weight:500;color:var(--text-muted);cursor:pointer;transition:all 0.3s;white-space:nowrap;position:relative;letter-spacing:2px;}
 .tab-btn:hover{color:var(--text-secondary);}
 .tab-btn.active{color:var(--heading-gold);font-weight:700;}
@@ -73,15 +72,7 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg-primary);color:va
 .filter-btn:hover{border-color:var(--text-muted);color:var(--text-secondary);}
 .filter-btn.active{border-color:var(--gold);color:var(--gold);background:var(--gold-glow);}
 
-/* ═══ Chronicles ═══ */
-.article-list{max-width:640px;margin:0 auto;}
-.article-item{padding:28px 0;border-bottom:1px solid var(--border-light);}.article-item:last-child{border-bottom:none;}
-.article-title{font-family:'Noto Serif SC',serif;font-size:21px;font-weight:700;color:var(--item-title);line-height:1.7;cursor:pointer;transition:color 0.2s;}
-.article-title:hover{color:var(--gold);}
-.article-excerpt{font-size:18px;color:var(--text-secondary);line-height:1.9;margin-top:8px;}
-.article-date{font-family:'EB Garamond',serif;font-size:17px;color:var(--text-muted);margin-top:10px;font-style:italic;}
-
-/* ═══ Chronicles Cards ═══ */
+/* ═══ Chronicles Cards — no date shown ═══ */
 .chronicle-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding:8px 0;}
 .chronicle-card{background:var(--bg-card);border:1px solid var(--border);border-radius:3px;overflow:hidden;cursor:pointer;transition:all 0.35s;}
 .chronicle-card:hover{border-color:var(--gold);box-shadow:0 6px 24px rgba(0,0,0,0.06);transform:translateY(-3px);}
@@ -101,13 +92,10 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg-primary);color:va
 .article-modal-date{font-family:'EB Garamond',serif;font-size:16px;color:var(--text-muted);font-style:italic;margin-bottom:20px;}
 .article-modal-body{font-family:'Noto Serif SC',serif;font-size:17px;line-height:2.2;color:var(--text-secondary);}
 
-/* ═══ Gallery ═══ */
-.gallery-grid{columns:3;column-gap:16px;}
-.gallery-item{break-inside:avoid;margin-bottom:16px;border-radius:3px;overflow:hidden;position:relative;cursor:pointer;border:1px solid var(--border);}
-.gallery-item img{width:100%;display:block;transition:transform 0.5s;}.gallery-item:hover img{transform:scale(1.03);}
-.gallery-caption{position:absolute;bottom:0;left:0;right:0;padding:24px 14px 12px;background:linear-gradient(transparent,rgba(0,0,0,0.55));opacity:0;transition:opacity 0.3s;}
-.gallery-item:hover .gallery-caption{opacity:1;}
-.gallery-caption span{font-size:16px;color:#fff;font-family:'Noto Serif SC',serif;}
+/* ═══ Gallery — CHANGED: 4-col photo wall, no interaction ═══ */
+.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:8px 0;}
+.gallery-item{border-radius:3px;overflow:hidden;border:1px solid var(--border);user-select:none;-webkit-user-select:none;pointer-events:none;}
+.gallery-item img{width:100%;display:block;-webkit-user-drag:none;pointer-events:none;}
 
 /* ═══ Lightbox ═══ */
 .lightbox{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:10000;background:rgba(0,0,0,0.88);backdrop-filter:blur(8px);align-items:center;justify-content:center;flex-direction:column;padding:40px;cursor:pointer;}
@@ -130,8 +118,8 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg-primary);color:va
 /* ═══ Responsive ═══ */
 @media(max-width:640px){
   .header{padding:36px 16px 24px;}.header h1{font-size:24px;letter-spacing:4px;}.header-en{font-size:24px;letter-spacing:2px;margin-left:4px;}
-  .tabs-bar{justify-content:flex-start;padding:0 8px;}.tab-btn{padding:13px 14px;font-size:15px;}
-  .featured-grid{grid-template-columns:repeat(2,1fr);gap:12px;}.chronicle-grid{grid-template-columns:repeat(2,1fr);gap:12px;}.gallery-grid{columns:2;}
+  .tabs-bar{justify-content:center;padding:0 8px;}.tab-btn{padding:13px 14px;font-size:15px;}
+  .featured-grid{grid-template-columns:repeat(2,1fr);gap:12px;}.chronicle-grid{grid-template-columns:repeat(2,1fr);gap:12px;}.gallery-grid{grid-template-columns:repeat(2,1fr);gap:10px;}
   .main{padding:0 14px 40px;}.item-info{padding:12px;}.item-title{font-size:15px;}
   .neo-divider{width:70%;}
 }
@@ -141,7 +129,7 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg-primary);color:va
 
 <header class="header">
   <h1>汪楚尧 <span class="header-en">Julian</span></h1>
-  <p class="header-subtitle">艺术品是对命运的僭越</p>
+  <p class="header-subtitle">艺术品是对时间的僭越</p>
 </header>
 
 <nav class="tabs-container"><div class="tabs-bar" id="tabsBar"></div></nav>
@@ -191,10 +179,10 @@ const collection = {
     { id:"r006", title:"法国医务军官大礼服外套", year:"约1931", origin:"法国", type:"大礼服", image:"images/regalia/r006.jpg", description:"Paris Thorn 制，1931式法国医务军官上尉大礼服外套。中厚挺括礼服毛呢、黑主色、单排9金扣、红丝绒袖口和领边。", forSale:false },
     { id:"r007", title:"意大利王家陆军军需兵团上尉晚礼服外套", year:"约1934", origin:"意大利", type:"大礼服", image:"images/regalia/r007.jpg", description:"1934式意大利王家陆军军需兵团上尉晚礼服外套。中厚礼服毛呢、黑主色、双排外张14金扣、紫丝绒领边、紫王冠肩章、深蓝丝绒袖口。", forSale:false },
     { id:"r008", title:"君皇仕脏橘羊毛马甲", year:"约1970", origin:"英国", type:"高级时装", image:"images/regalia/r008.jpg", description:"Gieves & Hawkes（君皇仕）脏橘色羊毛马甲，镀金压纹紫色贝母扣。", forSale:false },
-    { id:"r009", title:"Balmain 珍珠水晶刺绣长裙外套", year:"当代", origin:"法国", type:"高级时装", image:"images/regalia/r009.jpg", description:"Balmain 珍珠与水晶密镶长款礼服外套，香槟色，高定级别工艺。数百颗珍珠与水晶逐粒手工缝缀，刺绣构成对称的巴洛克纹样。剪裁具建筑感，结构精确，丝绸全衬里。即使在 Balmain 的标志性重工系列中，此件在密度、对称性与工艺精度上仍属罕见。", forSale:false },
+    { id:"r009", title:"巴尔曼珍珠水晶刺绣长裙外套", year:"当代", origin:"法国", type:"高级时装", image:"images/regalia/r009.jpg", description:"巴尔曼珍珠与水晶密镶长款礼服外套，香槟色，高定级别工艺。数百颗珍珠与水晶逐粒手工缝缀，刺绣构成对称的巴洛克纹样。剪裁具建筑感，结构精确，丝绸全衬里。即使在巴尔曼的标志性重工系列中，此件在密度、对称性与工艺精度上仍属罕见。", forSale:false },
     { id:"r010", title:"Moschino 拿破仑廓形黑色外套", year:"当代", origin:"意大利", type:"高级时装", image:"images/regalia/r010.jpg", description:"Moschino 拿破仑风格黑色外套，意大利制，初剪羊毛面料，黑色丝绒拼接。宽幅拿破仑翻领、丝绒镶边立领、丝绒翻折袖口，标志性金色球扣。两枚皇冠形倒置口袋盖各饰三粒金球。裁剪硬朗，下摆刻意不对称，轮廓锋利。", forSale:false },
     { id:"r011", title:"Douglas Hayward 海军蓝双排扣大衣", year:"当代", origin:"英国", type:"高级时装", image:"images/regalia/r011.jpg", description:"Douglas Hayward（梅费尔）双排扣大衣，意大利产羊绒羊毛混纺面料，六粒扣前襟，Bemberg 全衬里。剪裁英式，做工精细。", forSale:false },
-    { id:"r012", title:"Burberry 军事风羊绒羊毛短外套", year:"当代", origin:"英国", type:"高级时装", image:"images/regalia/r012.jpg", description:"Burberry 海军蓝军事风短外套，羊绒羊毛混纺。拿破仑式立领、三排金扣、盾徽浮雕扣、肩章、猩红色衬里。", forSale:false },
+    { id:"r012", title:"巴宝莉军事风羊绒羊毛短外套", year:"当代", origin:"英国", type:"高级时装", image:"images/regalia/r012.jpg", description:"巴宝莉海军蓝军事风短外套，羊绒羊毛混纺。拿破仑式立领、三排金扣、盾徽浮雕扣、肩章、猩红色衬里。", forSale:false },
     { id:"r013", title:"西点军校学员大礼服", year:"约1950", origin:"美国", type:"大礼服", image:"images/regalia/r013.jpg", description:"美国西点军校（USMA）学员大礼服外套。深蓝色重磅羊毛，立领，三排金属扣，袖口与下摆黑色编织装饰。20世纪中期。", forSale:false },
   ],
   treasures: [
@@ -208,14 +196,14 @@ const collection = {
     { id:"c002", title:"一件美国仿珠宝的设计逻辑：Florenza 马耳他十字项链", date:"2026年", image:"images/treasures/t001.jpg", excerpt:"这件 Florenza 项链的设计核心策略，是以历史权威性抵消材料的非贵重属性。它同时采用两条手段：以数量与密度压制对材料本身的注意力，以历史叙事将价值判断从材料鉴定转移到符号辨认。两条路径相互强化而非干扰，在同期美国 costume jewelry 中并不多见。风格上，它是四套历史传统的有意识融合：文艺复兴复兴提供构图骨架（马耳他十字与徽章形制），伊特鲁里亚复兴提供工艺语言（掐丝视觉密度与深琥珀色调），维多利亚情感传统引入浪漫向度（心形母题的结构化处理），巴洛克复兴赋予戏剧张力（立体爪托与涡卷细节）。四套语汇各自承担不同的设计功能，并非随机拼贴。<br><br>此件在设计层面的核心成就，在于观者面对它时，首先被激活的不是材料鉴定的冲动，而是历史符号辨认的冲动——这意味着设计策略的成功。庄严与浪漫两种本相悖的情绪向量，通过将心形处理为承载宝石的建筑构件而非独立的情感符号，获得了结构性的平衡。四重对称、三段式层级、中心锁定的放射构图，在极高的元素密度下维持了视觉秩序。铸造掐丝与模制玻璃石的材料层级构成了体验的物质边界，但在自身所设定的设计目标与工艺条件约束内，此件以高度的完成度实现了其设计意图。" },
   ],
   gallery: [
-    { id:"g001", image:"images/gallery/g001.jpg", caption:"" },
-    { id:"g002", image:"images/gallery/g002.jpg", caption:"" },
-    { id:"g003", image:"images/gallery/g003.jpg", caption:"" },
-    { id:"g004", image:"images/gallery/g004.jpg", caption:"" },
-    { id:"g005", image:"images/gallery/g005.jpg", caption:"" },
-    { id:"g006", image:"images/gallery/g006.jpg", caption:"" },
-    { id:"g007", image:"images/gallery/g007.jpg", caption:"" },
-    { id:"g008", image:"images/gallery/g008.jpg", caption:"" },
+    { id:"g001", image:"images/gallery/g001.jpg", caption:"", category:"藏品展示" },
+    { id:"g002", image:"images/gallery/g002.jpg", caption:"", category:"藏品展示" },
+    { id:"g003", image:"images/gallery/g003.jpg", caption:"", category:"藏品展示" },
+    { id:"g004", image:"images/gallery/g004.jpg", caption:"", category:"藏品展示" },
+    { id:"g005", image:"images/gallery/g005.jpg", caption:"", category:"藏品展示" },
+    { id:"g006", image:"images/gallery/g006.jpg", caption:"", category:"藏品展示" },
+    { id:"g007", image:"images/gallery/g007.jpg", caption:"", category:"藏品展示" },
+    { id:"g008", image:"images/gallery/g008.jpg", caption:"", category:"藏品展示" },
   ]
 };
 
@@ -227,7 +215,10 @@ const tabs = [
   { key:"departures", label:"出让" },
   { key:"gallery", label:"画廊" },
 ];
-let currentTab = "cabinet", filters = { regalia:{type:[]}, treasures:{type:[]} };
+let currentTab = "cabinet";
+let filters = { regalia:{type:[]}, treasures:{type:[]} };
+/* CHANGED: gallery filter — both categories active by default */
+let galleryFilter = ["艺术见闻", "藏品展示"];
 
 function renderTabs() {
   document.getElementById("tabsBar").innerHTML = tabs.map(t =>
@@ -250,19 +241,30 @@ function renderCurrentTab() {
   }
 }
 
+/* CHANGED: added chronicle c001 to featured */
 function renderCabinet() {
-  const featuredIds = ["r001","r004","r006","t001","t002"];
+  const featuredIds = ["r001","r004","r009","t001","t002"];
   const all = [...collection.regalia, ...collection.treasures];
   const featured = featuredIds.map(id => all.find(i => i.id === id)).filter(Boolean);
+  const chronicleFeatured = collection.chronicles.find(c => c.id === "c001");
   document.getElementById("tab-cabinet").innerHTML =
     '<div class="curator-statement" style="padding-top:28px">' +
-      '每一件藏品都是一段叙事的入口。<br>' +
-      '我收藏物件，更是它们所承载的身份、权力与审美的历史。<br>' +
-      '它们不语，但从不沉默。' +
+      '每一件藏品都是一段身份、权力或审美的叙事入口。' +
     '</div>' +
     '<div class="section-header"><div class="section-title">精选</div><div class="section-subtitle">Highlights</div></div>' +
     divider +
-    '<div class="featured-grid">' + featured.map((i,n) => renderCard(i,n)).join("") + '</div>';
+    '<div class="featured-grid">' +
+      featured.map((i,n) => renderCard(i,n)).join("") +
+      (chronicleFeatured ? renderChronicleCard(chronicleFeatured, featured.length) : '') +
+    '</div>';
+}
+
+/* NEW: render a chronicle item as a card in the featured grid */
+function renderChronicleCard(item, index) {
+  const img = item.image ? '<img src="' + item.image + '" alt="' + item.title + '" loading="lazy">' : '<span class="item-placeholder">✦</span>';
+  return '<div class="item-card" style="animation:fadeIn 0.4s ease ' + (index*0.06) + 's both" onclick="openArticle(\'' + item.id + '\')">' +
+    '<div class="item-image">' + img + '</div><div class="item-info"><div class="item-title">' + item.title + '</div>' +
+    '<div class="item-meta"><span class="item-tag">另类历史</span></div></div></div>';
 }
 
 function renderCollection(key) {
@@ -291,6 +293,7 @@ function renderCard(item, index) {
     '<div class="item-meta"><span>' + (item.year||'') + '</span><span>' + (item.origin||'') + '</span>' + st + '</div></div></div>';
 }
 
+/* CHANGED: chronicles — removed date display from cards */
 function renderChronicles() {
   document.getElementById("tab-chronicles").innerHTML =
     '<div class="section-header"><div class="section-title">另类历史</div><div class="section-subtitle">Alternative History</div></div>' +
@@ -298,7 +301,7 @@ function renderChronicles() {
     '<div class="chronicle-grid">' + collection.chronicles.map((a,i) =>
       '<div class="chronicle-card" style="animation:fadeIn 0.4s ease ' + (i*0.06) + 's both" onclick="openArticle(\'' + a.id + '\')">' +
         (a.image ? '<div class="card-img"><img src="' + a.image + '" alt="' + a.title + '" loading="lazy"></div>' : '') +
-        '<div class="card-info"><div class="card-title">' + a.title + '</div><div class="card-date">' + a.date + '</div></div></div>'
+        '<div class="card-info"><div class="card-title">' + a.title + '</div></div></div>'
     ).join("") + '</div>';
 }
 
@@ -313,18 +316,38 @@ function renderDepartures() {
       : '<div class="curator-statement" style="color:var(--text-muted)">暂无出让藏品</div>');
 }
 
+/* CHANGED: gallery with two-category filter, 4-col grid, no click/copy */
 function renderGallery() {
-  const items = collection.gallery.filter(g => g.image);
+  const allCats = ["艺术见闻", "藏品展示"];
+  const items = collection.gallery.filter(g => g.image && galleryFilter.includes(g.category));
+
+  const filterHtml = '<div class="filter-bar">' +
+    allCats.map(c =>
+      '<button class="filter-btn ' + (galleryFilter.includes(c)?'active':'') + '" onclick="toggleGalleryFilter(\'' + c + '\')">' + c + '</button>'
+    ).join("") + '</div>';
+
   document.getElementById("tab-gallery").innerHTML =
     '<div class="section-header"><div class="section-title">画廊</div><div class="section-subtitle">Gallery</div></div>' +
-    divider +
+    divider + filterHtml +
     (items.length > 0
       ? '<div class="gallery-grid">' + items.map(g =>
-          '<div class="gallery-item" onclick="openLightboxRaw(\'' + g.image + '\',\'' + (g.caption||'') + '\')"><img src="' + g.image + '" alt="' + (g.caption||'') + '" loading="lazy">' +
-          (g.caption ? '<div class="gallery-caption"><span>' + g.caption + '</span></div>' : '') + '</div>'
+          '<div class="gallery-item"><img src="' + g.image + '" alt="' + (g.caption||'') + '" loading="lazy" oncontextmenu="return false"></div>'
         ).join("") + '</div>'
-      : '<div class="curator-statement" style="color:var(--text-muted)">即将呈现</div>');
+      : '<div class="curator-statement" style="color:var(--text-muted)">该分类暂无内容</div>');
 }
+
+/* NEW: gallery filter toggle */
+window.toggleGalleryFilter = function(cat) {
+  const idx = galleryFilter.indexOf(cat);
+  if (idx > -1) {
+    /* prevent deselecting all */
+    if (galleryFilter.length <= 1) return;
+    galleryFilter.splice(idx, 1);
+  } else {
+    galleryFilter.push(cat);
+  }
+  renderGallery();
+};
 
 window.toggleFilter = function(k,v) {
   if (v==='all') filters[k].type = [];
@@ -338,7 +361,7 @@ window.openLightbox=openLightbox; window.openLightboxRaw=openLightboxRaw; window
 function openArticle(id) {
   const a = collection.chronicles.find(c => c.id === id);
   if (!a) return;
-  if (a.image) document.getElementById("articleImg").src = a.image;
+  if (a.image) { document.getElementById("articleImg").src = a.image; document.getElementById("articleImg").style.display = ""; }
   else document.getElementById("articleImg").style.display = "none";
   document.getElementById("articleTitle").textContent = a.title;
   document.getElementById("articleDate").textContent = a.date;
