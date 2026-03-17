@@ -18,18 +18,15 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg-primary);color:va
 ::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-track{background:var(--bg-primary);}::-webkit-scrollbar-thumb{background:var(--gold-dim);border-radius:3px;}
 @keyframes fadeIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
 
-/* ═══ Header ═══ */
 .header{text-align:center;padding:48px 24px 32px;background:linear-gradient(180deg,#F3F0E7 0%,var(--bg-primary) 100%);}
 .header h1{font-family:'Noto Serif SC',serif;font-size:36px;font-weight:900;letter-spacing:8px;color:var(--heading-gold);}
 .header-en{font-family:'Cinzel',serif;font-size:36px;font-weight:500;letter-spacing:4px;color:var(--heading-gold);margin-left:6px;text-transform:uppercase;}
 .header-subtitle{font-family:'Noto Serif SC',serif;font-size:22px;font-weight:600;color:var(--heading-gold);margin-top:14px;line-height:2;letter-spacing:2px;}
 
-/* ═══ Neoclassical Divider ═══ */
 .neo-divider{display:flex;align-items:center;justify-content:center;gap:16px;padding:6px 0;width:50%;max-width:400px;margin:0 auto;}
 .neo-divider .nd-line{flex:1;height:1px;background:var(--gold);opacity:0.5;}
 .neo-divider .nd-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);opacity:0.6;flex-shrink:0;}
 
-/* ═══ Tabs ═══ */
 .tabs-container{position:sticky;top:0;z-index:100;background:rgba(250,248,243,0.95);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
 .tabs-bar{display:flex;flex-wrap:wrap;justify-content:center;max-width:960px;margin:0 auto;}
 .tab-btn{padding:15px 24px;border:none;background:transparent;font-family:'Noto Serif SC',serif;font-size:18px;font-weight:500;color:var(--text-muted);cursor:pointer;transition:all 0.3s;white-space:nowrap;position:relative;letter-spacing:2px;}
@@ -37,20 +34,20 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg-primary);color:va
 .tab-btn.active{color:var(--heading-gold);font-weight:700;}
 .tab-btn.active::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:24px;height:2px;background:var(--gold);}
 
-/* ═══ Main ═══ */
 .main{max-width:960px;margin:0 auto;padding:0 20px 60px;}
 .tab-content{display:none;animation:fadeIn 0.4s ease;}.tab-content.active{display:block;}
 
-/* ═══ Section ═══ */
 .section-header{text-align:center;padding:36px 0 8px;}
 .section-title{font-family:'Noto Serif SC',serif;font-size:22px;font-weight:700;color:var(--heading-gold);letter-spacing:4px;}
 .section-subtitle{font-size:18px;color:var(--gold);margin-top:8px;font-family:'EB Garamond',serif;font-style:italic;letter-spacing:1px;}
 .section-after-divider{padding-bottom:20px;}
 
-/* ═══ Statement ═══ */
+/* 普通页 statement */
 .curator-statement{font-family:'Noto Serif SC',serif;font-size:18px;line-height:2.2;color:var(--heading-gold);max-width:580px;margin:0 auto;text-align:center;padding:12px 0 28px;}
+/* 珍奇柜专用：紧凑间距，与 section-header 对齐 */
+.cabinet-statement{font-family:'Noto Serif SC',serif;font-size:18px;line-height:2;color:var(--heading-gold);max-width:580px;margin:0 auto;text-align:center;padding:14px 0 0;}
+.cabinet-section-header{text-align:center;padding:12px 0 8px;}
 
-/* ═══ Cards ═══ */
 .featured-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding:8px 0;}
 .item-card{background:var(--bg-card);border:1px solid var(--border);border-radius:3px;overflow:hidden;cursor:pointer;transition:all 0.35s;position:relative;}
 .item-card:hover{border-color:var(--gold);box-shadow:0 6px 24px rgba(0,0,0,0.06),0 0 0 1px var(--gold);transform:translateY(-3px);}
@@ -66,13 +63,11 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg-primary);color:va
 .item-tag{display:inline-block;padding:2px 10px;border-radius:2px;font-size:15px;font-weight:500;color:var(--gold);background:var(--gold-glow);border:1px solid rgba(138,64,56,0.15);letter-spacing:1px;font-family:'Noto Sans SC',sans-serif;}
 .item-tag.sale{color:#A5503C;background:rgba(165,80,60,0.06);border-color:rgba(165,80,60,0.15);}
 
-/* ═══ Filters ═══ */
 .filter-bar{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:0 0 24px;}
 .filter-btn{padding:7px 18px;border:1px solid var(--border);border-radius:2px;background:transparent;color:var(--text-muted);font-size:16px;font-family:'Noto Sans SC',sans-serif;font-weight:500;cursor:pointer;transition:all 0.2s;letter-spacing:1px;}
 .filter-btn:hover{border-color:var(--text-muted);color:var(--text-secondary);}
 .filter-btn.active{border-color:var(--gold);color:var(--gold);background:var(--gold-glow);}
 
-/* ═══ Chronicles Cards ═══ */
 .chronicle-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding:8px 0;}
 .chronicle-card{background:var(--bg-card);border:1px solid var(--border);border-radius:3px;overflow:hidden;cursor:pointer;transition:all 0.35s;}
 .chronicle-card:hover{border-color:var(--gold);box-shadow:0 6px 24px rgba(0,0,0,0.06);transform:translateY(-3px);}
@@ -81,7 +76,6 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg-primary);color:va
 .chronicle-card:hover .card-img img{transform:scale(1.03);}
 .chronicle-card .card-info{padding:14px 16px;}
 .chronicle-card .card-title{font-family:'Noto Serif SC',serif;font-size:17px;font-weight:600;color:var(--item-title);line-height:1.7;}
-.chronicle-card .card-date{font-family:'EB Garamond',serif;font-size:15px;color:var(--text-muted);margin-top:4px;font-style:italic;}
 .article-modal{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:10000;background:rgba(0,0,0,0.6);backdrop-filter:blur(6px);overflow-y:auto;padding:40px 20px;}
 .article-modal.open{display:block;}
 .article-modal-inner{max-width:720px;margin:0 auto;background:var(--bg-primary);border-radius:4px;padding:40px 36px;position:relative;box-shadow:0 20px 60px rgba(0,0,0,0.2);}
@@ -92,12 +86,10 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg-primary);color:va
 .article-modal-date{font-family:'EB Garamond',serif;font-size:16px;color:var(--text-muted);font-style:italic;margin-bottom:20px;}
 .article-modal-body{font-family:'Noto Serif SC',serif;font-size:17px;line-height:2.2;color:var(--text-secondary);}
 
-/* ═══ Gallery ═══ */
 .gallery-grid{column-count:4;column-gap:12px;padding:8px 0;}
 .gallery-item{break-inside:avoid;margin-bottom:12px;overflow:hidden;user-select:none;-webkit-user-select:none;pointer-events:none;}
 .gallery-item img{width:100%;display:block;-webkit-user-drag:none;pointer-events:none;}
 
-/* ═══ Lightbox ═══ */
 .lightbox{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:10000;background:rgba(0,0,0,0.88);backdrop-filter:blur(8px);align-items:center;justify-content:center;flex-direction:column;padding:40px;cursor:pointer;}
 .lightbox.open{display:flex;}
 .lightbox img{max-width:90%;max-height:75vh;object-fit:contain;}
@@ -107,7 +99,6 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg-primary);color:va
 .lightbox-close{position:absolute;top:24px;right:28px;font-size:28px;color:#999;cursor:pointer;background:none;border:none;transition:color 0.2s;}
 .lightbox-close:hover{color:#fff;}
 
-/* ═══ Footer ═══ */
 .footer{text-align:center;padding:48px 24px;border-top:1px solid var(--border);}
 .footer p{font-family:'Noto Serif SC',serif;font-size:17px;font-weight:500;color:var(--gold);letter-spacing:2px;}
 .footer p+p{margin-top:6px;}
@@ -115,7 +106,6 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg-primary);color:va
 .footer a{color:var(--gold);text-decoration:none;font-family:'Cinzel',serif;font-size:17px;letter-spacing:2px;}
 .footer a:hover{text-decoration:underline;}
 
-/* ═══ Responsive ═══ */
 @media(max-width:640px){
   .header{padding:36px 16px 24px;}.header h1{font-size:24px;letter-spacing:4px;}.header-en{font-size:24px;letter-spacing:2px;margin-left:4px;}
   .tabs-bar{justify-content:center;padding:0 8px;}.tab-btn{padding:13px 14px;font-size:15px;}
@@ -169,7 +159,6 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg-primary);color:va
 <script>
 const divider = '<div class="neo-divider section-after-divider"><div class="nd-line"></div><div class="nd-dot"></div><div class="nd-line"></div></div>';
 
-// ── type 重命名：大礼服 → 仪式礼服，梅斯礼服 → 晚宴梅斯礼服 ──
 const collection = {
   regalia: [
     { id:"r001", title:"皇家海军少将常礼服外套", year:"1982", origin:"英国", type:"仪式礼服", highlight:true, image:"images/regalia/r001.jpg", description:"Moseley & Pounsford 制，皇家海军少将（Rear Admiral）常礼服外套。海军蓝主色、中等厚度礼服毛呢、双排8金扣、金袖标。马岛战争中谢菲尔德号驱逐舰被击沉后舰长返英后重新订制。", forSale:false },
@@ -217,22 +206,17 @@ const collection = {
   ]
 };
 
-// ── 年代排序辅助函数：忽略"约"，当代排最后 ──
 function parseYear(y) {
   if (!y || y === '当代') return 9999;
-  const clean = y.replace('约', '').trim();
-  const n = parseInt(clean, 10);
+  const n = parseInt(y.replace('约','').trim(), 10);
   return isNaN(n) ? 9999 : n;
 }
 
-// ── 按 highlight 优先、再按年代升序排列 ──
+// highlight 优先，各组内按年代升序
 function sortItems(items) {
-  return [...items].sort((a, b) => {
-    const ha = a.highlight ? 0 : 1;
-    const hb = b.highlight ? 0 : 1;
-    if (ha !== hb) return ha - hb;
-    return parseYear(a.year) - parseYear(b.year);
-  });
+  const hl = [...items].filter(i => i.highlight).sort((a,b) => parseYear(a.year)-parseYear(b.year));
+  const rest = [...items].filter(i => !i.highlight).sort((a,b) => parseYear(a.year)-parseYear(b.year));
+  return [...hl, ...rest];
 }
 
 const tabs = [
@@ -249,16 +233,15 @@ let galleryFilter = ["艺术见闻", "藏品展示"];
 
 function renderTabs() {
   document.getElementById("tabsBar").innerHTML = tabs.map(t =>
-    '<button class="tab-btn ' + (currentTab===t.key?'active':'') + '" onclick="switchTab(\'' + t.key + '\')">' + t.label + '</button>'
+    '<button class="tab-btn '+(currentTab===t.key?'active':'')+'" onclick="switchTab(\''+t.key+'\')">'+t.label+'</button>'
   ).join("");
-  document.querySelectorAll(".tab-content").forEach(e => e.classList.remove("active"));
-  const e = document.getElementById("tab-" + currentTab);
-  if (e) e.classList.add("active");
-  document.getElementById("mainContent").setAttribute("data-tab", currentTab);
+  document.querySelectorAll(".tab-content").forEach(e=>e.classList.remove("active"));
+  const e=document.getElementById("tab-"+currentTab);
+  if(e)e.classList.add("active");
 }
-function switchTab(k) { currentTab=k; renderTabs(); renderCurrentTab(); window.scrollTo({top:0,behavior:'smooth'}); }
-function renderCurrentTab() {
-  switch(currentTab) {
+function switchTab(k){currentTab=k;renderTabs();renderCurrentTab();window.scrollTo({top:0,behavior:'smooth'});}
+function renderCurrentTab(){
+  switch(currentTab){
     case "cabinet": renderCabinet(); break;
     case "regalia": renderCollection("regalia"); break;
     case "treasures": renderCollection("treasures"); break;
@@ -269,126 +252,103 @@ function renderCurrentTab() {
 }
 
 function renderCabinet() {
-  // 精选顺序固定：r001、r004、r009 前三，然后 t002、t001，最后文章卡
-  const featuredIds = ["r001","r004","r009","t002","t001"];
+  // 精选固定顺序：r001、r009、r004（巴尔曼与医疗军团对调后），t002、t001，最后文章卡
+  const featuredIds = ["r001","r009","r004","t002","t001"];
   const all = [...collection.regalia, ...collection.treasures];
-  const featured = featuredIds.map(id => all.find(i => i.id === id)).filter(Boolean);
-  const chronicleFeatured = collection.chronicles.find(c => c.id === "c001");
+  const featured = featuredIds.map(id => all.find(i => i.id===id)).filter(Boolean);
+  const chronicleFeatured = collection.chronicles.find(c => c.id==="c001");
   document.getElementById("tab-cabinet").innerHTML =
-    '<div class="curator-statement" style="padding-top:28px">' +
-      '艺术品是审美、身份与权力的物质叙事' +
-    '</div>' +
-    '<div class="section-header"><div class="section-title">精选</div><div class="section-subtitle">Highlights</div></div>' +
+    '<div class="cabinet-statement">艺术品是审美、身份与权力的物质叙事</div>' +
+    '<div class="cabinet-section-header"><div class="section-title">精选</div><div class="section-subtitle">Highlights</div></div>' +
     divider +
     '<div class="featured-grid">' +
-      featured.map((i,n) => renderCard(i, n, true)).join("") +
+      featured.map((i,n) => renderCard(i,n,true)).join("") +
       (chronicleFeatured ? renderChronicleCard(chronicleFeatured, featured.length) : '') +
     '</div>';
 }
 
-// renderChronicleCard: 不显示标签
 function renderChronicleCard(item, index) {
-  const img = item.image ? '<img src="' + item.image + '" alt="' + item.title + '" loading="lazy">' : '<span class="item-placeholder">✦</span>';
-  return '<div class="item-card" style="animation:fadeIn 0.4s ease ' + (index*0.06) + 's both" onclick="openArticle(\'' + item.id + '\')">' +
-    '<div class="item-image">' + img + '</div><div class="item-info"><div class="item-title">' + item.title + '</div>' +
+  const img = item.image ? '<img src="'+item.image+'" alt="'+item.title+'" loading="lazy">' : '<span class="item-placeholder">✦</span>';
+  return '<div class="item-card" style="animation:fadeIn 0.4s ease '+(index*0.06)+'s both" onclick="openArticle(\''+item.id+'\')">'+
+    '<div class="item-image">'+img+'</div><div class="item-info"><div class="item-title">'+item.title+'</div>'+
     '<div class="item-meta"></div></div></div>';
 }
 
 function renderCollection(key) {
-  const allItems = collection[key] || [];
-  const types = [...new Set(allItems.map(i => i.type))];
-  const af = filters[key]?.type || [];
-  const filtered = af.length === 0 ? allItems : allItems.filter(i => af.includes(i.type));
-
-  // 排序：highlight 优先，各组内按年代
+  const allItems = collection[key]||[];
+  const types = [...new Set(allItems.map(i=>i.type))];
+  const af = filters[key]?.type||[];
+  const filtered = af.length===0 ? allItems : allItems.filter(i=>af.includes(i.type));
   const sorted = sortItems(filtered);
-
-  const tm = { regalia:"礼服与华服", treasures:"勋章与珠宝" };
-  const sm = { regalia:"Uniform & Couture", treasures:"Medal & Jewellery" };
-
-  // 勋章与珠宝：不显示分类选择器
-  let fh = '';
-  if (key === 'regalia' && types.length > 1) {
-    fh = '<div class="filter-bar"><button class="filter-btn ' + (af.length===0?'active':'') + '" onclick="toggleFilter(\'' + key + '\',\'all\')">全部</button>' +
-      types.map(t => '<button class="filter-btn ' + (af.includes(t)?'active':'') + '" onclick="toggleFilter(\'' + key + '\',\'' + t + '\')">' + t + '</button>').join("") + '</div>';
+  const tm={regalia:"礼服与华服",treasures:"勋章与珠宝"};
+  const sm={regalia:"Uniform & Couture",treasures:"Medal & Jewellery"};
+  let fh='';
+  if(key==='regalia'&&types.length>1){
+    fh='<div class="filter-bar"><button class="filter-btn '+(af.length===0?'active':'')+'" onclick="toggleFilter(\''+key+'\',\'all\')">全部</button>'+
+      types.map(t=>'<button class="filter-btn '+(af.includes(t)?'active':'')+'" onclick="toggleFilter(\''+key+'\',\''+t+'\')">'+t+'</button>').join("")+'</div>';
   }
-
-  document.getElementById("tab-" + key).innerHTML =
-    '<div class="section-header"><div class="section-title">' + tm[key] + '</div><div class="section-subtitle">' + sm[key] + '</div></div>' +
-    divider + fh +
-    '<div class="featured-grid">' + sorted.map((i,n) => renderCard(i, n, false)).join("") + '</div>';
+  document.getElementById("tab-"+key).innerHTML=
+    '<div class="section-header"><div class="section-title">'+tm[key]+'</div><div class="section-subtitle">'+sm[key]+'</div></div>'+
+    divider+fh+
+    '<div class="featured-grid">'+sorted.map((i,n)=>renderCard(i,n,false)).join("")+'</div>';
 }
 
-// renderCard: isHighlightContext=true 时不显示任何标签（用于珍奇柜精选）
-function renderCard(item, index, isHighlightContext) {
-  const img = item.image ? '<img src="' + item.image + '" alt="' + item.title + '" loading="lazy">' : '<span class="item-placeholder">✦</span>';
+function renderCard(item, index, isHighlightCtx) {
+  const img = item.image ? '<img src="'+item.image+'" alt="'+item.title+'" loading="lazy">' : '<span class="item-placeholder">✦</span>';
   const st = item.forSale ? '<span class="item-tag sale">可出让</span>' : '';
-  // 在各 tab 内部：highlight 项不显示任何分类标签；非 highlight 项正常显示出让标签
-  const tagHtml = isHighlightContext ? '' : st;
-  return '<div class="item-card" style="animation:fadeIn 0.4s ease ' + (index*0.06) + 's both" onclick="openLightbox(\'' + item.id + '\')">' +
-    '<div class="item-image">' + img + '</div><div class="item-info"><div class="item-title">' + item.title + '</div>' +
-    '<div class="item-meta"><span>' + (item.year||'') + '</span><span>' + (item.origin||'') + '</span>' + tagHtml + '</div></div></div>';
+  const tagHtml = isHighlightCtx ? '' : st;
+  return '<div class="item-card" style="animation:fadeIn 0.4s ease '+(index*0.06)+'s both" onclick="openLightbox(\''+item.id+'\')">'+
+    '<div class="item-image">'+img+'</div><div class="item-info"><div class="item-title">'+item.title+'</div>'+
+    '<div class="item-meta"><span>'+(item.year||'')+'</span><span>'+(item.origin||'')+'</span>'+tagHtml+'</div></div></div>';
 }
 
 function renderChronicles() {
-  document.getElementById("tab-chronicles").innerHTML =
-    '<div class="section-header"><div class="section-title">另类历史</div><div class="section-subtitle">Alternative History</div></div>' +
-    divider +
-    '<div class="chronicle-grid">' + collection.chronicles.map((a,i) =>
-      '<div class="chronicle-card" style="animation:fadeIn 0.4s ease ' + (i*0.06) + 's both" onclick="openArticle(\'' + a.id + '\')">' +
-        (a.image ? '<div class="card-img"><img src="' + a.image + '" alt="' + a.title + '" loading="lazy"></div>' : '') +
-        '<div class="card-info"><div class="card-title">' + a.title + '</div></div></div>'
-    ).join("") + '</div>';
+  document.getElementById("tab-chronicles").innerHTML=
+    '<div class="section-header"><div class="section-title">另类历史</div><div class="section-subtitle">Alternative History</div></div>'+
+    divider+
+    '<div class="chronicle-grid">'+collection.chronicles.map((a,i)=>
+      '<div class="chronicle-card" style="animation:fadeIn 0.4s ease '+(i*0.06)+'s both" onclick="openArticle(\''+a.id+'\')">'+
+        (a.image?'<div class="card-img"><img src="'+a.image+'" alt="'+a.title+'" loading="lazy"></div>':'')+
+        '<div class="card-info"><div class="card-title">'+a.title+'</div></div></div>'
+    ).join("")+'</div>';
 }
 
 function renderDepartures() {
-  const fs = [...collection.regalia, ...collection.treasures].filter(i => i.forSale);
-  document.getElementById("tab-departures").innerHTML =
-    '<div class="section-header"><div class="section-title">甄选出让</div><div class="section-subtitle">Available Pieces</div></div>' +
-    divider +
-    '<div class="curator-statement" style="padding-bottom:16px">以下藏品寻找新的归宿。如有兴趣，请通过页尾联系方式洽询。</div>' +
-    (fs.length > 0
-      ? '<div class="featured-grid" style="padding-top:8px">' + fs.map((i,n) => renderCard(i,n,false)).join("") + '</div>'
-      : '<div class="curator-statement" style="color:var(--text-muted)">暂无出让藏品</div>');
+  const fs=[...collection.regalia,...collection.treasures].filter(i=>i.forSale);
+  document.getElementById("tab-departures").innerHTML=
+    '<div class="section-header"><div class="section-title">甄选出让</div><div class="section-subtitle">Available Pieces</div></div>'+
+    divider+
+    '<div class="curator-statement" style="padding-bottom:16px">以下藏品寻找新的归宿。如有兴趣，请通过页尾联系方式洽询。</div>'+
+    (fs.length>0
+      ?'<div class="featured-grid" style="padding-top:8px">'+fs.map((i,n)=>renderCard(i,n,false)).join("")+'</div>'
+      :'<div class="curator-statement" style="color:var(--text-muted)">暂无出让藏品</div>');
 }
 
 function renderGallery() {
-  const allCats = ["艺术见闻", "藏品展示"];
-  const items = collection.gallery.filter(g => g.image && galleryFilter.includes(g.category));
-
-  const filterHtml = '<div class="filter-bar">' +
-    allCats.map(c =>
-      '<button class="filter-btn ' + (galleryFilter.includes(c)?'active':'') + '" onclick="toggleGalleryFilter(\'' + c + '\')">' + c + '</button>'
-    ).join("") + '</div>';
-
-  document.getElementById("tab-gallery").innerHTML =
-    '<div class="section-header"><div class="section-title">画廊</div><div class="section-subtitle">Gallery</div></div>' +
-    divider + filterHtml +
-    (items.length > 0
-      ? '<div class="gallery-grid">' + items.map(g =>
-          '<div class="gallery-item"><img src="' + g.image + '" alt="' + (g.caption||'') + '" loading="lazy" oncontextmenu="return false"></div>'
-        ).join("") + '</div>'
-      : '<div class="curator-statement" style="color:var(--text-muted)">该分类暂无内容</div>');
+  const allCats=["艺术见闻","藏品展示"];
+  const items=collection.gallery.filter(g=>g.image&&galleryFilter.includes(g.category));
+  const filterHtml='<div class="filter-bar">'+
+    allCats.map(c=>'<button class="filter-btn '+(galleryFilter.includes(c)?'active':'')+'" onclick="toggleGalleryFilter(\''+c+'\')">'+c+'</button>').join("")+'</div>';
+  document.getElementById("tab-gallery").innerHTML=
+    '<div class="section-header"><div class="section-title">画廊</div><div class="section-subtitle">Gallery</div></div>'+
+    divider+filterHtml+
+    (items.length>0
+      ?'<div class="gallery-grid">'+items.map(g=>'<div class="gallery-item"><img src="'+g.image+'" alt="'+(g.caption||'')+'" loading="lazy" oncontextmenu="return false"></div>').join("")+'</div>'
+      :'<div class="curator-statement" style="color:var(--text-muted)">该分类暂无内容</div>');
 }
 
-window.toggleGalleryFilter = function(cat) {
-  const idx = galleryFilter.indexOf(cat);
-  if (idx > -1) {
-    if (galleryFilter.length <= 1) return;
-    galleryFilter.splice(idx, 1);
-  } else {
-    galleryFilter.push(cat);
-  }
+window.toggleGalleryFilter=function(cat){
+  const idx=galleryFilter.indexOf(cat);
+  if(idx>-1){if(galleryFilter.length<=1)return;galleryFilter.splice(idx,1);}
+  else{galleryFilter.push(cat);}
   renderGallery();
 };
-
-window.toggleFilter = function(k,v) {
-  if (v==='all') filters[k].type = [];
-  else { const i = filters[k].type.indexOf(v); if (i>-1) filters[k].type.splice(i,1); else filters[k].type.push(v); }
+window.toggleFilter=function(k,v){
+  if(v==='all')filters[k].type=[];
+  else{const i=filters[k].type.indexOf(v);if(i>-1)filters[k].type.splice(i,1);else filters[k].type.push(v);}
   renderCollection(k);
 };
-
-function openLightbox(id) {
+function openLightbox(id){
   const all=[...collection.regalia,...collection.treasures,...collection.gallery];
   const item=all.find(i=>i.id===id);
   if(!item||!item.image)return;
@@ -398,40 +358,29 @@ function openLightbox(id) {
   document.getElementById("lightbox").classList.add("open");
   document.body.style.overflow='hidden';
 }
-function openLightboxRaw(s,c) {
-  document.getElementById("lightboxImg").src=s;
-  document.getElementById("lightboxTitle").textContent=c;
-  document.getElementById("lightboxDesc").textContent='';
-  document.getElementById("lightbox").classList.add("open");
-  document.body.style.overflow='hidden';
-}
-function closeLightbox(e) {
+function closeLightbox(e){
   if(e.target===document.getElementById("lightbox")||e.target.classList.contains('lightbox-close')){
-    document.getElementById("lightbox").classList.remove("open");
-    document.body.style.overflow='';
+    document.getElementById("lightbox").classList.remove("open");document.body.style.overflow='';
   }
 }
-window.openLightbox=openLightbox; window.openLightboxRaw=openLightboxRaw; window.closeLightbox=closeLightbox; window.switchTab=switchTab;
-
-function openArticle(id) {
-  const a = collection.chronicles.find(c => c.id === id);
-  if (!a) return;
-  if (a.image) { document.getElementById("articleImg").src = a.image; document.getElementById("articleImg").style.display = ""; }
-  else document.getElementById("articleImg").style.display = "none";
-  document.getElementById("articleTitle").textContent = a.title;
-  document.getElementById("articleDate").textContent = a.date;
-  document.getElementById("articleBody").innerHTML = a.excerpt;
+function openArticle(id){
+  const a=collection.chronicles.find(c=>c.id===id);if(!a)return;
+  if(a.image){document.getElementById("articleImg").src=a.image;document.getElementById("articleImg").style.display="";}
+  else document.getElementById("articleImg").style.display="none";
+  document.getElementById("articleTitle").textContent=a.title;
+  document.getElementById("articleDate").textContent=a.date;
+  document.getElementById("articleBody").innerHTML=a.excerpt;
   document.getElementById("articleModal").classList.add("open");
-  document.body.style.overflow = "hidden";
+  document.body.style.overflow="hidden";
 }
-function closeArticle(e) {
-  if (e.target === document.getElementById("articleModal") || e.target.classList.contains("article-modal-close")) {
-    document.getElementById("articleModal").classList.remove("open");
-    document.body.style.overflow = "";
+function closeArticle(e){
+  if(e.target===document.getElementById("articleModal")||e.target.classList.contains("article-modal-close")){
+    document.getElementById("articleModal").classList.remove("open");document.body.style.overflow="";
   }
 }
-window.openArticle=openArticle; window.closeArticle=closeArticle;
-renderTabs(); renderCurrentTab();
+window.openLightbox=openLightbox;window.closeLightbox=closeLightbox;window.switchTab=switchTab;
+window.openArticle=openArticle;window.closeArticle=closeArticle;
+renderTabs();renderCurrentTab();
 </script>
 </body>
 </html>
