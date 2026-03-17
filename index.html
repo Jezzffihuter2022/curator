@@ -3,239 +3,118 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>汪楚尧 · Curator</title>
+<title>汪楚尧 · 个人策展</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Noto+Serif+SC:wght@400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg-primary: #FAF8F3;
-  --bg-warm: #F5F2EB;
-  --bg-card: #FFFFFF;
-  --text-primary: #4A3728;
-  --text-secondary: #5C4A3D;
-  --text-muted: #9C948A;
-  --gold: #9E8548;
-  --gold-light: #B89B56;
-  --gold-dim: #A6923F;
-  --gold-glow: rgba(158,133,72,0.08);
-  --heading-gold: #7A6228;
-  --item-title: #6B3A2A;
-  --border: #E8E3DA;
-  --border-light: #EDE9E1;
-  --accent: var(--gold);
+  --bg-primary:#FAF8F3; --bg-warm:#F5F2EB; --bg-card:#FFFFFF;
+  --text-primary:#4A3728; --text-secondary:#5C4A3D; --text-muted:#9C948A;
+  --gold:#9E8548; --gold-dim:#A6923F; --gold-glow:rgba(158,133,72,0.08);
+  --heading-gold:#7A6228; --item-title:#6B3A2A;
+  --border:#E8E3DA; --border-light:#EDE9E1;
 }
-[data-tab="regalia"] { --accent: #7A5C3A; }
-[data-tab="treasures"] { --accent: #7B3D4A; }
-[data-tab="chronicles"] { --accent: #4A6741; }
-[data-tab="departures"] { --accent: #5B6A8A; }
-[data-tab="gallery"] { --accent: #6E5D50; }
-
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-  font-family: 'Noto Sans SC', sans-serif;
-  background: var(--bg-primary);
-  color: var(--text-primary);
-  min-height: 100vh;
-  -webkit-font-smoothing: antialiased;
-}
-::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: var(--bg-primary); }
-::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 3px; }
-
-@keyframes fadeIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans SC',sans-serif;background:var(--bg-primary);color:var(--text-primary);min-height:100vh;-webkit-font-smoothing:antialiased;}
+::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-track{background:var(--bg-primary);}::-webkit-scrollbar-thumb{background:var(--gold-dim);border-radius:3px;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
 
 /* ═══ Header ═══ */
-.header {
-  text-align: center;
-  padding: 44px 24px 28px;
-  background: linear-gradient(180deg, #F3F0E7 0%, var(--bg-primary) 100%);
-}
-.header h1 {
-  font-family: 'Noto Serif SC', serif;
-  font-size: 34px;
-  font-weight: 900;
-  letter-spacing: 8px;
-  color: var(--heading-gold);
-}
-.header-en {
-  font-family: 'Cinzel', serif;
-  font-size: 34px;
-  font-weight: 500;
-  letter-spacing: 4px;
-  color: var(--heading-gold);
-  margin-left: 6px;
-  text-transform: uppercase;
-}
-.header-subtitle {
-  font-family: 'Noto Serif SC', serif;
-  font-size: 17px;
-  color: var(--text-secondary);
-  margin-top: 14px;
-  line-height: 2;
-  max-width: 520px;
-  margin-left: auto; margin-right: auto;
-}
+.header{text-align:center;padding:48px 24px 32px;background:linear-gradient(180deg,#F3F0E7 0%,var(--bg-primary) 100%);}
+.header h1{font-family:'Noto Serif SC',serif;font-size:38px;font-weight:900;letter-spacing:8px;color:var(--heading-gold);}
+.header-en{font-family:'Cinzel',serif;font-size:38px;font-weight:500;letter-spacing:4px;color:var(--heading-gold);margin-left:6px;text-transform:uppercase;}
+.header-subtitle{font-family:'EB Garamond',serif;font-size:20px;font-style:italic;color:var(--text-secondary);margin-top:14px;line-height:2;letter-spacing:1px;}
+
+/* ═══ Neoclassical Divider: line — dot — line ═══ */
+.neo-divider{display:flex;align-items:center;justify-content:center;gap:16px;padding:6px 0;width:50%;max-width:400px;margin:0 auto;}
+.neo-divider .nd-line{flex:1;height:1px;background:var(--gold-dim);opacity:0.5;}
+.neo-divider .nd-dot{width:5px;height:5px;border-radius:50%;background:var(--gold-dim);opacity:0.6;flex-shrink:0;}
 
 /* ═══ Tabs ═══ */
-.tabs-container {
-  position: sticky; top: 0; z-index: 100;
-  background: rgba(250,248,243,0.92);
-  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--border);
-}
-.tabs-bar {
-  display: flex; justify-content: center; max-width: 960px; margin: 0 auto;
-  overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none;
-}
-.tabs-bar::-webkit-scrollbar { display: none; }
-.tab-btn {
-  padding: 15px 24px; border: none; background: transparent;
-  font-family: 'Noto Serif SC', serif; font-size: 16px; font-weight: 500;
-  color: var(--text-muted); cursor: pointer; transition: all 0.3s;
-  white-space: nowrap; position: relative; letter-spacing: 2px;
-}
-.tab-btn:hover { color: var(--text-secondary); }
-.tab-btn.active { color: var(--heading-gold); font-weight: 700; }
-.tab-btn.active::after {
-  content: ''; position: absolute;
-  bottom: 0; left: 50%; transform: translateX(-50%);
-  width: 24px; height: 2px; background: var(--gold);
-}
+.tabs-container{position:sticky;top:0;z-index:100;background:rgba(250,248,243,0.95);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
+.tabs-bar{display:flex;justify-content:center;max-width:960px;margin:0 auto;overflow-x:auto;scrollbar-width:none;}
+.tabs-bar::-webkit-scrollbar{display:none;}
+.tab-btn{padding:15px 24px;border:none;background:transparent;font-family:'Noto Serif SC',serif;font-size:17px;font-weight:500;color:var(--text-muted);cursor:pointer;transition:all 0.3s;white-space:nowrap;position:relative;letter-spacing:2px;}
+.tab-btn:hover{color:var(--text-secondary);}
+.tab-btn.active{color:var(--heading-gold);font-weight:700;}
+.tab-btn.active::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:24px;height:2px;background:var(--gold);}
 
 /* ═══ Main ═══ */
-.main { max-width: 960px; margin: 0 auto; padding: 0 20px 60px; }
-.tab-content { display: none; animation: fadeIn 0.4s ease; }
-.tab-content.active { display: block; }
+.main{max-width:960px;margin:0 auto;padding:0 20px 60px;}
+.tab-content{display:none;animation:fadeIn 0.4s ease;}.tab-content.active{display:block;}
 
 /* ═══ Section ═══ */
-.section-header { text-align: center; padding: 36px 0 28px; }
-.section-title {
-  font-family: 'Noto Serif SC', serif; font-size: 22px; font-weight: 700;
-  color: var(--heading-gold); letter-spacing: 4px;
-}
-.section-subtitle {
-  font-size: 15px; color: var(--gold-dim); margin-top: 8px;
-  font-family: 'EB Garamond', serif; font-style: italic; letter-spacing: 1px;
-}
+.section-header{text-align:center;padding:36px 0 8px;}
+.section-title{font-family:'Noto Serif SC',serif;font-size:24px;font-weight:700;color:var(--heading-gold);letter-spacing:4px;}
+.section-subtitle{font-size:16px;color:var(--gold-dim);margin-top:8px;font-family:'EB Garamond',serif;font-style:italic;letter-spacing:1px;}
+.section-after-divider{padding-bottom:20px;}
 
 /* ═══ Statement ═══ */
-.curator-statement {
-  font-family: 'Noto Serif SC', serif; font-size: 17px; line-height: 2.2;
-  color: var(--text-secondary); max-width: 560px; margin: 0 auto; text-align: center; padding: 12px 0 32px;
-}
+.curator-statement{font-family:'Noto Serif SC',serif;font-size:18px;line-height:2.2;color:var(--text-secondary);max-width:580px;margin:0 auto;text-align:center;padding:12px 0 28px;}
 
 /* ═══ Cards ═══ */
-.featured-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; padding: 8px 0; }
-.item-card {
-  background: var(--bg-card); border: 1px solid var(--border); border-radius: 3px;
-  overflow: hidden; cursor: pointer; transition: all 0.35s; position: relative;
-}
-.item-card:hover {
-  border-color: var(--gold-dim);
-  box-shadow: 0 6px 24px rgba(0,0,0,0.06), 0 0 0 1px var(--gold-dim);
-  transform: translateY(-3px);
-}
-.item-image {
-  width: 100%; aspect-ratio: 4/5; background: var(--bg-warm);
-  display: flex; align-items: center; justify-content: center; overflow: hidden;
-}
-.item-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
-.item-card:hover .item-image img { transform: scale(1.03); }
-.item-placeholder { font-family: 'Cinzel', serif; font-size: 42px; color: var(--border); }
-.item-info { padding: 16px 18px; }
-.item-title {
-  font-family: 'Noto Serif SC', serif; font-size: 16px; font-weight: 600;
-  color: var(--item-title); line-height: 1.7;
-}
-.item-meta {
-  font-size: 14px; color: var(--text-muted); margin-top: 6px;
-  display: flex; gap: 12px; align-items: center;
-  font-family: 'EB Garamond', serif;
-}
-.item-tag {
-  display: inline-block; padding: 2px 10px; border-radius: 2px;
-  font-size: 13px; font-weight: 500; color: var(--gold);
-  background: var(--gold-glow); border: 1px solid rgba(158,133,72,0.15);
-  letter-spacing: 1px; font-family: 'Noto Sans SC', sans-serif;
-}
-.item-tag.sale { color: #A5503C; background: rgba(165,80,60,0.06); border-color: rgba(165,80,60,0.15); }
+.featured-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding:8px 0;}
+.item-card{background:var(--bg-card);border:1px solid var(--border);border-radius:3px;overflow:hidden;cursor:pointer;transition:all 0.35s;position:relative;}
+.item-card:hover{border-color:var(--gold-dim);box-shadow:0 6px 24px rgba(0,0,0,0.06),0 0 0 1px var(--gold-dim);transform:translateY(-3px);}
+.item-card::before{content:'';position:absolute;top:0;left:15%;right:15%;height:1px;background:linear-gradient(90deg,transparent,var(--gold-dim),transparent);opacity:0;transition:opacity 0.35s;}
+.item-card:hover::before{opacity:0.6;}
+.item-image{width:100%;aspect-ratio:4/5;background:var(--bg-warm);display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.item-image img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s;}
+.item-card:hover .item-image img{transform:scale(1.03);}
+.item-placeholder{font-family:'Cinzel',serif;font-size:42px;color:var(--border);}
+.item-info{padding:16px 18px;}
+.item-title{font-family:'Noto Serif SC',serif;font-size:17px;font-weight:600;color:var(--item-title);line-height:1.7;}
+.item-meta{font-size:15px;color:var(--text-muted);margin-top:6px;display:flex;gap:12px;align-items:center;font-family:'EB Garamond',serif;}
+.item-tag{display:inline-block;padding:2px 10px;border-radius:2px;font-size:14px;font-weight:500;color:var(--gold);background:var(--gold-glow);border:1px solid rgba(158,133,72,0.15);letter-spacing:1px;font-family:'Noto Sans SC',sans-serif;}
+.item-tag.sale{color:#A5503C;background:rgba(165,80,60,0.06);border-color:rgba(165,80,60,0.15);}
 
 /* ═══ Filters ═══ */
-.filter-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; padding: 0 0 24px; }
-.filter-btn {
-  padding: 7px 18px; border: 1px solid var(--border); border-radius: 2px; background: transparent;
-  color: var(--text-muted); font-size: 14px; font-family: 'Noto Sans SC', sans-serif;
-  font-weight: 500; cursor: pointer; transition: all 0.2s; letter-spacing: 1px;
-}
-.filter-btn:hover { border-color: var(--text-muted); color: var(--text-secondary); }
-.filter-btn.active { border-color: var(--gold); color: var(--gold); background: var(--gold-glow); }
+.filter-bar{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:0 0 24px;}
+.filter-btn{padding:7px 18px;border:1px solid var(--border);border-radius:2px;background:transparent;color:var(--text-muted);font-size:15px;font-family:'Noto Sans SC',sans-serif;font-weight:500;cursor:pointer;transition:all 0.2s;letter-spacing:1px;}
+.filter-btn:hover{border-color:var(--text-muted);color:var(--text-secondary);}
+.filter-btn.active{border-color:var(--gold);color:var(--gold);background:var(--gold-glow);}
 
 /* ═══ Chronicles ═══ */
-.article-list { max-width: 600px; margin: 0 auto; }
-.article-item { padding: 28px 0; border-bottom: 1px solid var(--border-light); }
-.article-item:last-child { border-bottom: none; }
-.article-title {
-  font-family: 'Noto Serif SC', serif; font-size: 19px; font-weight: 700;
-  color: var(--item-title); line-height: 1.7; cursor: pointer; transition: color 0.2s;
-}
-.article-title:hover { color: var(--gold); }
-.article-excerpt { font-size: 16px; color: var(--text-secondary); line-height: 1.9; margin-top: 8px; }
-.article-date {
-  font-family: 'EB Garamond', serif; font-size: 15px; color: var(--text-muted);
-  margin-top: 10px; font-style: italic;
-}
+.article-list{max-width:640px;margin:0 auto;}
+.article-item{padding:28px 0;border-bottom:1px solid var(--border-light);}.article-item:last-child{border-bottom:none;}
+.article-title{font-family:'Noto Serif SC',serif;font-size:20px;font-weight:700;color:var(--item-title);line-height:1.7;cursor:pointer;transition:color 0.2s;}
+.article-title:hover{color:var(--gold);}
+.article-excerpt{font-size:17px;color:var(--text-secondary);line-height:1.9;margin-top:8px;}
+.article-date{font-family:'EB Garamond',serif;font-size:16px;color:var(--text-muted);margin-top:10px;font-style:italic;}
 
 /* ═══ Gallery ═══ */
-.gallery-grid { columns: 3; column-gap: 16px; }
-.gallery-item {
-  break-inside: avoid; margin-bottom: 16px; border-radius: 3px;
-  overflow: hidden; position: relative; cursor: pointer; border: 1px solid var(--border);
-}
-.gallery-item img { width: 100%; display: block; transition: transform 0.5s; }
-.gallery-item:hover img { transform: scale(1.03); }
-.gallery-caption {
-  position: absolute; bottom: 0; left: 0; right: 0;
-  padding: 24px 14px 12px; background: linear-gradient(transparent, rgba(0,0,0,0.55));
-  opacity: 0; transition: opacity 0.3s;
-}
-.gallery-item:hover .gallery-caption { opacity: 1; }
-.gallery-caption span { font-size: 14px; color: #fff; font-family: 'Noto Serif SC', serif; }
+.gallery-grid{columns:3;column-gap:16px;}
+.gallery-item{break-inside:avoid;margin-bottom:16px;border-radius:3px;overflow:hidden;position:relative;cursor:pointer;border:1px solid var(--border);}
+.gallery-item img{width:100%;display:block;transition:transform 0.5s;}.gallery-item:hover img{transform:scale(1.03);}
+.gallery-caption{position:absolute;bottom:0;left:0;right:0;padding:24px 14px 12px;background:linear-gradient(transparent,rgba(0,0,0,0.55));opacity:0;transition:opacity 0.3s;}
+.gallery-item:hover .gallery-caption{opacity:1;}
+.gallery-caption span{font-size:15px;color:#fff;font-family:'Noto Serif SC',serif;}
 
 /* ═══ Lightbox ═══ */
-.lightbox {
-  display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 1000;
-  background: rgba(0,0,0,0.88); backdrop-filter: blur(8px);
-  align-items: center; justify-content: center; flex-direction: column; padding: 40px; cursor: pointer;
-}
-.lightbox.open { display: flex; }
-.lightbox img { max-width: 90%; max-height: 75vh; object-fit: contain; }
-.lightbox-info { margin-top: 20px; text-align: center; }
-.lightbox-title { font-family: 'Noto Serif SC', serif; font-size: 20px; color: #F5F0E8; }
-.lightbox-desc { font-size: 15px; color: #A9A193; margin-top: 8px; max-width: 500px; line-height: 1.8; font-family: 'EB Garamond', serif; }
-.lightbox-close {
-  position: absolute; top: 24px; right: 28px; font-size: 28px; color: #999;
-  cursor: pointer; background: none; border: none; transition: color 0.2s;
-}
-.lightbox-close:hover { color: #fff; }
+.lightbox{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:10000;background:rgba(0,0,0,0.88);backdrop-filter:blur(8px);align-items:center;justify-content:center;flex-direction:column;padding:40px;cursor:pointer;}
+.lightbox.open{display:flex;}
+.lightbox img{max-width:90%;max-height:75vh;object-fit:contain;}
+.lightbox-info{margin-top:20px;text-align:center;}
+.lightbox-title{font-family:'Noto Serif SC',serif;font-size:22px;color:#F5F0E8;}
+.lightbox-desc{font-size:16px;color:#A9A193;margin-top:8px;max-width:500px;line-height:1.8;font-family:'EB Garamond',serif;}
+.lightbox-close{position:absolute;top:24px;right:28px;font-size:28px;color:#999;cursor:pointer;background:none;border:none;transition:color 0.2s;}
+.lightbox-close:hover{color:#fff;}
 
 /* ═══ Footer ═══ */
-.footer { text-align: center; padding: 36px 24px; border-top: 1px solid var(--border); }
-.footer p { font-size: 14px; color: var(--text-muted); letter-spacing: 2px; }
-.footer p + p { margin-top: 6px; }
-.footer a { color: var(--gold); text-decoration: none; font-family: 'EB Garamond', serif; letter-spacing: 0; }
-.footer a:hover { text-decoration: underline; }
+.footer{text-align:center;padding:48px 24px;border-top:1px solid var(--border);}
+.footer-name{font-family:'Noto Serif SC',serif;font-size:22px;font-weight:700;color:var(--heading-gold);letter-spacing:4px;}
+.footer-name span{font-family:'Cinzel',serif;font-weight:500;letter-spacing:3px;margin-left:4px;}
+.footer p{font-size:16px;color:var(--text-muted);letter-spacing:2px;}
+.footer p+p{margin-top:6px;}
+.footer a{color:var(--gold);text-decoration:none;font-family:'EB Garamond',serif;font-size:16px;}
+.footer a:hover{text-decoration:underline;}
 
 /* ═══ Responsive ═══ */
-@media (max-width: 640px) {
-  .header { padding: 36px 20px 22px; }
-  .header h1 { font-size: 22px; letter-spacing: 4px; }
-  .header-en { font-size: 22px; letter-spacing: 2px; margin-left: 4px; }
-  .tabs-bar { justify-content: flex-start; padding: 0 12px; }
-  .tab-btn { padding: 13px 16px; font-size: 15px; }
-  .featured-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-  .gallery-grid { columns: 2; }
-  .main { padding: 0 14px 40px; }
-  .item-info { padding: 12px; }
-  .item-title { font-size: 15px; }
+@media(max-width:640px){
+  .header{padding:36px 16px 24px;}.header h1{font-size:24px;letter-spacing:4px;}.header-en{font-size:24px;letter-spacing:2px;margin-left:4px;}
+  .tabs-bar{justify-content:flex-start;padding:0 8px;}.tab-btn{padding:13px 14px;font-size:15px;}
+  .featured-grid{grid-template-columns:repeat(2,1fr);gap:12px;}.gallery-grid{columns:2;}
+  .main{padding:0 14px 40px;}.item-info{padding:12px;}.item-title{font-size:15px;}
+  .neo-divider{width:70%;}
 }
 </style>
 </head>
@@ -246,9 +125,7 @@ body {
   <p class="header-subtitle">艺术是对命运的反叛</p>
 </header>
 
-<nav class="tabs-container">
-  <div class="tabs-bar" id="tabsBar"></div>
-</nav>
+<nav class="tabs-container"><div class="tabs-bar" id="tabsBar"></div></nav>
 
 <div class="main" id="mainContent">
   <div class="tab-content" id="tab-cabinet"></div>
@@ -262,65 +139,54 @@ body {
 <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
   <button class="lightbox-close" onclick="closeLightbox(event)">✕</button>
   <img id="lightboxImg" src="" alt="">
-  <div class="lightbox-info">
-    <div class="lightbox-title" id="lightboxTitle"></div>
-    <div class="lightbox-desc" id="lightboxDesc"></div>
-  </div>
+  <div class="lightbox-info"><div class="lightbox-title" id="lightboxTitle"></div><div class="lightbox-desc" id="lightboxDesc"></div></div>
 </div>
 
 <footer class="footer">
-  <p>汪楚尧 Julian</p>
-  <p>微信号：LondonHKSZ</p>
+  <div class="neo-divider" style="margin-bottom:20px"><div class="nd-line"></div><div class="nd-dot"></div><div class="nd-line"></div></div>
+  <p class="footer-name">汪楚尧 <span>Julian</span></p>
+  <p style="margin-top:8px">微信号：LondonHKSZ</p>
   <p><a href="https://curator.wangchuyao.com">curator.wangchuyao.com</a></p>
 </footer>
 
 <script>
+const divider = '<div class="neo-divider section-after-divider"><div class="nd-line"></div><div class="nd-dot"></div><div class="nd-line"></div></div>';
+
 const collection = {
   regalia: [
-    { id: "r001", title: "法兰西第二帝国近卫军大礼服", year: "约1860", origin: "法国", type: "大礼服", image: "", description: "拿破仑三世时期近卫军高级军官全套礼服，含金线刺绣燕尾服、肩章及腰带。", forSale: false },
-    { id: "r002", title: "英属印度总督府侍从官白色礼服", year: "约1910", origin: "英国", type: "殖民礼服", image: "", description: "爱德华时代典型的热带白色礼服，配金色穗带与皇冠纽扣。", forSale: false },
-    { id: "r003", title: "普鲁士枢密院顾问官常礼服", year: "约1900", origin: "德国", type: "文官礼服", image: "", description: "深蓝色呢料，银线刺绣领章与袖口，保存完好。", forSale: true },
+    { id:"r001", title:"法兰西第二帝国近卫军大礼服", year:"约1860", origin:"法国", type:"大礼服", image:"", description:"拿破仑三世时期近卫军高级军官全套礼服，含金线刺绣燕尾服、肩章及腰带。", forSale:false },
+    { id:"r002", title:"英属印度总督府侍从官白色礼服", year:"约1910", origin:"英国", type:"殖民礼服", image:"", description:"爱德华时代典型的热带白色礼服，配金色穗带与皇冠纽扣。", forSale:true },
   ],
   treasures: [
-    { id: "t001", title: "法国荣誉军团勋章（骑士级）", year: "第三共和国时期", origin: "法国", type: "勋章", image: "", description: "珐琅保存完好，附原装绶带。", forSale: false },
-    { id: "t002", title: "维多利亚时代蛇形胸针", year: "约1870", origin: "英国", type: "珠宝", image: "", description: "黄金蛇身镶嵌石榴石双眼，绿松石装饰鳞片。", forSale: true },
-    { id: "t003", title: "奥匈帝国弗朗茨·约瑟夫勋章", year: "约1890", origin: "奥匈帝国", type: "勋章", image: "", description: "骑士十字章，附战时绶带。", forSale: false },
+    { id:"t001", title:"法国荣誉军团勋章（骑士级）", year:"第三共和国时期", origin:"法国", type:"勋章", image:"", description:"珐琅保存完好，附原装绶带。", forSale:false },
   ],
   chronicles: [
-    { id: "c001", title: "假如拿破仑三世赢得色当之战", date: "2026年", excerpt: "一场战术层面的胜利如何可能重塑欧洲大陆的权力平衡——从阿尔萨斯到巴尔干。" },
-    { id: "c002", title: "清帝国勋赏制度的欧洲渊源", date: "2026年", excerpt: "从宝星到嘉禾：中国如何吸收并改造了西方的勋章与等级体系。" },
+    { id:"c001", title:"假如拿破仑三世赢得色当之战", date:"2026年", excerpt:"一场战术层面的胜利如何可能重塑欧洲大陆的权力平衡——从阿尔萨斯到巴尔干。" },
+    { id:"c002", title:"清帝国勋赏制度的欧洲渊源", date:"2026年", excerpt:"从宝星到嘉禾：中国如何吸收并改造了西方的勋章与等级体系。" },
   ],
-  gallery: [
-    { id: "g001", title: "", image: "", caption: "" },
-  ]
+  gallery: [{ id:"g001", title:"", image:"", caption:"" }]
 };
 
 const tabs = [
-  { key: "cabinet", label: "珍奇柜" },
-  { key: "regalia", label: "礼服与华服" },
-  { key: "treasures", label: "勋章与珠宝" },
-  { key: "chronicles", label: "另类历史" },
-  { key: "departures", label: "出让" },
-  { key: "gallery", label: "画廊" },
+  { key:"cabinet", label:"珍奇柜" },
+  { key:"regalia", label:"礼服与华服" },
+  { key:"treasures", label:"勋章与珠宝" },
+  { key:"chronicles", label:"另类历史" },
+  { key:"departures", label:"出让" },
+  { key:"gallery", label:"画廊" },
 ];
-let currentTab = "cabinet";
-let filters = { regalia: { type: [] }, treasures: { type: [] } };
+let currentTab = "cabinet", filters = { regalia:{type:[]}, treasures:{type:[]} };
 
 function renderTabs() {
   document.getElementById("tabsBar").innerHTML = tabs.map(t =>
-    '<button class="tab-btn ' + (currentTab === t.key ? 'active' : '') + '" onclick="switchTab(\'' + t.key + '\')">' + t.label + '</button>'
+    '<button class="tab-btn ' + (currentTab===t.key?'active':'') + '" onclick="switchTab(\'' + t.key + '\')">' + t.label + '</button>'
   ).join("");
-  document.querySelectorAll(".tab-content").forEach(el => el.classList.remove("active"));
-  const el = document.getElementById("tab-" + currentTab);
-  if (el) el.classList.add("active");
+  document.querySelectorAll(".tab-content").forEach(e => e.classList.remove("active"));
+  const e = document.getElementById("tab-" + currentTab);
+  if (e) e.classList.add("active");
   document.getElementById("mainContent").setAttribute("data-tab", currentTab);
 }
-function switchTab(key) {
-  currentTab = key;
-  renderTabs();
-  renderCurrentTab();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
+function switchTab(k) { currentTab=k; renderTabs(); renderCurrentTab(); window.scrollTo({top:0,behavior:'smooth'}); }
 function renderCurrentTab() {
   switch(currentTab) {
     case "cabinet": renderCabinet(); break;
@@ -333,70 +199,61 @@ function renderCurrentTab() {
 }
 
 function renderCabinet() {
-  const featured = [...collection.regalia, ...collection.treasures].slice(0, 6);
+  const featured = [...collection.regalia, ...collection.treasures].slice(0, 3);
   document.getElementById("tab-cabinet").innerHTML =
-    '<div class="curator-statement" style="padding-top:32px">' +
-      '每一件藏品都是一段叙事的入口。我收藏物件，更是它们所承载的身份、权力与审美的历史。<br>' +
-      '在这间珍奇柜中，礼服记录等级，勋章铭刻功勋，珠宝凝固欲望——它们不语，但从不沉默。' +
+    '<div class="curator-statement" style="padding-top:28px">' +
+      '每一件藏品都是一段叙事的入口。<br>' +
+      '我收藏物件，更是它们所承载的身份、权力与审美的历史。<br>' +
+      '它们不语，但从不沉默。' +
     '</div>' +
     '<div class="section-header"><div class="section-title">精选</div><div class="section-subtitle">Pièces Choisies</div></div>' +
-    '<div class="featured-grid">' + featured.map((item, i) => renderCard(item, i)).join("") + '</div>';
+    divider +
+    '<div class="featured-grid">' + featured.map((i,n) => renderCard(i,n)).join("") + '</div>';
 }
 
 function renderCollection(key) {
   const items = collection[key] || [];
   const types = [...new Set(items.map(i => i.type))];
-  const activeFilters = filters[key]?.type || [];
-  const filtered = activeFilters.length === 0 ? items : items.filter(i => activeFilters.includes(i.type));
-  const titleMap = { regalia: "礼服与华服", treasures: "勋章与珠宝" };
-  const subMap = { regalia: "Regalia & Couture", treasures: "Decorations & Jewellery" };
-  let filterHTML = '';
+  const af = filters[key]?.type || [];
+  const filtered = af.length === 0 ? items : items.filter(i => af.includes(i.type));
+  const tm = { regalia:"礼服与华服", treasures:"勋章与珠宝" };
+  const sm = { regalia:"Uniform & Couture", treasures:"Medal & Jewellery" };
+  let fh = '';
   if (types.length > 1) {
-    filterHTML = '<div class="filter-bar">' +
-      '<button class="filter-btn ' + (activeFilters.length === 0 ? 'active' : '') + '" onclick="toggleFilter(\'' + key + '\',\'all\')">全部</button>' +
-      types.map(t =>
-        '<button class="filter-btn ' + (activeFilters.includes(t) ? 'active' : '') + '" onclick="toggleFilter(\'' + key + '\',\'' + t + '\')">' + t + '</button>'
-      ).join("") + '</div>';
+    fh = '<div class="filter-bar"><button class="filter-btn ' + (af.length===0?'active':'') + '" onclick="toggleFilter(\'' + key + '\',\'all\')">全部</button>' +
+      types.map(t => '<button class="filter-btn ' + (af.includes(t)?'active':'') + '" onclick="toggleFilter(\'' + key + '\',\'' + t + '\')">' + t + '</button>').join("") + '</div>';
   }
   document.getElementById("tab-" + key).innerHTML =
-    '<div class="section-header"><div class="section-title">' + titleMap[key] + '</div><div class="section-subtitle">' + subMap[key] + '</div></div>' +
-    filterHTML +
-    '<div class="featured-grid">' + filtered.map((item, i) => renderCard(item, i)).join("") + '</div>';
+    '<div class="section-header"><div class="section-title">' + tm[key] + '</div><div class="section-subtitle">' + sm[key] + '</div></div>' +
+    divider + fh +
+    '<div class="featured-grid">' + filtered.map((i,n) => renderCard(i,n)).join("") + '</div>';
 }
 
 function renderCard(item, index) {
-  const imgHTML = item.image
-    ? '<img src="' + item.image + '" alt="' + item.title + '" loading="lazy">'
-    : '<span class="item-placeholder">✦</span>';
-  const saleTag = item.forSale ? '<span class="item-tag sale">可出让</span>' : '';
-  return '<div class="item-card" style="animation:fadeIn 0.4s ease ' + (index * 0.06) + 's both" onclick="openLightbox(\'' + item.id + '\')">' +
-    '<div class="item-image">' + imgHTML + '</div>' +
-    '<div class="item-info">' +
-      '<div class="item-title">' + item.title + '</div>' +
-      '<div class="item-meta"><span>' + (item.year || '') + '</span><span>' + (item.origin || '') + '</span>' + saleTag + '</div>' +
-    '</div></div>';
+  const img = item.image ? '<img src="' + item.image + '" alt="' + item.title + '" loading="lazy">' : '<span class="item-placeholder">✦</span>';
+  const st = item.forSale ? '<span class="item-tag sale">可出让</span>' : '';
+  return '<div class="item-card" style="animation:fadeIn 0.4s ease ' + (index*0.06) + 's both" onclick="openLightbox(\'' + item.id + '\')">' +
+    '<div class="item-image">' + img + '</div><div class="item-info"><div class="item-title">' + item.title + '</div>' +
+    '<div class="item-meta"><span>' + (item.year||'') + '</span><span>' + (item.origin||'') + '</span>' + st + '</div></div></div>';
 }
 
 function renderChronicles() {
   document.getElementById("tab-chronicles").innerHTML =
     '<div class="section-header"><div class="section-title">另类历史</div><div class="section-subtitle">Alternative History</div></div>' +
-    '<div class="article-list">' +
-    collection.chronicles.map((a, i) =>
-      '<div class="article-item" style="animation:fadeIn 0.4s ease ' + (i * 0.08) + 's both">' +
-        '<div class="article-title">' + a.title + '</div>' +
-        '<div class="article-excerpt">' + a.excerpt + '</div>' +
-        '<div class="article-date">' + a.date + '</div>' +
-      '</div>'
+    divider +
+    '<div class="article-list">' + collection.chronicles.map((a,i) =>
+      '<div class="article-item" style="animation:fadeIn 0.4s ease ' + (i*0.08) + 's both"><div class="article-title">' + a.title + '</div><div class="article-excerpt">' + a.excerpt + '</div><div class="article-date">' + a.date + '</div></div>'
     ).join("") + '</div>';
 }
 
 function renderDepartures() {
-  const forSale = [...collection.regalia, ...collection.treasures].filter(i => i.forSale);
+  const fs = [...collection.regalia, ...collection.treasures].filter(i => i.forSale);
   document.getElementById("tab-departures").innerHTML =
     '<div class="section-header"><div class="section-title">出让</div><div class="section-subtitle">Departures</div></div>' +
-    '<div class="curator-statement" style="padding-bottom:16px">以下藏品寻找新的归宿。<br>如有兴趣，请通过页尾联系方式洽询。</div>' +
-    (forSale.length > 0
-      ? '<div class="featured-grid" style="padding-top:8px">' + forSale.map((item, i) => renderCard(item, i)).join("") + '</div>'
+    divider +
+    '<div class="curator-statement" style="padding-bottom:16px">以下藏品寻找新的归宿。如有兴趣，请通过页尾联系方式洽询。</div>' +
+    (fs.length > 0
+      ? '<div class="featured-grid" style="padding-top:8px">' + fs.map((i,n) => renderCard(i,n)).join("") + '</div>'
       : '<div class="curator-statement" style="color:var(--text-muted)">暂无出让藏品</div>');
 }
 
@@ -404,56 +261,25 @@ function renderGallery() {
   const items = collection.gallery.filter(g => g.image);
   document.getElementById("tab-gallery").innerHTML =
     '<div class="section-header"><div class="section-title">画廊</div><div class="section-subtitle">Gallery</div></div>' +
+    divider +
     (items.length > 0
       ? '<div class="gallery-grid">' + items.map(g =>
-          '<div class="gallery-item" onclick="openLightboxRaw(\'' + g.image + '\',\'' + (g.caption || '') + '\')">' +
-            '<img src="' + g.image + '" alt="' + (g.caption || '') + '" loading="lazy">' +
-            (g.caption ? '<div class="gallery-caption"><span>' + g.caption + '</span></div>' : '') +
-          '</div>'
+          '<div class="gallery-item" onclick="openLightboxRaw(\'' + g.image + '\',\'' + (g.caption||'') + '\')"><img src="' + g.image + '" alt="' + (g.caption||'') + '" loading="lazy">' +
+          (g.caption ? '<div class="gallery-caption"><span>' + g.caption + '</span></div>' : '') + '</div>'
         ).join("") + '</div>'
       : '<div class="curator-statement" style="color:var(--text-muted)">即将呈现</div>');
 }
 
-window.toggleFilter = function(key, value) {
-  if (value === 'all') { filters[key].type = []; }
-  else {
-    const idx = filters[key].type.indexOf(value);
-    if (idx > -1) filters[key].type.splice(idx, 1);
-    else filters[key].type.push(value);
-  }
-  renderCollection(key);
+window.toggleFilter = function(k,v) {
+  if (v==='all') filters[k].type = [];
+  else { const i = filters[k].type.indexOf(v); if (i>-1) filters[k].type.splice(i,1); else filters[k].type.push(v); }
+  renderCollection(k);
 };
-
-function openLightbox(id) {
-  const all = [...collection.regalia, ...collection.treasures, ...collection.gallery];
-  const item = all.find(i => i.id === id);
-  if (!item || !item.image) return;
-  document.getElementById("lightboxImg").src = item.image;
-  document.getElementById("lightboxTitle").textContent = item.title || item.caption || '';
-  document.getElementById("lightboxDesc").textContent = item.description || '';
-  document.getElementById("lightbox").classList.add("open");
-  document.body.style.overflow = 'hidden';
-}
-function openLightboxRaw(src, caption) {
-  document.getElementById("lightboxImg").src = src;
-  document.getElementById("lightboxTitle").textContent = caption;
-  document.getElementById("lightboxDesc").textContent = '';
-  document.getElementById("lightbox").classList.add("open");
-  document.body.style.overflow = 'hidden';
-}
-function closeLightbox(e) {
-  if (e.target === document.getElementById("lightbox") || e.target.classList.contains('lightbox-close')) {
-    document.getElementById("lightbox").classList.remove("open");
-    document.body.style.overflow = '';
-  }
-}
-window.openLightbox = openLightbox;
-window.openLightboxRaw = openLightboxRaw;
-window.closeLightbox = closeLightbox;
-window.switchTab = switchTab;
-
-renderTabs();
-renderCurrentTab();
+function openLightbox(id) { const all=[...collection.regalia,...collection.treasures,...collection.gallery]; const item=all.find(i=>i.id===id); if(!item||!item.image)return; document.getElementById("lightboxImg").src=item.image; document.getElementById("lightboxTitle").textContent=item.title||item.caption||''; document.getElementById("lightboxDesc").textContent=item.description||''; document.getElementById("lightbox").classList.add("open"); document.body.style.overflow='hidden'; }
+function openLightboxRaw(s,c) { document.getElementById("lightboxImg").src=s; document.getElementById("lightboxTitle").textContent=c; document.getElementById("lightboxDesc").textContent=''; document.getElementById("lightbox").classList.add("open"); document.body.style.overflow='hidden'; }
+function closeLightbox(e) { if(e.target===document.getElementById("lightbox")||e.target.classList.contains('lightbox-close')){ document.getElementById("lightbox").classList.remove("open"); document.body.style.overflow=''; } }
+window.openLightbox=openLightbox; window.openLightboxRaw=openLightboxRaw; window.closeLightbox=closeLightbox; window.switchTab=switchTab;
+renderTabs(); renderCurrentTab();
 </script>
 </body>
 </html>
