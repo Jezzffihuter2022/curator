@@ -269,11 +269,10 @@ function renderCurrentTab() {
 }
 
 function renderCabinet() {
-  const featuredIds = ["r001","r004","r009","t001","t002"];
+  // 精选顺序固定：r001、r004、r009 前三，然后 t002、t001，最后文章卡
+  const featuredIds = ["r001","r004","r009","t002","t001"];
   const all = [...collection.regalia, ...collection.treasures];
   const featured = featuredIds.map(id => all.find(i => i.id === id)).filter(Boolean);
-  // 珍奇柜精选按年代排序
-  const sortedFeatured = [...featured].sort((a,b) => parseYear(a.year) - parseYear(b.year));
   const chronicleFeatured = collection.chronicles.find(c => c.id === "c001");
   document.getElementById("tab-cabinet").innerHTML =
     '<div class="curator-statement" style="padding-top:28px">' +
@@ -282,8 +281,8 @@ function renderCabinet() {
     '<div class="section-header"><div class="section-title">精选</div><div class="section-subtitle">Highlights</div></div>' +
     divider +
     '<div class="featured-grid">' +
-      sortedFeatured.map((i,n) => renderCard(i, n, true)).join("") +
-      (chronicleFeatured ? renderChronicleCard(chronicleFeatured, sortedFeatured.length) : '') +
+      featured.map((i,n) => renderCard(i, n, true)).join("") +
+      (chronicleFeatured ? renderChronicleCard(chronicleFeatured, featured.length) : '') +
     '</div>';
 }
 
