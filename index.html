@@ -92,9 +92,9 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg-primary);color:va
 .article-modal-date{font-family:'EB Garamond',serif;font-size:16px;color:var(--text-muted);font-style:italic;margin-bottom:20px;}
 .article-modal-body{font-family:'Noto Serif SC',serif;font-size:17px;line-height:2.2;color:var(--text-secondary);}
 
-/* ═══ Gallery — CHANGED: 4-col photo wall, no interaction ═══ */
-.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:8px 0;}
-.gallery-item{border-radius:3px;overflow:hidden;border:1px solid var(--border);user-select:none;-webkit-user-select:none;pointer-events:none;}
+/* ═══ Gallery — single column, minimal gap, no border ═══ */
+.gallery-grid{column-count:4;column-gap:12px;padding:8px 0;}
+.gallery-item{break-inside:avoid;margin-bottom:12px;overflow:hidden;user-select:none;-webkit-user-select:none;pointer-events:none;}
 .gallery-item img{width:100%;display:block;-webkit-user-drag:none;pointer-events:none;}
 
 /* ═══ Lightbox ═══ */
@@ -119,7 +119,7 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg-primary);color:va
 @media(max-width:640px){
   .header{padding:36px 16px 24px;}.header h1{font-size:24px;letter-spacing:4px;}.header-en{font-size:24px;letter-spacing:2px;margin-left:4px;}
   .tabs-bar{justify-content:center;padding:0 8px;}.tab-btn{padding:13px 14px;font-size:15px;}
-  .featured-grid{grid-template-columns:repeat(2,1fr);gap:12px;}.chronicle-grid{grid-template-columns:repeat(2,1fr);gap:12px;}.gallery-grid{grid-template-columns:repeat(2,1fr);gap:10px;}
+  .featured-grid{grid-template-columns:repeat(2,1fr);gap:12px;}.chronicle-grid{grid-template-columns:repeat(2,1fr);gap:12px;}.gallery-grid{column-count:2;}
   .main{padding:0 14px 40px;}.item-info{padding:12px;}.item-title{font-size:15px;}
   .neo-divider{width:70%;}
 }
@@ -178,7 +178,6 @@ const collection = {
     { id:"r005", title:"皇家海军少校梅斯礼服外套", year:"1945", origin:"英国", type:"梅斯礼服", image:"images/regalia/r005.jpg", description:"Gieves 制，皇家海军少校（Lieutenant Commander）梅斯礼服外套。海军蓝主色、较厚礼服毛呢、前对扣闭合、侧翼金扣，金袖标。", forSale:false },
     { id:"r006", title:"法国医务军官大礼服外套", year:"约1931", origin:"法国", type:"大礼服", image:"images/regalia/r006.jpg", description:"Paris Thorn 制，1931式法国医务军官上尉大礼服外套。中厚挺括礼服毛呢、黑主色、单排9金扣、红丝绒袖口和领边。", forSale:false },
     { id:"r007", title:"意大利王家陆军军需兵团上尉晚礼服外套", year:"约1934", origin:"意大利", type:"大礼服", image:"images/regalia/r007.jpg", description:"1934式意大利王家陆军军需兵团上尉晚礼服外套。中厚礼服毛呢、黑主色、双排外张14金扣、紫丝绒领边、紫王冠肩章、深蓝丝绒袖口。", forSale:false },
-    { id:"r008", title:"君皇仕脏橘羊毛马甲", year:"约1970", origin:"英国", type:"高级时装", image:"images/regalia/r008.jpg", description:"Gieves & Hawkes（君皇仕）脏橘色羊毛马甲，镀金压纹紫色贝母扣。", forSale:false },
     { id:"r009", title:"巴尔曼珍珠水晶刺绣长裙外套", year:"当代", origin:"法国", type:"高级时装", image:"images/regalia/r009.jpg", description:"巴尔曼珍珠与水晶密镶长款礼服外套，香槟色，高定级别工艺。数百颗珍珠与水晶逐粒手工缝缀，刺绣构成对称的巴洛克纹样。剪裁具建筑感，结构精确，丝绸全衬里。即使在巴尔曼的标志性重工系列中，此件在密度、对称性与工艺精度上仍属罕见。", forSale:false },
     { id:"r010", title:"Moschino 拿破仑廓形黑色外套", year:"当代", origin:"意大利", type:"高级时装", image:"images/regalia/r010.jpg", description:"Moschino 拿破仑风格黑色外套，意大利制，初剪羊毛面料，黑色丝绒拼接。宽幅拿破仑翻领、丝绒镶边立领、丝绒翻折袖口，标志性金色球扣。两枚皇冠形倒置口袋盖各饰三粒金球。裁剪硬朗，下摆刻意不对称，轮廓锋利。", forSale:false },
     { id:"r011", title:"Douglas Hayward 海军蓝双排扣大衣", year:"当代", origin:"英国", type:"高级时装", image:"images/regalia/r011.jpg", description:"Douglas Hayward（梅费尔）双排扣大衣，意大利产羊绒羊毛混纺面料，六粒扣前襟，Bemberg 全衬里。剪裁英式，做工精细。", forSale:false },
@@ -241,7 +240,6 @@ function renderCurrentTab() {
   }
 }
 
-/* CHANGED: added chronicle c001 to featured */
 function renderCabinet() {
   const featuredIds = ["r001","r004","r009","t001","t002"];
   const all = [...collection.regalia, ...collection.treasures];
@@ -249,7 +247,7 @@ function renderCabinet() {
   const chronicleFeatured = collection.chronicles.find(c => c.id === "c001");
   document.getElementById("tab-cabinet").innerHTML =
     '<div class="curator-statement" style="padding-top:28px">' +
-      '每一件藏品都是一段身份、权力或审美的叙事入口。' +
+      '藏品是身份、权力与审美的叙事入口' +
     '</div>' +
     '<div class="section-header"><div class="section-title">精选</div><div class="section-subtitle">Highlights</div></div>' +
     divider +
@@ -259,7 +257,6 @@ function renderCabinet() {
     '</div>';
 }
 
-/* NEW: render a chronicle item as a card in the featured grid */
 function renderChronicleCard(item, index) {
   const img = item.image ? '<img src="' + item.image + '" alt="' + item.title + '" loading="lazy">' : '<span class="item-placeholder">✦</span>';
   return '<div class="item-card" style="animation:fadeIn 0.4s ease ' + (index*0.06) + 's both" onclick="openArticle(\'' + item.id + '\')">' +
@@ -293,7 +290,6 @@ function renderCard(item, index) {
     '<div class="item-meta"><span>' + (item.year||'') + '</span><span>' + (item.origin||'') + '</span>' + st + '</div></div></div>';
 }
 
-/* CHANGED: chronicles — removed date display from cards */
 function renderChronicles() {
   document.getElementById("tab-chronicles").innerHTML =
     '<div class="section-header"><div class="section-title">另类历史</div><div class="section-subtitle">Alternative History</div></div>' +
@@ -316,7 +312,7 @@ function renderDepartures() {
       : '<div class="curator-statement" style="color:var(--text-muted)">暂无出让藏品</div>');
 }
 
-/* CHANGED: gallery with two-category filter, 4-col grid, no click/copy */
+/* Gallery: single column, photos stacked vertically with minimal gap, no border */
 function renderGallery() {
   const allCats = ["艺术见闻", "藏品展示"];
   const items = collection.gallery.filter(g => g.image && galleryFilter.includes(g.category));
@@ -336,11 +332,9 @@ function renderGallery() {
       : '<div class="curator-statement" style="color:var(--text-muted)">该分类暂无内容</div>');
 }
 
-/* NEW: gallery filter toggle */
 window.toggleGalleryFilter = function(cat) {
   const idx = galleryFilter.indexOf(cat);
   if (idx > -1) {
-    /* prevent deselecting all */
     if (galleryFilter.length <= 1) return;
     galleryFilter.splice(idx, 1);
   } else {
