@@ -216,9 +216,7 @@ function renderCabinet() {
   const featured = featuredIds.map(id => all.find(i => i.id === id)).filter(Boolean);
   document.getElementById("tab-cabinet").innerHTML =
     '<div class="curator-statement" style="padding-top:28px">' +
-      '每一件藏品都是一段叙事的入口。<br>' +
-      '我收藏物件，更是它们所承载的身份、权力与审美的历史。<br>' +
-      '它们不语，但从不沉默。' +
+      '每一件藏品都是一段身份、权力与审美的叙事入口。<br>' +
     '</div>' +
     '<div class="section-header"><div class="section-title">精选</div><div class="section-subtitle">Selected</div></div>' +
     divider +
