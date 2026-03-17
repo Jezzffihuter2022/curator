@@ -153,8 +153,14 @@ const divider = '<div class="neo-divider section-after-divider"><div class="nd-l
 
 const collection = {
   regalia: [
-    { id:"r001", title:"法兰西第二帝国近卫军大礼服", year:"约1860", origin:"法国", type:"大礼服", image:"", description:"拿破仑三世时期近卫军高级军官全套礼服，含金线刺绣燕尾服、肩章及腰带。", forSale:false },
-    { id:"r002", title:"英属印度总督府侍从官白色礼服", year:"约1910", origin:"英国", type:"殖民礼服", image:"", description:"爱德华时代典型的热带白色礼服，配金色穗带与皇冠纽扣。", forSale:true },
+    { id:"r001", title:"皇家海军少将常礼服外套", year:"1982", origin:"英国", type:"大礼服", image:"images/regalia/r001.jpg", description:"Moseley & Pounsford 制，皇家海军少将（Rear Admiral）常礼服外套。海军蓝主色、中等厚度礼服毛呢、双排8金扣、金袖标。马岛战争中谢菲尔德号驱逐舰被击沉后舰长返英后重新订制。", forSale:false },
+    { id:"r002", title:"皇家炮兵少校梅斯礼服外套", year:"1992", origin:"英国", type:"梅斯礼服", image:"images/regalia/r002.jpg", description:"Gieves & Hawkes 制，皇家陆军炮兵少校（Major）梅斯礼服外套。黑主色、红翻领、中等厚度礼服毛呢、前敞开、侧翼金扣，丝绸内衬，奢侈品质感。", forSale:false },
+    { id:"r003", title:"皇家空军上校梅斯礼服全套", year:"1956", origin:"英国", type:"梅斯礼服", image:"images/regalia/r003.jpg", description:"Gieves 制，皇家空军上校（Group Captain）梅斯礼服外套、马甲、长裤。蓝灰主色、中等厚度毛呢、前对扣闭合、侧翼金扣、黑色翻领，含飞行员刺绣徽章，对应空军基地指挥官。", forSale:false },
+    { id:"r004", title:"皇家陆军医疗军团少校梅斯礼服", year:"1964", origin:"英国", type:"梅斯礼服", image:"images/regalia/r004.jpg", description:"Alkit 制，皇家陆军医疗军团少校（Major）梅斯礼服外套和马甲。黑主色、紫礼服领、中等厚度毛呢、前敞开、侧翼金扣，含杖蛇医疗徽章，对应帝国战争博物馆诺曼底登陆口述史。", forSale:false },
+    { id:"r005", title:"皇家海军少校梅斯礼服外套", year:"1945", origin:"英国", type:"梅斯礼服", image:"images/regalia/r005.jpg", description:"Gieves 制，皇家海军少校（Lieutenant Commander）梅斯礼服外套。海军蓝主色、较厚礼服毛呢、前对扣闭合、侧翼金扣，金袖标。", forSale:false },
+    { id:"r006", title:"法国医务军官大礼服外套", year:"约1931", origin:"法国", type:"大礼服", image:"images/regalia/r006.jpg", description:"Paris Thorn 制，1931式法国医务军官上尉大礼服外套。中厚挺括礼服毛呢、黑主色、单排9金扣、红丝绒袖口和领边。", forSale:false },
+    { id:"r007", title:"意大利王家陆军军需兵团上尉晚礼服外套", year:"约1934", origin:"意大利", type:"大礼服", image:"images/regalia/r007.jpg", description:"1934式意大利王家陆军军需兵团上尉晚礼服外套。中厚礼服毛呢、黑主色、双排外张14金扣、紫丝绒领边、紫王冠肩章、深蓝丝绒袖口。", forSale:false },
+    { id:"r008", title:"君皇仕脏橘羊毛马甲", year:"约1970", origin:"英国", type:"高级时装", image:"images/regalia/r008.jpg", description:"Gieves & Hawkes（君皇仕）脏橘色羊毛马甲，镀金压纹紫色贝母扣。", forSale:false },
   ],
   treasures: [
     { id:"t001", title:"法国荣誉军团勋章（骑士级）", year:"第三共和国时期", origin:"法国", type:"勋章", image:"", description:"珐琅保存完好，附原装绶带。", forSale:false },
@@ -198,7 +204,7 @@ function renderCurrentTab() {
 }
 
 function renderCabinet() {
-  const featured = [...collection.regalia, ...collection.treasures].slice(0, 3);
+  const featured = [...collection.regalia, ...collection.treasures].slice(0, 6);
   document.getElementById("tab-cabinet").innerHTML =
     '<div class="curator-statement" style="padding-top:28px">' +
       '每一件藏品都是一段叙事的入口。<br>' +
