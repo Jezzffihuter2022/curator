@@ -258,7 +258,7 @@ function renderCabinet() {
   const featured = featuredIds.map(id => all.find(i => i.id===id)).filter(Boolean);
   const chronicleFeatured = collection.chronicles.find(c => c.id==="c001");
   document.getElementById("tab-cabinet").innerHTML =
-    '<div class="cabinet-statement" style="font-size:15px;font-weight:400;color:var(--heading-gold);padding-top:16px;padding-bottom:16px;line-height:1.9;">我研究人工智能、社会与治理；收藏和策展是互补视角：关于艺术品如何承载审美、身份与权力，及其在历史和社会演化中被赋予、争夺、再创造的意义</div>' +
+    '<div class="cabinet-statement" style="font-size:15px;font-weight:400;color:var(--heading-gold);padding-top:16px;padding-bottom:16px;line-height:1.9;">我研究人工智能、社会与治理；收藏和策展是另一种思考方式：审美、身份与权力如何在物质中赋予与再创造</div>' +
     '<div class="featured-grid">' +
       featured.map((i,n) => renderCard(i,n,true)).join("") +
       (chronicleFeatured ? renderChronicleCard(chronicleFeatured, featured.length) : '') +
