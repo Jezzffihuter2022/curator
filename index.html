@@ -29,7 +29,7 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg-primary);color:va
 .neo-divider .nd-line{flex:1;height:1px;background:var(--gold);opacity:0.5;}
 .neo-divider .nd-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);opacity:0.6;flex-shrink:0;}
 
-/* ═══ Tabs — CHANGED: flex-wrap for auto line break ═══ */
+/* ═══ Tabs ═══ */
 .tabs-container{position:sticky;top:0;z-index:100;background:rgba(250,248,243,0.95);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
 .tabs-bar{display:flex;flex-wrap:wrap;justify-content:center;max-width:960px;margin:0 auto;}
 .tab-btn{padding:15px 24px;border:none;background:transparent;font-family:'Noto Serif SC',serif;font-size:18px;font-weight:500;color:var(--text-muted);cursor:pointer;transition:all 0.3s;white-space:nowrap;position:relative;letter-spacing:2px;}
@@ -72,7 +72,7 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg-primary);color:va
 .filter-btn:hover{border-color:var(--text-muted);color:var(--text-secondary);}
 .filter-btn.active{border-color:var(--gold);color:var(--gold);background:var(--gold-glow);}
 
-/* ═══ Chronicles Cards — no date shown ═══ */
+/* ═══ Chronicles Cards ═══ */
 .chronicle-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding:8px 0;}
 .chronicle-card{background:var(--bg-card);border:1px solid var(--border);border-radius:3px;overflow:hidden;cursor:pointer;transition:all 0.35s;}
 .chronicle-card:hover{border-color:var(--gold);box-shadow:0 6px 24px rgba(0,0,0,0.06);transform:translateY(-3px);}
@@ -92,7 +92,7 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg-primary);color:va
 .article-modal-date{font-family:'EB Garamond',serif;font-size:16px;color:var(--text-muted);font-style:italic;margin-bottom:20px;}
 .article-modal-body{font-family:'Noto Serif SC',serif;font-size:17px;line-height:2.2;color:var(--text-secondary);}
 
-/* ═══ Gallery — single column, minimal gap, no border ═══ */
+/* ═══ Gallery ═══ */
 .gallery-grid{column-count:4;column-gap:12px;padding:8px 0;}
 .gallery-item{break-inside:avoid;margin-bottom:12px;overflow:hidden;user-select:none;-webkit-user-select:none;pointer-events:none;}
 .gallery-item img{width:100%;display:block;-webkit-user-drag:none;pointer-events:none;}
@@ -169,28 +169,28 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg-primary);color:va
 <script>
 const divider = '<div class="neo-divider section-after-divider"><div class="nd-line"></div><div class="nd-dot"></div><div class="nd-line"></div></div>';
 
+// ── type 重命名：大礼服 → 仪式礼服，梅斯礼服 → 晚宴梅斯礼服 ──
 const collection = {
   regalia: [
-    { id:"r001", title:"皇家海军少将常礼服外套", year:"1982", origin:"英国", type:"大礼服", image:"images/regalia/r001.jpg", description:"Moseley & Pounsford 制，皇家海军少将（Rear Admiral）常礼服外套。海军蓝主色、中等厚度礼服毛呢、双排8金扣、金袖标。马岛战争中谢菲尔德号驱逐舰被击沉后舰长返英后重新订制。", forSale:false },
-    { id:"r002", title:"皇家炮兵少校梅斯礼服外套", year:"1992", origin:"英国", type:"梅斯礼服", image:"images/regalia/r002.jpg", description:"Gieves & Hawkes 制，皇家陆军炮兵少校（Major）梅斯礼服外套。黑主色、红翻领、中等厚度礼服毛呢、前敞开、侧翼金扣，丝绸内衬。", forSale:false },
-    { id:"r003", title:"皇家空军上校梅斯礼服全套", year:"1956", origin:"英国", type:"梅斯礼服", image:"images/regalia/r003.jpg", description:"Gieves 制，皇家空军上校（Group Captain）梅斯礼服外套、马甲、长裤。蓝灰主色、中等厚度毛呢、前对扣闭合、侧翼金扣、黑色翻领，含飞行员刺绣徽章，对应空军基地指挥官。", forSale:false },
-    { id:"r004", title:"皇家陆军医疗军团少校梅斯礼服", year:"1964", origin:"英国", type:"梅斯礼服", image:"images/regalia/r004.jpg", description:"Alkit 制，皇家陆军医疗军团少校（Major）梅斯礼服外套和马甲。黑主色、紫礼服领、中等厚度毛呢、前敞开、侧翼金扣，含杖蛇医疗徽章，对应帝国战争博物馆诺曼底登陆口述史。", forSale:false },
-    { id:"r005", title:"皇家海军少校梅斯礼服外套", year:"1945", origin:"英国", type:"梅斯礼服", image:"images/regalia/r005.jpg", description:"Gieves 制，皇家海军少校（Lieutenant Commander）梅斯礼服外套。海军蓝主色、较厚礼服毛呢、前对扣闭合、侧翼金扣，金袖标。", forSale:false },
-    { id:"r006", title:"法国医务军官大礼服外套", year:"约1931", origin:"法国", type:"大礼服", image:"images/regalia/r006.jpg", description:"Paris Thorn 制，1931式法国医务军官上尉大礼服外套。中厚挺括礼服毛呢、黑主色、单排9金扣、红丝绒袖口和领边。", forSale:false },
-    { id:"r007", title:"意大利王家陆军军需兵团上尉晚礼服外套", year:"约1934", origin:"意大利", type:"大礼服", image:"images/regalia/r007.jpg", description:"1934式意大利王家陆军军需兵团上尉晚礼服外套。中厚礼服毛呢、黑主色、双排外张14金扣、紫丝绒领边、紫王冠肩章、深蓝丝绒袖口。", forSale:false },
-    { id:"r009", title:"巴尔曼珍珠水晶刺绣长裙外套", year:"当代", origin:"法国", type:"高级时装", image:"images/regalia/r009.jpg", description:"巴尔曼珍珠与水晶密镶长款礼服外套，香槟色，高定级别工艺。数百颗珍珠与水晶逐粒手工缝缀，刺绣构成对称的巴洛克纹样。剪裁具建筑感，结构精确，丝绸全衬里。即使在巴尔曼的标志性重工系列中，此件在密度、对称性与工艺精度上仍属罕见。", forSale:false },
-    { id:"r010", title:"Moschino 拿破仑廓形黑色外套", year:"当代", origin:"意大利", type:"高级时装", image:"images/regalia/r010.jpg", description:"Moschino 拿破仑风格黑色外套，意大利制，初剪羊毛面料，黑色丝绒拼接。宽幅拿破仑翻领、丝绒镶边立领、丝绒翻折袖口，标志性金色球扣。两枚皇冠形倒置口袋盖各饰三粒金球。裁剪硬朗，下摆刻意不对称，轮廓锋利。", forSale:false },
-    { id:"r011", title:"Douglas Hayward 海军蓝双排扣大衣", year:"当代", origin:"英国", type:"高级时装", image:"images/regalia/r011.jpg", description:"Douglas Hayward（梅费尔）双排扣大衣，意大利产羊绒羊毛混纺面料，六粒扣前襟，Bemberg 全衬里。剪裁英式，做工精细。", forSale:false },
-    { id:"r012", title:"巴宝莉军事风羊绒羊毛短外套", year:"当代", origin:"英国", type:"高级时装", image:"images/regalia/r012.jpg", description:"巴宝莉海军蓝军事风短外套，羊绒羊毛混纺。拿破仑式立领、三排金扣、盾徽浮雕扣、肩章、猩红色衬里。", forSale:false },
-    { id:"r014", title:"巴宝莉秀场款猩红骠骑兵短外套", year:"当代", origin:"英国", type:"高级时装", image:"images/regalia/r014.jpg", description:"巴宝莉秀场款猩红色羊毛短外套，取法拿破仑时期骠骑兵制服。双排银质浮雕扣配横向编织扣绊，短身长臂剪裁，猩红色呼应线列步兵时代军装配色。", forSale:false },
-    { id:"r013", title:"西点军校学员大礼服", year:"约1950", origin:"美国", type:"大礼服", image:"images/regalia/r013.jpg", description:"美国西点军校（USMA）学员大礼服外套。深蓝色重磅羊毛，立领，三排金属扣，袖口与下摆黑色编织装饰。20世纪中期。", forSale:false },
-    { id:"r014", title:"巴宝莉秀场款红色羊毛短外套", year:"当代", origin:"英国", type:"高级时装", image:"images/regalia/r014.jpg", description:"巴宝莉秀场款红色羊毛短外套，模仿拿破仑时期骠骑兵外套，双排银扣浮雕，猩红色呼应线列时代军装，短身长臂秀场款。", forSale:false },
+    { id:"r001", title:"皇家海军少将常礼服外套", year:"1982", origin:"英国", type:"仪式礼服", highlight:true, image:"images/regalia/r001.jpg", description:"Moseley & Pounsford 制，皇家海军少将（Rear Admiral）常礼服外套。海军蓝主色、中等厚度礼服毛呢、双排8金扣、金袖标。马岛战争中谢菲尔德号驱逐舰被击沉后舰长返英后重新订制。", forSale:false },
+    { id:"r002", title:"皇家炮兵少校梅斯礼服外套", year:"1992", origin:"英国", type:"晚宴梅斯礼服", highlight:false, image:"images/regalia/r002.jpg", description:"Gieves & Hawkes 制，皇家陆军炮兵少校（Major）梅斯礼服外套。黑主色、红翻领、中等厚度礼服毛呢、前敞开、侧翼金扣，丝绸内衬。", forSale:false },
+    { id:"r003", title:"皇家空军上校梅斯礼服全套", year:"1956", origin:"英国", type:"晚宴梅斯礼服", highlight:false, image:"images/regalia/r003.jpg", description:"Gieves 制，皇家空军上校（Group Captain）梅斯礼服外套、马甲、长裤。蓝灰主色、中等厚度毛呢、前对扣闭合、侧翼金扣、黑色翻领，含飞行员刺绣徽章，对应空军基地指挥官。", forSale:false },
+    { id:"r004", title:"皇家陆军医疗军团少校梅斯礼服", year:"1964", origin:"英国", type:"晚宴梅斯礼服", highlight:true, image:"images/regalia/r004.jpg", description:"Alkit 制，皇家陆军医疗军团少校（Major）梅斯礼服外套和马甲。黑主色、紫礼服领、中等厚度毛呢、前敞开、侧翼金扣，含杖蛇医疗徽章，对应帝国战争博物馆诺曼底登陆口述史。", forSale:false },
+    { id:"r005", title:"皇家海军少校梅斯礼服外套", year:"1945", origin:"英国", type:"晚宴梅斯礼服", highlight:false, image:"images/regalia/r005.jpg", description:"Gieves 制，皇家海军少校（Lieutenant Commander）梅斯礼服外套。海军蓝主色、较厚礼服毛呢、前对扣闭合、侧翼金扣，金袖标。", forSale:false },
+    { id:"r006", title:"法国医务军官大礼服外套", year:"约1931", origin:"法国", type:"仪式礼服", highlight:false, image:"images/regalia/r006.jpg", description:"Paris Thorn 制，1931式法国医务军官上尉大礼服外套。中厚挺括礼服毛呢、黑主色、单排9金扣、红丝绒袖口和领边。", forSale:false },
+    { id:"r007", title:"意大利陆军军需兵团晚礼服", year:"约1934", origin:"意大利", type:"仪式礼服", highlight:false, image:"images/regalia/r007.jpg", description:"1934式意大利王家陆军军需兵团上尉晚礼服外套。中厚礼服毛呢、黑主色、双排外张14金扣、紫丝绒领边、紫王冠肩章、深蓝丝绒袖口。", forSale:false },
+    { id:"r009", title:"巴尔曼巴洛克复兴风刺绣长外套", year:"当代", origin:"法国", type:"高级时装", highlight:false, image:"images/regalia/r009.jpg", description:"巴尔曼珍珠与水晶密镶长款礼服外套，香槟色，高定级别工艺。数百颗珍珠与水晶逐粒手工缝缀，刺绣构成对称的巴洛克纹样。剪裁具建筑感，结构精确，丝绸全衬里。即使在巴尔曼的标志性重工系列中，此件在密度、对称性与工艺精度上仍属罕见。", forSale:false },
+    { id:"r010", title:"Moschino 拿破仑廓形黑色外套", year:"当代", origin:"意大利", type:"高级时装", highlight:false, image:"images/regalia/r010.jpg", description:"Moschino 拿破仑风格黑色外套，意大利制，初剪羊毛面料，黑色丝绒拼接。宽幅拿破仑翻领、丝绒镶边立领、丝绒翻折袖口，标志性金色球扣。两枚皇冠形倒置口袋盖各饰三粒金球。裁剪硬朗，下摆刻意不对称，轮廓锋利。", forSale:false },
+    { id:"r011", title:"英产海军蓝双排扣大衣", year:"当代", origin:"英国", type:"高级时装", highlight:false, image:"images/regalia/r011.jpg", description:"Douglas Hayward（梅费尔）双排扣大衣，意大利产羊绒羊毛混纺面料，六粒扣前襟，Bemberg 全衬里。剪裁英式，做工精细。", forSale:false },
+    { id:"r012", title:"巴宝莉军礼服式短外套", year:"当代", origin:"英国", type:"高级时装", highlight:false, image:"images/regalia/r012.jpg", description:"巴宝莉海军蓝军事风短外套，羊绒羊毛混纺。拿破仑式立领、三排金扣、盾徽浮雕扣、肩章、猩红色衬里。", forSale:false },
+    { id:"r014", title:"巴宝莉秀场款猩红骠骑兵短外套", year:"当代", origin:"英国", type:"高级时装", highlight:false, image:"images/regalia/r014.jpg", description:"巴宝莉秀场款猩红色羊毛短外套，取法拿破仑时期骠骑兵制服。双排银质浮雕扣配横向编织扣绊，短身长臂剪裁，猩红色呼应线列步兵时代军装配色。", forSale:false },
+    { id:"r013", title:"西点军校学员大礼服", year:"约1950", origin:"美国", type:"仪式礼服", highlight:false, image:"images/regalia/r013.jpg", description:"美国西点军校（USMA）学员大礼服外套。深蓝色重磅羊毛，立领，三排金属扣，袖口与下摆黑色编织装饰。20世纪中期。", forSale:false },
   ],
   treasures: [
-    { id:"t002", title:"圣赫勒拿奖章", year:"1857", origin:"法国", type:"勋章", image:"images/treasures/t002.jpg", description:"法国首枚正式战役纪念章。1857年拿破仑三世设立，授予1792至1815年间服役的拿破仑大军团幸存老兵。正面为拿破仑一世侧面像，环以月桂花环，顶部帝国皇冠。弥补了拿破仑一世未为士兵设立战役纪念章的空白。", forSale:false },
-    { id:"t004", title:"乔治五世与玛丽王后加冕纪念章", year:"1911", origin:"英国", type:"勋章", image:"images/treasures/t004.jpg", description:"1911年乔治五世与玛丽王后加冕纪念镀金章。正面为国王与王后并列侧面像，附原装红色皮盒。尺寸 4×3.1 厘米，重 18.6 克。", forSale:false },
-    { id:"t003", title:"伊丽莎白二世银禧纪念章项链", year:"1977", origin:"英国", type:"珠宝", image:"images/treasures/t003.jpg", description:"英国皇家铸币局 Crown of Crowns 系列，22K 镀金纪念章，纪念伊丽莎白二世登基银禧（1977）。正面为女王骑马像，镶入金属框架配链，附原装蓝色绒盒。", forSale:false },
-    { id:"t001", title:"Florenza 巴洛克复兴马耳他十字琥珀色项链", year:"约1960", origin:"美国", type:"珠宝", image:"images/treasures/t001.jpg", description:"Florenza 多链琥珀色玻璃石项链，铸造掐丝工艺，立体爪托镶嵌，马耳他十字与心形母题，四重对称放射构图。文艺复兴、伊特鲁里亚、维多利亚与巴洛克四套历史语汇的融合体，是 Florenza 设计意图最完整的作品类型之一。", forSale:false },
+    { id:"t002", title:"圣赫勒拿奖章", year:"1857", origin:"法国", type:"勋章", highlight:true, image:"images/treasures/t002.jpg", description:"法国首枚正式战役纪念章。1857年拿破仑三世设立，授予1792至1815年间服役的拿破仑大军团幸存老兵。正面为拿破仑一世侧面像，环以月桂花环，顶部帝国皇冠。弥补了拿破仑一世未为士兵设立战役纪念章的空白。", forSale:false },
+    { id:"t004", title:"乔治五世与玛丽王后加冕纪念章", year:"1911", origin:"英国", type:"勋章", highlight:false, image:"images/treasures/t004.jpg", description:"1911年乔治五世与玛丽王后加冕纪念镀金章。正面为国王与王后并列侧面像，附原装红色皮盒。尺寸 4×3.1 厘米，重 18.6 克。", forSale:false },
+    { id:"t003", title:"伊丽莎白二世银禧纪念章项链", year:"1977", origin:"英国", type:"珠宝", highlight:false, image:"images/treasures/t003.jpg", description:"英国皇家铸币局 Crown of Crowns 系列，22K 镀金纪念章，纪念伊丽莎白二世登基银禧（1977）。正面为女王骑马像，镶入金属框架配链，附原装蓝色绒盒。", forSale:false },
+    { id:"t001", title:"Florenza 巴洛克复兴马耳他十字琥珀色项链", year:"约1960", origin:"美国", type:"珠宝", highlight:true, image:"images/treasures/t001.jpg", description:"Florenza 多链琥珀色玻璃石项链，铸造掐丝工艺，立体爪托镶嵌，马耳他十字与心形母题，四重对称放射构图。文艺复兴、伊特鲁里亚、维多利亚与巴洛克四套历史语汇的融合体，是 Florenza 设计意图最完整的作品类型之一。", forSale:false },
   ],
   chronicles: [
     { id:"c001", title:"鲁斯坦擒获中国可汗：一页萨法维《列王纪》的阅读", date:"2026年", image:"images/chronicles/c001.jpg", excerpt:"波斯史诗《列王纪》中，英雄鲁斯坦在混战中生擒中国可汗——这不是历史记录，而是伊朗世界对帝国边疆的文学想象。这页萨法维时期（16世纪后半叶）细密画手抄本插图，描绘的正是这一俘获时刻。画面中心，骑白马与粉马的核心人物构成全图权力轴线。叙事重心不是杀戮，而是征服与秩序重建：将敌方统治者纳入己方体系。这是王权胜利的图像，不是武勇展示。<br><br>画家的技法高度成熟。人物、战马、武器、山石密集交叠，但依靠色块分区和墨线勾勒维持平面秩序——这是萨法维细密画的核心能力：在极高的元素密度下保持可读性。背景的紫色与橙色山体不是自然写生，而是波斯绘画体系自己的视觉语言，让战场同时具有园林与梦境的质感。右上方舒展的大树平衡了左侧密集战团，给暴力场景加上了诗意化的框架。上下两栏波斯文诗句（nastaliq 体）与画面构成完整的手抄本页面——图像不是独立挂画，文字不是旁注，整页是文学、书法、绘画共同工作的产物。" },
@@ -217,6 +217,24 @@ const collection = {
   ]
 };
 
+// ── 年代排序辅助函数：忽略"约"，当代排最后 ──
+function parseYear(y) {
+  if (!y || y === '当代') return 9999;
+  const clean = y.replace('约', '').trim();
+  const n = parseInt(clean, 10);
+  return isNaN(n) ? 9999 : n;
+}
+
+// ── 按 highlight 优先、再按年代升序排列 ──
+function sortItems(items) {
+  return [...items].sort((a, b) => {
+    const ha = a.highlight ? 0 : 1;
+    const hb = b.highlight ? 0 : 1;
+    if (ha !== hb) return ha - hb;
+    return parseYear(a.year) - parseYear(b.year);
+  });
+}
+
 const tabs = [
   { key:"cabinet", label:"珍奇柜" },
   { key:"regalia", label:"礼服与华服" },
@@ -227,7 +245,6 @@ const tabs = [
 ];
 let currentTab = "cabinet";
 let filters = { regalia:{type:[]}, treasures:{type:[]} };
-/* CHANGED: gallery filter — both categories active by default */
 let galleryFilter = ["艺术见闻", "藏品展示"];
 
 function renderTabs() {
@@ -255,50 +272,63 @@ function renderCabinet() {
   const featuredIds = ["r001","r004","r009","t001","t002"];
   const all = [...collection.regalia, ...collection.treasures];
   const featured = featuredIds.map(id => all.find(i => i.id === id)).filter(Boolean);
+  // 珍奇柜精选按年代排序
+  const sortedFeatured = [...featured].sort((a,b) => parseYear(a.year) - parseYear(b.year));
   const chronicleFeatured = collection.chronicles.find(c => c.id === "c001");
   document.getElementById("tab-cabinet").innerHTML =
     '<div class="curator-statement" style="padding-top:28px">' +
-      '藏品是身份、权力与审美的叙事入口' +
+      '艺术品是审美、身份与权力的物质叙事' +
     '</div>' +
     '<div class="section-header"><div class="section-title">精选</div><div class="section-subtitle">Highlights</div></div>' +
     divider +
     '<div class="featured-grid">' +
-      featured.map((i,n) => renderCard(i,n)).join("") +
-      (chronicleFeatured ? renderChronicleCard(chronicleFeatured, featured.length) : '') +
+      sortedFeatured.map((i,n) => renderCard(i, n, true)).join("") +
+      (chronicleFeatured ? renderChronicleCard(chronicleFeatured, sortedFeatured.length) : '') +
     '</div>';
 }
 
+// renderChronicleCard: 不显示标签
 function renderChronicleCard(item, index) {
   const img = item.image ? '<img src="' + item.image + '" alt="' + item.title + '" loading="lazy">' : '<span class="item-placeholder">✦</span>';
   return '<div class="item-card" style="animation:fadeIn 0.4s ease ' + (index*0.06) + 's both" onclick="openArticle(\'' + item.id + '\')">' +
     '<div class="item-image">' + img + '</div><div class="item-info"><div class="item-title">' + item.title + '</div>' +
-    '<div class="item-meta"><span class="item-tag">另类历史</span></div></div></div>';
+    '<div class="item-meta"></div></div></div>';
 }
 
 function renderCollection(key) {
-  const items = collection[key] || [];
-  const types = [...new Set(items.map(i => i.type))];
+  const allItems = collection[key] || [];
+  const types = [...new Set(allItems.map(i => i.type))];
   const af = filters[key]?.type || [];
-  const filtered = af.length === 0 ? items : items.filter(i => af.includes(i.type));
+  const filtered = af.length === 0 ? allItems : allItems.filter(i => af.includes(i.type));
+
+  // 排序：highlight 优先，各组内按年代
+  const sorted = sortItems(filtered);
+
   const tm = { regalia:"礼服与华服", treasures:"勋章与珠宝" };
   const sm = { regalia:"Uniform & Couture", treasures:"Medal & Jewellery" };
+
+  // 勋章与珠宝：不显示分类选择器
   let fh = '';
-  if (types.length > 1) {
+  if (key === 'regalia' && types.length > 1) {
     fh = '<div class="filter-bar"><button class="filter-btn ' + (af.length===0?'active':'') + '" onclick="toggleFilter(\'' + key + '\',\'all\')">全部</button>' +
       types.map(t => '<button class="filter-btn ' + (af.includes(t)?'active':'') + '" onclick="toggleFilter(\'' + key + '\',\'' + t + '\')">' + t + '</button>').join("") + '</div>';
   }
+
   document.getElementById("tab-" + key).innerHTML =
     '<div class="section-header"><div class="section-title">' + tm[key] + '</div><div class="section-subtitle">' + sm[key] + '</div></div>' +
     divider + fh +
-    '<div class="featured-grid">' + filtered.map((i,n) => renderCard(i,n)).join("") + '</div>';
+    '<div class="featured-grid">' + sorted.map((i,n) => renderCard(i, n, false)).join("") + '</div>';
 }
 
-function renderCard(item, index) {
+// renderCard: isHighlightContext=true 时不显示任何标签（用于珍奇柜精选）
+function renderCard(item, index, isHighlightContext) {
   const img = item.image ? '<img src="' + item.image + '" alt="' + item.title + '" loading="lazy">' : '<span class="item-placeholder">✦</span>';
   const st = item.forSale ? '<span class="item-tag sale">可出让</span>' : '';
+  // 在各 tab 内部：highlight 项不显示任何分类标签；非 highlight 项正常显示出让标签
+  const tagHtml = isHighlightContext ? '' : st;
   return '<div class="item-card" style="animation:fadeIn 0.4s ease ' + (index*0.06) + 's both" onclick="openLightbox(\'' + item.id + '\')">' +
     '<div class="item-image">' + img + '</div><div class="item-info"><div class="item-title">' + item.title + '</div>' +
-    '<div class="item-meta"><span>' + (item.year||'') + '</span><span>' + (item.origin||'') + '</span>' + st + '</div></div></div>';
+    '<div class="item-meta"><span>' + (item.year||'') + '</span><span>' + (item.origin||'') + '</span>' + tagHtml + '</div></div></div>';
 }
 
 function renderChronicles() {
@@ -319,11 +349,10 @@ function renderDepartures() {
     divider +
     '<div class="curator-statement" style="padding-bottom:16px">以下藏品寻找新的归宿。如有兴趣，请通过页尾联系方式洽询。</div>' +
     (fs.length > 0
-      ? '<div class="featured-grid" style="padding-top:8px">' + fs.map((i,n) => renderCard(i,n)).join("") + '</div>'
+      ? '<div class="featured-grid" style="padding-top:8px">' + fs.map((i,n) => renderCard(i,n,false)).join("") + '</div>'
       : '<div class="curator-statement" style="color:var(--text-muted)">暂无出让藏品</div>');
 }
 
-/* Gallery: single column, photos stacked vertically with minimal gap, no border */
 function renderGallery() {
   const allCats = ["艺术见闻", "藏品展示"];
   const items = collection.gallery.filter(g => g.image && galleryFilter.includes(g.category));
@@ -359,10 +388,32 @@ window.toggleFilter = function(k,v) {
   else { const i = filters[k].type.indexOf(v); if (i>-1) filters[k].type.splice(i,1); else filters[k].type.push(v); }
   renderCollection(k);
 };
-function openLightbox(id) { const all=[...collection.regalia,...collection.treasures,...collection.gallery]; const item=all.find(i=>i.id===id); if(!item||!item.image)return; document.getElementById("lightboxImg").src=item.image; document.getElementById("lightboxTitle").textContent=item.title||item.caption||''; document.getElementById("lightboxDesc").textContent=item.description||''; document.getElementById("lightbox").classList.add("open"); document.body.style.overflow='hidden'; }
-function openLightboxRaw(s,c) { document.getElementById("lightboxImg").src=s; document.getElementById("lightboxTitle").textContent=c; document.getElementById("lightboxDesc").textContent=''; document.getElementById("lightbox").classList.add("open"); document.body.style.overflow='hidden'; }
-function closeLightbox(e) { if(e.target===document.getElementById("lightbox")||e.target.classList.contains('lightbox-close')){ document.getElementById("lightbox").classList.remove("open"); document.body.style.overflow=''; } }
+
+function openLightbox(id) {
+  const all=[...collection.regalia,...collection.treasures,...collection.gallery];
+  const item=all.find(i=>i.id===id);
+  if(!item||!item.image)return;
+  document.getElementById("lightboxImg").src=item.image;
+  document.getElementById("lightboxTitle").textContent=item.title||item.caption||'';
+  document.getElementById("lightboxDesc").textContent=item.description||'';
+  document.getElementById("lightbox").classList.add("open");
+  document.body.style.overflow='hidden';
+}
+function openLightboxRaw(s,c) {
+  document.getElementById("lightboxImg").src=s;
+  document.getElementById("lightboxTitle").textContent=c;
+  document.getElementById("lightboxDesc").textContent='';
+  document.getElementById("lightbox").classList.add("open");
+  document.body.style.overflow='hidden';
+}
+function closeLightbox(e) {
+  if(e.target===document.getElementById("lightbox")||e.target.classList.contains('lightbox-close')){
+    document.getElementById("lightbox").classList.remove("open");
+    document.body.style.overflow='';
+  }
+}
 window.openLightbox=openLightbox; window.openLightboxRaw=openLightboxRaw; window.closeLightbox=closeLightbox; window.switchTab=switchTab;
+
 function openArticle(id) {
   const a = collection.chronicles.find(c => c.id === id);
   if (!a) return;
