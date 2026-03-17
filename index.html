@@ -22,7 +22,7 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg-primary);color:va
 .header{text-align:center;padding:48px 24px 32px;background:linear-gradient(180deg,#F3F0E7 0%,var(--bg-primary) 100%);}
 .header h1{font-family:'Noto Serif SC',serif;font-size:41px;font-weight:900;letter-spacing:8px;color:var(--heading-gold);}
 .header-en{font-family:'Cinzel',serif;font-size:41px;font-weight:500;letter-spacing:4px;color:var(--heading-gold);margin-left:6px;text-transform:uppercase;}
-.header-subtitle{font-family:'EB Garamond',serif;font-size:22px;color:var(--heading-gold);margin-top:14px;line-height:2;letter-spacing:1px;}
+.header-subtitle{font-family:'Noto Serif SC',serif;font-size:22px;font-weight:600;color:var(--heading-gold);margin-top:14px;line-height:2;letter-spacing:2px;}
 
 /* ═══ Neoclassical Divider: line — dot — line ═══ */
 .neo-divider{display:flex;align-items:center;justify-content:center;gap:16px;padding:6px 0;width:50%;max-width:400px;margin:0 auto;}
@@ -49,7 +49,7 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg-primary);color:va
 .section-after-divider{padding-bottom:20px;}
 
 /* ═══ Statement ═══ */
-.curator-statement{font-family:'Noto Serif SC',serif;font-size:20px;line-height:2.2;color:var(--text-secondary);max-width:580px;margin:0 auto;text-align:center;padding:12px 0 28px;}
+.curator-statement{font-family:'Noto Serif SC',serif;font-size:20px;line-height:2.2;color:var(--heading-gold);max-width:580px;margin:0 auto;text-align:center;padding:12px 0 28px;}
 
 /* ═══ Cards ═══ */
 .featured-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding:8px 0;}
@@ -101,11 +101,10 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg-primary);color:va
 
 /* ═══ Footer ═══ */
 .footer{text-align:center;padding:48px 24px;border-top:1px solid var(--border);}
-.footer-name{font-family:'Noto Serif SC',serif;font-size:17px;font-weight:700;color:var(--gold);letter-spacing:4px;}
-.footer-name span{font-family:'Cinzel',serif;font-weight:500;letter-spacing:3px;margin-left:4px;}
-.footer p{font-size:17px;color:var(--gold);letter-spacing:2px;}
+.footer p{font-family:'Noto Serif SC',serif;font-size:17px;font-weight:500;color:var(--gold);letter-spacing:2px;}
 .footer p+p{margin-top:6px;}
-.footer a{color:var(--gold);text-decoration:none;font-family:'EB Garamond',serif;font-size:17px;letter-spacing:0;}
+.footer p span.en{font-family:'Cinzel',serif;letter-spacing:2px;margin-left:4px;}
+.footer a{color:var(--gold);text-decoration:none;font-family:'Cinzel',serif;font-size:17px;letter-spacing:2px;}
 .footer a:hover{text-decoration:underline;}
 
 /* ═══ Responsive ═══ */
@@ -144,8 +143,8 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg-primary);color:va
 
 <footer class="footer">
   <div class="neo-divider" style="margin-bottom:20px"><div class="nd-line"></div><div class="nd-dot"></div><div class="nd-line"></div></div>
-  <p class="footer-name">汪楚尧 <span>Julian</span></p>
-  <p style="margin-top:8px">微信号：LondonHKSZ</p>
+  <p>汪楚尧 <span class="en">Julian</span></p>
+  <p style="margin-top:8px">微信号：<span class="en">LondonHKSZ</span></p>
   <p><a href="https://curator.wangchuyao.com">curator.wangchuyao.com</a></p>
 </footer>
 
@@ -206,7 +205,7 @@ function renderCabinet() {
       '我收藏物件，更是它们所承载的身份、权力与审美的历史。<br>' +
       '它们不语，但从不沉默。' +
     '</div>' +
-    '<div class="section-header"><div class="section-title">精选</div><div class="section-subtitle">Pièces Choisies</div></div>' +
+    '<div class="section-header"><div class="section-title">精选</div><div class="section-subtitle">Selected</div></div>' +
     divider +
     '<div class="featured-grid">' + featured.map((i,n) => renderCard(i,n)).join("") + '</div>';
 }
@@ -249,7 +248,7 @@ function renderChronicles() {
 function renderDepartures() {
   const fs = [...collection.regalia, ...collection.treasures].filter(i => i.forSale);
   document.getElementById("tab-departures").innerHTML =
-    '<div class="section-header"><div class="section-title">出让</div><div class="section-subtitle">Departures</div></div>' +
+    '<div class="section-header"><div class="section-title">出让</div><div class="section-subtitle">Available</div></div>' +
     divider +
     '<div class="curator-statement" style="padding-bottom:16px">以下藏品寻找新的归宿。如有兴趣，请通过页尾联系方式洽询。</div>' +
     (fs.length > 0
