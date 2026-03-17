@@ -20,8 +20,8 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg-primary);color:va
 
 /* ═══ Header ═══ */
 .header{text-align:center;padding:48px 24px 32px;background:linear-gradient(180deg,#F3F0E7 0%,var(--bg-primary) 100%);}
-.header h1{font-family:'Noto Serif SC',serif;font-size:41px;font-weight:900;letter-spacing:8px;color:var(--heading-gold);}
-.header-en{font-family:'Cinzel',serif;font-size:41px;font-weight:500;letter-spacing:4px;color:var(--heading-gold);margin-left:6px;text-transform:uppercase;}
+.header h1{font-family:'Noto Serif SC',serif;font-size:36px;font-weight:900;letter-spacing:8px;color:var(--heading-gold);}
+.header-en{font-family:'Cinzel',serif;font-size:36px;font-weight:500;letter-spacing:4px;color:var(--heading-gold);margin-left:6px;text-transform:uppercase;}
 .header-subtitle{font-family:'Noto Serif SC',serif;font-size:22px;font-weight:600;color:var(--heading-gold);margin-top:14px;line-height:2;letter-spacing:2px;}
 
 /* ═══ Neoclassical Divider ═══ */
@@ -32,7 +32,7 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg-primary);color:va
 /* ═══ Tabs — CHANGED: flex-wrap for auto line break ═══ */
 .tabs-container{position:sticky;top:0;z-index:100;background:rgba(250,248,243,0.95);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
 .tabs-bar{display:flex;flex-wrap:wrap;justify-content:center;max-width:960px;margin:0 auto;}
-.tab-btn{padding:15px 24px;border:none;background:transparent;font-family:'Noto Serif SC',serif;font-size:19px;font-weight:500;color:var(--text-muted);cursor:pointer;transition:all 0.3s;white-space:nowrap;position:relative;letter-spacing:2px;}
+.tab-btn{padding:15px 24px;border:none;background:transparent;font-family:'Noto Serif SC',serif;font-size:18px;font-weight:500;color:var(--text-muted);cursor:pointer;transition:all 0.3s;white-space:nowrap;position:relative;letter-spacing:2px;}
 .tab-btn:hover{color:var(--text-secondary);}
 .tab-btn.active{color:var(--heading-gold);font-weight:700;}
 .tab-btn.active::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:24px;height:2px;background:var(--gold);}
@@ -43,12 +43,12 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg-primary);color:va
 
 /* ═══ Section ═══ */
 .section-header{text-align:center;padding:36px 0 8px;}
-.section-title{font-family:'Noto Serif SC',serif;font-size:27px;font-weight:700;color:var(--heading-gold);letter-spacing:4px;}
+.section-title{font-family:'Noto Serif SC',serif;font-size:22px;font-weight:700;color:var(--heading-gold);letter-spacing:4px;}
 .section-subtitle{font-size:18px;color:var(--gold);margin-top:8px;font-family:'EB Garamond',serif;font-style:italic;letter-spacing:1px;}
 .section-after-divider{padding-bottom:20px;}
 
 /* ═══ Statement ═══ */
-.curator-statement{font-family:'Noto Serif SC',serif;font-size:20px;line-height:2.2;color:var(--heading-gold);max-width:580px;margin:0 auto;text-align:center;padding:12px 0 28px;}
+.curator-statement{font-family:'Noto Serif SC',serif;font-size:18px;line-height:2.2;color:var(--heading-gold);max-width:580px;margin:0 auto;text-align:center;padding:12px 0 28px;}
 
 /* ═══ Cards ═══ */
 .featured-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding:8px 0;}
@@ -162,7 +162,7 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg-primary);color:va
 <footer class="footer">
   <div class="neo-divider" style="margin-bottom:20px"><div class="nd-line"></div><div class="nd-dot"></div><div class="nd-line"></div></div>
   <p>汪楚尧 <span class="en">Julian</span></p>
-  <p style="margin-top:8px">微信号：<span class="en">LondonHKSZ</span></p>
+  <p style="margin-top:8px">微信联系 <span class="en">LondonHKSZ</span></p>
   <p><a href="https://curator.wangchuyao.com">curator.wangchuyao.com</a></p>
 </footer>
 
@@ -220,7 +220,7 @@ const tabs = [
   { key:"regalia", label:"礼服与华服" },
   { key:"treasures", label:"勋章与珠宝" },
   { key:"chronicles", label:"另类历史" },
-  { key:"departures", label:"出让" },
+  { key:"departures", label:"甄选出让" },
   { key:"gallery", label:"画廊" },
 ];
 let currentTab = "cabinet";
@@ -313,7 +313,7 @@ function renderChronicles() {
 function renderDepartures() {
   const fs = [...collection.regalia, ...collection.treasures].filter(i => i.forSale);
   document.getElementById("tab-departures").innerHTML =
-    '<div class="section-header"><div class="section-title">出让</div><div class="section-subtitle">Available</div></div>' +
+    '<div class="section-header"><div class="section-title">甄选出让</div><div class="section-subtitle">Available Pieces</div></div>' +
     divider +
     '<div class="curator-statement" style="padding-bottom:16px">以下藏品寻找新的归宿。如有兴趣，请通过页尾联系方式洽询。</div>' +
     (fs.length > 0
