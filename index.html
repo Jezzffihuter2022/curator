@@ -258,8 +258,7 @@ function renderCabinet() {
   const featured = featuredIds.map(id => all.find(i => i.id===id)).filter(Boolean);
   const chronicleFeatured = collection.chronicles.find(c => c.id==="c001");
   document.getElementById("tab-cabinet").innerHTML =
-    '<div class="cabinet-statement">艺术品是审美、身份与权力的物质叙事</div>' +
-    '<div class="cabinet-statement" style="font-size:15px;font-weight:400;color:var(--text-secondary);padding-top:6px;padding-bottom:0;line-height:1.9;">我研究人工智能、社会与治理；收藏和策展是互补的另一个视角：关于礼服与勋章如何承载身份、权力与审美，以及它们在历史和社会演化中被赋予、被争夺、被遗忘的意义</div>' +
+    '<div class="cabinet-statement" style="font-size:15px;font-weight:400;color:var(--text-secondary);padding-top:6px;padding-bottom:0;line-height:1.9;">我研究人工智能、社会与治理；收藏和策展是互补视角：关于艺术品如何承载审美、身份与权力，及其在历史和社会演化中被赋予、争夺、再创造的意义</div>' +
     '<div class="cabinet-section-header"><div class="section-title">精选</div><div class="section-subtitle">Highlights</div></div>' +
     divider +
     '<div class="featured-grid">' +
