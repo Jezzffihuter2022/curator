@@ -288,7 +288,7 @@ function renderCurrentTab(){
 }
 
 function renderCabinet() {
-  const featuredIds = ["r006","r004","r009","t002","t001"]; // [CHANGE] r001→r006 (法国1931式替代海军少将)
+  const featuredIds = ["r006","r009","r004","t002","t001"]; // [CHANGE] r001→r006 (法国1931式替代海军少将)
   const all = [...collection.regalia, ...collection.treasures];
   const featured = featuredIds.map(id => all.find(i => i.id===id)).filter(Boolean);
   const chronicleFeatured = collection.chronicles.find(c => c.id==="c003"); // [CHANGE] c001→c003 (战争与和平替代波斯画)
