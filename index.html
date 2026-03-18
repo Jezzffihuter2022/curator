@@ -51,8 +51,8 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg-primary);color:va
 .item-card:hover{border-color:var(--gold);box-shadow:0 6px 24px rgba(0,0,0,0.06),0 0 0 1px var(--gold);transform:translateY(-3px);}
 .item-card::before{content:'';position:absolute;top:0;left:15%;right:15%;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0;transition:opacity 0.35s;}
 .item-card:hover::before{opacity:0.6;}
-.item-image{width:100%;background:var(--bg-warm);display:block;overflow:hidden;} /* [CHANGE] 移除固定height，图片恢复原始比例 */
-.item-image img{width:100%;height:auto;display:block;transition:transform 0.6s;} /* [CHANGE] height:auto，移除object-fit:cover */
+.item-image{width:100%;background:var(--bg-warm);display:block;overflow:hidden;}
+.item-image img{width:100%;height:auto;display:block;transition:transform 0.6s;}
 .item-card:hover .item-image img{transform:scale(1.03);}
 .item-placeholder{font-family:'Cinzel',serif;font-size:42px;color:var(--border);}
 .item-info{padding:16px 18px;}
@@ -76,19 +76,15 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg-primary);color:va
 .chronicle-card .card-title{font-family:'Noto Serif SC',serif;font-size:17px;font-weight:600;color:var(--item-title);line-height:1.7;}
 .article-modal{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:10000;background:rgba(0,0,0,0.6);backdrop-filter:blur(6px);overflow-y:auto;padding:40px 20px;}
 .article-modal.open{display:block;}
-.article-modal-inner{max-width:1080px; /* [CHANGE] 720→1080px，另类历史文章宽度×1.5 */margin:0 auto;background:var(--bg-primary);border-radius:4px;padding:40px 36px;position:relative;box-shadow:0 20px 60px rgba(0,0,0,0.2);}
+.article-modal-inner{max-width:1080px;margin:0 auto;background:var(--bg-primary);border-radius:4px;padding:40px 36px;position:relative;box-shadow:0 20px 60px rgba(0,0,0,0.2);}
 .article-modal-close{position:absolute;top:16px;right:20px;font-size:24px;color:var(--text-muted);cursor:pointer;background:none;border:none;transition:color 0.2s;}
 .article-modal-close:hover{color:var(--text-primary);}
-.article-modal-img{width:100%;max-width:720px;display:block;margin:0 auto 24px;border-radius:3px;border:1px solid var(--border);} /* [CHANGE] 图片最宽720px，居中，文章容器保持1080px */
+.article-modal-img{width:100%;max-width:720px;display:block;margin:0 auto 24px;border-radius:3px;border:1px solid var(--border);}
 .article-modal-title{font-family:'Noto Serif SC',serif;font-size:22px;font-weight:700;color:var(--item-title);line-height:1.7;margin-bottom:8px;}
 .article-modal-date{font-family:'EB Garamond',serif;font-size:16px;color:var(--text-muted);font-style:italic;margin-bottom:20px;}
 .article-modal-body{font-family:'Noto Serif SC',serif;font-size:17px;line-height:2.2;color:var(--text-secondary);}
 
-/* ============================================================
-   GALLERY — changed from pointer-events:none to clickable
-   ============================================================ */
 .gallery-grid{column-count:4;column-gap:12px;padding:8px 0;}
-/* [CHANGE] Removed pointer-events:none and user-select:none; added cursor:pointer and hover effect */
 .gallery-item{
   break-inside:avoid;
   margin-bottom:12px;
@@ -96,19 +92,16 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg-primary);color:va
   cursor:pointer;
   position:relative;
 }
-/* [CHANGE] Re-enabled pointer-events on img so clicks register; kept drag disabled */
 .gallery-item img{
   width:100%;
   display:block;
   -webkit-user-drag:none;
   transition:transform 0.45s ease, opacity 0.3s ease;
 }
-/* [CHANGE] Subtle zoom + dim on hover to signal interactivity */
 .gallery-item:hover img{
   transform:scale(1.04);
   opacity:0.88;
 }
-/* [CHANGE] Magnifier icon overlay on hover */
 .gallery-item::after{
   content:'⊕';
   position:absolute;
@@ -217,8 +210,8 @@ const collection = {
     { id:"t001", title:"巴洛克复兴马耳他十字项链", year:"约1960", origin:"美国", type:"珠宝", highlight:true, image:"images/treasures/t001.jpg", description:"Florenza 多链琥珀色玻璃石项链，铸造掐丝工艺，立体爪托镶嵌，马耳他十字与心形母题，四重对称放射构图。文艺复兴、伊特鲁里亚、维多利亚与巴洛克四套历史语汇的融合体，是 Florenza 设计意图最完整的作品类型之一。", forSale:false },
   ],
   chronicles: [
-    { id:"c003", title:"一件礼服的战争与和平", date:"2026年", image:"images/regalia/r001.jpg", excerpt:"1982年5月4日，南大西洋，谢菲尔德号驱逆舰在巡逻途中遇阿根廷海军&ldquo;超级军旗&rdquo;舰载机发射的飞鱼导弹击中。导弹击穿舰体引发大火，舰长萨姆·索尔特下令弃舰。谢菲尔德号在被拖带数日后沉没，成为二战结束后第一艰被击沉的皮家海军战舰。二十名船员在这次袭击中罹难。<br><br>索尔特返回英国后，于1982年6月1日在 Moseley &amp; Pounsford 定制了这件少将常礼服外套。时间的选择耀人宻味：此时议会和媒体对谢菲尔德号事件的追责尚未平息，关于舰上通讯失误、导弹预警系统的质询正在进行。这件礼服很可能在随后的听证、仪式与公开场合中被穿着，见证了一名指挥官在舆论漩涡中维护自身荣誉的过程。<br><br>索尔特最终未被追责。此后他相继指挥南安普顿号驱逆舰，出任北伍德司令部作战助理参谋长，后升任国防情报局局长，晋升海军少将，主持海湾战争的皮家海军战略规划。1991年退役。2009年12月，索尔特因癌症去世，享年六十九岁。<br><br>于是，这件外套记录一场失败与随后漫长职业生涯之间的张力。" },
-    { id:"c004", title:"两枚面孔，两个拿破仑", date:"2026年", image:"images/treasures/t002.jpg", excerpt:"<strong>正面：侧面像的政治学</strong><br><br>圣赫勒拿奖章正面，拿破仑一世以罗马皇帝的姿态出现：严格的侧面像，月桂花环加冕，头衔环绕。这套视觉语言有明确的历史来源。古罗马硬币以侧面像确认皇帝的神圣权威，启蒙时代的共和主义者用同样的图式重新激活了这一传统，自由女神、革命烈士、执政官，都以侧面像的形式在金属上留存。拿破仑继承了这套语言，将军事胜利与古典共和的正当性焊接在一起：我不是国王，我是凯撒尔。<br><br><strong>背面：一个假托的遗言</strong><br><br>背面铭文不假托语气，直接以第三人称宣告：献给他的荣耀战友，他最后的思念。圣赫勒拿，1821年5月5日。外圈镌刻的是服役年限：1792至1815年间的战役。顶部是帝国皇冠。<br><br>这套设计的逻辑是完整的：拿破仑死于流放地，死前记挂的是他的士兵；三十六年后，他的继承者把这份&ldquo;最后的思念&rdquo;铸成金属，发到仍然在世的老兵手中。那些在奥斯特里茨、耶拿、滑铁卢浴血的人，彼时已白发苍苍，在波旁王朝复辟后被历史遗忘。这枚奖章告诉他们：你们被记得，而且是以他的名义。<br><br>幕后的操盘者是拿破仑三世。他以伯父的姓氏当選总统，又以伯父的先例称帝。1857年颌布圣赫勒拿奖章，时机算计精准：传说已发酵为神话，老兵正在凋零，此时给予承认，代价极小，收益极大。<br><br>马克思在《路易·波拿巴的雾月十八日》里写道：&ldquo;一切伟大的世界历史事变和人物，可以说都出现两次……第一次是作为悲剧出现，第二次是作为笑剧出现。&rdquo;拿破仑一世的帝国是悲剧；这枚奖章，是笑剧的道具。尽管对领取它的老兵而言，那份情感并不是笑剧。<br><br>一枚硬币，两代帝国，一句假托的遗言，和马克思冷峻的旁白。" },
+    { id:"c003", title:"一件礼服的战争与和平", date:"2026年", image:"images/regalia/r001.jpg", excerpt:"1982年5月4日，南大西洋，谢菲尔德号驱逐舰在巡逻途中遇阿根廷海军&ldquo;超级军旗&rdquo;舰载机发射的飞鱼导弹击中。导弹击穿舰体引发大火，舰长萨姆·索尔特下令弃舰。谢菲尔德号在被拖带数日后沉没，成为二战结束后第一艘被击沉的皇家海军战舰。二十名船员在这次袭击中罹难。<br><br>索尔特返回英国后，于1982年6月1日在 Moseley &amp; Pounsford 定制了这件少将常礼服外套。时间的选择耐人寻味：此时议会和媒体对谢菲尔德号事件的追责尚未平息，关于舰上通讯失误、导弹预警系统的质询正在进行。其订制时间，使人难以不将其与战后的问责程序和身份修复联系起来；至少在象征层面，它属于一名指挥官重新以体面形式出现于制度场合的见证。<br><br>索尔特最终未被追责。此后他相继指挥南安普顿号驱逐舰，出任北伍德司令部作战助理参谋长，后升任国防情报局局长，晋升海军少将，主持海湾战争的皇家海军战略规划。1991年退役。2009年12月，索尔特因癌症去世，享年六十九岁。<br><br>于是，这件外套记录的不是荣耀本身，而是荣耀在挫败之后如何被制度重新组织——它的意义不在战场，而在于战后制度仍允许此人以体面的形式出现。" },
+    { id:"c004", title:"两枚面孔，两个拿破仑", date:"2026年", image:"images/treasures/t002.jpg", excerpt:"<strong>正面：侧面像的政治学</strong><br><br>圣赫勒拿奖章正面，拿破仑一世以罗马皇帝的姿态出现：严格的侧面像，月桂花环加冕，头衔环绕。这套视觉语言有明确的历史来源。古罗马硬币以侧面像确认皇帝的神圣权威，启蒙时代的共和主义者用同样的图式重新激活了这一传统，自由女神、革命烈士、执政官，都以侧面像的形式在金属上留存。拿破仑继承了这套语言，将军事胜利与古典共和的正当性焊接在一起：我不是国王，我是凯撒。<br><br><strong>背面：一个假托的遗言</strong><br><br>背面铭文放弃第一人称假托，转以第三人称宣告：献给他的荣耀战友，他最后的思念。圣赫勒拿，1821年5月5日。外圈镌刻的是服役年限：1792至1815年间的战役。顶部是帝国皇冠。<br><br>这套设计的逻辑是完整的：拿破仑死于流放地，死前记挂的是他的士兵；三十六年后，他的继承者把这份&ldquo;最后的思念&rdquo;铸成金属，发到仍然在世的老兵手中。那些在奥斯特里茨、耶拿、滑铁卢浴血的人，彼时已白发苍苍，在波旁王朝复辟后被历史遗忘。这枚奖章告诉他们：你们被记得，而且是以他的名义。<br><br>幕后的操盘者是拿破仑三世。他以伯父的姓氏当选总统，又以伯父的先例称帝。1857年颁布圣赫勒拿奖章，时机算计精准：传说已发酵为神话，老兵正在凋零，此时给予承认，代价极小，收益极大。<br><br>马克思在《路易·波拿巴的雾月十八日》里写道：&ldquo;一切伟大的世界历史事变和人物，可以说都出现两次……第一次是作为悲剧出现，第二次是作为笑剧出现。&rdquo;对政权而言，这是一次效率极高的拿破仑主义再包装；对那些白发苍苍的老兵而言，它或许是迟来却真实的承认。正是在宣传技术与真实情感的重叠处，这枚奖章获得了它最复杂的历史生命——而马克思的旁白，不过照亮了其中一层。" },
     { id:"c001", title:"鲁斯坦擒获中国可汗：波斯《列王纪》", date:"2026年", image:"images/chronicles/c001.jpg", excerpt:"波斯史诗《列王纪》中，英雄鲁斯坦在混战中生擒中国可汗——这不是历史记录，是伊朗世界对帝国边疆的文学想象。这页萨法维时期（16世纪后半叶）细密画手抄本插图，描绘的正是这一俘获时刻。画面中心，骑白马与粉马的核心人物构成全图权力轴线。叙事重心在于征服与秩序重建，将敌方统治者纳入己方体系。这是王权胜利的图像，而非武勇的炫示。<br><br>画家的技法高度成熟。人物、战马、武器、山石密集交叠，但依靠色块分区和墨线勾勒维持平面秩序——这正是萨法维细密画的核心能力：在极高的元素密度下维持可读秩序。背景的紫色与橙色山体并非自然写生，而是波斯绘画体系独有的视觉语言，赋予战场以园林与梦境的双重质感。右上方舒展的大树平衡了左侧密集战团，给暴力场景加上了诗意化的框架。上下两栏波斯文诗句（nastaliq 体）与画面构成完整的手抄本页面——图像不是独立挂画，文字不是旁注，整页是文学、书法与绘画共同成就的产物。" },
     { id:"c002", title:"仿珠宝的设计逻辑：马耳他十字项链", date:"2026年", image:"images/treasures/t001.jpg", excerpt:"这件 Florenza 项链的设计核心策略，是以历史权威性抵消材料的非贵重属性。它同时采用两条手段：以数量与密度压制对材料本身的注意力，以历史叙事将价值判断从材料鉴定转移到符号辨认。两条路径相互强化而非干扰，在同期美国 costume jewelry 中并不多见。风格上，它是四套历史传统的有意识融合：文艺复兴复兴提供构图骨架（马耳他十字与徽章形制），伊特鲁里亚复兴提供工艺语言（掐丝视觉密度与深琥珀色调），维多利亚情感传统引入浪漫向度（心形母题的结构化处理），巴洛克复兴赋予戏剧张力（立体爪托与涡卷细节）。四套语汇各自承担不同的设计功能，并非随机拼贴。<br><br>此件在设计层面的核心成就，在于观者面对它时，首先被激活的不是材料鉴定的冲动，而是历史符号辨认的冲动——这本身便是设计策略成功的标志。庄严与浪漫两种本相悖的情绪向量，通过将心形处理为承载宝石的建筑构件而非独立的情感符号，获得了结构性的平衡。四重对称、三段式层级、中心锁定的放射构图，在极高的元素密度下维持了视觉秩序。铸造掐丝与模制玻璃石的材料层级构成了体验的物质边界，在自身所设定的目标与工艺约束之内，此件以罕见的完成度实现了它的设计意图。" },
   ],
@@ -288,10 +281,10 @@ function renderCurrentTab(){
 }
 
 function renderCabinet() {
-  const featuredIds = ["r006","r009","r004","t002","t001"]; // [CHANGE] r001→r006 (法国1931式替代海军少将)
+  const featuredIds = ["r006","r009","r004","t002","t001"];
   const all = [...collection.regalia, ...collection.treasures];
   const featured = featuredIds.map(id => all.find(i => i.id===id)).filter(Boolean);
-  const chronicleFeatured = collection.chronicles.find(c => c.id==="c003"); // [CHANGE] c001→c003 (战争与和平替代波斯画)
+  const chronicleFeatured = collection.chronicles.find(c => c.id==="c003");
   document.getElementById("tab-cabinet").innerHTML =
     '<div class="cabinet-statement" style="font-family:\'Noto Serif SC\',serif;font-size:22px;font-weight:700;color:var(--heading-gold);padding-top:16px;padding-bottom:4px;line-height:1.7;text-align:center;letter-spacing:4px;">收藏与策展：我在时间中重构审美、身份与权力的物质表达</div>' +
     '<div class="section-header" style="padding-top:20px;padding-bottom:8px"><div class="section-title">精选藏品</div><div class="section-subtitle">Highlights</div></div>' +
@@ -359,7 +352,6 @@ function renderDepartures() {
       :'<div class="curator-statement" style="color:var(--text-muted)">暂无出让藏品</div>');
 }
 
-// [CHANGE] renderGallery: removed pointer-events:none; added onclick="openGalleryLightbox(id)" per item
 function renderGallery() {
   const allCats=["艺术见闻","藏品穿搭"];
   const items=collection.gallery.filter(g=>g.image&&galleryFilter.includes(g.category));
@@ -379,8 +371,6 @@ function renderGallery() {
       :'<div class="curator-statement" style="color:var(--text-muted)">该分类暂无内容</div>');
 }
 
-// [CHANGE] New dedicated function for gallery lightbox — uses image src directly,
-// caption as title (empty string is fine), no description needed for gallery items
 window.openGalleryLightbox = function(id) {
   const item = collection.gallery.find(g => g.id === id);
   if (!item || !item.image) return;
@@ -422,7 +412,7 @@ function openArticle(id){
   if(a.image){document.getElementById("articleImg").src=a.image;document.getElementById("articleImg").style.display="";}
   else document.getElementById("articleImg").style.display="none";
   document.getElementById("articleTitle").textContent=a.title;
-  document.getElementById("articleDate").textContent=a.date;
+  document.getElementById("articleDate").textContent='';
   document.getElementById("articleBody").innerHTML=a.excerpt;
   document.getElementById("articleModal").classList.add("open");
   document.body.style.overflow="hidden";
