@@ -252,7 +252,7 @@ const tabs = [
   { key:"cabinet", label:"珍奇柜" },
   { key:"regalia", label:"礼服与华服" },
   { key:"treasures", label:"勋章与珠宝" },
-  { key:"chronicles", label:"另类历史" },
+  { key:"chronicles", label:"物质文化" },
   { key:"departures", label:"甄选出让" },
   { key:"gallery", label:"画廊" },
 ];
@@ -332,7 +332,7 @@ function renderCard(item, index, isHighlightCtx) {
 
 function renderChronicles() {
   document.getElementById("tab-chronicles").innerHTML=
-    '<div class="section-header"><div class="section-title">另类历史</div><div class="section-subtitle">Alternative History</div></div>'+
+    '<div class="section-header"><div class="section-title">物质文化</div><div class="section-subtitle">Material Culture</div></div>'+
     divider+
     '<div class="chronicle-grid">'+collection.chronicles.map((a,i)=>
       '<div class="chronicle-card" style="animation:fadeIn 0.4s ease '+(i*0.06)+'s both" onclick="openArticle(\''+a.id+'\')">'+
