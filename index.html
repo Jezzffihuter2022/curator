@@ -189,21 +189,21 @@ const collection = {
   ],
   gallery: [
     { id:"g012", image:"images/gallery/g012.jpg", caption:"", category:"艺术见闻" },
-    { id:"g001", image:"images/gallery/g001.jpg", caption:"", category:"藏品展示" },
+    { id:"g001", image:"images/gallery/g001.jpg", caption:"", category:"藏品穿搭" },
     { id:"g016", image:"images/gallery/g016.jpg", caption:"", category:"艺术见闻" },
-    { id:"g006", image:"images/gallery/g006.jpg", caption:"", category:"藏品展示" },
+    { id:"g006", image:"images/gallery/g006.jpg", caption:"", category:"藏品穿搭" },
     { id:"g010", image:"images/gallery/g010.jpg", caption:"", category:"艺术见闻" },
-    { id:"g002", image:"images/gallery/g002.jpg", caption:"", category:"藏品展示" },
+    { id:"g002", image:"images/gallery/g002.jpg", caption:"", category:"藏品穿搭" },
     { id:"g015", image:"images/gallery/g015.jpg", caption:"", category:"艺术见闻" },
-    { id:"g003", image:"images/gallery/g003.jpg", caption:"", category:"藏品展示" },
+    { id:"g003", image:"images/gallery/g003.jpg", caption:"", category:"藏品穿搭" },
     { id:"g011", image:"images/gallery/g011.jpg", caption:"", category:"艺术见闻" },
-    { id:"g004", image:"images/gallery/g004.jpg", caption:"", category:"藏品展示" },
+    { id:"g004", image:"images/gallery/g004.jpg", caption:"", category:"藏品穿搭" },
     { id:"g013", image:"images/gallery/g013.jpg", caption:"", category:"艺术见闻" },
-    { id:"g005", image:"images/gallery/g005.jpg", caption:"", category:"藏品展示" },
+    { id:"g005", image:"images/gallery/g005.jpg", caption:"", category:"藏品穿搭" },
     { id:"g014", image:"images/gallery/g014.jpg", caption:"", category:"艺术见闻" },
-    { id:"g007", image:"images/gallery/g007.jpg", caption:"", category:"藏品展示" },
+    { id:"g007", image:"images/gallery/g007.jpg", caption:"", category:"藏品穿搭" },
     { id:"g017", image:"images/gallery/g017.jpg", caption:"", category:"艺术见闻" },
-    { id:"g008", image:"images/gallery/g008.jpg", caption:"", category:"藏品展示" },
+    { id:"g008", image:"images/gallery/g008.jpg", caption:"", category:"藏品穿搭" },
     { id:"g009", image:"images/gallery/g009.jpg", caption:"", category:"艺术见闻" },
   ]
 };
@@ -231,7 +231,7 @@ const tabs = [
 ];
 let currentTab = "cabinet";
 let filters = { regalia:{type:[]}, treasures:{type:[]} };
-let galleryFilter = ["艺术见闻", "藏品展示"];
+let galleryFilter = ["艺术见闻", "藏品穿搭"];
 
 function renderTabs() {
   document.getElementById("tabsBar").innerHTML = tabs.map(t =>
@@ -327,7 +327,7 @@ function renderDepartures() {
 }
 
 function renderGallery() {
-  const allCats=["艺术见闻","藏品展示"];
+  const allCats=["艺术见闻","藏品穿搭"];
   const items=collection.gallery.filter(g=>g.image&&galleryFilter.includes(g.category));
   const filterHtml='<div class="filter-bar">'+
     allCats.map(c=>'<button class="filter-btn '+(galleryFilter.includes(c)?'active':'')+'" onclick="toggleGalleryFilter(\''+c+'\')">'+c+'</button>').join("")+'</div>';
