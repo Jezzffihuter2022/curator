@@ -186,23 +186,23 @@ const collection = {
     { id:"c002", title:"一件美国仿珠宝的设计逻辑：Florenza 马耳他十字项链", date:"2026年", image:"images/treasures/t001.jpg", excerpt:"这件 Florenza 项链的设计核心策略，是以历史权威性抵消材料的非贵重属性。它同时采用两条手段：以数量与密度压制对材料本身的注意力，以历史叙事将价值判断从材料鉴定转移到符号辨认。两条路径相互强化而非干扰，在同期美国 costume jewelry 中并不多见。风格上，它是四套历史传统的有意识融合：文艺复兴复兴提供构图骨架（马耳他十字与徽章形制），伊特鲁里亚复兴提供工艺语言（掐丝视觉密度与深琥珀色调），维多利亚情感传统引入浪漫向度（心形母题的结构化处理），巴洛克复兴赋予戏剧张力（立体爪托与涡卷细节）。四套语汇各自承担不同的设计功能，并非随机拼贴。<br><br>此件在设计层面的核心成就，在于观者面对它时，首先被激活的不是材料鉴定的冲动，而是历史符号辨认的冲动——这本身便是设计策略成功的标志。庄严与浪漫两种本相悖的情绪向量，通过将心形处理为承载宝石的建筑构件而非独立的情感符号，获得了结构性的平衡。四重对称、三段式层级、中心锁定的放射构图，在极高的元素密度下维持了视觉秩序。铸造掐丝与模制玻璃石的材料层级构成了体验的物质边界，在自身所设定的目标与工艺约束之内，此件以罕见的完成度实现了它的设计意图。" },
   ],
   gallery: [
-    { id:"g009", image:"images/gallery/g009.jpg", caption:"", category:"艺术见闻" },
-    { id:"g001", image:"images/gallery/g001.jpg", caption:"", category:"藏品展示" },
     { id:"g012", image:"images/gallery/g012.jpg", caption:"", category:"艺术见闻" },
-    { id:"g002", image:"images/gallery/g002.jpg", caption:"", category:"藏品展示" },
-    { id:"g010", image:"images/gallery/g010.jpg", caption:"", category:"艺术见闻" },
-    { id:"g003", image:"images/gallery/g003.jpg", caption:"", category:"藏品展示" },
-    { id:"g015", image:"images/gallery/g015.jpg", caption:"", category:"艺术见闻" },
-    { id:"g004", image:"images/gallery/g004.jpg", caption:"", category:"藏品展示" },
-    { id:"g011", image:"images/gallery/g011.jpg", caption:"", category:"艺术见闻" },
-    { id:"g005", image:"images/gallery/g005.jpg", caption:"", category:"藏品展示" },
-    { id:"g013", image:"images/gallery/g013.jpg", caption:"", category:"艺术见闻" },
+    { id:"g001", image:"images/gallery/g001.jpg", caption:"", category:"藏品展示" },
+    { id:"g016", image:"images/gallery/g016.jpg", caption:"", category:"艺术见闻" },
     { id:"g006", image:"images/gallery/g006.jpg", caption:"", category:"藏品展示" },
+    { id:"g010", image:"images/gallery/g010.jpg", caption:"", category:"艺术见闻" },
+    { id:"g002", image:"images/gallery/g002.jpg", caption:"", category:"藏品展示" },
+    { id:"g015", image:"images/gallery/g015.jpg", caption:"", category:"艺术见闻" },
+    { id:"g003", image:"images/gallery/g003.jpg", caption:"", category:"藏品展示" },
+    { id:"g011", image:"images/gallery/g011.jpg", caption:"", category:"艺术见闻" },
+    { id:"g004", image:"images/gallery/g004.jpg", caption:"", category:"藏品展示" },
+    { id:"g013", image:"images/gallery/g013.jpg", caption:"", category:"艺术见闻" },
+    { id:"g005", image:"images/gallery/g005.jpg", caption:"", category:"藏品展示" },
     { id:"g014", image:"images/gallery/g014.jpg", caption:"", category:"艺术见闻" },
     { id:"g007", image:"images/gallery/g007.jpg", caption:"", category:"藏品展示" },
-    { id:"g016", image:"images/gallery/g016.jpg", caption:"", category:"艺术见闻" },
-    { id:"g008", image:"images/gallery/g008.jpg", caption:"", category:"藏品展示" },
     { id:"g017", image:"images/gallery/g017.jpg", caption:"", category:"艺术见闻" },
+    { id:"g008", image:"images/gallery/g008.jpg", caption:"", category:"藏品展示" },
+    { id:"g009", image:"images/gallery/g009.jpg", caption:"", category:"艺术见闻" },
   ]
 };
 
@@ -258,7 +258,7 @@ function renderCabinet() {
   const featured = featuredIds.map(id => all.find(i => i.id===id)).filter(Boolean);
   const chronicleFeatured = collection.chronicles.find(c => c.id==="c001");
   document.getElementById("tab-cabinet").innerHTML =
-    '<div class="cabinet-statement" style="font-size:15px;font-weight:400;color:var(--heading-gold);padding-top:16px;padding-bottom:4px;line-height:1.9;">收藏与策展：我在时间中重构审美、身份与权力的物质表达</div>' +
+    '<div class="cabinet-statement" style="font-size:15px;font-weight:400;color:var(--heading-gold);padding-top:16px;padding-bottom:4px;line-height:1.9;text-align:center;">收藏与策展：<br><br>我在时间中重构审美、身份与权力的物质表达</div>' +
     '<div class="section-header" style="padding-top:20px;padding-bottom:8px"><div class="section-title">精选藏品</div><div class="section-subtitle">Highlights</div></div>' +
     divider +
     '<div class="featured-grid">' +
