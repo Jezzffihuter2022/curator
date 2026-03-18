@@ -258,7 +258,7 @@ function renderCabinet() {
   const featured = featuredIds.map(id => all.find(i => i.id===id)).filter(Boolean);
   const chronicleFeatured = collection.chronicles.find(c => c.id==="c001");
   document.getElementById("tab-cabinet").innerHTML =
-    '<div class="cabinet-statement" style="font-size:15px;font-weight:400;color:var(--heading-gold);padding-top:16px;padding-bottom:4px;line-height:1.9;text-align:center;">收藏与策展：<br><br>我在时间中重构审美、身份与权力的物质表达</div>' +
+    '<div class="cabinet-statement" style="font-family:'Noto Serif SC',serif;font-size:22px;font-weight:700;color:var(--heading-gold);padding-top:16px;padding-bottom:4px;line-height:1.7;text-align:center;letter-spacing:4px;">收藏与策展：<br>我在时间中重构审美、身份与权力的物质表达</div>' +
     '<div class="section-header" style="padding-top:20px;padding-bottom:8px"><div class="section-title">精选藏品</div><div class="section-subtitle">Highlights</div></div>' +
     divider +
     '<div class="featured-grid">' +
