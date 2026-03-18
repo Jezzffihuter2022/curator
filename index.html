@@ -51,7 +51,7 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg-primary);color:va
 .item-card:hover{border-color:var(--gold);box-shadow:0 6px 24px rgba(0,0,0,0.06),0 0 0 1px var(--gold);transform:translateY(-3px);}
 .item-card::before{content:'';position:absolute;top:0;left:15%;right:15%;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0;transition:opacity 0.35s;}
 .item-card:hover::before{opacity:0.6;}
-.item-image{width:100%;aspect-ratio:4/5;background:var(--bg-warm);display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.item-image{width:100%;height:720px;background:var(--bg-warm);display:flex;align-items:center;justify-content:center;overflow:hidden;}
 .item-image img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s;}
 .item-card:hover .item-image img{transform:scale(1.03);}
 .item-placeholder{font-family:'Cinzel',serif;font-size:42px;color:var(--border);}
@@ -76,10 +76,10 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg-primary);color:va
 .chronicle-card .card-title{font-family:'Noto Serif SC',serif;font-size:17px;font-weight:600;color:var(--item-title);line-height:1.7;}
 .article-modal{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:10000;background:rgba(0,0,0,0.6);backdrop-filter:blur(6px);overflow-y:auto;padding:40px 20px;}
 .article-modal.open{display:block;}
-.article-modal-inner{max-width:720px;margin:0 auto;background:var(--bg-primary);border-radius:4px;padding:40px 36px;position:relative;box-shadow:0 20px 60px rgba(0,0,0,0.2);}
+.article-modal-inner{max-width:1080px; /* [CHANGE] 720→1080px，另类历史文章宽度×1.5 */margin:0 auto;background:var(--bg-primary);border-radius:4px;padding:40px 36px;position:relative;box-shadow:0 20px 60px rgba(0,0,0,0.2);}
 .article-modal-close{position:absolute;top:16px;right:20px;font-size:24px;color:var(--text-muted);cursor:pointer;background:none;border:none;transition:color 0.2s;}
 .article-modal-close:hover{color:var(--text-primary);}
-.article-modal-img{width:100%;border-radius:3px;margin-bottom:24px;border:1px solid var(--border);}
+.article-modal-img{width:100%;max-width:720px;display:block;margin:0 auto 24px;border-radius:3px;border:1px solid var(--border);} /* [CHANGE] 图片最宽720px，居中，文章容器保持1080px */
 .article-modal-title{font-family:'Noto Serif SC',serif;font-size:22px;font-weight:700;color:var(--item-title);line-height:1.7;margin-bottom:8px;}
 .article-modal-date{font-family:'EB Garamond',serif;font-size:16px;color:var(--text-muted);font-style:italic;margin-bottom:20px;}
 .article-modal-body{font-family:'Noto Serif SC',serif;font-size:17px;line-height:2.2;color:var(--text-secondary);}
@@ -288,10 +288,10 @@ function renderCurrentTab(){
 }
 
 function renderCabinet() {
-  const featuredIds = ["r001","r009","r004","t002","t001"];
+  const featuredIds = ["r006","r009","r004","t002","t001"]; // [CHANGE] r001→r006 (法国1931式替代海军少将)
   const all = [...collection.regalia, ...collection.treasures];
   const featured = featuredIds.map(id => all.find(i => i.id===id)).filter(Boolean);
-  const chronicleFeatured = collection.chronicles.find(c => c.id==="c001");
+  const chronicleFeatured = collection.chronicles.find(c => c.id==="c003"); // [CHANGE] c001→c003 (战争与和平替代波斯画)
   document.getElementById("tab-cabinet").innerHTML =
     '<div class="cabinet-statement" style="font-family:\'Noto Serif SC\',serif;font-size:22px;font-weight:700;color:var(--heading-gold);padding-top:16px;padding-bottom:4px;line-height:1.7;text-align:center;letter-spacing:4px;">收藏与策展：我在时间中重构审美、身份与权力的物质表达</div>' +
     '<div class="section-header" style="padding-top:20px;padding-bottom:8px"><div class="section-title">精选藏品</div><div class="section-subtitle">Highlights</div></div>' +
