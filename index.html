@@ -406,8 +406,8 @@ window.toggleGalleryFilter=function(cat){
   renderGallery();
 };
 window.toggleFilter=function(k,v){
-  if(v==='all')filters[k].type=[];
-  else{const i=filters[k].type.indexOf(v);if(i>-1)filters[k].type.splice(i,1);else filters[k].type.push(v);}
+  if(v==='all') filters[k].type=[];
+  else filters[k].type=[v]; // [CHANGE] 子类改为单选，点击即切换到该类
   renderCollection(k);
 };
 function openLightbox(id){
