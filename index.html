@@ -79,7 +79,14 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg-primary);color:va
 .article-modal-inner{max-width:1080px;margin:0 auto;background:var(--bg-primary);border-radius:4px;padding:40px 36px;position:relative;box-shadow:0 20px 60px rgba(0,0,0,0.2);}
 .article-modal-close{position:absolute;top:16px;right:20px;font-size:24px;color:var(--text-muted);cursor:pointer;background:none;border:none;transition:color 0.2s;}
 .article-modal-close:hover{color:var(--text-primary);}
+.article-img-stack{display:flex;flex-direction:column;gap:12px;max-width:720px;margin:0 auto 24px;}
+.article-img-stack img{width:100%;height:auto;display:block;border-radius:3px;border:1px solid var(--border);}
+.article-img-side{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:720px;margin:0 auto 24px;}
+.article-img-side img{width:100%;height:auto;display:block;border-radius:3px;border:1px solid var(--border);}
+.article-img-grid4{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:720px;margin:0 auto 24px;}
+.article-img-grid4 img{width:100%;height:auto;display:block;border-radius:3px;border:1px solid var(--border);}
 .article-modal-img{width:100%;max-width:720px;display:block;margin:0 auto 24px;border-radius:3px;border:1px solid var(--border);}
+@media(max-width:640px){.article-img-side,.article-img-grid4{grid-template-columns:1fr;}}
 .article-modal-title{font-family:'Noto Serif SC',serif;font-size:22px;font-weight:700;color:var(--item-title);line-height:1.7;margin-bottom:8px;}
 .article-modal-date{font-family:'EB Garamond',serif;font-size:16px;color:var(--text-muted);font-style:italic;margin-bottom:20px;}
 .article-modal-body{font-family:'Noto Serif SC',serif;font-size:17px;line-height:2.2;color:var(--text-secondary);}
@@ -170,7 +177,7 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg-primary);color:va
 <div class="article-modal" id="articleModal" onclick="closeArticle(event)">
   <div class="article-modal-inner" onclick="event.stopPropagation()">
     <button class="article-modal-close" onclick="closeArticle(event)">✕</button>
-    <img class="article-modal-img" id="articleImg" src="" alt="">
+    <div id="articleImgContainer"></div>
     <div class="article-modal-title" id="articleTitle"></div>
     <div class="article-modal-date" id="articleDate"></div>
     <div class="article-modal-body" id="articleBody"></div>
@@ -213,10 +220,10 @@ const collection = {
     { id:"t007", title:"比特币镀金纪念币", year:"当代", origin:"美国", type:"纪念币", highlight:false, image:"images/treasures/t007.jpg", description:"市售镀金铜质纪念章，正面为比特币符号、格言与电路板纹样，为加密货币文化的物质化产物。比特币以去物质化为核心意识形态，其纪念章却沿用了最古老的权力造像逻辑：镀金、圆形、铭文，即以传统金币的形式为其竞争者背书。", forSale:false },
   ],
   chronicles: [
-    { id:"c003", title:"一件礼服的战争与和平", date:"2026年", image:"images/regalia/r001.jpg", excerpt:"1982年5月4日，南大西洋。谢菲尔德号驱逐舰遭阿根廷海军的飞鱼导弹击中，导弹击穿舰体引发大火，舰长萨姆·索尔特下令弃舰。谢菲尔德号随后沉没，成为二战结束后第一艘被击沉的皇家海军战舰。二十名船员在这次袭击中罹难。<br><br>索尔特返回英国后，于1982年6月1日在 Moseley &amp; Pounsford 定制了这件礼服外套。时间的选择耐人寻味：此时议会和媒体对谢菲尔德号事件的追责正在进行。这件礼服使人难以不将其与战后的问责程序和身份修复联系起来；至少在象征层面，它标志着一名指挥官在舆论漩涡中重新确立自身位置的努力。<br><br>在战争胜利气氛中，索尔特最终未被追责。此后他相继指挥南安普顿号驱逐舰，出任北伍德司令部作战助理参谋长，后升任国防情报局局长，晋升海军少将，主持海湾战争的皇家海军战略规划。1991年退役。2009年，索尔特去世，享年六十九岁。<br><br>这件外套因此成为一个问题的物质载体：荣耀在挫败之后，如何通过自身努力和制度宽容重新组织。" },
-    { id:"c004", title:"两枚面孔，两个拿破仑", date:"2026年", image:"images/treasures/t002.jpg", excerpt:"<strong>正面：侧面像的政治学</strong><br><br>圣赫勒拿奖章正面，拿破仑一世以罗马皇帝的姿态出现：严格的侧面像，月桂花环加冕，头衔环绕。这套视觉语言有明确的历史来源。古罗马硬币以侧面像确认皇帝的神圣权威，启蒙时代的共和主义者用同样的图式重新激活了这一传统：自由女神、革命烈士、执政官，都以侧面像的形式在金属上留存。拿破仑继承了这套语言，将军事胜利与古典共和的正当性焊接在一起：我不是国王，我是凯撒。<br><br><strong>背面：一个假托的遗言</strong><br><br>背面铭文宣告：献给拿破仑的荣耀战友，他最后的思念。圣赫勒拿，1821年5月5日。外圈镌刻的是服役年限：1792至1815年诸战役。顶部是帝国皇冠。<br><br><strong>奖章的整体逻辑</strong><br><br>这套设计的意图是：拿破仑死于流放地，死前记挂的是他的士兵；三十六年后，他的继承者把这份&ldquo;最后的思念&rdquo;铸成金属，发到仍然在世的老兵手中。那些在奥斯特里茨、耶拿、滑铁卢浴血的人，彼时已白发苍苍，在波旁王朝复辟后一度被历史遗忘。这枚奖章告诉他们：你们被当时和现在的拿破仑记得。<br><br>幕后的操盘者是拿破仑三世。他以拿破仑一世的姓氏当选总统、政变称帝。1857年颁布圣赫勒拿奖章，时机算计精准：传说已发酵为神话，老兵正在凋零，此时给予承认，代价极小，收益极大。<br><br>马克思写道，一切伟大的世界历史事变和人物都出现两次：第一次是作为悲剧出现，第二次是作为笑剧出现。这一判断对拿破仑三世而言是准确的。但那些年迈的老兵，当他们接过这枚奖章时，触碰的是多年前真实流过的血与泥。宣传技术与真实情感在这枚奖章上重叠，这正是它作为历史物件最难被单一叙事收编的地方。" },
-    { id:"c001", title:"鲁斯坦擒获中国可汗：波斯《列王纪》", date:"2026年", image:"images/chronicles/c001.jpg", excerpt:"波斯史诗《列王纪》中，英雄鲁斯坦在混战中生擒中国可汗：这不是历史记录，是波斯（今伊朗）世界对帝国边疆的文学想象。这页波斯帝国萨法维时期（16世纪后半叶）细密画手抄本插图，描绘的正是这一俘获时刻。画面中心，骑粉马、穿锦袍的鲁斯坦牵着左边骑白马的中国可汗，二者构成全图权力轴线。周围穿着相对朴素盔甲的侍从次第环绕，最外围是理想化的自然。叙事重心在于征服与秩序重建，将敌方统治者纳入己方体系。这是王权胜利的图像，而非武勇的炫示。<br><br>画家的技法高度成熟。人物、战马、武器、山石密集交叠，但依靠色块分区和墨线勾勒维持平面秩序。这正是萨法维细密画的核心能力：在极高的元素密度下维持可读秩序。背景的紫色与橙色山体并非自然写生，而是波斯绘画体系独有的视觉语言，赋予战场以园林与梦境的双重质感。右上方舒展的大树平衡了左侧密集战团，给暴力场景加上了诗意化的框架。上下两栏波斯文诗句与画面构成完整的手抄本页面，整页是文学、书法与绘画共同成就的产物。" },
-    { id:"c002", title:"仿珠宝的设计逻辑：马耳他十字项链", date:"2026年", image:"images/treasures/t001.jpg", excerpt:"自上而下观赏这件 Florenza 项链。视线首先遇到的是巴洛克掐丝心形小吊坠：体量细小，却以立体爪托与涡卷细节预告了整串的主题和工艺密度。视线继续下移，花瓣形中心座以铸造掐丝构成对称的放射骨架，将四重构图秩序带入视野；马耳他十字主吊坠随即展开，以徽章形制确立整串的历史语义重心。圆形宝石与马眼形宝石分布于各节点，深琥珀色调回应了伊特鲁里亚复兴的色彩传统，在维持视觉密度的同时锁定了情绪基调。<br><br>这件项链的设计核心策略，是以历史权威性抵消材料的非贵重属性，同时采用两条手段：以数量与密度压制对材料本身的注意力，以历史叙事将价值判断从材料鉴定转移到符号辨认。风格上，它是四套历史传统的有意识融合：文艺复兴风格复兴提供构图骨架，伊特鲁里亚复兴提供工艺语言，维多利亚情感传统引入浪漫向度，巴洛克复兴赋予戏剧张力，四套语汇各自承担不同的设计功能。<br><br>通过将心形处理为承载宝石的建筑构件而非独立的情感符号，庄严与浪漫两种本相悖的情绪向量获得了结构性的平衡。铸造掐丝与模制玻璃石的材料层级构成了体验的物质边界，而在自身目标与工艺约束之内，此件以罕见的完成度实现了它的设计意图。" },
+    { id:"c003", title:"一件礼服的战争与和平", date:"2026年", image:"images/regalia/r001.jpg", image2:"images/chronicles/c003b.jpg", imageLayout:"stack", excerpt:"1982年5月4日，南大西洋。谢菲尔德号驱逐舰遭阿根廷海军的飞鱼导弹击中，导弹击穿舰体引发大火，舰长萨姆·索尔特下令弃舰。谢菲尔德号随后沉没，成为二战结束后第一艘被击沉的皇家海军战舰。二十名船员在这次袭击中罹难。<br><br>索尔特返回英国后，于1982年6月1日在 Moseley &amp; Pounsford 定制了这件礼服外套。时间的选择耐人寻味：此时议会和媒体对谢菲尔德号事件的追责正在进行。这件礼服使人难以不将其与战后的问责程序和身份修复联系起来；至少在象征层面，它标志着一名指挥官在舆论漩涡中重新确立自身位置的努力。<br><br>在战争胜利气氛中，索尔特最终未被追责。此后他相继指挥南安普顿号驱逐舰，出任北伍德司令部作战助理参谋长，后升任国防情报局局长，晋升海军少将，主持海湾战争的皇家海军战略规划。1991年退役。2009年，索尔特去世，享年六十九岁。<br><br>这件外套因此成为一个问题的物质载体：荣耀在挫败之后，如何通过自身努力和制度宽容重新组织。" },
+    { id:"c004", title:"两枚面孔，两个拿破仑", date:"2026年", image:"images/treasures/t002.jpg", image2:"images/chronicles/c004b.jpg", imageLayout:"side", excerpt:"<strong>正面：侧面像的政治学</strong><br><br>圣赫勒拿奖章正面，拿破仑一世以罗马皇帝的姿态出现：严格的侧面像，月桂花环加冕，头衔环绕。这套视觉语言有明确的历史来源。古罗马硬币以侧面像确认皇帝的神圣权威，启蒙时代的共和主义者用同样的图式重新激活了这一传统：自由女神、革命烈士、执政官，都以侧面像的形式在金属上留存。拿破仑继承了这套语言，将军事胜利与古典共和的正当性焊接在一起：我不是国王，我是凯撒。<br><br><strong>背面：一个假托的遗言</strong><br><br>背面铭文宣告：献给拿破仑的荣耀战友，他最后的思念。圣赫勒拿，1821年5月5日。外圈镌刻的是服役年限：1792至1815年诸战役。顶部是帝国皇冠。<br><br><strong>奖章的整体逻辑</strong><br><br>这套设计的意图是：拿破仑死于流放地，死前记挂的是他的士兵；三十六年后，他的继承者把这份&ldquo;最后的思念&rdquo;铸成金属，发到仍然在世的老兵手中。那些在奥斯特里茨、耶拿、滑铁卢浴血的人，彼时已白发苍苍，在波旁王朝复辟后一度被历史遗忘。这枚奖章告诉他们：你们被当时和现在的拿破仑记得。<br><br>幕后的操盘者是拿破仑三世。他以拿破仑一世的姓氏当选总统、政变称帝。1857年颁布圣赫勒拿奖章，时机算计精准：传说已发酵为神话，老兵正在凋零，此时给予承认，代价极小，收益极大。<br><br>马克思写道，一切伟大的世界历史事变和人物都出现两次：第一次是作为悲剧出现，第二次是作为笑剧出现。这一判断对拿破仑三世而言是准确的。但那些年迈的老兵，当他们接过这枚奖章时，触碰的是多年前真实流过的血与泥。宣传技术与真实情感在这枚奖章上重叠，这正是它作为历史物件最难被单一叙事收编的地方。" },
+    { id:"c001", title:"鲁斯坦擒获中国可汗：波斯《列王纪》", date:"2026年", image:"images/chronicles/c001.jpg", imageLayout:"single", excerpt:"波斯史诗《列王纪》中，英雄鲁斯坦在混战中生擒中国可汗：这不是历史记录，是波斯（今伊朗）世界对帝国边疆的文学想象。这页波斯帝国萨法维时期（16世纪后半叶）细密画手抄本插图，描绘的正是这一俘获时刻。画面中心，骑粉马、穿锦袍的鲁斯坦牵着左边骑白马的中国可汗，二者构成全图权力轴线。周围穿着相对朴素盔甲的侍从次第环绕，最外围是理想化的自然。叙事重心在于征服与秩序重建，将敌方统治者纳入己方体系。这是王权胜利的图像，而非武勇的炫示。<br><br>画家的技法高度成熟。人物、战马、武器、山石密集交叠，但依靠色块分区和墨线勾勒维持平面秩序。这正是萨法维细密画的核心能力：在极高的元素密度下维持可读秩序。背景的紫色与橙色山体并非自然写生，而是波斯绘画体系独有的视觉语言，赋予战场以园林与梦境的双重质感。右上方舒展的大树平衡了左侧密集战团，给暴力场景加上了诗意化的框架。上下两栏波斯文诗句与画面构成完整的手抄本页面，整页是文学、书法与绘画共同成就的产物。" },
+    { id:"c002", title:"一件仿珠宝的设计逻辑：Florenza 马耳他十字项链", date:"2026年", image:"images/treasures/t001.jpg", image2:"images/chronicles/c002b.jpg", image3:"images/chronicles/c002c.jpg", image4:"images/chronicles/c002d.jpg", imageLayout:"grid4", excerpt:"自上而下观赏这件 Florenza 项链。视线首先遇到的是巴洛克掐丝心形小吊坠：体量细小，却以立体爪托与涡卷细节预告了整串的主题和工艺密度。视线继续下移，花瓣形中心座以铸造掐丝构成对称的放射骨架，将四重构图秩序带入视野；马耳他十字主吊坠随即展开，以徽章形制确立整串的历史语义重心。圆形宝石与马眼形宝石分布于各节点，深琥珀色调回应了伊特鲁里亚复兴的色彩传统，在维持视觉密度的同时锁定了情绪基调。<br><br>这件项链的设计核心策略，是以历史权威性抵消材料的非贵重属性，同时采用两条手段：以数量与密度压制对材料本身的注意力，以历史叙事将价值判断从材料鉴定转移到符号辨认。风格上，它是四套历史传统的有意识融合：文艺复兴风格复兴提供构图骨架，伊特鲁里亚复兴提供工艺语言，维多利亚情感传统引入浪漫向度，巴洛克复兴赋予戏剧张力，四套语汇各自承担不同的设计功能。<br><br>通过将心形处理为承载宝石的建筑构件而非独立的情感符号，庄严与浪漫两种本相悖的情绪向量获得了结构性的平衡。铸造掐丝与模制玻璃石的材料层级构成了体验的物质边界，而在自身目标与工艺约束之内，此件以罕见的完成度实现了它的设计意图。" },
   ],
   gallery: [
     { id:"g012", image:"images/gallery/g012.jpg", caption:"", category:"艺术掠影" },
@@ -422,8 +429,24 @@ function closeLightbox(e){
 }
 function openArticle(id){
   const a=collection.chronicles.find(c=>c.id===id);if(!a)return;
-  if(a.image){document.getElementById("articleImg").src=a.image;document.getElementById("articleImg").style.display="";}
-  else document.getElementById("articleImg").style.display="none";
+  const container=document.getElementById("articleImgContainer");
+  function imgEl(src){return '<img src="'+src+'" alt="" loading="lazy">';}
+  function tryImg(src,cls){
+    // only emit the img tag; missing images simply show broken icon which is acceptable
+    return imgEl(src);
+  }
+  if(a.imageLayout==="stack"){
+    container.innerHTML='<div class="article-img-stack">'+imgEl(a.image)+(a.image2?imgEl(a.image2):'')+'</div>';
+  } else if(a.imageLayout==="side"){
+    container.innerHTML='<div class="article-img-side">'+imgEl(a.image)+(a.image2?imgEl(a.image2):'')+'</div>';
+  } else if(a.imageLayout==="grid4"){
+    const imgs=[a.image,a.image2,a.image3,a.image4].filter(Boolean);
+    container.innerHTML='<div class="article-img-grid4">'+imgs.map(s=>imgEl(s)).join('')+'</div>';
+  } else if(a.image){
+    container.innerHTML='<img class="article-modal-img" src="'+a.image+'" alt="">';
+  } else {
+    container.innerHTML='';
+  }
   document.getElementById("articleTitle").textContent=a.title;
   document.getElementById("articleDate").textContent="";
   document.getElementById("articleBody").innerHTML=a.excerpt;
