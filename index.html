@@ -326,12 +326,18 @@ function renderChronicleCard(item, index) {
     '<div class="item-meta"></div></div></div>';
 }
 
+const typeOrder = {
+  regalia: ["仪式礼服","晚宴礼服","高级时装"],
+  treasures: ["勋章","珠宝","纪念币"]
+};
 function renderCollection(key) {
   const allItems = collection[key]||[];
-  const types = [...new Set(allItems.map(i=>i.type))];
+  const order = typeOrder[key] || [];
+  const rawTypes = [...new Set(allItems.map(i=>i.type))];
+  const types = [...order.filter(t=>rawTypes.includes(t)), ...rawTypes.filter(t=>!order.includes(t))];
   const af = filters[key]?.type||[];
   const filtered = af.length===0 ? allItems : allItems.filter(i=>af.includes(i.type));
-  const sorted = sortItems(filtered);
+  const sorted = [...filtered].sort((a,b)=>parseYear(a.year)-parseYear(b.year));
   const tm={regalia:"礼服与华服",treasures:"勋章与珠宝"};
   const sm={regalia:"Uniform & Couture",treasures:"Medal & Jewellery"};
   let fh='';
