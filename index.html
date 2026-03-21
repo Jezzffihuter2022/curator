@@ -85,8 +85,12 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg-primary);color:va
 .article-img-side img{width:100%;height:auto;display:block;border-radius:3px;border:1px solid var(--border);}
 .article-img-grid4{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:720px;margin:0 auto 24px;}
 .article-img-grid4 img{width:100%;height:auto;display:block;border-radius:3px;border:1px solid var(--border);}
+.article-textleft{display:grid;grid-template-columns:1fr 1fr;gap:32px;max-width:1000px;margin:0 auto 24px;align-items:start;}
+.article-textleft-imgs{display:flex;flex-direction:column;gap:12px;}
+.article-textleft-imgs img{width:100%;height:auto;display:block;border-radius:3px;border:1px solid var(--border);}
+.article-textleft-body{font-family:'Noto Serif SC',serif;font-size:17px;line-height:2.2;color:var(--text-secondary);}
 .article-modal-img{width:100%;max-width:720px;display:block;margin:0 auto 24px;border-radius:3px;border:1px solid var(--border);}
-@media(max-width:640px){.article-img-side,.article-img-grid4{grid-template-columns:1fr;}}
+@media(max-width:640px){.article-img-side,.article-img-grid4,.article-textleft{grid-template-columns:1fr;}}
 .article-modal-title{font-family:'Noto Serif SC',serif;font-size:22px;font-weight:700;color:var(--item-title);line-height:1.7;margin-bottom:8px;}
 .article-modal-date{font-family:'EB Garamond',serif;font-size:16px;color:var(--text-muted);font-style:italic;margin-bottom:20px;}
 .article-modal-body{font-family:'Noto Serif SC',serif;font-size:17px;line-height:2.2;color:var(--text-secondary);}
@@ -221,9 +225,10 @@ const collection = {
     { id:"t007", title:"比特币镀金纪念币", year:"当代", origin:"美国", type:"纪念币", highlight:false, image:"images/treasures/t007.jpg", description:"市售镀金铜质纪念章，正面为比特币符号、格言与电路板纹样，为加密货币文化的物质化产物。比特币以去物质化为核心意识形态，其纪念章却沿用了最古老的权力造像逻辑：镀金、圆形、铭文，即以传统金币的形式为其竞争者背书。", forSale:false },
     { id:"t008", title:"金色流苏项链", year:"约1960", origin:"意大利", type:"珠宝", highlight:false, image:"images/treasures/t008.jpg", description:"可能为1960年代意大利产。镀金编织网带为主链，密排琥珀色爪托玻璃石沿边缘延伸，中心矩形座以多列玻璃石构成几何面，向下发散为多股网链与石链交织的流苏坠。流苏在二十世纪的规模化生产中完成了从宫廷服饰向大众佩戴的转译。", forSale:false },
     { id:"t009", title:"黄铜镂空三联项链", year:"约1930", origin:"捷克", type:"珠宝", highlight:false, image:"images/treasures/t009.jpg", description:"可能为1930年代捷克产。冲压黄铜镂空花卉三联构图，涡卷与花瓣骨架内嵌蓝色玻璃石，大中小分级排布。此类工艺与配色高度对应二十世纪初期波西米亚出口仿珠宝传统。", forSale:false },
+    { id:"t012", title:"镀金历史主义圆章式项链", year:"约1960", origin:"美国", type:"珠宝", highlight:false, image:"images/treasures/t012.jpg", description:"以深琥珀与橄榄绿玻璃石构成中心化圆章构图，卷草、颗粒纹与仿珍珠共同调用文艺复兴复兴与维多利亚历史主义语法。将徽章、教会饰物与晚装珠宝的视觉秩序压缩为一件中产可佩戴的历史主义饰物。", forSale:false },
   ],
   chronicles: [
-    { id:"c003", title:"一件礼服的战争与和平", date:"2026年", image:"images/regalia/r001.jpg", image2:"images/chronicles/c003b.jpg", imageLayout:"stack", excerpt:"1982年5月4日，南大西洋。谢菲尔德号驱逐舰遭阿根廷海军的飞鱼导弹击中，导弹击穿舰体引发大火，舰长萨姆·索尔特下令弃舰。谢菲尔德号随后沉没，成为二战结束后第一艘被击沉的皇家海军战舰。二十名船员在这次袭击中罹难。<br><br>索尔特返回英国后，于1982年6月1日在 Moseley &amp; Pounsford 定制了这件礼服外套。时间的选择耐人寻味：此时议会和媒体对谢菲尔德号事件的追责正在进行。这件礼服使人难以不将其与战后的问责程序和身份修复联系起来；至少在象征层面，它标志着一名指挥官在舆论漩涡中重新确立自身位置的努力。<br><br>在战争胜利气氛中，索尔特最终未被追责。此后他相继指挥南安普顿号驱逐舰，出任北伍德司令部作战助理参谋长，后升任国防情报局局长，晋升海军少将，主持海湾战争的皇家海军战略规划。1991年退役。2009年，索尔特去世，享年六十九岁。<br><br>这件外套因此成为一个问题的物质载体：荣耀在挫败之后，如何通过自身努力和制度宽容重新组织。" },
+    { id:"c003", title:"一件礼服的战争与和平", date:"2026年", image:"images/chronicles/c003c.jpg", image2:"images/chronicles/c003b.jpg", imageLayout:"textleft", excerpt:"1982年5月4日，南大西洋。谢菲尔德号驱逐舰遭阿根廷海军的飞鱼导弹击中，导弹击穿舰体引发大火，舰长萨姆·索尔特下令弃舰。谢菲尔德号随后沉没，成为二战结束后第一艘被击沉的皇家海军战舰。二十名船员在这次袭击中罹难。<br><br>索尔特返回英国后，于1982年6月1日在 Moseley &amp; Pounsford 定制了这件礼服外套。时间的选择耐人寻味：此时议会和媒体对谢菲尔德号事件的追责正在进行。这件礼服使人难以不将其与战后的问责程序和身份修复联系起来；至少在象征层面，它标志着一名指挥官在舆论漩涡中重新确立自身位置的努力。<br><br>在战争胜利气氛中，索尔特最终未被追责。此后他相继指挥南安普顿号驱逐舰，出任北伍德司令部作战助理参谋长，后升任国防情报局局长，晋升海军少将，主持海湾战争的皇家海军战略规划。1991年退役。2009年，索尔特去世，享年六十九岁。<br><br>这件外套因此成为一个问题的物质载体：荣耀在挫败之后，如何通过自身努力和制度宽容重新组织。" },
     { id:"c004", title:"两枚面孔，两个拿破仑", date:"2026年", image:"images/treasures/t002.jpg", image2:"images/chronicles/c004b.jpg", imageLayout:"side", excerpt:"<strong>正面：侧面像的政治学</strong><br><br>圣赫勒拿奖章正面，拿破仑一世以罗马皇帝的姿态出现：严格的侧面像，月桂花环加冕，头衔环绕。这套视觉语言有明确的历史来源。古罗马硬币以侧面像确认皇帝的神圣权威，启蒙时代的共和主义者用同样的图式重新激活了这一传统：自由女神、革命烈士、执政官，都以侧面像的形式在金属上留存。拿破仑继承了这套语言，将军事胜利与古典共和的正当性焊接在一起：我不是国王，我是凯撒。<br><br><strong>背面：一个假托的遗言</strong><br><br>背面铭文宣告：献给拿破仑的荣耀战友，他最后的思念。圣赫勒拿，1821年5月5日。外圈镌刻的是服役年限：1792至1815年诸战役。顶部是帝国皇冠。<br><br><strong>奖章的整体逻辑</strong><br><br>这套设计的意图是：拿破仑死于流放地，死前记挂的是他的士兵；三十六年后，他的继承者把这份&ldquo;最后的思念&rdquo;铸成金属，发到仍然在世的老兵手中。他们彼时已白发苍苍，在波旁王朝复辟后一度被历史遗忘。这枚奖章告诉他们：你们被当时和现在的拿破仑记得。<br><br>幕后的操盘者是拿破仑三世。他以拿破仑一世的姓氏当选总统、政变称帝。1857年颁布圣赫勒拿奖章，时机算计精准：传说已发酵为神话，老兵正在凋零，此时给予承认，代价极小，收益极大。<br><br>马克思写道，一切伟大的世界历史事变和人物都出现两次：第一次是作为悲剧出现，第二次是作为笑剧出现。这一判断对拿破仑三世而言是准确的。但那些年迈的老兵，当他们接过这枚奖章时，触碰的是多年前真实流过的血与泥。宣传技术与真实情感在这枚奖章上重叠，这正是它作为历史物件最难被单一叙事收编的地方。" },
     { id:"c001", title:"鲁斯坦擒获中国可汗：波斯《列王纪》", date:"2026年", image:"images/chronicles/c001.jpg", imageLayout:"single", excerpt:"波斯史诗《列王纪》中，英雄鲁斯坦在混战中生擒中国可汗：这不是历史记录，是波斯（今伊朗）世界对帝国边疆的文学想象。这页波斯帝国萨法维时期（16世纪后半叶）细密画手抄本插图，描绘的正是这一俘获时刻。画面中心，骑粉马、穿锦袍的鲁斯坦牵着左边骑白马的中国可汗，二者构成全图权力轴线。周围穿着相对朴素盔甲的侍从次第环绕，最外围是理想化的自然。叙事重心在于征服与秩序重建，将敌方统治者纳入己方体系。这是王权胜利的图像，而非武勇的炫示。<br><br>画家的技法高度成熟。人物、战马、武器、山石密集交叠，但依靠色块分区和墨线勾勒维持平面秩序。这正是萨法维细密画的核心能力：在极高的元素密度下维持可读秩序。背景的紫色与橙色山体并非自然写生，而是波斯绘画体系独有的视觉语言，赋予战场以园林与梦境的双重质感。右上方舒展的大树平衡了左侧密集战团，给暴力场景加上了诗意化的框架。上下两栏波斯文诗句与画面构成完整的手抄本页面，整页是文学、书法与绘画共同成就的产物。" },
     { id:"c005", title:"法国陆军医官礼服的制度剖析", date:"2026年", image:"images/regalia/r006.jpg", image2:"images/regalia/r006b.jpg", image3:"images/regalia/r006c.jpg", image4:"images/regalia/r006d.jpg", imageLayout:"grid4", excerpt:"<strong>工艺</strong><br><br>这件礼服出自巴黎第八区 Thorn，1 rue de la pépinière，彼时该地址是法国军服定制业的核心门牌，客户以军官及外交官为主。面料为中厚挺括礼服毛呢，黑色，织物密度足以支撑直身廓形。单排9粒扣沿前襟垂直排列，扣面以黄铜铸造，浮雕图案为权杖缠蛇外环月桂，赫尔墨斯权杖的医疗变体，每粒扣均是一枚微型的身份宣言。<br><br>领部与袖口以深红丝绒包覆，切割边缘利落，与黑色毛呢的交界处收口无毛边。领片两侧各施一组金线手工刺绣：左侧橄榄枝，右侧蓟花，以管状金属丝构成，密度均匀，九十年后光泽与张力仍在。袖口丝绒之上，两道金色织带横贯，金线走向规整，是法国军服刺绣工艺的标准高输出。<br><br>整件礼服体现了法兰西制服美学的核心逻辑：以裁缝的精度代替装饰的堆砌，将布料、丝绒、金线与金属扣的材料层级压入严格的几何秩序，使礼服获得建筑与雕塑的同时感，它不是被穿着的，它是被构筑的。<br><br><strong>风格与制度含义</strong><br><br>黑色礼服毛呢配深红丝绒，是第三共和国时期法国军医系统礼服的标准配色。单排扣廓形在同期法国陆军礼服中对应文职与技术兵种，作战兵种多用双排扣，医官以单排扣区隔，将持有者定位为制度的技术支柱而非武力代理人。<br><br>9粒权杖缠蛇扣沿前襟构成一条垂直的身份轴线，从领口延伸至腰部。在正式场合的每一次视线接触中，兵种、职级与机构归属同时完成识别。礼服由此成为国家通过个人身体进行的一次持续性的制度表达。" },
@@ -446,6 +451,15 @@ function openArticle(id){
   } else if(a.imageLayout==="grid4"){
     const imgs=[a.image,a.image2,a.image3,a.image4].filter(Boolean);
     container.innerHTML='<div class="article-img-grid4">'+imgs.map(s=>imgEl(s)).join('')+'</div>';
+  } else if(a.imageLayout==="textleft"){
+    const imgs=[a.image,a.image2].filter(Boolean);
+    container.innerHTML='<div class="article-textleft"><div class="article-textleft-body">'+a.excerpt+'</div><div class="article-textleft-imgs">'+imgs.map(s=>imgEl(s)).join('')+'</div></div>';
+    document.getElementById("articleTitle").textContent=a.title;
+    document.getElementById("articleDate").textContent="";
+    document.getElementById("articleBody").innerHTML='';
+    document.getElementById("articleModal").classList.add("open");
+    document.body.style.overflow="hidden";
+    return;
   } else if(a.image){
     container.innerHTML='<img class="article-modal-img" src="'+a.image+'" alt="">';
   } else {
