@@ -103,6 +103,9 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg-primary);color:va
 .article-item-link-name{font-family:'Noto Serif SC',serif;font-size:17px;font-weight:600;color:var(--item-title);cursor:pointer;letter-spacing:1px;transition:color 0.2s;}
 .article-item-link-name:hover{color:var(--gold);}
 
+/* CHANGE: type statement style */
+.type-statement{font-family:'Noto Serif SC',serif;font-size:15px;line-height:2;color:var(--text-muted);max-width:520px;margin:0 auto;text-align:center;padding:0 0 20px;}
+
 .gallery-grid{column-count:3;column-gap:12px;padding:8px 0;}
 .gallery-item{
   break-inside:avoid;
@@ -351,6 +354,21 @@ const typeOrder = {
   regalia: ["仪式礼服","晚宴礼服","高级时装"],
   treasures: ["勋章","珠宝","纪念币"]
 };
+
+/* CHANGE: section-level curatorial statements, always visible */
+const sectionStatements = {
+  regalia: [
+    "仪式礼服：国家将权威编入礼服，通过身体完成公共宣示",
+    "晚宴礼服：仪式融入晚宴，权威与归属在烛光下被低声确认",
+    "高级时装：军礼服语汇经由时尚工业的转译进入日常运作"
+  ],
+  treasures: [
+    "勋章：国家以金银、珐琅和绶带将功绩固定为可佩戴的等级",
+    "珠宝：设计以历史语汇和工艺密度替代贵重材料来完成说服",
+    "纪念币：铸币是权力造像术，将统治者的面孔压入社会流通"
+  ]
+};
+
 function renderCollection(key) {
   const allItems = collection[key]||[];
   const order = typeOrder[key] || [];
@@ -360,6 +378,9 @@ function renderCollection(key) {
   const filtered = af.length===0 ? allItems : allItems.filter(i=>af.includes(i.type));
   const sorted = [...filtered].sort((a,b)=>parseYear(a.year)-parseYear(b.year));
   const tm={regalia:"礼服与华服",treasures:"勋章与珠宝"};
+  /* CHANGE: always show all section statements */
+  const stmts = sectionStatements[key] || [];
+  const sh = stmts.length > 0 ? '<div class="type-statement">' + stmts.join('<br>') + '</div>' : '';
   let fh='';
   if(types.length>1){
     fh='<div class="filter-bar"><button class="filter-btn '+(af.length===0?'active':'')+'" onclick="toggleFilter(\''+key+'\',\'all\')">全部</button>'+
@@ -367,7 +388,7 @@ function renderCollection(key) {
   }
   document.getElementById("tab-"+key).innerHTML=
     '<div class="section-header"><div class="section-title">'+tm[key]+'</div></div>'+
-    divider+fh+
+    sh+divider+fh+
     '<div class="featured-grid">'+sorted.map((i,n)=>renderCard(i,n,false)).join("")+'</div>';
 }
 
