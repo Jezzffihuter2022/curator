@@ -155,6 +155,14 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg-primary);color:va
 .footer p span.en{font-family:'Cinzel',serif;letter-spacing:2px;margin-left:4px;}
 .footer a{color:var(--gold);text-decoration:none;font-family:'Cinzel',serif;font-size:17px;letter-spacing:2px;}
 .footer a:hover{text-decoration:underline;}
+.footer-note-link{color:var(--gold);font-family:'Noto Serif SC',serif;font-size:17px;letter-spacing:2px;cursor:pointer;transition:color 0.2s;border:none;background:none;padding:0;text-decoration:underline;}
+.footer-note-link:hover{text-decoration:underline;}
+.curator-note-modal{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:10000;background:var(--bg-primary);overflow-y:auto;cursor:pointer;}
+.curator-note-modal.open{display:flex;align-items:center;justify-content:center;}
+.curator-note-modal-inner{max-width:580px;padding:40px 32px;font-family:'Noto Serif SC',serif;font-size:17px;line-height:2.4;color:var(--text-secondary);text-align:justify;letter-spacing:0.5px;}
+.curator-note-modal-title{font-size:20px;font-weight:700;color:var(--heading-gold);text-align:center;letter-spacing:4px;margin-bottom:28px;}
+.curator-note-modal-close{position:absolute;top:24px;right:28px;font-size:24px;color:var(--text-muted);cursor:pointer;background:none;border:none;transition:color 0.2s;}
+.curator-note-modal-close:hover{color:var(--text-primary);}
 
 @media(max-width:640px){
   .header{padding:36px 16px 24px;}.header h1{font-size:24px;letter-spacing:4px;}.header-en{font-size:24px;letter-spacing:2px;margin-left:4px;}
@@ -204,9 +212,18 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg-primary);color:va
 <footer class="footer">
   <div class="neo-divider" style="margin-bottom:20px"><div class="nd-line"></div><div class="nd-dot"></div><div class="nd-line"></div></div>
   <p>汪楚尧 <span class="en">Julian</span></p>
+  <p style="margin-top:10px"><button class="footer-note-link" onclick="document.getElementById('curatorNoteModal').classList.add('open');document.body.style.overflow='hidden';">策展手记</button></p>
   <p style="margin-top:8px">微信联系 <span class="en">LondonHKSZ</span></p>
   <p><a href="https://curator.wangchuyao.com">curator.wangchuyao.com</a></p>
 </footer>
+
+<div class="curator-note-modal" id="curatorNoteModal" onclick="if(event.target===this||event.target.classList.contains('curator-note-modal-close')){this.classList.remove('open');document.body.style.overflow='';}">
+  <button class="curator-note-modal-close">✕</button>
+  <div class="curator-note-modal-inner" onclick="event.stopPropagation()">
+    <div class="curator-note-modal-title">策展手记</div>
+    这个网站类似一件被有意展开的珍奇柜。礼服、勋章与珠宝在此被重新排列，使审美、权力与身份的关系得以显现。它试图说明：器物不仅承载历史，也会影响我们如何去看它。<br><br>这种观看并不无偏。这里明显偏爱那些承载密集历史与仪式感的器物，将秩序、等级与荣耀转化为可见的表面；相应地，日常、流通与生产过程被有意压缩。有些复杂的历史符号，会在这里被看成风格；有些严肃的等级秩序，也容易显得优雅。<br><br>因此，这既是关于藏品的策展，也是关于观看本身的练习。它并不提供标准答案，而呈现一种仍在调整中的观看方式。观者所见，不只是这些器物，也包括它们被如何观看。
+  </div>
+</div>
 
 <script>
 const divider = '<div class="neo-divider section-after-divider"><div class="nd-line"></div><div class="nd-dot"></div><div class="nd-line"></div></div>';
