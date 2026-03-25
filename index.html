@@ -165,7 +165,7 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg-primary);color:va
 <body>
 
 <header class="header">
-  <h1>汪楚尧 <span class="header-en">Julian</span></h1>
+  <h1>汪楚尧 · 收藏与策展</span></h1>
   <p class="header-subtitle">艺术品是对时间的僭越</p>
 </header>
 
@@ -332,7 +332,7 @@ function renderCabinet() {
   const chronicleFeatured = null;
   document.getElementById("tab-cabinet").innerHTML =
     '<div class="cabinet-statement" style="font-family:\'Noto Serif SC\',serif;font-size:22px;font-weight:700;color:var(--heading-gold);padding-top:16px;padding-bottom:4px;line-height:1.7;text-align:center;letter-spacing:4px;">审美、身份与权力的器物叙事</div>' +
-    '<div class="section-header" style="padding-top:20px;padding-bottom:8px"><div class="section-title">精选藏品</div><div class="section-subtitle">Highlights</div></div>' +
+    '<div class="section-header" style="padding-top:20px;padding-bottom:8px"><div class="section-title">精选藏品</div></div>' +
     divider +
     '<div class="featured-grid">' +
       featured.map((i,n) => renderCard(i,n,true)).join("") +
@@ -360,14 +360,13 @@ function renderCollection(key) {
   const filtered = af.length===0 ? allItems : allItems.filter(i=>af.includes(i.type));
   const sorted = [...filtered].sort((a,b)=>parseYear(a.year)-parseYear(b.year));
   const tm={regalia:"礼服与华服",treasures:"勋章与珠宝"};
-  const sm={regalia:"Uniform & Couture",treasures:"Medal & Jewellery"};
   let fh='';
   if(types.length>1){
     fh='<div class="filter-bar"><button class="filter-btn '+(af.length===0?'active':'')+'" onclick="toggleFilter(\''+key+'\',\'all\')">全部</button>'+
       types.map(t=>'<button class="filter-btn '+(af.includes(t)?'active':'')+'" onclick="toggleFilter(\''+key+'\',\''+t+'\')">'+t+'</button>').join("")+'</div>';
   }
   document.getElementById("tab-"+key).innerHTML=
-    '<div class="section-header"><div class="section-title">'+tm[key]+'</div><div class="section-subtitle">'+sm[key]+'</div></div>'+
+    '<div class="section-header"><div class="section-title">'+tm[key]+'</div></div>'+
     divider+fh+
     '<div class="featured-grid">'+sorted.map((i,n)=>renderCard(i,n,false)).join("")+'</div>';
 }
@@ -383,7 +382,7 @@ function renderCard(item, index, isHighlightCtx) {
 
 function renderChronicles() {
   document.getElementById("tab-chronicles").innerHTML=
-    '<div class="section-header"><div class="section-title">物质文化</div><div class="section-subtitle">Material Culture</div></div>'+
+    '<div class="section-header"><div class="section-title">物质文化</div></div>'+
     divider+
     '<div class="chronicle-grid">'+collection.chronicles.map((a,i)=>
       '<div class="chronicle-card" style="animation:fadeIn 0.4s ease '+(i*0.06)+'s both" onclick="openArticle(\''+a.id+'\')">'+
@@ -395,7 +394,7 @@ function renderChronicles() {
 function renderDepartures() {
   const fs=[...collection.regalia,...collection.treasures].filter(i=>i.forSale);
   document.getElementById("tab-departures").innerHTML=
-    '<div class="section-header"><div class="section-title">甄选出让</div><div class="section-subtitle">Available Pieces</div></div>'+
+    '<div class="section-header"><div class="section-title">甄选出让</div></div>'+
     divider+
     '<div class="curator-statement" style="padding-bottom:16px">以下藏品可转让，欢迎通过页尾方式联系。</div>'+
     (fs.length>0
@@ -411,7 +410,7 @@ function renderGallery() {
     allCats.map(c=>'<button class="filter-btn '+(galleryFilter===c?'active':'')+'" onclick="toggleGalleryFilter(\''+c+'\')">'+c+'</button>').join("")+
   '</div>';
   document.getElementById("tab-gallery").innerHTML=
-    '<div class="section-header"><div class="section-title">画廊</div><div class="section-subtitle">Gallery</div></div>'+
+    '<div class="section-header"><div class="section-title">画廊</div></div>'+
     divider+filterHtml+
     (items.length>0
       ? '<div class="gallery-grid">'+
