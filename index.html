@@ -259,14 +259,28 @@ const divider = '<div class="neo-divider section-after-divider"><div class="nd-l
 function closeAnonModal(){document.getElementById('anonModal').classList.remove('open');}
 function sendAnon(){
   var t=document.getElementById('anonText').value.trim();
-  if(!t){document.getElementById('anonToast').style.display='block';document.getElementById('anonToast').textContent='请输入内容后再发送';return;}
+  var toast=document.getElementById('anonToast');
+  var btn=document.getElementById('anonSendBtn');
+  if(!t){toast.style.display='block';toast.textContent='请输入内容后再发送';return;}
+  btn.disabled=true;btn.textContent='发送中…';
   var a=[49,56,50,49,55,55,49,50,54,51,57,64,49,54,51,46,99,111,109].map(function(c){return String.fromCharCode(c);}).join('');
-  var s='[匿名建议] curator.wangchuyao.com';
-  var m='mailto:'+a+'?subject='+encodeURIComponent(s)+'&body='+encodeURIComponent(t);
-  window.location.href=m;
-  document.getElementById('anonToast').style.display='block';
-  document.getElementById('anonToast').textContent='正在打开邮件客户端…';
-  setTimeout(function(){document.getElementById('anonText').value='';document.getElementById('anonToast').style.display='none';closeAnonModal();},2000);
+  fetch('https://formsubmit.co/ajax/'+a,{
+    method:'POST',
+    headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify({message:t,_subject:'[匿名建议] curator.wangchuyao.com',_template:'box'})
+  }).then(function(r){return r.json();}).then(function(d){
+    if(d.success==='true'||d.success===true){
+      toast.style.display='block';toast.textContent='已发送，感谢您的建议';
+      document.getElementById('anonText').value='';
+      setTimeout(function(){toast.style.display='none';btn.disabled=false;btn.textContent='发送';closeAnonModal();},1800);
+    } else {
+      toast.style.display='block';toast.textContent='发送失败，请稍后再试';
+      btn.disabled=false;btn.textContent='发送';
+    }
+  }).catch(function(){
+    toast.style.display='block';toast.textContent='网络错误，请稍后再试';
+    btn.disabled=false;btn.textContent='发送';
+  });
 }
 window.closeAnonModal=closeAnonModal;window.sendAnon=sendAnon;
 
