@@ -193,7 +193,7 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg-primary);color:va
 
 <header class="header">
   <h1>汪楚尧 · 收藏与策展</span></h1>
-  <p class="header-subtitle">艺术品是对时间的僭越</p>
+  <p class="header-subtitle">审美、身份与权力的器物叙事</p>
 </header>
 
 <nav class="tabs-container"><div class="tabs-bar" id="tabsBar"></div></nav>
@@ -407,8 +407,7 @@ function renderCabinet() {
   const featured = featuredIds.map(id => all.find(i => i.id===id)).filter(Boolean);
   const chronicleFeatured = null;
   document.getElementById("tab-cabinet").innerHTML =
-    '<div class="cabinet-statement" style="font-family:\'Noto Serif SC\',serif;font-size:22px;font-weight:700;color:var(--heading-gold);padding-top:16px;padding-bottom:4px;line-height:1.7;text-align:center;letter-spacing:4px;">审美、身份与权力的器物叙事</div>' +
-    '<div class="section-header" style="padding-top:20px;padding-bottom:8px"><div class="section-title">精选藏品</div></div>' +
+    '<div class="section-header" style="padding-top:20px;padding-bottom:8px"><div class="section-title">珍奇柜</div></div>' +
     divider +
     '<div class="featured-grid">' +
       featured.map((i,n) => renderCard(i,n,true)).join("") +
