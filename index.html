@@ -263,7 +263,7 @@ function sendAnon(){
   var btn=document.getElementById('anonSendBtn');
   if(!t){toast.style.display='block';toast.textContent='请输入内容后再发送';return;}
   btn.disabled=true;btn.textContent='发送中…';
-  var a=[49,56,50,49,55,55,49,50,54,51,57,64,49,54,51,46,99,111,109].map(function(c){return String.fromCharCode(c);}).join('');
+  var a='3d4627760930542d1dd6b9938358434d';
   fetch('https://formsubmit.co/ajax/'+a,{
     method:'POST',
     headers:{'Content-Type':'application/json','Accept':'application/json'},
