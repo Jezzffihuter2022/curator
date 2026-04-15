@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
 <title>汪楚尧 · 收藏与策展</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Noto+Serif+SC:wght@400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -167,21 +168,42 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg-primary);color:va
 .curator-note-modal-close{position:absolute;top:24px;right:28px;font-size:32px;color:var(--text-muted);cursor:pointer;background:none;border:none;transition:color 0.2s;}
 .curator-note-modal-close:hover{color:var(--text-primary);}
 
-.anon-link{display:inline-block;margin-top:36px;font-family:'Noto Serif SC',serif;font-size:15px;color:var(--text-muted);text-decoration:underline;text-underline-offset:4px;cursor:pointer;letter-spacing:1px;transition:color 0.2s;}
-.anon-link:hover{color:var(--text-secondary);}
-.anon-modal{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:10001;background:rgba(0,0,0,0.6);backdrop-filter:blur(6px);overflow-y:auto;padding:40px 20px;}
-.anon-modal.open{display:flex;align-items:center;justify-content:center;}
-.anon-modal-inner{max-width:480px;width:100%;background:var(--bg-primary);border-radius:4px;padding:36px 32px;position:relative;box-shadow:0 20px 60px rgba(0,0,0,0.2);}
-.anon-modal-close{position:absolute;top:14px;right:18px;font-size:32px;color:var(--text-muted);cursor:pointer;background:none;border:none;transition:color 0.2s;}
-.anon-modal-close:hover{color:var(--text-primary);}
-.anon-modal-title{font-family:'Noto Serif SC',serif;font-size:18px;font-weight:700;color:var(--heading-gold);text-align:center;letter-spacing:3px;margin-bottom:16px;}
-.anon-modal-intro{font-family:'Noto Serif SC',serif;font-size:15px;line-height:2.2;color:var(--text-secondary);text-align:center;margin-bottom:20px;}
-.anon-textarea{width:100%;min-height:120px;padding:14px 16px;border:1px solid var(--border);border-radius:3px;background:var(--bg-card);font-family:'Noto Serif SC',serif;font-size:15px;line-height:2;color:var(--text-primary);resize:vertical;outline:none;transition:border-color 0.2s;}
-.anon-textarea:focus{border-color:var(--gold);}
-.anon-textarea::placeholder{color:var(--text-muted);font-size:14px;}
-.anon-send{display:block;margin:18px auto 0;padding:9px 32px;border:1px solid var(--gold);border-radius:2px;background:transparent;font-family:'Noto Serif SC',serif;font-size:15px;color:var(--gold);letter-spacing:2px;cursor:pointer;transition:all 0.2s;}
-.anon-send:hover{background:var(--gold-glow);}
-.anon-toast{display:none;margin-top:14px;text-align:center;font-family:'Noto Serif SC',serif;font-size:14px;color:var(--gold);letter-spacing:1px;}
+/* conversation modal */
+.conv-modal{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:10001;background:rgba(0,0,0,0.6);backdrop-filter:blur(6px);overflow-y:auto;padding:40px 20px;}
+.conv-modal.open{display:block;}
+.conv-modal-inner{max-width:540px;width:100%;margin:40px auto;background:var(--bg-primary);border-radius:4px;padding:36px 32px;position:relative;box-shadow:0 20px 60px rgba(0,0,0,0.2);}
+.conv-modal-close{position:absolute;top:14px;right:18px;font-size:32px;color:var(--text-muted);cursor:pointer;background:none;border:none;transition:color 0.2s;}
+.conv-modal-close:hover{color:var(--text-primary);}
+.conv-modal-title{font-family:'Noto Serif SC',serif;font-size:18px;font-weight:700;color:var(--heading-gold);text-align:center;letter-spacing:3px;margin-bottom:6px;}
+.conv-modal-intro{font-family:'Noto Serif SC',serif;font-size:14px;line-height:2;color:var(--text-muted);text-align:center;margin-bottom:20px;}
+.conv-admin-bar{display:flex;align-items:center;gap:8px;margin-bottom:18px;justify-content:center;}
+.conv-admin-input{padding:6px 12px;border:1px solid var(--border);border-radius:2px;background:var(--bg-card);font-family:'Noto Sans SC',sans-serif;font-size:13px;color:var(--text-primary);outline:none;width:140px;transition:border-color 0.2s;}
+.conv-admin-input:focus{border-color:var(--gold);}
+.conv-admin-btn{padding:6px 14px;border:1px solid var(--border);border-radius:2px;background:transparent;font-family:'Noto Sans SC',sans-serif;font-size:13px;color:var(--text-muted);cursor:pointer;transition:all 0.2s;}
+.conv-admin-btn:hover{border-color:var(--gold);color:var(--gold);}
+.conv-admin-status{font-size:13px;color:var(--gold);font-family:'Noto Sans SC',sans-serif;letter-spacing:1px;}
+.conv-compose{margin-bottom:24px;border-bottom:1px solid var(--border);padding-bottom:20px;}
+.conv-textarea{width:100%;min-height:80px;padding:12px 14px;border:1px solid var(--border);border-radius:3px;background:var(--bg-card);font-family:'Noto Serif SC',serif;font-size:14px;line-height:2;color:var(--text-primary);resize:vertical;outline:none;transition:border-color 0.2s;}
+.conv-textarea:focus{border-color:var(--gold);}
+.conv-textarea::placeholder{color:var(--text-muted);font-size:13px;}
+.conv-send{display:block;margin:12px auto 0;padding:8px 28px;border:1px solid var(--gold);border-radius:2px;background:transparent;font-family:'Noto Serif SC',serif;font-size:14px;color:var(--gold);letter-spacing:2px;cursor:pointer;transition:all 0.2s;}
+.conv-send:hover{background:var(--gold-glow);}
+.conv-toast{display:none;margin-top:10px;text-align:center;font-family:'Noto Serif SC',serif;font-size:13px;color:var(--gold);letter-spacing:1px;}
+.conv-threads{display:flex;flex-direction:column;gap:20px;}
+.conv-thread{border:1px solid var(--border);border-radius:3px;padding:16px 18px;background:var(--bg-card);transition:border-color 0.2s;}
+.conv-msg{margin-bottom:10px;}
+.conv-msg:last-child{margin-bottom:0;}
+.conv-msg-text{font-family:'Noto Serif SC',serif;font-size:14px;line-height:2;color:var(--text-secondary);white-space:pre-wrap;word-break:break-word;}
+.conv-msg-meta{font-family:'EB Garamond',serif;font-size:13px;color:var(--text-muted);margin-top:4px;font-style:italic;}
+.conv-msg-curator{padding-left:16px;border-left:2px solid var(--gold);margin-top:12px;}
+.conv-msg-curator .conv-msg-label{font-family:'Noto Sans SC',sans-serif;font-size:12px;color:var(--gold);letter-spacing:1px;margin-bottom:4px;font-weight:500;}
+.conv-reply-area{margin-top:12px;padding-top:12px;border-top:1px solid var(--border-light);}
+.conv-reply-textarea{width:100%;min-height:50px;padding:10px 12px;border:1px solid var(--border);border-radius:3px;background:var(--bg-primary);font-family:'Noto Serif SC',serif;font-size:13px;line-height:1.9;color:var(--text-primary);resize:vertical;outline:none;transition:border-color 0.2s;}
+.conv-reply-textarea:focus{border-color:var(--gold);}
+.conv-reply-send{margin-top:8px;padding:5px 18px;border:1px solid var(--gold);border-radius:2px;background:transparent;font-family:'Noto Sans SC',sans-serif;font-size:13px;color:var(--gold);cursor:pointer;transition:all 0.2s;float:right;}
+.conv-reply-send:hover{background:var(--gold-glow);}
+.conv-empty{text-align:center;font-family:'Noto Serif SC',serif;font-size:14px;color:var(--text-muted);padding:20px 0;letter-spacing:1px;}
+.conv-loading{text-align:center;font-family:'Noto Sans SC',sans-serif;font-size:13px;color:var(--text-muted);padding:20px 0;}
 
 @media(max-width:640px){
   .header{padding:36px 16px 24px;}.header h1{font-size:24px;letter-spacing:4px;}.header-en{font-size:24px;letter-spacing:2px;margin-left:4px;}
@@ -231,7 +253,7 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg-primary);color:va
 <footer class="footer">
   <div class="neo-divider" style="margin-bottom:20px"><div class="nd-line"></div><div class="nd-dot"></div><div class="nd-line"></div></div>
   <p>汪楚尧 <span class="en">Julian</span></p>
-  <p style="margin-top:10px"><button class="footer-note-link" onclick="document.getElementById('curatorNoteModal').classList.add('open');document.body.style.overflow='hidden';">策展手记</button><span style="display:inline-block;width:2em;"></span><span class="footer-note-link" onclick="document.getElementById('anonModal').classList.add('open');">匿名建议</span></p>
+  <p style="margin-top:10px"><button class="footer-note-link" onclick="document.getElementById('curatorNoteModal').classList.add('open');document.body.style.overflow='hidden';">策展手记</button><span style="display:inline-block;width:2em;"></span><span class="footer-note-link" onclick="openConvModal();">留言与对话</span></p>
   <p style="margin-top:8px">微信联系 <span class="en">LondonHKSZ</span></p>
   <p><a href="https://curator.wangchuyao.com">curator.wangchuyao.com</a></p>
 </footer>
@@ -244,48 +266,41 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg-primary);color:va
   </div>
 </div>
 
-<div class="anon-modal" id="anonModal" onclick="if(event.target===this)closeAnonModal();">
-  <div class="anon-modal-inner" onclick="event.stopPropagation()">
-    <button class="anon-modal-close" onclick="closeAnonModal()">✕</button>
-    <div class="anon-modal-title">匿名建议</div>
-    <div class="anon-modal-intro">策展在不断进步中，欢迎留下建议或意见。反馈将匿名发送。</div>
-    <textarea class="anon-textarea" id="anonText" placeholder="请输入您的建议..."></textarea>
-    <button class="anon-send" id="anonSendBtn" onclick="sendAnon()">发送</button>
-    <div class="anon-toast" id="anonToast"></div>
+<div class="conv-modal" id="convModal" onclick="if(event.target===this)closeConvModal();">
+  <div class="conv-modal-inner" onclick="event.stopPropagation()">
+    <button class="conv-modal-close" onclick="closeConvModal()">✕</button>
+    <div class="conv-modal-title">留言与对话</div>
+    <div class="conv-modal-intro">留言仅策展人可见，回复后你可在此查看</div>
+    <div class="conv-admin-bar" id="convAdminBar">
+      <input class="conv-admin-input" id="convAdminPwd" type="password" placeholder="策展人入口">
+      <button class="conv-admin-btn" onclick="convAdminLogin()">进入</button>
+    </div>
+    <div class="conv-compose">
+      <textarea class="conv-textarea" id="convText" placeholder="请输入留言..."></textarea>
+      <button class="conv-send" id="convSendBtn" onclick="convSendMsg()">发送留言</button>
+      <div class="conv-toast" id="convToast"></div>
+    </div>
+    <div class="conv-threads" id="convThreads">
+      <div class="conv-loading">加载中…</div>
+    </div>
   </div>
 </div>
 
 <script>
 const divider = '<div class="neo-divider section-after-divider"><div class="nd-line"></div><div class="nd-dot"></div><div class="nd-line"></div></div>';
 
-/* anonymous suggestion */
-function closeAnonModal(){document.getElementById('anonModal').classList.remove('open');}
-function sendAnon(){
-  var t=document.getElementById('anonText').value.trim();
-  var toast=document.getElementById('anonToast');
-  var btn=document.getElementById('anonSendBtn');
-  if(!t){toast.style.display='block';toast.textContent='请输入内容后再发送';return;}
-  btn.disabled=true;btn.textContent='发送中…';
-  var a='3d4627760930542d1dd6b9938358434d';
-  fetch('https://formsubmit.co/ajax/'+a,{
-    method:'POST',
-    headers:{'Content-Type':'application/json','Accept':'application/json'},
-    body:JSON.stringify({message:t,_subject:'[匿名建议] curator.wangchuyao.com',_template:'box'})
-  }).then(function(r){return r.json();}).then(function(d){
-    if(d.success==='true'||d.success===true){
-      toast.style.display='block';toast.textContent='已发送，感谢您的建议';
-      document.getElementById('anonText').value='';
-      setTimeout(function(){toast.style.display='none';btn.disabled=false;btn.textContent='发送';closeAnonModal();},1800);
-    } else {
-      toast.style.display='block';toast.textContent='发送失败，请稍后再试';
-      btn.disabled=false;btn.textContent='发送';
-    }
-  }).catch(function(){
-    toast.style.display='block';toast.textContent='网络错误，请稍后再试';
-    btn.disabled=false;btn.textContent='发送';
-  });
+/* Conversation modal open/close (safe without Firebase) */
+function openConvModal() {
+  document.getElementById('convModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  if (typeof loadConversations === 'function') loadConversations();
 }
-window.closeAnonModal=closeAnonModal;window.sendAnon=sendAnon;
+function closeConvModal() {
+  document.getElementById('convModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+window.openConvModal = openConvModal;
+window.closeConvModal = closeConvModal;
 
 const collection = {
   regalia: [
@@ -633,6 +648,161 @@ function closeArticle(e){
 window.openLightbox=openLightbox;window.closeLightbox=closeLightbox;window.switchTab=switchTab;
 window.openArticle=openArticle;window.closeArticle=closeArticle;
 renderTabs();renderCurrentTab();
+</script>
+
+<!-- Firebase conversation system: isolated so it never breaks the main page -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script>
+(function(){
+  /* ======= Firebase Init ======= */
+  var db, convCol, ready = false;
+  try {
+    /* TODO: Replace with your Firebase project config from https://console.firebase.google.com */
+    firebase.initializeApp({
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT.appspot.com",
+      messagingSenderId: "000000000000",
+      appId: "YOUR_APP_ID"
+    });
+    db = firebase.firestore();
+    convCol = db.collection('conversations');
+    ready = true;
+  } catch(e) { console.warn('Firebase not available:', e); }
+
+  /* Visitor token — persistent per browser via localStorage */
+  var VK = 'curator_visitor_id', vid;
+  try { vid = localStorage.getItem(VK); } catch(e){}
+  if (!vid) {
+    vid = 'v_' + Date.now().toString(36) + '_' + Math.random().toString(36).substr(2,6);
+    try { localStorage.setItem(VK, vid); } catch(e){}
+  }
+
+  /* Admin */
+  /* TODO: Change to your own password */
+  var ADMIN_PWD = 'your_admin_password_here';
+  var isAdmin = false;
+
+  /* FormSubmit email notification (reused from original) */
+  var FS = '3d4627760930542d1dd6b9938358434d';
+  function notifyEmail(t) {
+    fetch('https://formsubmit.co/ajax/'+FS, {
+      method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body: JSON.stringify({message:t, _subject:'[新留言] curator.wangchuyao.com', _template:'box'})
+    }).catch(function(){});
+  }
+
+  function esc(s) { var e=document.createElement('div'); e.textContent=s||''; return e.innerHTML; }
+  function fmtTime(ts) {
+    if(!ts) return '';
+    var d = ts.toDate ? ts.toDate() : new Date(ts);
+    var p = function(n){return n<10?'0'+n:n;};
+    return d.getFullYear()+'/'+p(d.getMonth()+1)+'/'+p(d.getDate())+' '+p(d.getHours())+':'+p(d.getMinutes());
+  }
+
+  /* ======= Load threads ======= */
+  window.loadConversations = function() {
+    var c = document.getElementById('convThreads');
+    if (!ready) { c.innerHTML='<div class="conv-empty">留言服务未连接</div>'; return; }
+    c.innerHTML='<div class="conv-loading">加载中…</div>';
+
+    /* Admin sees ALL; visitor sees only own threads */
+    var q = isAdmin
+      ? convCol.orderBy('createdAt','desc').limit(50)
+      : convCol.where('visitorId','==',vid).orderBy('createdAt','desc').limit(20);
+
+    q.get().then(function(snap){
+      if(snap.empty){
+        c.innerHTML = isAdmin
+          ? '<div class="conv-empty">暂无留言</div>'
+          : '<div class="conv-empty">发送留言后，策展人的回复将显示在此处</div>';
+        return;
+      }
+      var h='';
+      snap.forEach(function(doc){
+        var d=doc.data();
+        h+='<div class="conv-thread">';
+        h+='<div class="conv-msg"><div class="conv-msg-text">'+esc(d.text)+'</div>';
+        h+='<div class="conv-msg-meta">'+(isAdmin?'访客 · ':'')+fmtTime(d.createdAt)+'</div></div>';
+        if(d.replies&&d.replies.length>0){
+          d.replies.forEach(function(r){
+            h+='<div class="conv-msg conv-msg-curator"><div class="conv-msg-label">策展人回复</div>';
+            h+='<div class="conv-msg-text">'+esc(r.text)+'</div>';
+            h+='<div class="conv-msg-meta">'+fmtTime(r.createdAt)+'</div></div>';
+          });
+        }
+        if(isAdmin){
+          h+='<div class="conv-reply-area">';
+          h+='<textarea class="conv-reply-textarea" id="reply-'+doc.id+'" placeholder="回复此留言…"></textarea>';
+          h+='<button class="conv-reply-send" onclick="convSendReply(\''+doc.id+'\')">回复</button>';
+          h+='<button class="conv-reply-send" style="color:var(--text-muted);border-color:var(--border);float:left;" onclick="convDeleteThread(\''+doc.id+'\')">删除</button>';
+          h+='<div style="clear:both"></div></div>';
+        }
+        h+='</div>';
+      });
+      c.innerHTML=h;
+    }).catch(function(err){
+      c.innerHTML='<div class="conv-empty">加载失败，请刷新重试</div>';
+      console.error(err);
+    });
+  };
+
+  /* ======= Send message ======= */
+  window.convSendMsg = function() {
+    var text=document.getElementById('convText').value.trim();
+    var toast=document.getElementById('convToast');
+    var btn=document.getElementById('convSendBtn');
+    if(!text){toast.style.display='block';toast.textContent='请输入内容后再发送';return;}
+    if(!ready){toast.style.display='block';toast.textContent='留言服务暂不可用';return;}
+    btn.disabled=true; btn.textContent='发送中…';
+    convCol.add({
+      text:text, visitorId:vid,
+      createdAt:firebase.firestore.FieldValue.serverTimestamp(),
+      replies:[]
+    }).then(function(){
+      toast.style.display='block'; toast.textContent='已发送，策展人回复后将显示在下方';
+      document.getElementById('convText').value='';
+      notifyEmail(text);
+      setTimeout(function(){toast.style.display='none';btn.disabled=false;btn.textContent='发送留言';},1800);
+      loadConversations();
+    }).catch(function(err){
+      toast.style.display='block'; toast.textContent='发送失败，请稍后再试';
+      btn.disabled=false; btn.textContent='发送留言';
+      console.error(err);
+    });
+  };
+
+  /* ======= Admin reply ======= */
+  window.convSendReply = function(docId) {
+    var ta=document.getElementById('reply-'+docId);
+    var text=ta?ta.value.trim():'';
+    if(!text||!ready) return;
+    convCol.doc(docId).update({
+      replies: firebase.firestore.FieldValue.arrayUnion({text:text, createdAt:new Date().toISOString()})
+    }).then(function(){ loadConversations(); }).catch(function(e){ console.error(e); });
+  };
+
+  /* ======= Admin delete ======= */
+  window.convDeleteThread = function(docId) {
+    if(!confirm('确认删除此对话？')) return;
+    convCol.doc(docId).delete().then(function(){ loadConversations(); }).catch(function(e){ console.error(e); });
+  };
+
+  /* ======= Admin login ======= */
+  window.convAdminLogin = function() {
+    var pwd=document.getElementById('convAdminPwd').value.trim();
+    if(pwd===ADMIN_PWD){
+      isAdmin=true;
+      document.getElementById('convAdminBar').innerHTML='<span class="conv-admin-status">策展人模式</span>';
+      loadConversations();
+    } else {
+      document.getElementById('convAdminPwd').value='';
+      document.getElementById('convAdminPwd').placeholder='密码错误';
+    }
+  };
+})();
 </script>
 </body>
 </html>
