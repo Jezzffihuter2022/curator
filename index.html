@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>汪楚尧 · 收藏与策展</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Noto+Serif+SC:wght@400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-primary:#FAF8F3; --bg-warm:#F5F2EB; --bg-card:#FFFFFF;
+  --text-primary:#4A3728; --text-secondary:#5C4A3D; --text-muted:#9C948A;
+  --gold:#8A4038; --gold-dim:#9E5248; --gold-glow:rgba(138,64,56,0.08);
+  --heading-gold:#8A4038; --item-title:#6B3A2A;
+  --border:#E8E3DA; --border-light:#EDE9E1;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans SC',sans-serif;background:var(--bg-primary);color:var(--text-primary);min-height:100vh;-webkit-font-smoothing:antialiased;}
+::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-track{background:var(--bg-primary);}::-webkit-scrollbar-thumb{background:var(--gold-dim);border-radius:3px;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+
+.header{text-align:center;padding:48px 24px 32px;background:linear-gradient(180deg,#F3F0E7 0%,var(--bg-primary) 100%);}
+.header h1{font-family:'Noto Serif SC',serif;font-size:36px;font-weight:900;letter-spacing:8px;color:var(--heading-gold);}
+.header-en{font-family:'Cinzel',serif;font-size:36px;font-weight:500;letter-spacing:4px;color:var(--heading-gold);margin-left:6px;text-transform:uppercase;}
+.header-subtitle{font-family:'Noto Serif SC',serif;font-size:22px;font-weight:600;color:var(--heading-gold);margin-top:14px;line-height:2;letter-spacing:2px;}
+
+.neo-divider{display:flex;align-items:center;justify-content:center;gap:16px;padding:6px 0;width:50%;max-width:400px;margin:0 auto;}
+.neo-divider .nd-line{flex:1;height:1px;background:var(--gold);opacity:0.5;}
+.neo-divider .nd-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);opacity:0.6;flex-shrink:0;}
+
+.tabs-container{position:sticky;top:0;z-index:100;background:rgba(250,248,243,0.95);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
+.tabs-bar{display:flex;flex-wrap:wrap;justify-content:center;max-width:960px;margin:0 auto;}
+.tab-btn{padding:15px 24px;border:none;background:transparent;font-family:'Noto Serif SC',serif;font-size:18px;font-weight:500;color:var(--text-muted);cursor:pointer;transition:all 0.3s;white-space:nowrap;position:relative;letter-spacing:2px;}
+.tab-btn:hover{color:var(--text-secondary);}
+.tab-btn.active{color:var(--heading-gold);font-weight:700;}
+.tab-btn.active::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:24px;height:2px;background:var(--gold);}
+
+.main{max-width:960px;margin:0 auto;padding:0 20px 60px;}
+.tab-content{display:none;animation:fadeIn 0.4s ease;}.tab-content.active{display:block;}
+
+.section-header{text-align:center;padding:36px 0 8px;}
+.section-title{font-family:'Noto Serif SC',serif;font-size:22px;font-weight:700;color:var(--heading-gold);letter-spacing:4px;}
+.section-subtitle{font-size:18px;color:var(--gold);margin-top:8px;font-family:'EB Garamond',serif;font-style:italic;letter-spacing:1px;}
+.section-after-divider{padding-bottom:20px;}
+
+.curator-statement{font-family:'Noto Serif SC',serif;font-size:18px;line-height:2.2;color:var(--heading-gold);max-width:580px;margin:0 auto;text-align:center;padding:12px 0 28px;}
+.cabinet-statement{font-family:'Noto Serif SC',serif;font-size:18px;line-height:2;color:var(--heading-gold);max-width:580px;margin:0 auto;text-align:center;padding:14px 0 0;}
+.cabinet-section-header{text-align:center;padding:12px 0 8px;}
+
+.featured-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding:8px 0;}
+.item-card{background:var(--bg-card);border:1px solid var(--border);border-radius:3px;overflow:hidden;cursor:pointer;transition:all 0.35s;position:relative;}
+.item-card:hover{border-color:var(--gold);box-shadow:0 6px 24px rgba(0,0,0,0.06),0 0 0 1px var(--gold);transform:translateY(-3px);}
+.item-card::before{content:'';position:absolute;top:0;left:15%;right:15%;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0;transition:opacity 0.35s;}
+.item-card:hover::before{opacity:0.6;}
+.item-image{width:100%;background:var(--bg-warm);display:block;overflow:hidden;}
+.item-image img{width:100%;height:auto;display:block;transition:transform 0.6s;}
+.item-card:hover .item-image img{transform:scale(1.03);}
+.item-placeholder{font-family:'Cinzel',serif;font-size:42px;color:var(--border);}
+.item-info{padding:16px 18px;}
+.item-title{font-family:'Noto Serif SC',serif;font-size:18px;font-weight:600;color:var(--item-title);line-height:1.7;}
+.item-meta{font-size:16px;color:var(--text-muted);margin-top:6px;display:flex;gap:12px;align-items:center;font-family:'EB Garamond',serif;}
+.item-tag{display:inline-block;padding:2px 10px;border-radius:2px;font-size:15px;font-weight:500;color:var(--gold);background:var(--gold-glow);border:1px solid rgba(138,64,56,0.15);letter-spacing:1px;font-family:'Noto Sans SC',sans-serif;}
+.item-tag.sale{color:#A5503C;background:rgba(165,80,60,0.06);border-color:rgba(165,80,60,0.15);}
+
+
+.filter-bar{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:0 0 24px;}
+.filter-btn{padding:7px 18px;border:1px solid var(--border);border-radius:2px;background:transparent;color:var(--text-muted);font-size:16px;font-family:'Noto Sans SC',sans-serif;font-weight:500;cursor:pointer;transition:all 0.2s;letter-spacing:1px;}
+.filter-btn:hover{border-color:var(--text-muted);color:var(--text-secondary);}
+.filter-btn.active{border-color:var(--gold);color:var(--gold);background:var(--gold-glow);}
+
+.chronicle-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding:8px 0;}
+.chronicle-card{background:var(--bg-card);border:1px solid var(--border);border-radius:3px;overflow:hidden;cursor:pointer;transition:all 0.35s;}
+.chronicle-card:hover{border-color:var(--gold);box-shadow:0 6px 24px rgba(0,0,0,0.06);transform:translateY(-3px);}
+.chronicle-card .card-img{width:100%;aspect-ratio:1/1;overflow:hidden;background:var(--bg-warm);}
+.chronicle-card .card-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s;}
+.chronicle-card:hover .card-img img{transform:scale(1.03);}
+.chronicle-card .card-info{padding:14px 16px;}
+.chronicle-card .card-title{font-family:'Noto Serif SC',serif;font-size:17px;font-weight:600;color:var(--item-title);line-height:1.7;}
+.article-modal{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:10000;background:rgba(0,0,0,0.6);backdrop-filter:blur(6px);overflow-y:auto;padding:40px 20px;}
+.article-modal.open{display:block;}
+.article-modal-inner{max-width:1080px;margin:0 auto;background:var(--bg-primary);border-radius:4px;padding:40px 36px;position:relative;box-shadow:0 20px 60px rgba(0,0,0,0.2);}
+.article-modal-close{position:absolute;top:16px;right:20px;font-size:32px;color:var(--text-muted);cursor:pointer;background:none;border:none;transition:color 0.2s;}
+.article-modal-close:hover{color:var(--text-primary);}
+.article-img-stack{display:flex;flex-direction:column;gap:12px;max-width:720px;margin:0 auto 24px;}
+.article-img-stack img{width:100%;height:auto;display:block;border-radius:3px;border:1px solid var(--border);}
+.article-img-side{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:720px;margin:0 auto 24px;}
+.article-img-side img{width:100%;height:auto;display:block;border-radius:3px;border:1px solid var(--border);}
+.article-img-grid4{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:720px;margin:0 auto 24px;}
+.article-img-grid4 img{width:100%;height:auto;display:block;border-radius:3px;border:1px solid var(--border);}
+.article-img-grid6{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:720px;margin:0 auto 24px;}
+.article-img-grid6 img{width:100%;height:auto;display:block;border-radius:3px;border:1px solid var(--border);}
+.article-img-grid3left{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:720px;margin:0 auto 24px;}
+.article-img-grid3left-main{display:flex;}
+.article-img-grid3left-main img{width:100%;object-fit:cover;border-radius:3px;border:1px solid var(--border);display:block;}
+.article-img-grid3left-stack{display:flex;flex-direction:column;gap:12px;}
+.article-img-grid3left-stack img{width:100%;height:auto;display:block;border-radius:3px;border:1px solid var(--border);}
+.article-modal-img{width:100%;max-width:720px;display:block;margin:0 auto 24px;border-radius:3px;border:1px solid var(--border);}
+@media(max-width:640px){.article-img-side,.article-img-grid4,.article-img-grid6,.article-img-grid3left{grid-template-columns:1fr;}}
+.article-modal-title{font-family:'Noto Serif SC',serif;font-size:22px;font-weight:700;color:var(--item-title);line-height:1.7;margin-bottom:8px;}
+.article-modal-date{font-family:'EB Garamond',serif;font-size:16px;color:var(--text-muted);font-style:italic;margin-bottom:20px;}
+.article-modal-body{font-family:'Noto Serif SC',serif;font-size:17px;line-height:2.2;color:var(--text-secondary);}
+
+/* CHANGE: reverse link block at bottom of article modal */
+.article-item-link{margin-top:28px;padding-top:20px;border-top:1px solid var(--border);text-align:center;}
+.article-item-link-label{font-family:'Noto Serif SC',serif;font-size:15px;color:var(--text-muted);letter-spacing:2px;margin-bottom:10px;}
+.article-item-link-name{font-family:'Noto Serif SC',serif;font-size:17px;font-weight:600;color:var(--item-title);cursor:pointer;letter-spacing:1px;transition:color 0.2s;}
+.article-item-link-name:hover{color:var(--gold);}
+
+/* CHANGE: type statement style */
+.type-statement{font-family:'Noto Serif SC',serif;font-size:16px;line-height:2;color:var(--text-muted);max-width:520px;margin:0 auto;text-align:center;padding:0 0 20px;}
+.cabinet-intro{font-size:20px;}
+
+.gallery-grid{column-count:3;column-gap:12px;padding:8px 0;}
+.gallery-item{
+  break-inside:avoid;
+  margin-bottom:12px;
+  overflow:hidden;
+  cursor:pointer;
+  position:relative;
+}
+.gallery-item img{
+  width:100%;
+  display:block;
+  -webkit-user-drag:none;
+  transition:transform 0.45s ease, opacity 0.3s ease;
+}
+.gallery-item:hover img{
+  transform:scale(1.04);
+  opacity:0.88;
+}
+.gallery-item::after{
+  content:'⊕';
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+  color:rgba(250,248,243,0.9);
+  opacity:0;
+  transition:opacity 0.3s ease;
+  pointer-events:none;
+  text-shadow:0 1px 6px rgba(0,0,0,0.4);
+}
+.gallery-item:hover::after{opacity:1;}
+
+.lightbox{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:10000;background:rgba(0,0,0,0.88);backdrop-filter:blur(8px);align-items:center;justify-content:center;flex-direction:column;padding:40px;cursor:pointer;}
+.lightbox.open{display:flex;}
+.lightbox img{max-width:90%;max-height:75vh;object-fit:contain;}
+.lightbox-info{margin-top:20px;text-align:center;}
+.lightbox-title{font-family:'Noto Serif SC',serif;font-size:23px;color:#F5F0E8;}
+.lightbox-desc{font-size:17px;color:#A9A193;margin-top:8px;max-width:500px;line-height:1.8;font-family:'EB Garamond',serif;}
+.lightbox-close{position:absolute;top:24px;right:28px;font-size:32px;color:#999;cursor:pointer;background:none;border:none;transition:color 0.2s;}
+.lightbox-close:hover{color:#fff;}
+
+.footer{text-align:center;padding:48px 24px;border-top:1px solid var(--border);}
+.footer p{font-family:'Noto Serif SC',serif;font-size:17px;font-weight:500;color:var(--gold);letter-spacing:2px;}
+.footer p+p{margin-top:6px;}
+.footer p span.en{font-family:'Cinzel',serif;letter-spacing:2px;margin-left:4px;}
+.footer a{color:var(--gold);text-decoration:none;font-family:'Cinzel',serif;font-size:17px;letter-spacing:2px;}
+.footer a:hover{text-decoration:underline;}
+.footer-note-link{color:var(--gold);font-family:'Noto Serif SC',serif;font-size:17px;letter-spacing:2px;cursor:pointer;transition:color 0.2s;border:none;background:none;padding:0;text-decoration:underline;}
+.footer-note-link:hover{text-decoration:underline;}
+.curator-note-modal{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:10000;background:var(--bg-primary);overflow-y:auto;cursor:pointer;}
+.curator-note-modal.open{display:flex;align-items:center;justify-content:center;}
+.curator-note-modal-inner{max-width:580px;padding:40px 32px;font-family:'Noto Serif SC',serif;font-size:15px;line-height:2.2;color:var(--text-secondary);text-align:justify;letter-spacing:0.5px;}
+.curator-note-modal-title{font-size:20px;font-weight:700;color:var(--heading-gold);text-align:center;letter-spacing:4px;margin-bottom:28px;}
+.curator-note-modal-close{position:absolute;top:24px;right:28px;font-size:32px;color:var(--text-muted);cursor:pointer;background:none;border:none;transition:color 0.2s;}
+.curator-note-modal-close:hover{color:var(--text-primary);}
+
+/* conversation modal */
+.conv-modal{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:10001;background:rgba(0,0,0,0.6);backdrop-filter:blur(6px);overflow-y:auto;padding:40px 20px;}
+.conv-modal.open{display:block;}
+.conv-modal-inner{max-width:540px;width:100%;margin:40px auto;background:var(--bg-primary);border-radius:4px;padding:36px 32px;position:relative;box-shadow:0 20px 60px rgba(0,0,0,0.2);}
+.conv-modal-close{position:absolute;top:14px;right:18px;font-size:32px;color:var(--text-muted);cursor:pointer;background:none;border:none;transition:color 0.2s;}
+.conv-modal-close:hover{color:var(--text-primary);}
+.conv-modal-title{font-family:'Noto Serif SC',serif;font-size:18px;font-weight:700;color:var(--heading-gold);text-align:center;letter-spacing:3px;margin-bottom:6px;}
+.conv-modal-intro{font-family:'Noto Serif SC',serif;font-size:14px;line-height:2;color:var(--text-muted);text-align:center;margin-bottom:20px;}
+.conv-admin-bar{display:flex;align-items:center;gap:8px;margin-bottom:18px;justify-content:center;}
+.conv-admin-input{padding:6px 12px;border:1px solid var(--border);border-radius:2px;background:var(--bg-card);font-family:'Noto Sans SC',sans-serif;font-size:13px;color:var(--text-primary);outline:none;width:140px;transition:border-color 0.2s;}
+.conv-admin-input:focus{border-color:var(--gold);}
+.conv-admin-btn{padding:6px 14px;border:1px solid var(--border);border-radius:2px;background:transparent;font-family:'Noto Sans SC',sans-serif;font-size:13px;color:var(--text-muted);cursor:pointer;transition:all 0.2s;}
+.conv-admin-btn:hover{border-color:var(--gold);color:var(--gold);}
+.conv-admin-status{font-size:13px;color:var(--gold);font-family:'Noto Sans SC',sans-serif;letter-spacing:1px;}
+.conv-compose{margin-bottom:24px;border-bottom:1px solid var(--border);padding-bottom:20px;}
+.conv-textarea{width:100%;min-height:80px;padding:12px 14px;border:1px solid var(--border);border-radius:3px;background:var(--bg-card);font-family:'Noto Serif SC',serif;font-size:14px;line-height:2;color:var(--text-primary);resize:vertical;outline:none;transition:border-color 0.2s;}
+.conv-textarea:focus{border-color:var(--gold);}
+.conv-textarea::placeholder{color:var(--text-muted);font-size:13px;}
+.conv-send{display:block;margin:12px auto 0;padding:8px 28px;border:1px solid var(--gold);border-radius:2px;background:transparent;font-family:'Noto Serif SC',serif;font-size:14px;color:var(--gold);letter-spacing:2px;cursor:pointer;transition:all 0.2s;}
+.conv-send:hover{background:var(--gold-glow);}
+.conv-toast{display:none;margin-top:10px;text-align:center;font-family:'Noto Serif SC',serif;font-size:13px;color:var(--gold);letter-spacing:1px;}
+.conv-threads{display:flex;flex-direction:column;gap:20px;}
+.conv-thread{border:1px solid var(--border);border-radius:3px;padding:16px 18px;background:var(--bg-card);transition:border-color 0.2s;}
+.conv-msg{margin-bottom:10px;}
+.conv-msg:last-child{margin-bottom:0;}
+.conv-msg-text{font-family:'Noto Serif SC',serif;font-size:14px;line-height:2;color:var(--text-secondary);white-space:pre-wrap;word-break:break-word;}
+.conv-msg-meta{font-family:'EB Garamond',serif;font-size:13px;color:var(--text-muted);margin-top:4px;font-style:italic;}
+.conv-msg-curator{padding-left:16px;border-left:2px solid var(--gold);margin-top:12px;}
+.conv-msg-curator .conv-msg-label{font-family:'Noto Sans SC',sans-serif;font-size:12px;color:var(--gold);letter-spacing:1px;margin-bottom:4px;font-weight:500;}
+.conv-reply-area{margin-top:12px;padding-top:12px;border-top:1px solid var(--border-light);}
+.conv-reply-textarea{width:100%;min-height:50px;padding:10px 12px;border:1px solid var(--border);border-radius:3px;background:var(--bg-primary);font-family:'Noto Serif SC',serif;font-size:13px;line-height:1.9;color:var(--text-primary);resize:vertical;outline:none;transition:border-color 0.2s;}
+.conv-reply-textarea:focus{border-color:var(--gold);}
+.conv-reply-send{margin-top:8px;padding:5px 18px;border:1px solid var(--gold);border-radius:2px;background:transparent;font-family:'Noto Sans SC',sans-serif;font-size:13px;color:var(--gold);cursor:pointer;transition:all 0.2s;float:right;}
+.conv-reply-send:hover{background:var(--gold-glow);}
+.conv-empty{text-align:center;font-family:'Noto Serif SC',serif;font-size:14px;color:var(--text-muted);padding:20px 0;letter-spacing:1px;}
+.conv-loading{text-align:center;font-family:'Noto Sans SC',sans-serif;font-size:13px;color:var(--text-muted);padding:20px 0;}
+
+@media(max-width:640px){
+  .header{padding:36px 16px 24px;}.header h1{font-size:24px;letter-spacing:4px;}.header-en{font-size:24px;letter-spacing:2px;margin-left:4px;}
+  .tabs-bar{justify-content:center;padding:0 8px;}.tab-btn{padding:13px 14px;font-size:15px;}
+  .featured-grid{grid-template-columns:repeat(2,1fr);gap:12px;}.chronicle-grid{grid-template-columns:repeat(2,1fr);gap:12px;}.gallery-grid{column-count:2;}
+  .main{padding:0 14px 40px;}.item-info{padding:12px;}.item-title{font-size:15px;}
+  .neo-divider{width:70%;}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <h1>汪楚尧 · 收藏与策展</h1>
+  <p class="header-subtitle">审美、身份与权力的器物叙事</p>
+</header>
+
+<nav class="tabs-container"><div class="tabs-bar" id="tabsBar"></div></nav>
+
+<div class="main" id="mainContent">
+  <div class="tab-content" id="tab-cabinet"></div>
+  <div class="tab-content" id="tab-regalia"></div>
+  <div class="tab-content" id="tab-treasures"></div>
+  <div class="tab-content" id="tab-chronicles"></div>
+  <div class="tab-content" id="tab-departures"></div>
+  <div class="tab-content" id="tab-gallery"></div>
+</div>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <button class="lightbox-close" onclick="closeLightbox(event)">✕</button>
+  <img id="lightboxImg" src="" alt="">
+  <div class="lightbox-info"><div class="lightbox-title" id="lightboxTitle"></div><div class="lightbox-desc" id="lightboxDesc"></div><a id="lightboxArticleLink" style="display:none;margin-top:16px;padding:7px 20px;border:1px solid rgba(245,240,232,0.5);border-radius:2px;color:#F5F0E8;font-family:'Noto Serif SC',serif;font-size:15px;letter-spacing:2px;text-decoration:none;cursor:pointer;transition:background 0.2s;" onmouseover="this.style.background='rgba(245,240,232,0.1)'" onmouseout="this.style.background='transparent'">了解物质文化</a></div>
+</div>
+
+<div class="article-modal" id="articleModal" onclick="closeArticle(event)">
+  <div class="article-modal-inner" onclick="event.stopPropagation()">
+    <button class="article-modal-close" onclick="closeArticle(event)">✕</button>
+    <div id="articleImgContainer"></div>
+    <div class="article-modal-title" id="articleTitle"></div>
+    <div class="article-modal-date" id="articleDate"></div>
+    <div class="article-modal-body" id="articleBody"></div>
+    <!-- CHANGE: reverse link container, populated by openArticle() -->
+    <div id="articleItemLink"></div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="neo-divider" style="margin-bottom:20px"><div class="nd-line"></div><div class="nd-dot"></div><div class="nd-line"></div></div>
+  <p>汪楚尧 <span class="en">Julian</span></p>
+  <p style="margin-top:10px"><button class="footer-note-link" onclick="document.getElementById('curatorNoteModal').classList.add('open');document.body.style.overflow='hidden';">策展手记</button><span style="display:inline-block;width:2em;"></span><span class="footer-note-link" onclick="openConvModal();">留言与对话</span></p>
+  <p style="margin-top:8px">微信联系 <span class="en">LondonHKSZ</span></p>
+  <p><a href="https://curator.wangchuyao.com">curator.wangchuyao.com</a></p>
+</footer>
+
+<div class="curator-note-modal" id="curatorNoteModal" onclick="if(event.target===this||event.target.classList.contains('curator-note-modal-close')){this.classList.remove('open');document.body.style.overflow='';}">
+  <button class="curator-note-modal-close">✕</button>
+  <div class="curator-note-modal-inner" onclick="event.stopPropagation()">
+    <div class="curator-note-modal-title">策展手记</div>
+    我对礼服、勋章与仪式器物的兴趣由来已久，到伦敦后才发现这些东西可以被实际收藏。通过这个网站，我把收藏的礼服、时装、勋章与珠宝放在同一视野中。当它们并置，审美趣味、制度等级与权力象征之间的关联会更容易被看见。器物不仅记录历史，也通过材质、造型和佩戴方式塑造观看者的判断。<br><br>这种呈现带有明确的个人取向。我偏爱承载密集历史与仪式感的器物，把制度性的威严转成可见、可感的视觉效果。一些有争议的历史符号，或许会被看成风格；某些沉重的等级秩序，也容易显得优雅。<br><br>因此，我想呈现的不只是器物本身，也包括观看它们的方式。它不试图给出标准答案，只保留一种仍在形成中的判断。
+  </div>
+</div>
+
+<div class="conv-modal" id="convModal" onclick="if(event.target===this)closeConvModal();">
+  <div class="conv-modal-inner" onclick="event.stopPropagation()">
+    <button class="conv-modal-close" onclick="closeConvModal()">✕</button>
+    <div class="conv-modal-title" id="convTitle">留言与对话</div>
+    <div class="conv-modal-intro">欢迎留下建议或意见，反馈将匿名发送至策展人</div>
+    <div class="conv-admin-bar" id="convAdminBar" style="display:none;">
+      <input class="conv-admin-input" id="convAdminPwd" type="password" placeholder="策展人入口">
+      <button class="conv-admin-btn" onclick="convAdminLogin()">进入</button>
+    </div>
+    <div class="conv-compose">
+      <textarea class="conv-textarea" id="convText" placeholder="请输入您的建议..."></textarea>
+      <button class="conv-send" id="convSendBtn" onclick="convSendMsg()">发送</button>
+      <div class="conv-toast" id="convToast"></div>
+    </div>
+    <div class="conv-threads" id="convThreads" style="display:none;"></div>
+  </div>
+</div>
+
+<script>
+const divider = '<div class="neo-divider section-after-divider"><div class="nd-line"></div><div class="nd-dot"></div><div class="nd-line"></div></div>';
+
+/* Conversation modal open/close (safe without Firebase) */
+function openConvModal() {
+  document.getElementById('convModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  if (typeof loadConversations === 'function' && window._convAdmin) loadConversations();
+}
+function closeConvModal() {
+  document.getElementById('convModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+window.openConvModal = openConvModal;
+window.closeConvModal = closeConvModal;
+
+const collection = {
+  regalia: [
+    { id:"r001", title:"皇家海军少将常礼服外套", year:"1982", origin:"英国", type:"仪式礼服", highlight:true, image:"images/regalia/r001.jpg", description:"Moseley & Pounsford 制，马岛战争期间定制。海军蓝礼服毛呢，双排8枚镀金扣，扣面铸皇冠、船锚与月桂花环。一道宽金袖环，上方加一道卷环标示少将职级，金线含2%黄金。", articleLink:"c003", forSale:false },
+    { id:"r009", title:"巴尔曼巴洛克复兴刺绣长外套", year:"当代", origin:"法国", type:"高级时装", highlight:true, image:"images/regalia/r009.jpg", description:"巴尔曼珍珠与水晶密镶长款礼服外套，香槟色。数百颗珍珠与水晶逐粒手工缝缀，刺绣构成对称的巴洛克纹样。剪裁具建筑感，丝绸全衬里。", forSale:false },
+    { id:"r002", title:"皇家炮兵少校梅斯礼服外套", year:"1992", origin:"英国", type:"晚宴礼服", highlight:false, image:"images/regalia/r002.jpg", description:"Gieves & Hawkes 制。黑色礼服毛呢，红翻领为皇家炮兵团标志色，前敞开，侧翼金扣，红色丝绸内衬与翻领配色统一。短身剪裁。", forSale:false },
+    { id:"r004", title:"皇家陆军医疗军团少校梅斯礼服", year:"1964", origin:"英国", type:"晚宴礼服", highlight:false, image:"images/regalia/r004.jpg", description:"Alkit 制，含外套与马甲。黑色礼服毛呢，紫色礼服领为皇家陆军医疗军团标志色，前敞开，侧翼金扣，马甲同色紫领。杖蛇徽章标明医务兵种。礼服主人有诺曼底登陆口述史记录。短身剪裁。", forSale:false },
+    { id:"r006", title:"医务军官大礼服外套", year:"约1931", origin:"法国", type:"仪式礼服", highlight:false, image:"images/regalia/r006.jpg", description:"Paris Thorn 制，1931年式。挺括黑礼服毛呢、红丝绒领口和袖口、领口饰以权杖缠蛇金线刺绣、单排9粒扣含镀金的权杖与蛇浮雕。直身长款，金属肩章。", articleLink:"c005", forSale:false },
+    { id:"r007", title:"陆军军需兵团晚礼服", year:"约1934", origin:"意大利", type:"仪式礼服", highlight:false, image:"images/regalia/r007.jpg", description:"意大利陆军军需兵团晚礼服。黑色礼服毛呢，双排14枚倒梯形金扣铸萨伏依王室纹章。紫丝绒领边，领片饰金属星徽，肩章嵌萨伏依王冠金属刺绣，深蓝丝绒袖口。紫色为军需兵团标志色。", forSale:false },
+    { id:"r003", title:"皇家空军上校梅斯礼服全套", year:"1956", origin:"英国", type:"晚宴礼服", highlight:false, image:"images/regalia/r003.jpg", description:"Gieves 制，含外套、马甲、长裤，三件齐全。蓝灰色礼服毛呢，双排银扣铸皇冠下展翅鹰浮雕，黑色翻领。胸前飞行员刺绣徽章，对应空军基地指挥官身份。袖口四道金环标示上校军衔。短身剪裁。", forSale:false },
+    { id:"r005", title:"皇家海军少校梅斯礼服外套", year:"1945", origin:"英国", type:"晚宴礼服", highlight:false, image:"images/regalia/r005.jpg", description:"Gieves 制。海军蓝礼服毛呢，镀金对扣闭合，双排镀金扣铸皇冠与船锚，尖翻领。一道宽金袖环，上方加一道卷环标示少校职级，金线含2%黄金。短身剪裁。", forSale:false },
+    { id:"r010", title:"拿破仑廓形黑色金球扣外套", year:"约1990", origin:"意大利", type:"高级时装", highlight:false, image:"images/regalia/r010.jpg", description:"Moschino 的 Cheap & Chic 线意大利制，初剪羊毛面料，黑色丝绒拼接。宽幅拿破仑翻领、丝绒镶边立领、丝绒翻折袖口。单排7粒金色球扣，两枚皇冠形倒置口袋盖各饰三粒金球，下摆轮廓锋利。", forSale:false },
+    { id:"r012", title:"巴宝莉军礼服式短外套", year:"当代", origin:"英国", type:"高级时装", highlight:false, image:"images/regalia/r012.jpg", description:"羊绒羊毛混纺，拿破仑式立领、三排15粒金扣、盾徽浮雕扣、肩章、猩红色衬里棱形格纹。风格类似英军骑兵和炮兵短夹克。", forSale:false },
+    { id:"r014", title:"巴宝莉秀场款猩红骠骑兵短外套", year:"当代", origin:"英国", type:"高级时装", highlight:false, image:"images/regalia/r014.jpg", description:"取法骠骑兵制服。双排银质浮雕扣配横向编织扣绊，短身长臂剪裁，猩红色呼应拿破仑时代军装配色。", forSale:false },
+    { id:"r015", title:"巴宝莉切尔西款蓝灰战壕风衣", year:"当代", origin:"英国", type:"高级时装", highlight:false, image:"images/regalia/r015.jpg", description:" 此战壕风衣的蓝灰色近似一战制服配色，嘎巴甸细密棉织法。双排10粒牛角扣，小牛皮收紧带约束袖口与立领。右肩设枪挡，后背附雨挡，腰带配吊环，内衬为王室御用品牌纹章和经典巴宝莉格纹。", forSale:false },
+    { id:"r016", title:"巴宝莉深蓝金扣布雷泽外套", year:"约1990", origin:"英国", type:"高级时装", highlight:false, image:"images/regalia/r016.jpg", description:"廓形与皇家海军军官礼服布雷泽相近，兼有1990年代宽松版型特征：宽肩、厚垫肩、高扣位、箱型身线。双排6扣配1装饰扣，扣面铸造巴宝莉战马骑士浮雕。", forSale:false },
+    { id:"r013", title:"西点军校学员大礼服", year:"约1950", origin:"美国", type:"仪式礼服", highlight:false, image:"images/regalia/r013.jpg", description:"深蓝色重磅羊毛，立领，胸前三排金属扣，燕尾剪裁。袖口与燕尾饰金线，棉内衬。", forSale:false },
+  ],
+  treasures: [
+    { id:"t014", title:"伊莎贝拉天主教勋章指挥官级", year:"约1900", origin:"西班牙", type:"勋章", highlight:true, image:"images/treasures/t014.jpg", description:"1815年设立，表彰对西班牙或对外事务的贡献。此枚指挥官级为银镀金，主体为红色珐琅马耳他十字，放射星芒氧化后幻出彩色。正面呈手绘珐琅，铭文「致纯粹的忠诚」；背面含王室花押，铭文「为伊莎贝拉天主教女王」。顶部接绿色橄榄枝月桂环。", articleLink:"c006", forSale:false },
+    { id:"t015", title:"法属突尼斯荣耀勋章指挥官级", year:"约1920", origin:"法国", type:"勋章", highlight:true, image:"images/treasures/t015.jpg", description:"1835年由突尼斯贝伊创设，用于奖励文武功勋。此枚指挥官级为银质，顶部含花结式银质连接件，主体十角星形红绿珐琅交替，其间穿插切面银质光芒。中心绿色珐琅底上覆立体阿拉伯书法的贝伊花押，悬挂环上印有巴黎工坊标记。", articleLink:"c007", forSale:false },
+    { id:"t016", title:"维多利亚女王金禧纪念十字挂坠", year:"1887", origin:"英国", type:"纪念币", highlight:false, image:"images/treasures/t016.jpg", description:"铸造黄铜，维多利亚涡卷装饰四臂十字，中心圆章为女王加冕侧面像。庆祝女王在位五十周年。", forSale:false },
+    { id:"t017", title:"利奥波德二世在位四十年纪念章", year:"1905", origin:"比利时", type:"纪念币", highlight:false, image:"images/treasures/t017.jpg", description:"镀金青铜，十字放射纹底上浮雕国王左向侧面像，橡叶与月桂环绕。红色丝带配黑黄中线。此章正与利奥波德二世的殖民暴行同期。", forSale:false },
+    { id:"t002", title:"圣赫勒拿奖章", year:"1857", origin:"法国", type:"勋章", highlight:true, image:"images/treasures/t002.jpg", description:"1857年拿破仑三世设立，授予1792至1815年间服役的拿破仑一世麾下幸存老兵。正面为拿破仑一世罗马式侧面像，头戴月桂花环，顶部帝国皇冠。背面铭文以拿破仑遗言口吻献给「荣耀的战友」，环以诸战役年份。此为法国首枚正式战役纪念章。", articleLink:"c004", forSale:false },
+    { id:"t004", title:"乔治五世与玛丽王后加冕纪念章", year:"1911", origin:"英国", type:"纪念币", highlight:false, image:"images/treasures/t004.jpg", description:"1911年乔治五世与玛丽王后加冕镀金纪念章。正面为着军礼服的国王与戴王冠的王后并列侧面像；背面铭文显示由 Elect Cocoa 公司发行。", forSale:false },
+    { id:"t003", title:"伊丽莎白二世银禧纪念章项链", year:"1977", origin:"英国", type:"珠宝", highlight:false, image:"images/treasures/t003.jpg", description:"英国皇家铸币局出品，22K 镀金纪念章，纪念伊丽莎白二世登基银禧（1977）。正面为女王骑马像；背面呈现帝国皇冠，辅以繁复花饰纹样。镶入金属框架配链，附原装蓝色绒盒。", forSale:false },
+    { id:"t001", title:"巴洛克复兴十字项链", year:"约1960", origin:"美国", type:"珠宝", highlight:true, image:"images/treasures/t001.jpg", description:"Florenza 1960年前后作品。多链琥珀色玻璃石项链，铸造掐丝工艺，立体爪托镶嵌，心形吊坠母题源自维多利亚时代情感珠宝传统、马耳他十字对称放射架构。文艺复兴、伊特鲁里亚、维多利亚与巴洛克四套历史语汇的融合体。", articleLink:"c002", forSale:false },
+    { id:"t005", title:"乔治六世加冕纪念克朗", year:"1937", origin:"英国", type:"纪念币", highlight:false, image:"images/treasures/t005.jpg", description:"1937年乔治六世加冕纪念版银质克朗，英国皇家铸币局发行，50%银含量。正面为乔治六世左向肖像；背面为皇家纹章，狮与独角兽护盾。", forSale:false },
+    { id:"t010", title:"大英帝国勋章指挥官级", year:"当代", origin:"英国", type:"勋章", highlight:false, image:"images/treasures/t010.jpg", description:"最优秀的大英帝国勋章在1917年由乔治五世设立。此枚纪念版对应1937年以前指挥官级民事版本：蓝色珐琅花形四臂章体，中心为不列颠尼亚女神金像，环以红底铭文「为了上帝和帝国」，女神头戴罗马式头盔，手持三叉戟，端坐于海洋之上，背景为帝国日轮，大英帝国皇冠顶饰。", forSale:false },
+    { id:"t011", title:"荣誉军团勋章指挥官级", year:"当代", origin:"法国", type:"勋章", highlight:false, image:"images/treasures/t011.jpg", description:"荣誉军团勋章于1802年由拿破仑设立，取代旧王朝封爵制度。此枚纪念版为第一帝国样式，正面是拿破仑一世侧面，环绕铭文：「拿破仑法国人的皇帝」，背面帝国鹰徽，环绕铭文：「荣誉与祖国」，白色珐琅五角星臂间饰绿色橡树与橄榄枝，法兰西第一帝国皇冠顶饰。", forSale:false },
+    { id:"t013", title:"巴伐利亚军事功绩勋章", year:"当代", origin:"德国", type:"勋章", highlight:false, image:"images/treasures/t013.jpg", description:"勋章于1866年设立。此纪念版为蓝色珐琅马耳他十字，十字臂间饰交叉军剑与鎏金火焰。正面中央以铭文「授予有功者」环绕王室花押。背面铭刻1866年设立年份，中心为巴伐利亚狮徽。", forSale:false },
+    { id:"t006", title:"君士坦丁红十字骑士团胸章", year:"当代", origin:"英国", type:"勋章", highlight:false, image:"images/treasures/t006.jpg", description:"此骑士团是一个仅接纳基督徒的共济会附属骑士团体。此胸章由紫色绶带牵引，下悬主教冠形金质吊饰，标志主事官职级。主体为红色珐琅四叶形章体，金色边框叠加紫红色珐琅上的凯乐符号（X·P）及字母 I·H·S·V。", forSale:false },
+    { id:"t007", title:"比特币镀金纪念币", year:"当代", origin:"美国", type:"纪念币", highlight:false, image:"images/treasures/t007.jpg", description:"市售镀金纪念章，含比特币符号、格言与电路板纹样。比特币以去中心化、非物质化为核心意识形态，其纪念章却沿用了最古老的中心化权力造像：镀金、圆形、铭文，以金币的形式为其竞争者黄金背书。", forSale:false },
+    { id:"t009", title:"镂空三联项链", year:"约1930", origin:"捷克", type:"珠宝", highlight:false, image:"images/treasures/t009.jpg", description:"可能为1930年代捷克产。冲压黄铜镂空花卉三联构图，涡卷与花瓣骨架内嵌蓝色玻璃石，大中小分级排布。此类工艺与配色高度对应二十世纪初期波西米亚出口仿珠宝传统。", forSale:false },
+    { id:"t012", title:"历史主义圆章项链", year:"约1960", origin:"美国", type:"珠宝", highlight:false, image:"images/treasures/t012.jpg", description:"Florenza 1960年前后作品。压铸镀金圆形底座，卷草纹从中心向四方对称展开，爪托镶嵌深琥珀圆形主石居中，橄榄绿方形与圆形玻璃石分布于各节点，仿珍珠散布外框，颗粒纹边饰模拟伊特鲁里亚金工。", forSale:false },
+    { id:"t008", title:"金色流苏项链", year:"约1960", origin:"意大利", type:"珠宝", highlight:false, image:"images/treasures/t008.jpg", description:"可能为1960年代意大利产。镀金编织网带为主链，密排琥珀色爪托玻璃石沿链延伸。中心矩形座以多列玻璃石构成几何面，向下发散为多股网链与石链交织的流苏坠。", forSale:false },
+  ],
+  chronicles: [
+    { id:"c005", title:"法国医官礼服的工艺和制度剖析", image:"images/regalia/r006.jpg", image2:"images/regalia/r006b.jpg", image3:"images/regalia/r006c.jpg", image4:"images/regalia/r006d.jpg", imageLayout:"grid4", excerpt:"<strong>工艺</strong><br><br>这件1931年式法国陆军医官大礼服出自巴黎第八区 Thorn。彼时该地址是法国军服定制业的核心门牌，客户以军官及外交官为主。面料为中厚挺括礼服毛呢，黑色，织物密度足以支撑直身廓形。单排9粒扣沿前襟垂直排列，扣面以黄铜镀金铸造，浮雕图案为权杖缠蛇外环月桂，赫尔墨斯权杖的医疗变体，每粒扣面均铸有兵种标识。<br><br>领部与袖口以深红丝绒包覆，切割边缘利落，与黑色毛呢的交界处收口无毛边。领片两侧各施一组金线手工刺绣：左侧橄榄枝，右侧蓟花，以管状金属丝构成，密度均匀，九十年后光泽与张力仍在。袖口丝绒之上，两道金色织带横贯，金线规整。内衬有多圈走线分散受力，是法国军服刺绣工艺的标准高输出。<br><br>整件礼服体现了法兰西制服美学的核心逻辑：以裁缝的精度代替装饰的堆砌，将布料、丝绒、金线与金属扣的材料层级压入严格的几何秩序，使礼服获得建筑与雕塑的同时感，它不是被穿着的，它是被构筑的。<br><br><strong>风格与制度含义</strong><br><br>黑色礼服毛呢配深红丝绒，是第三共和国时期法国军医系统礼服的标准配色。同期法国陆军礼服中，作战兵种多用双排扣，医官等技术兵种以单排扣与作战兵种的双排扣区隔。<br><br>9粒权杖缠蛇扣沿前襟从领口延伸至腰部。佩戴者站定，兵种、职级与机构归属即在视线接触中同时完成识别。" },
+    { id:"c003", title:"一件礼服的战争与和平", image:"images/regalia/r001.jpg", image2:"images/chronicles/c003c.jpg", image3:"images/chronicles/c003b.jpg", imageLayout:"grid3left", excerpt:"1982年5月4日，南大西洋，马岛战争进行中。谢菲尔德号驱逐舰遭阿根廷海军的飞鱼导弹击中引发大火，舰长索尔特下令弃舰。谢菲尔德号随后沉没，成为二战结束后第一艘被击沉的皇家海军战舰。二十名船员罹难。<br><br>索尔特返回英国后，于1982年6月1日在 Moseley &amp; Pounsford 定制了这件礼服外套。时间的选择耐人寻味：此时议会和媒体对谢菲尔德号事件的追责正在进行。这件礼服使人难以不将其与战后的问责程序和身份修复联系起来；至少在象征层面，它标志着一名指挥官在舆论漩涡中重新确立自身位置的努力。<br><br>在战争胜利气氛中，索尔特最终未被追责。此后他相继指挥南安普顿号驱逐舰，出任北伍德司令部作战助理参谋长，后升任国防情报局局长，晋升海军少将，主持海湾战争的皇家海军战略规划。索尔特1991年退役后经商，2009年去世，享年六十九岁。<br><br>这件外套因此成为一个问题的物质载体：荣耀在挫败之后，如何通过自身努力和制度宽容重新组织。" },
+    { id:"c006", title:"帝国的勋章符号", image:"images/treasures/t014.jpg", image2:"images/chronicles/c006b.jpg", image3:"images/chronicles/c006c.jpg", image4:"images/chronicles/c006e.jpg", image5:"images/chronicles/c006d.jpg", image6:"images/chronicles/c006f.jpg", imageLayout:"grid6",excerpt:"<strong>勋章细节</strong><br><br>此枚伊莎贝拉天主教勋章指挥官级为银镀金颈佩章，尺寸5.3 × 8.19厘米。顶部为绿色珐琅橄榄枝与月桂环，连接颈绶。主体为红色珐琅马耳他十字，八端以球形收束，边缘钻石切面形成锐利反光。马耳他十字形制指向天主教骑士团传统。十字臂之间铺陈多层放射星芒，银镀金表面因长期氧化呈现蓝紫至铜红的虹彩光谱。星芒密集反光，使勋章在礼仪场合中远距离可辨。<br><br>中心圆章为双面结构。正面手绘珐琅以海格力斯之柱与环球为核心图像：海格力斯之柱源自西班牙王室徽章，指向直布罗陀海峡作为古典世界边界，两柱间飘带铭文「海外犹有天地」；环球将这一边界扩展至全球尺度，对应西班牙帝国的扩张理念；背面为蓝白珐琅底上的FS花押。两面铭文合计意为「以伊莎贝拉之名，致纯粹的忠诚」。<br><br>原盒标明制造商 Celadas 的地址马德里Mayor 21，红色压纹外壳与丝绒内衬保存完整，合页与锁扣仍可正常使用。Celadas 创立于1896年，FJ画押在1875-1931年复辟时期使用，因此勋章年代为1896-1931年。<br><br><strong>制度含义</strong><br><br>该勋章设立于1815年，正当拿破仑战争后王室复辟、欧洲秩序重组，其功能集中于奖励对西班牙国家、王室及对外关系有贡献的个人，尤其涉及外交、文化、艺术事务。这件物件结合宗教合法性、帝国扩张与外交秩序，佩戴者由此在公共场合代表国家与王室的权威。" },
+    { id:"c007", title:"帝国保护国的荣誉语法", image:"images/treasures/t015.jpg", image2:"images/chronicles/c007b.jpg", image3:"images/chronicles/c007c.jpg", image4:"images/chronicles/c007d.jpg", imageLayout:"grid4", excerpt:"<strong>形制</strong><br><br>此枚法属突尼斯荣耀勋章指挥官级为银质红绿珐琅颈佩章，星体直径约5.7厘米，连顶部结形吊饰总高约9.35厘米，重约57克（含绶带）。顶部花结式银质连接件含巴黎工坊 Arthus Bertrand 标记并衔接颈绶，下接圆环与横向铰接。主体十角放射星形，红绿珐琅尖芒交替展开，其间穿插银质切面光芒，表面饰连续颗粒与刻纹，静止状态下仍有明显闪烁感。中心圆章绿色珐琅为基础，凸出突尼斯贝伊花押，外绕一圈凸起珠饰，轴心凝聚力强。背面光素银面，中央拱起托构，为独立中心结构的立体组装件。背面呈现灰黑、蓝紫、褐金交错的旧银包浆。<br><br><strong>断代与来源</strong><br><br>带 Arthus Bertrand 原盒和原绶带。综合绶带制度、工匠记号与尺寸模数，勋章大概率制作于1909至1942年间。此件由一个法国家庭连同数件勋饰送交拍卖，这个组合指向一名跨区域任职的法国军官或殖民行政官员。<br><br><strong>双重编码</strong><br><br>这枚勋章的中心花押声明权威来自突尼斯贝伊本人；而悬挂环上的冲印是巴黎银匠的工坊标记。<br><br>勋章是制度的缩影。1881年后，突尼斯贝伊名义上保留主权与勋章授予权，而实际提名权由法国驻扎官员掌控，制造由承接法国荣誉军团勋章的工坊完成。佩戴者由此同时登记两套忠诚：在突尼斯贝伊的荣誉等级中获得一个位置，也在法国殖民礼仪秩序中获得一个可换算的等级坐标。正面花押与背面戳记，分别书写一半权力编码。" },
+    { id:"c004", title:"两枚面孔，两个拿破仑", image:"images/treasures/t002.jpg", image2:"images/chronicles/c004b.jpg", imageLayout:"side", excerpt:"<strong>正面：侧面像的政治学</strong><br><br>圣赫勒拿奖章正面，拿破仑一世以罗马皇帝的姿态出现：严格的侧面像，月桂花环加冕，头衔环绕。这套视觉语言有明确的历史来源。古罗马硬币以侧面像确认皇帝的神圣权威，启蒙时代的共和主义者用同样的图式重新激活了这一传统：自由女神、革命烈士、执政官，都以侧面像的形式在金属上留存。拿破仑继承了这套语言，将军事胜利与古典共和的正当性焊接在一起：我不是国王，我是凯撒。<br><br><strong>背面：一个假托的遗言</strong><br><br>背面铭文宣告：献给拿破仑的荣耀战友，他最后的思念。圣赫勒拿，1821年5月5日。外圈镌刻的是服役年限：1792至1815年诸战役。顶部是帝国皇冠。<br><br><strong>整体意图</strong><br><br>这套设计的意图是：拿破仑死于流放地，死前记挂的是他的士兵；三十六年后，他的继承者把这份&ldquo;最后的思念&rdquo;铸成金属，发到仍然在世的老兵手中。他们彼时已白发苍苍，在波旁王朝复辟后一度被历史遗忘。这枚奖章告诉他们：你们被当时和现在的拿破仑记得。<br><br>幕后的操盘者是拿破仑三世。他以拿破仑一世的姓氏当选总统、政变称帝。1857年颁布圣赫勒拿奖章，时机算计精准：传说已发酵为神话，老兵正在凋零，此时给予承认，代价极小，收益极大。<br><br>马克思写道，一切伟大的世界历史事变和人物都出现两次：第一次是作为悲剧出现，第二次是作为笑剧出现。这一判断对拿破仑三世而言是准确的。但那些年迈的老兵，当他们接过这枚奖章时，触碰的是多年前真实流过的血与泥。宣传技术与真实情感在这枚奖章上重叠，这正是它作为历史物件最难被单一叙事收编的地方。" },
+    { id:"c002", title:"一件精品项链的设计逻辑", image:"images/treasures/t001.jpg", image2:"images/chronicles/c002b.jpg", image3:"images/chronicles/c002c.jpg", image4:"images/chronicles/c002d.jpg", imageLayout:"grid4", excerpt:"自上而下观赏这件 Florenza 项链。视线首先遇到的是巴洛克掐丝心形小吊坠：体量细小，却以立体爪托与涡卷细节预告了整串的主题和工艺密度。视线继续下移，花瓣形中心座以铸造掐丝构成对称的放射骨架，将四重构图秩序带入视野；马耳他十字主吊坠随即展开，以徽章形制确立整串的历史语义重心。圆形宝石与马眼形宝石分布于各节点，深琥珀色调回应了伊特鲁里亚复兴的色彩传统，在维持视觉密度的同时锁定了情绪基调。<br><br>这件项链的设计核心策略，是以历史权威性抵消材料的非贵重属性，同时采用两条手段：以数量与密度压制对材料本身的注意力，以历史风格引导观者关注设计而非材料本身。风格上，它是四套历史传统的有意识融合：文艺复兴风格复兴提供构图骨架，伊特鲁里亚复兴提供工艺语言，维多利亚情感传统引入浪漫向度，巴洛克复兴赋予戏剧张力，四套语汇各自承担不同的设计功能。<br><br>通过将心形处理为承载宝石的建筑构件而非独立的情感符号，庄严与浪漫两种原本相悖的气质在同一构图中取得平衡。铸造掐丝与模制玻璃石决定了工艺的上限，而在自身目标与工艺约束之内，此件以罕见的完成度实现了它的设计意图。" },
+    { id:"c001", title:"鲁斯坦擒获中国可汗", image:"images/chronicles/c001.jpg", imageLayout:"single", excerpt:"波斯史诗《列王纪》中，英雄鲁斯坦在混战中生擒中国可汗：这不是历史记录，是波斯（今伊朗）世界对帝国边疆的文学想象。<br><br>这页波斯帝国萨法维时期（16世纪后半叶）细密画手抄本插图，描绘的正是这一俘获时刻。画面中心，骑粉马、穿锦袍的鲁斯坦牵着左边骑白马的中国可汗，二者构成全图权力轴线。周围穿着相对朴素盔甲的侍从次第环绕，最外围是理想化的自然。画面讲述的不是战斗本身，而是俘获与收编：将敌方统治者纳入己方体系。这是王权胜利的图像，而非武勇的炫示。<br><br>画家的技法高度成熟。人物、战马、武器、山石密集交叠，但依靠色块分区和墨线勾勒维持平面秩序。这正是萨法维细密画的核心能力：在极高的元素密度下维持可读秩序。背景的紫色与橙色山体并非自然写生，而是波斯绘画体系独有的视觉语言，赋予战场以园林与梦境的双重质感。右上方舒展的大树平衡了左侧密集战团，给暴力场景加上了诗意化的框架。上下两栏波斯文诗句与画面构成完整的手抄本页面，整页是文学、书法与绘画共同成就的产物。" },
+  ],
+  gallery: [
+    { id:"g012", image:"images/gallery/g012.jpg", caption:"", category:"艺术掠影" },
+    { id:"g008", image:"images/gallery/g008.jpg", caption:"", category:"藏品穿搭" },
+    { id:"g016", image:"images/gallery/g016.jpg", caption:"", category:"艺术掠影" },
+    { id:"g006", image:"images/gallery/g006.jpg", caption:"", category:"藏品穿搭" },
+    { id:"g010", image:"images/gallery/g010.jpg", caption:"", category:"艺术掠影" },
+    { id:"g002", image:"images/gallery/g002.jpg", caption:"", category:"藏品穿搭" },
+    { id:"g015", image:"images/gallery/g015.jpg", caption:"", category:"艺术掠影" },
+    { id:"g003", image:"images/gallery/g003.jpg", caption:"", category:"藏品穿搭" },
+    { id:"g011", image:"images/gallery/g011.jpg", caption:"", category:"艺术掠影" },
+    { id:"g004", image:"images/gallery/g004.jpg", caption:"", category:"藏品穿搭" },
+    { id:"g013", image:"images/gallery/g013.jpg", caption:"", category:"艺术掠影" },
+    { id:"g005", image:"images/gallery/g005.jpg", caption:"", category:"藏品穿搭" },
+    { id:"g014", image:"images/gallery/g014.jpg", caption:"", category:"艺术掠影" },
+    { id:"g007", image:"images/gallery/g007.jpg", caption:"", category:"藏品穿搭" },
+    { id:"g017", image:"images/gallery/g017.jpg", caption:"", category:"艺术掠影" },
+    { id:"g001", image:"images/gallery/g001.jpg", caption:"", category:"藏品穿搭" },
+    { id:"g009", image:"images/gallery/g009.jpg", caption:"", category:"艺术掠影" },
+  ]
+};
+
+// CHANGE: reverse map from chronicle id to item id (c001 excluded — no corresponding item)
+const chronicleToItem = {
+  c002: "t001",
+  c003: "r001",
+  c004: "t002",
+  c005: "r006",
+  c006: "t014"
+};
+
+function parseYear(y) {
+  if (!y || y === '当代') return 9999;
+  const n = parseInt(y.replace('约','').trim(), 10);
+  return isNaN(n) ? 9999 : n;
+}
+
+function sortItems(items) {
+  const hl = [...items].filter(i => i.highlight).sort((a,b) => parseYear(a.year)-parseYear(b.year));
+  const rest = [...items].filter(i => !i.highlight).sort((a,b) => parseYear(a.year)-parseYear(b.year));
+  return [...hl, ...rest];
+}
+
+const tabs = [
+  { key:"cabinet", label:"珍奇柜" },
+  { key:"regalia", label:"礼服与华服" },
+  { key:"treasures", label:"勋章与珠宝" },
+  { key:"chronicles", label:"物质文化" },
+  { key:"departures", label:"甄选出让" },
+  { key:"gallery", label:"画廊" },
+];
+let currentTab = "cabinet";
+let filters = { regalia:{type:[]}, treasures:{type:[]} };
+let galleryFilter = null;
+
+function renderTabs() {
+  const hasDepartures = [...collection.regalia,...collection.treasures].some(i=>i.forSale);
+  const visibleTabs = tabs.filter(t => t.key !== 'departures' || hasDepartures);
+  if (!hasDepartures && currentTab === 'departures') { currentTab = 'cabinet'; }
+  document.getElementById("tabsBar").innerHTML = visibleTabs.map(t =>
+    '<button class="tab-btn '+(currentTab===t.key?'active':'')+'" onclick="switchTab(\''+t.key+'\')">'+t.label+'</button>'
+  ).join("");
+  document.querySelectorAll(".tab-content").forEach(e=>e.classList.remove("active"));
+  const e=document.getElementById("tab-"+currentTab);
+  if(e)e.classList.add("active");
+}
+function switchTab(k){currentTab=k;renderTabs();renderCurrentTab();window.scrollTo({top:0,behavior:'smooth'});}
+function renderCurrentTab(){
+  switch(currentTab){
+    case "cabinet": renderCabinet(); break;
+    case "regalia": renderCollection("regalia"); break;
+    case "treasures": renderCollection("treasures"); break;
+    case "chronicles": renderChronicles(); break;
+    case "departures": renderDepartures(); break;
+    case "gallery": renderGallery(); break;
+  }
+}
+
+function renderCabinet() {
+  const featuredIds = ["r001","t014","r006","t015","r009","t001"];
+  const all = [...collection.regalia, ...collection.treasures];
+  const featured = featuredIds.map(id => all.find(i => i.id===id)).filter(Boolean);
+  const chronicleFeatured = null;
+  document.getElementById("tab-cabinet").innerHTML =
+    '<div class="section-header" style="padding-top:20px;padding-bottom:8px"><div class="section-title">珍奇柜</div></div>' +
+    '<div class="type-statement cabinet-intro">多类精品并置于此，以数件勾勒整体</div>' +
+    divider +
+    '<div class="featured-grid">' +
+      featured.map((i,n) => renderCard(i,n,true)).join("") +
+      (chronicleFeatured ? renderChronicleCard(chronicleFeatured, featured.length) : '') +
+    '</div>';
+}
+
+function renderChronicleCard(item, index) {
+  const img = item.image ? '<img src="'+item.image+'" alt="'+item.title+'" loading="lazy">' : '<span class="item-placeholder">✦</span>';
+  return '<div class="item-card" style="animation:fadeIn 0.4s ease '+(index*0.06)+'s both" onclick="openArticle(\''+item.id+'\')">'+
+    '<div class="item-image">'+img+'</div><div class="item-info"><div class="item-title">'+item.title+'</div>'+
+    '<div class="item-meta"></div></div></div>';
+}
+
+const typeOrder = {
+  regalia: ["仪式礼服","晚宴礼服","高级时装"],
+  treasures: ["勋章","珠宝","纪念币"]
+};
+
+/* CHANGE: section-level curatorial statements, always visible */
+const sectionStatements = {
+  regalia: [
+    "仪式礼服：国家将权威织入礼服，通过身体完成宣示",
+    "晚宴礼服：仪式融入晚宴，权威与归属在烛光下互认",
+    "高级时装：军礼服语汇经由时尚工业的挪用隐入日常"
+  ],
+  treasures: [
+    "勋章：国家以金银、珐琅和绶带将功绩固定成为等级",
+    "珠宝：设计以历史语汇与工艺而非贵金属来说服观者",
+    "纪念币：铸币造像权力，将统治者肖像压入日常流通"
+  ]
+};
+
+function renderCollection(key) {
+  const allItems = collection[key]||[];
+  const order = typeOrder[key] || [];
+  const rawTypes = [...new Set(allItems.map(i=>i.type))];
+  const types = [...order.filter(t=>rawTypes.includes(t)), ...rawTypes.filter(t=>!order.includes(t))];
+  const af = filters[key]?.type||[];
+  const filtered = af.length===0 ? allItems : allItems.filter(i=>af.includes(i.type));
+  const sorted = [...filtered].sort((a,b)=>parseYear(a.year)-parseYear(b.year));
+  const tm={regalia:"礼服与华服",treasures:"勋章与珠宝"};
+  /* CHANGE: always show all section statements */
+  const stmts = sectionStatements[key] || [];
+  const sh = stmts.length > 0 ? '<div class="type-statement">' + stmts.join('<br>') + '</div>' : '';
+  let fh='';
+  if(types.length>1){
+    fh='<div class="filter-bar"><button class="filter-btn '+(af.length===0?'active':'')+'" onclick="toggleFilter(\''+key+'\',\'all\')">全部</button>'+
+      types.map(t=>'<button class="filter-btn '+(af.includes(t)?'active':'')+'" onclick="toggleFilter(\''+key+'\',\''+t+'\')">'+t+'</button>').join("")+'</div>';
+  }
+  document.getElementById("tab-"+key).innerHTML=
+    '<div class="section-header"><div class="section-title">'+tm[key]+'</div></div>'+
+    sh+divider+fh+
+    '<div class="featured-grid">'+sorted.map((i,n)=>renderCard(i,n,false)).join("")+'</div>';
+}
+
+function renderCard(item, index, isHighlightCtx) {
+  const img = item.image ? '<img src="'+item.image+'" alt="'+item.title+'" loading="lazy">' : '<span class="item-placeholder">✦</span>';
+  const st = item.forSale ? '<span class="item-tag sale">可出让</span>' : '';
+  const tagHtml = isHighlightCtx ? '' : st;
+  return '<div class="item-card" style="animation:fadeIn 0.4s ease '+(index*0.06)+'s both" onclick="openLightbox(\''+item.id+'\')">'+
+    '<div class="item-image">'+img+'</div><div class="item-info"><div class="item-title">'+item.title+'</div>'+
+    '<div class="item-meta"><span>'+(item.year||'')+'</span><span>'+(item.origin||'')+'</span>'+tagHtml+'</div></div></div>';
+}
+
+function renderChronicles() {
+  document.getElementById("tab-chronicles").innerHTML=
+    '<div class="section-header"><div class="section-title">物质文化</div></div>'+
+    '<div class="type-statement">以器物解码审美、身份与权力</div>'+
+    divider+
+    '<div class="chronicle-grid">'+collection.chronicles.map((a,i)=>
+      '<div class="chronicle-card" style="animation:fadeIn 0.4s ease '+(i*0.06)+'s both" onclick="openArticle(\''+a.id+'\')">'+
+        (a.image?'<div class="card-img"><img src="'+a.image+'" alt="'+a.title+'" loading="lazy"></div>':'')+
+        '<div class="card-info"><div class="card-title">'+a.title+'</div></div></div>'
+    ).join("")+'</div>';
+}
+
+function renderDepartures() {
+  const fs=[...collection.regalia,...collection.treasures].filter(i=>i.forSale);
+  document.getElementById("tab-departures").innerHTML=
+    '<div class="section-header"><div class="section-title">甄选出让</div></div>'+
+    divider+
+    '<div class="curator-statement" style="padding-bottom:16px">以下藏品可转让，欢迎通过页尾方式联系。</div>'+
+    (fs.length>0
+      ?'<div class="featured-grid" style="padding-top:8px">'+fs.map((i,n)=>renderCard(i,n,false)).join("")+'</div>'
+      :'<div class="curator-statement" style="color:var(--text-muted)">暂无出让藏品</div>');
+}
+
+function renderGallery() {
+  const allCats=["艺术掠影","藏品穿搭"];
+  const items=collection.gallery.filter(g=>g.image&&(galleryFilter===null||g.category===galleryFilter));
+  const filterHtml='<div class="filter-bar">'+
+    '<button class="filter-btn '+(galleryFilter===null?'active':'')+'" onclick="toggleGalleryFilter(null)">全部</button>'+
+    allCats.map(c=>'<button class="filter-btn '+(galleryFilter===c?'active':'')+'" onclick="toggleGalleryFilter(\''+c+'\')">'+c+'</button>').join("")+
+  '</div>';
+  document.getElementById("tab-gallery").innerHTML=
+    '<div class="section-header"><div class="section-title">画廊</div></div>'+
+    '<div class="type-statement">藏品进入艺术空间与日常场景</div>'+
+    divider+filterHtml+
+    (items.length>0
+      ? '<div class="gallery-grid">'+
+          items.map(g=>
+            '<div class="gallery-item" onclick="openGalleryLightbox(\''+g.id+'\')">'+
+              '<img src="'+g.image+'" alt="'+(g.caption||'')+'" loading="lazy" oncontextmenu="return false">'+
+            '</div>'
+          ).join("")+
+        '</div>'
+      :'<div class="curator-statement" style="color:var(--text-muted)">该分类暂无内容</div>');
+}
+
+window.openGalleryLightbox = function(id) {
+  const item = collection.gallery.find(g => g.id === id);
+  if (!item || !item.image) return;
+  document.getElementById("lightboxImg").src = item.image;
+  document.getElementById("lightboxTitle").textContent = item.caption || '';
+  document.getElementById("lightboxDesc").textContent = '';
+  document.getElementById("lightbox").classList.add("open");
+  document.body.style.overflow = 'hidden';
+};
+
+window.toggleGalleryFilter=function(cat){
+  galleryFilter = cat;
+  renderGallery();
+};
+window.toggleFilter=function(k,v){
+  if(v==='all') filters[k].type=[];
+  else filters[k].type=[v];
+  renderCollection(k);
+};
+
+function openLightbox(id){
+  const all=[...collection.regalia,...collection.treasures,...collection.gallery];
+  const item=all.find(i=>i.id===id);
+  if(!item||!item.image)return;
+  document.getElementById("lightboxImg").src=item.image;
+  document.getElementById("lightboxTitle").textContent=item.title||item.caption||'';
+  document.getElementById("lightboxDesc").textContent=item.description||'';
+  const linkEl=document.getElementById("lightboxArticleLink");
+  if(item.articleLink){
+    linkEl.style.display='inline-block';
+    linkEl.onclick=function(e){e.stopPropagation();closeLightbox({target:document.getElementById("lightbox")});openArticle(item.articleLink);};
+  } else {
+    linkEl.style.display='none';
+  }
+  document.getElementById("lightbox").classList.add("open");
+  document.body.style.overflow='hidden';
+}
+
+function closeLightbox(e){
+  if(e.target===document.getElementById("lightbox")||e.target.classList.contains('lightbox-close')){
+    document.getElementById("lightbox").classList.remove("open");document.body.style.overflow='';
+  }
+}
+
+function openArticle(id){
+  const a=collection.chronicles.find(c=>c.id===id);if(!a)return;
+  const container=document.getElementById("articleImgContainer");
+  function imgEl(src){return '<img src="'+src+'" alt="" loading="lazy">';}
+  if(a.imageLayout==="stack"){
+    container.innerHTML='<div class="article-img-stack">'+imgEl(a.image)+(a.image2?imgEl(a.image2):'')+'</div>';
+  } else if(a.imageLayout==="side"){
+    container.innerHTML='<div class="article-img-side">'+imgEl(a.image)+(a.image2?imgEl(a.image2):'')+'</div>';
+  } else if(a.imageLayout==="grid4"){
+    const imgs=[a.image,a.image2,a.image3,a.image4].filter(Boolean);
+    container.innerHTML='<div class="article-img-grid4">'+imgs.map(s=>imgEl(s)).join('')+'</div>';
+  } else if(a.imageLayout==="grid6"){
+    const imgs=[a.image,a.image2,a.image3,a.image4,a.image5,a.image6].filter(Boolean);
+    container.innerHTML='<div class="article-img-grid6">'+imgs.map(s=>imgEl(s)).join('')+'</div>';
+  } else if(a.imageLayout==="grid3left"){
+    container.innerHTML='<div class="article-img-grid3left">'+
+      '<div class="article-img-grid3left-main">'+imgEl(a.image)+'</div>'+
+      '<div class="article-img-grid3left-stack">'+(a.image2?imgEl(a.image2):'')+(a.image3?imgEl(a.image3):'')+'</div>'+
+    '</div>';
+  } else if(a.image){
+    container.innerHTML='<img class="article-modal-img" src="'+a.image+'" alt="">';
+  } else {
+    container.innerHTML='';
+  }
+  document.getElementById("articleTitle").textContent=a.title;
+  document.getElementById("articleDate").textContent="";
+  document.getElementById("articleBody").innerHTML=a.excerpt;
+
+  // CHANGE: render reverse link to corresponding item, if any
+  const linkContainer = document.getElementById("articleItemLink");
+  const linkedItemId = chronicleToItem[id];
+  if (linkedItemId) {
+    const allItems = [...collection.regalia, ...collection.treasures];
+    const linkedItem = allItems.find(i => i.id === linkedItemId);
+    if (linkedItem) {
+      const targetTab = linkedItemId.startsWith('r') ? 'regalia' : 'treasures';
+      linkContainer.innerHTML =
+        '<div class="article-item-link">' +
+          '<div class="article-item-link-label">查看藏品</div>' +
+          '<div class="article-item-link-name" onclick="closeArticle({target:document.getElementById(\'articleModal\')});setTimeout(function(){switchTab(\''+targetTab+'\');openLightbox(\''+linkedItemId+'\');},350);">' +
+            '↗ ' + linkedItem.title +
+          '</div>' +
+        '</div>';
+    } else {
+      linkContainer.innerHTML = '';
+    }
+  } else {
+    linkContainer.innerHTML = '';
+  }
+
+  document.getElementById("articleModal").classList.add("open");
+  document.body.style.overflow="hidden";
+}
+
+function closeArticle(e){
+  if(e.target===document.getElementById("articleModal")||e.target.classList.contains("article-modal-close")){
+    document.getElementById("articleModal").classList.remove("open");document.body.style.overflow="";
+  }
+}
+window.openLightbox=openLightbox;window.closeLightbox=closeLightbox;window.switchTab=switchTab;
+window.openArticle=openArticle;window.closeArticle=closeArticle;
+renderTabs();renderCurrentTab();
+</script>
+
+<!-- Firebase conversation system: isolated so it never breaks the main page -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script>
+(function(){
+  /* ======= Firebase Init ======= */
+  var db, convCol, ready = false;
+  try {
+    /* TODO: Replace with your Firebase project config from https://console.firebase.google.com */
+    firebase.initializeApp({
+      apiKey: "AIzaSyAuMWXc_gR0NSKTpD16dqd2kPm7RexFi7s",
+      authDomain: "cruator-wangchuyao.firebaseapp.com",
+      projectId: "cruator-wangchuyao",
+      storageBucket: "cruator-wangchuyao.firebasestorage.app",
+      messagingSenderId: "69756796610",
+      appId: "1:69756796610:web:0d7d33b38029a39e2e855b"
+    });
+    db = firebase.firestore();
+    convCol = db.collection('conversations');
+    ready = true;
+  } catch(e) { console.warn('Firebase not available:', e); }
+
+  /* Visitor token — persistent per browser via localStorage */
+  var VK = 'curator_visitor_id', vid;
+  try { vid = localStorage.getItem(VK); } catch(e){}
+  if (!vid) {
+    vid = 'v_' + Date.now().toString(36) + '_' + Math.random().toString(36).substr(2,6);
+    try { localStorage.setItem(VK, vid); } catch(e){}
+  }
+
+  /* Admin */
+  /* TODO: Change to your own password */
+  var ADMIN_PWD = 'your_admin_password_here';
+  var isAdmin = false;
+
+  /* Secret admin trigger: triple-click on modal title */
+  var clickCount = 0, clickTimer = null;
+  var titleEl = document.getElementById('convTitle');
+  if (titleEl) {
+    titleEl.style.cursor = 'default';
+    titleEl.addEventListener('click', function() {
+      clickCount++;
+      clearTimeout(clickTimer);
+      clickTimer = setTimeout(function(){ clickCount = 0; }, 600);
+      if (clickCount >= 3) {
+        clickCount = 0;
+        document.getElementById('convAdminBar').style.display = 'flex';
+      }
+    });
+  }
+
+  /* FormSubmit email notification (reused from original) */
+  var FS = '3d4627760930542d1dd6b9938358434d';
+  function notifyEmail(t) {
+    fetch('https://formsubmit.co/ajax/'+FS, {
+      method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body: JSON.stringify({message:t, _subject:'[新留言] curator.wangchuyao.com', _template:'box'})
+    }).catch(function(){});
+  }
+
+  function esc(s) { var e=document.createElement('div'); e.textContent=s||''; return e.innerHTML; }
+  function fmtTime(ts) {
+    if(!ts) return '';
+    var d = ts.toDate ? ts.toDate() : new Date(ts);
+    var p = function(n){return n<10?'0'+n:n;};
+    return d.getFullYear()+'/'+p(d.getMonth()+1)+'/'+p(d.getDate())+' '+p(d.getHours())+':'+p(d.getMinutes());
+  }
+
+  /* ======= Load threads ======= */
+  window.loadConversations = function() {
+    var c = document.getElementById('convThreads');
+    if (!ready) { c.innerHTML='<div class="conv-empty">留言服务未连接</div>'; return; }
+    c.innerHTML='<div class="conv-loading">加载中…</div>';
+
+    /* Admin sees ALL; visitor sees only own threads */
+    var q = isAdmin
+      ? convCol.orderBy('createdAt','desc').limit(50)
+      : convCol.where('visitorId','==',vid).limit(20);
+
+    q.get().then(function(snap){
+      if(snap.empty){
+        c.innerHTML = isAdmin
+          ? '<div class="conv-empty">暂无留言</div>'
+          : '<div class="conv-empty">发送留言后，策展人的回复将显示在此处</div>';
+        return;
+      }
+      /* Sort visitor results client-side (newest first) */
+      var docs = [];
+      snap.forEach(function(doc){ docs.push(doc); });
+      if (!isAdmin) {
+        docs.sort(function(a,b){
+          var ta = a.data().createdAt, tb = b.data().createdAt;
+          if (!ta) return 1; if (!tb) return -1;
+          return (tb.toDate ? tb.toDate() : new Date(tb)) - (ta.toDate ? ta.toDate() : new Date(ta));
+        });
+      }
+      var h='';
+      docs.forEach(function(doc){
+        var d=doc.data();
+        h+='<div class="conv-thread">';
+        h+='<div class="conv-msg"><div class="conv-msg-text">'+esc(d.text)+'</div>';
+        h+='<div class="conv-msg-meta">'+(isAdmin?'访客 · ':'')+fmtTime(d.createdAt)+'</div></div>';
+        if(d.replies&&d.replies.length>0){
+          d.replies.forEach(function(r){
+            h+='<div class="conv-msg conv-msg-curator"><div class="conv-msg-label">策展人回复</div>';
+            h+='<div class="conv-msg-text">'+esc(r.text)+'</div>';
+            h+='<div class="conv-msg-meta">'+fmtTime(r.createdAt)+'</div></div>';
+          });
+        }
+        if(isAdmin){
+          h+='<div class="conv-reply-area">';
+          h+='<textarea class="conv-reply-textarea" id="reply-'+doc.id+'" placeholder="回复此留言…"></textarea>';
+          h+='<button class="conv-reply-send" onclick="convSendReply(\''+doc.id+'\')">回复</button>';
+          h+='<button class="conv-reply-send" style="color:var(--text-muted);border-color:var(--border);float:left;" onclick="convDeleteThread(\''+doc.id+'\')">删除</button>';
+          h+='<div style="clear:both"></div></div>';
+        }
+        h+='</div>';
+      });
+      c.innerHTML=h;
+    }).catch(function(err){
+      c.innerHTML='<div class="conv-empty">加载失败，请刷新重试</div>';
+      console.error(err);
+    });
+  };
+
+  /* ======= Send message ======= */
+  window.convSendMsg = function() {
+    var text=document.getElementById('convText').value.trim();
+    var toast=document.getElementById('convToast');
+    var btn=document.getElementById('convSendBtn');
+    if(!text){toast.style.display='block';toast.textContent='请输入内容后再发送';return;}
+    if(!ready){toast.style.display='block';toast.textContent='留言服务暂不可用';return;}
+    btn.disabled=true; btn.textContent='发送中…';
+    convCol.add({
+      text:text, visitorId:vid,
+      createdAt:firebase.firestore.FieldValue.serverTimestamp(),
+      replies:[]
+    }).then(function(){
+      toast.style.display='block'; toast.textContent='已发送，感谢您的建议';
+      document.getElementById('convText').value='';
+      notifyEmail(text);
+      setTimeout(function(){toast.style.display='none';btn.disabled=false;btn.textContent='发送';closeConvModal();},1800);
+    }).catch(function(err){
+      toast.style.display='block'; toast.textContent='发送失败，请稍后再试';
+      btn.disabled=false; btn.textContent='发送';
+      console.error(err);
+    });
+  };
+
+  /* ======= Admin reply ======= */
+  window.convSendReply = function(docId) {
+    var ta=document.getElementById('reply-'+docId);
+    var text=ta?ta.value.trim():'';
+    if(!text||!ready) return;
+    convCol.doc(docId).update({
+      replies: firebase.firestore.FieldValue.arrayUnion({text:text, createdAt:new Date().toISOString()})
+    }).then(function(){ loadConversations(); }).catch(function(e){ console.error(e); });
+  };
+
+  /* ======= Admin delete ======= */
+  window.convDeleteThread = function(docId) {
+    if(!confirm('确认删除此对话？')) return;
+    convCol.doc(docId).delete().then(function(){ loadConversations(); }).catch(function(e){ console.error(e); });
+  };
+
+  /* ======= Admin login ======= */
+  window.convAdminLogin = function() {
+    var pwd=document.getElementById('convAdminPwd').value.trim();
+    if(pwd===ADMIN_PWD){
+      isAdmin=true;
+      window._convAdmin=true;
+      document.getElementById('convAdminBar').innerHTML='<span class="conv-admin-status">策展人模式</span>';
+      document.getElementById('convThreads').style.display='block';
+      loadConversations();
+    } else {
+      document.getElementById('convAdminPwd').value='';
+      document.getElementById('convAdminPwd').placeholder='密码错误';
+    }
+  };
+})();
+</script>
+</body>
+</html>
