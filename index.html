@@ -392,7 +392,7 @@ const tabs = [
   { key:"treasures", label:"勋章与珠宝" },
   { key:"chronicles", label:"物质文化" },
   { key:"departures", label:"甄选出让" },
-  { key:"gallery", label:"画廊" },
+  { key:"gallery", label:"观看与穿戴" },
 ];
 let currentTab = "cabinet";
 let filters = { regalia:{type:[]}, treasures:{type:[]} };
@@ -525,7 +525,7 @@ function renderGallery() {
     allCats.map(c=>'<button class="filter-btn '+(galleryFilter===c?'active':'')+'" onclick="toggleGalleryFilter(\''+c+'\')">'+c+'</button>').join("")+
   '</div>';
   document.getElementById("tab-gallery").innerHTML=
-    '<div class="section-header"><div class="section-title">画廊</div></div>'+
+    '<div class="section-header"><div class="section-title">观看与穿戴</div></div>'+
     '<div class="type-statement">藏品进入艺术空间与日常场景</div>'+
     divider+filterHtml+
     (items.length>0
