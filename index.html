@@ -430,7 +430,7 @@ function renderCurrentTab(){
 }
 
 function renderCabinet() {
-  const featuredIds ["r009","t014","t021","t023","r001","t015"];
+  const featuredIds = ["r009","t014","t021","t023","r001","t015"];
   const all = [...collection.regalia, ...collection.treasures];
   const featured = featuredIds.map(id => all.find(i => i.id===id)).filter(Boolean);
   const chronicleFeatured = null;
