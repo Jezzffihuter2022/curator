@@ -396,8 +396,8 @@ function sortItems(items) {
 
 const tabs = [
   { key:"cabinet", label:"甄选珍奇" },
-  { key:"regalia", label:"礼服与华服" },
   { key:"treasures", label:"勋章与珠宝" },
+  { key:"regalia", label:"礼服与华服" },
   { key:"chronicles", label:"物质文化" },
   { key:"departures", label:"甄选出让" },
   { key:"gallery", label:"观看与穿戴" },
@@ -430,7 +430,7 @@ function renderCurrentTab(){
 }
 
 function renderCabinet() {
-  const featuredIds = ["r009","t014","t021","t023","r001","t015"];
+  const featuredIds = ["t014","r009","t021","t023","r001","t015"];
   const all = [...collection.regalia, ...collection.treasures];
   const featured = featuredIds.map(id => all.find(i => i.id===id)).filter(Boolean);
   const chronicleFeatured = null;
