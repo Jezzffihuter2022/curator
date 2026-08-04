@@ -386,10 +386,10 @@ const chronicleToItem = {
   c007: "t015",
   c008: "t016",
   c009: "r009",
-  c011: "t021",   // 新增
-  c012: "t023",   // 新增
+  c011: "t021",
+  c012: "t023",
   c013: "t026",
-  c014: "r004"    // 新增
+  c014: "r004"
 };
 
 function parseYear(y) {
@@ -439,7 +439,7 @@ function renderCurrentTab(){
 }
 
 function renderCabinet() {
-  const featuredIds = ["t014","r009","t021","t023","r001","t015"];
+  const featuredIds = ["t014","r001","t021","t023","r009","t015"];
   const all = [...collection.regalia, ...collection.treasures];
   const featured = featuredIds.map(id => all.find(i => i.id===id)).filter(Boolean);
   const chronicleFeatured = null;
