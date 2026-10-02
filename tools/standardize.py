@@ -23,7 +23,8 @@ OUT_ROOT = os.environ.get("STANDARD_OUT", ROOT)       # where the standard files
 RATIO = 3 / 4                 # width / height shared by most of the original photographs
 W, H = 1200, 1600             # 3:4 canvas
 FILL = 0.84                   # the object fills this fraction of the limiting dimension
-KEEP_BACKGROUND = {"t021", "t015", "t019", "t016", "t027", "t003", "t022", "t026", "t018"}
+KEEP_BACKGROUND = {"t021", "t015", "t019", "t016", "t027", "t003", "t022", "t026", "t018",
+                   "t014"}   # t014: tightly framed low-resolution photograph; kept so that it matches its reverse (c006b)
 MODEL = "birefnet-general-lite"
 RATIO_TOL = 0.015            # an original within this of RATIO is only resized
 # Per-item colour ranges (OpenCV HSV, H 0-179) removed from the segmentation mask, for

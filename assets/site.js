@@ -6,10 +6,10 @@
 /* ---------- Sections and their paths ---------- */
 const pages = [
   { key:"cabinet",    path:"/",                  label:"甄选珍奇" },
+  { key:"gallery",    path:"/gallery/",          label:"藏品随览" },
   { key:"treasures",  path:"/orders-jewellery/", label:"勋章与珠宝" },
   { key:"regalia",    path:"/dress-couture/",    label:"礼服与华服" },
   { key:"chronicles", path:"/chronicles/",       label:"藏品札记" },
-  { key:"gallery",    path:"/gallery/",          label:"藏品随览" },
   { key:"departures", path:"/departures/",       label:"甄选出让" },
 ];
 const pageByKey = Object.fromEntries(pages.map(p => [p.key, p]));
