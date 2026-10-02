@@ -23,14 +23,16 @@ OUT_ROOT = os.environ.get("STANDARD_OUT", ROOT)       # where the standard files
 RATIO = 3 / 4                 # width / height shared by most of the original photographs
 W, H = 1200, 1600             # 3:4 canvas
 FILL = 0.84                   # the object fills this fraction of the limiting dimension
-KEEP_BACKGROUND = {"t021", "t015", "t019", "t016", "t027", "t003", "t022", "t026"}
+KEEP_BACKGROUND = {"t021", "t015", "t019", "t016", "t027", "t003", "t022", "t026", "t018"}
 MODEL = "birefnet-general-lite"
 RATIO_TOL = 0.015            # an original within this of RATIO is only resized
 # Per-item colour ranges (OpenCV HSV, H 0-179) removed from the segmentation mask, for
 # photographs where a second object lay under the item.
 STRIP_COLOUR = {"r015": ((5, 25), 60, 60)}   # tan overcoat under the trench coat
 # Items whose photograph carries a colour cast: the object's average is pulled towards neutral grey.
-NEUTRALIZE = {"t018": 1.0}                    # strength 0..1
+NEUTRALIZE = {}                               # id -> strength 0..1
+# Items too close in tone to the warm-white ground are set on their own colour instead.
+BG_OVERRIDE = {"r009": (22, 20, 20), "t005": (22, 20, 20)}   # pale or silver objects sit on black
 
 
 def items():
@@ -145,10 +147,12 @@ def cut_out(im, iid, session):
     scale = min(FILL * W / sub.width, FILL * H / sub.height)
     sub = sub.resize((max(1, int(sub.width * scale)), max(1, int(sub.height * scale))), Image.LANCZOS)
     x, y = (W - sub.width) // 2, (H - sub.height) // 2
-    canvas = Image.new("RGBA", (W, H), BG + (255,))
-    shadow = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    shadow.paste(Image.new("RGBA", sub.size, (70, 55, 45, 70)), (x + 6, y + 14), sub.split()[3])
-    canvas = Image.alpha_composite(canvas, shadow.filter(ImageFilter.GaussianBlur(22)))
+    ground = BG_OVERRIDE.get(iid, BG)
+    canvas = Image.new("RGBA", (W, H), ground + (255,))
+    if sum(ground) > 300:   # a shadow only reads on a light ground
+        shadow = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+        shadow.paste(Image.new("RGBA", sub.size, (70, 55, 45, 70)), (x + 6, y + 14), sub.split()[3])
+        canvas = Image.alpha_composite(canvas, shadow.filter(ImageFilter.GaussianBlur(22)))
     canvas.alpha_composite(sub, (x, y))
     return canvas.convert("RGB")
 
