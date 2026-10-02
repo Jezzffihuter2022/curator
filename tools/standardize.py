@@ -38,6 +38,8 @@ NEUTRALIZE = {}                               # id -> strength 0..1
 BG_OVERRIDE = {"r009": (22, 20, 20)}   # pale or silver objects sit on black
 # Garments photographed on a hanger: the hook above the shoulders is removed.
 REMOVE_HANGER = {"r009", "r012", "r014"}
+# Garments photographed on a dress form: the pole and base below the form are removed, the form stays.
+REMOVE_STAND = {"r013"}
 
 
 def items():
@@ -145,6 +147,30 @@ def drop_hanger(cut):
     return Image.fromarray(a, "RGBA")
 
 
+def drop_stand(cut):
+    """Remove the pole and base under a dress form: everything below the pale form, in a central
+    band, that is not the dark cloth of the garment."""
+    import cv2
+    from scipy import ndimage
+    a = np.asarray(cut).copy(); rgb = np.ascontiguousarray(a[..., :3]); alpha = a[..., 3]; obj = alpha > 128
+    hsv = cv2.cvtColor(rgb, cv2.COLOR_RGB2HSV); s, v = hsv[..., 1], hsv[..., 2]
+    pale = ndimage.binary_opening(obj & (v > 150) & (s < 70), iterations=2)
+    lab, n = ndimage.label(pale)
+    if n == 0: return cut
+    sizes = ndimage.sum(pale, lab, range(1, n + 1)); form = np.isin(lab, 1 + np.where(sizes > 0.004 * obj.sum())[0])
+    ys, xs = np.where(form)
+    if len(ys) == 0: return cut
+    bottom = ys.max(); cx = int(np.median(xs[ys > np.percentile(ys, 90)])); h, w = obj.shape
+    band = np.zeros_like(obj); band[max(0, bottom - 10):, max(0, cx - int(0.18 * w)):min(w, cx + int(0.18 * w))] = True
+    cloth = (v < 110) | ((s > 60) & (v < 150))
+    stand = ndimage.binary_dilation(ndimage.binary_closing(obj & band & ~cloth & ~form, iterations=3), iterations=3)
+    keep = obj & ~stand
+    lab, n = ndimage.label(keep)
+    if n: keep = lab == (1 + int(np.argmax(ndimage.sum(keep, lab, range(1, n + 1)))))
+    a[..., 3] = cv2.GaussianBlur((alpha * keep).astype(np.uint8), (0, 0), 1.0)
+    return Image.fromarray(a, "RGBA")
+
+
 def cut_out(im, iid, session):
     from rembg import remove
     import cv2
@@ -163,6 +189,8 @@ def cut_out(im, iid, session):
         cut = Image.fromarray(np.dstack([rgb, a]), "RGBA")
     if iid in REMOVE_HANGER:
         cut = drop_hanger(cut)
+    if iid in REMOVE_STAND:
+        cut = drop_stand(cut)
     bbox = cut.getbbox()
     if not bbox: raise RuntimeError(f"{iid}: no object found")
     sub = cut.crop(bbox); alpha = sub.split()[3]
