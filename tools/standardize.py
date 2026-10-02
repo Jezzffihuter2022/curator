@@ -18,7 +18,8 @@ import numpy as np
 from PIL import Image, ImageFilter, ImageOps
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-BG = (243, 240, 232)          # warm white, close to the site's --bg-warm
+BG = tuple(int(v) for v in os.environ.get("STANDARD_BG", "243,240,232").split(","))   # warm white by default
+OUT_ROOT = os.environ.get("STANDARD_OUT", ROOT)       # where the standard files are written (tests only)
 RATIO = 3 / 4                 # width / height shared by most of the original photographs
 W, H = 1200, 1600             # 3:4 canvas
 FILL = 0.84                   # the object fills this fraction of the limiting dimension
@@ -28,11 +29,21 @@ RATIO_TOL = 0.015            # an original within this of RATIO is only resized
 # Per-item colour ranges (OpenCV HSV, H 0-179) removed from the segmentation mask, for
 # photographs where a second object lay under the item.
 STRIP_COLOUR = {"r015": ((5, 25), 60, 60)}   # tan overcoat under the trench coat
+# Items whose photograph carries a colour cast: the object's average is pulled towards neutral grey.
+NEUTRALIZE = {"t018": 1.0}                    # strength 0..1
 
 
 def items():
     src = open(os.path.join(ROOT, "assets/data.js"), encoding="utf-8").read()
     return re.findall(r'\{ id:"([rt]\d+)".*?image:"/images/([a-z]+)/\1(?:_standard)?\.jpg"', src)
+
+
+def neutralize(rgb, alpha, strength):
+    """Grey-world white balance on the object only, blended by `strength`."""
+    a = np.asarray(rgb).astype(np.float32); m = np.asarray(alpha) > 128
+    mean = a[m].mean(axis=0); gain = mean.mean() / np.maximum(mean, 1)
+    gain = 1 + (gain - 1) * strength
+    return Image.fromarray(np.clip(a * gain, 0, 255).astype(np.uint8))
 
 
 def stretch(rgb, alpha):
@@ -128,7 +139,9 @@ def cut_out(im, iid, session):
     bbox = cut.getbbox()
     if not bbox: raise RuntimeError(f"{iid}: no object found")
     sub = cut.crop(bbox); alpha = sub.split()[3]
-    sub = Image.merge("RGBA", (*stretch(sub.convert("RGB"), alpha).split(), alpha))
+    rgb = stretch(sub.convert("RGB"), alpha)
+    if iid in NEUTRALIZE: rgb = neutralize(rgb, alpha, NEUTRALIZE[iid])
+    sub = Image.merge("RGBA", (*rgb.split(), alpha))
     scale = min(FILL * W / sub.width, FILL * H / sub.height)
     sub = sub.resize((max(1, int(sub.width * scale)), max(1, int(sub.height * scale))), Image.LANCZOS)
     x, y = (W - sub.width) // 2, (H - sub.height) // 2
@@ -152,18 +165,18 @@ def main(argv):
         # detail photographs with a plain background are brought to RATIO as well
         from rembg import new_session; session = new_session(MODEL)
         for cid in chronicle_images():
-            src = os.path.join(ROOT, "images/chronicles", f"{cid}.jpg"); dst = os.path.join(ROOT, "images/chronicles", f"{cid}_standard.jpg")
+            src = os.path.join(ROOT, "images/chronicles", f"{cid}.jpg"); dst = os.path.join(OUT_ROOT, "images/chronicles", f"{cid}_standard.jpg")
             if not os.path.exists(src): continue
             if os.path.exists(dst) and not force: continue
             im = ImageOps.exif_transpose(Image.open(src)).convert("RGB"); im.thumbnail((1600, 1600))
             if im.width > im.height: continue                       # landscape close-ups stay as they are
             mask = object_mask(im, session)
             if not is_plain_background(im, mask): print(f"{cid}: textured background, left as it is"); continue
-            fit_ratio(im, mask).save(dst, quality=88, optimize=True); print(f"{cid}: plain background, fitted to 3:4")
+            os.makedirs(os.path.dirname(dst), exist_ok=True); fit_ratio(im, mask).save(dst, quality=88, optimize=True); print(f"{cid}: plain background, fitted to 3:4")
         return
     for iid, folder in items():
         if wanted and iid not in wanted: continue
-        src = os.path.join(ROOT, "images", folder, f"{iid}.jpg"); dst = os.path.join(ROOT, "images", folder, f"{iid}_standard.jpg")
+        src = os.path.join(ROOT, "images", folder, f"{iid}.jpg"); dst = os.path.join(OUT_ROOT, "images", folder, f"{iid}_standard.jpg")
         if not os.path.exists(src): print(f"{iid}: original missing, skipped"); continue
         if os.path.exists(dst) and not force: continue
         im = ImageOps.exif_transpose(Image.open(src)).convert("RGB"); im.thumbnail((1600, 1600))
@@ -173,7 +186,7 @@ def main(argv):
             out = fit_ratio(im, object_mask(im, session)); how = "background kept, fitted to 3:4"
         else:
             out = cut_out(im, iid, session); how = "cut out"
-        out.save(dst, quality=88, optimize=True); print(f"{iid}: {how} -> {os.path.relpath(dst, ROOT)}")
+        os.makedirs(os.path.dirname(dst), exist_ok=True); out.save(dst, quality=88, optimize=True); print(f"{iid}: {how} -> {os.path.relpath(dst, ROOT)}")
 
 
 if __name__ == "__main__":

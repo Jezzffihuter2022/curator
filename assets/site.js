@@ -163,8 +163,9 @@ function renderCollection(key) {
 
 function renderChronicleCard(a, i) {
   return '<div class="chronicle-card" style="animation:fadeIn 0.4s ease ' + (i * 0.06) + 's both" onclick="openArticle(\'' + a.id + '\')">' +
+    '<div class="card-info"><div class="card-title">' + a.title + '</div></div>' +
     (a.image ? '<div class="card-img"><img src="' + a.image + '" alt="' + a.title + '" loading="lazy"></div>' : '') +
-    '<div class="card-info"><div class="card-title">' + a.title + '</div></div></div>';
+    '</div>';
 }
 
 function renderChronicles() {
@@ -205,9 +206,7 @@ function renderGallery() {
   for (let i = items.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [items[i], items[j]] = [items[j], items[i]]; }
   lightboxIds = items.map(i => i.id);
   document.getElementById("page").innerHTML =
-    '<div class="type-statement cabinet-intro" style="padding-top:28px">搁置类别与年代，让器物在偶然的邻接中互相说明</div>' +
-    divider +
-    '<div class="gallery-grid">' +
+    '<div class="gallery-grid" style="padding-top:24px">' +
       items.map(i => '<div class="gallery-item" onclick="openLightbox(\'' + i.id + '\')"><img src="' + i.image + '" alt="' + i.title + '" loading="lazy" onerror="this.parentNode.style.display=\'none\'"></div>').join("") +
     '</div>';
 }
