@@ -97,6 +97,12 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg-primary);color:va
 .article-item-link-name{font-family:'Noto Serif SC',serif;font-size:17px;font-weight:600;color:var(--item-title);cursor:pointer;letter-spacing:1px;transition:color 0.2s;}
 .article-item-link-name:hover{color:var(--gold);}
 
+/* curator note on the home page */
+.home-note{max-width:580px;margin:0 auto;padding:4px 0 24px;}
+.home-note-title{font-family:'Noto Serif SC',serif;font-size:16px;font-weight:700;color:var(--heading-gold);letter-spacing:4px;text-align:center;margin-bottom:14px;}
+.home-note-body{font-family:'Noto Serif SC',serif;font-size:15px;line-height:2.2;color:var(--text-secondary);text-align:justify;letter-spacing:0.5px;}
+.inline-link{color:var(--gold);text-decoration:underline;}
+
 /* chronicle groups */
 .chronicle-group{padding-top:28px;}
 .chronicle-group:first-of-type{padding-top:4px;}

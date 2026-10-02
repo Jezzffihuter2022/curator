@@ -15,6 +15,8 @@ const pages = [
 const pageByKey = Object.fromEntries(pages.map(p => [p.key, p]));
 const currentPage = document.body.dataset.page || "cabinet";
 
+const curatorNote = '我对礼服、勋章与仪式器物的兴趣由来已久，到伦敦后才发现这些东西可以被实际收藏。通过这个网站，我把收藏的礼服、时装、勋章与珠宝放在同一视野中。当它们并置，审美趣味、制度等级与权力象征之间的关联会更容易被看见。器物不仅记录历史，也通过材质、造型和佩戴方式塑造观看者的判断。<br><br>这种呈现带有明确的个人取向。我偏爱承载密集历史与仪式感的器物，把制度性的威严转成可见、可感的视觉效果。一些有争议的历史符号，或许会被看成风格；某些沉重的等级秩序，也容易显得优雅。<br><br>因此，我想呈现的不只是器物本身，也包括观看它们的方式。它不试图给出标准答案，只保留一种仍在形成中的判断。';
+
 const divider = '<div class="neo-divider section-after-divider"><div class="nd-line"></div><div class="nd-dot"></div><div class="nd-line"></div></div>';
 
 function allItems() { return [...collection.regalia, ...collection.treasures]; }
@@ -41,7 +43,7 @@ function renderChrome() {
       '<button class="lightbox-close" onclick="closeLightbox(event)">✕</button>' +
       '<img id="lightboxImg" src="" alt="">' +
       '<div class="lightbox-info"><div class="lightbox-title" id="lightboxTitle"></div><div class="lightbox-desc" id="lightboxDesc"></div>' +
-        '<a id="lightboxArticleLink" href="#" style="display:none;margin-top:16px;padding:7px 20px;border:1px solid rgba(245,240,232,0.5);border-radius:2px;color:#F5F0E8;font-family:\'Noto Serif SC\',serif;font-size:15px;letter-spacing:2px;text-decoration:none;cursor:pointer;transition:background 0.2s;" onclick="event.stopPropagation()" onmouseover="this.style.background=\'rgba(245,240,232,0.1)\'" onmouseout="this.style.background=\'transparent\'">了解物质文化</a>' +
+        '<a id="lightboxArticleLink" href="#" style="display:none;margin-top:16px;padding:7px 20px;border:1px solid rgba(245,240,232,0.5);border-radius:2px;color:#F5F0E8;font-family:\'Noto Serif SC\',serif;font-size:15px;letter-spacing:2px;text-decoration:none;cursor:pointer;transition:background 0.2s;" onclick="event.stopPropagation()" onmouseover="this.style.background=\'rgba(245,240,232,0.1)\'" onmouseout="this.style.background=\'transparent\'">阅读札记</a>' +
       '</div>' +
     '</div>' +
 
@@ -68,7 +70,7 @@ function renderChrome() {
       '<button class="curator-note-modal-close">✕</button>' +
       '<div class="curator-note-modal-inner" onclick="event.stopPropagation()">' +
         '<div class="curator-note-modal-title">策展手记</div>' +
-        '我对礼服、勋章与仪式器物的兴趣由来已久，到伦敦后才发现这些东西可以被实际收藏。通过这个网站，我把收藏的礼服、时装、勋章与珠宝放在同一视野中。当它们并置，审美趣味、制度等级与权力象征之间的关联会更容易被看见。器物不仅记录历史，也通过材质、造型和佩戴方式塑造观看者的判断。<br><br>这种呈现带有明确的个人取向。我偏爱承载密集历史与仪式感的器物，把制度性的威严转成可见、可感的视觉效果。一些有争议的历史符号，或许会被看成风格；某些沉重的等级秩序，也容易显得优雅。<br><br>因此，我想呈现的不只是器物本身，也包括观看它们的方式。它不试图给出标准答案，只保留一种仍在形成中的判断。' +
+        curatorNote +
       '</div>' +
     '</div>' +
 
@@ -127,7 +129,9 @@ function renderCabinet() {
   const featured = featuredIds.map(id => all.find(i => i.id === id)).filter(Boolean);
   document.getElementById("page").innerHTML =
     '<div class="section-header" style="padding-top:20px;padding-bottom:8px"><div class="section-title">甄选珍奇</div></div>' +
-    '<div class="type-statement cabinet-intro">多类精品并置于此，以数件勾勒整体</div>' +
+    '<div class="type-statement cabinet-intro">国家以金线与珐琅把等级铸成可见之物，时尚以同一套工艺把权威复制为风格</div>' +
+    divider +
+    '<div class="home-note"><div class="home-note-title">策展手记</div><div class="home-note-body">' + curatorNote + '</div></div>' +
     divider +
     '<div class="featured-grid">' + featured.map((i, n) => renderCard(i, n, true)).join("") + '</div>';
 }
@@ -203,6 +207,13 @@ function renderGallery() {
     '</div>';
 }
 
+function renderNotFound() {
+  document.getElementById("page").innerHTML =
+    '<div class="section-header"><div class="section-title">未找到页面</div></div>' +
+    divider +
+    '<div class="curator-statement">此地址下没有内容。各板块入口见上方导航，或<a class="inline-link" href="/">回到首页</a>。</div>';
+}
+
 function renderPage() {
   switch (currentPage) {
     case "cabinet": renderCabinet(); break;
@@ -211,6 +222,7 @@ function renderPage() {
     case "chronicles": renderChronicles(); break;
     case "departures": renderDepartures(); break;
     case "gallery": renderGallery(); break;
+    default: renderNotFound();
   }
 }
 
