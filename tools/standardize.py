@@ -40,6 +40,8 @@ BG_OVERRIDE = {"r009": (22, 20, 20)}   # pale or silver objects sit on black
 REMOVE_HANGER = {"r009", "r012", "r014"}
 # Garments photographed on a dress form: the pole and base below the form are removed, the form stays.
 REMOVE_STAND = {"r013"}
+# Detail photographs that show the whole object and whose cover is a cut-out are cut out the same way.
+CHRONICLE_CUT_OUT = {"c004b", "c012c", "c002c"}
 
 
 def items():
@@ -238,6 +240,9 @@ def main(argv):
             if os.path.exists(dst) and not force: continue
             im = ImageOps.exif_transpose(Image.open(src)).convert("RGB"); im.thumbnail((4096, 4096))
             if im.width > im.height: continue                       # landscape close-ups stay as they are
+            if cid in CHRONICLE_CUT_OUT:
+                os.makedirs(os.path.dirname(dst), exist_ok=True)
+                compose(cut_out(im, cid, session), cid, H).save(dst, quality=88, optimize=True); print(f"{cid}: cut out like its cover"); continue
             mask = object_mask(im, session)
             if not is_plain_background(im, mask): print(f"{cid}: textured background, left as it is"); continue
             os.makedirs(os.path.dirname(dst), exist_ok=True); fit_ratio(im, mask).save(dst, quality=88, optimize=True); print(f"{cid}: plain background, fitted to 3:4")
