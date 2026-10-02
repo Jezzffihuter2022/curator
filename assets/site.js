@@ -247,7 +247,7 @@ function setHash(id) { history.replaceState(null, "", id ? "#" + id : location.p
 function openLightbox(id) {
   const item = allItems().find(i => i.id === id);
   if (!item || !item.image) return;
-  document.getElementById("lightboxImg").src = item.image;
+  document.getElementById("lightboxImg").src = item.image.replace("_standard.jpg", "_large.jpg");
   document.getElementById("lightboxTitle").textContent = item.title || item.caption || '';
   document.getElementById("lightboxDesc").textContent = item.description || '';
   const linkEl = document.getElementById("lightboxArticleLink");

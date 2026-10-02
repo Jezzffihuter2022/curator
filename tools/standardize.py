@@ -2,8 +2,9 @@
 """Produce the *_standard.jpg cover images used by the site.
 
 For every item in assets/data.js the original photograph (e.g. images/treasures/t001.jpg)
-is turned into images/treasures/t001_standard.jpg: a 3:4 canvas (1200 x 1600), the ratio most
-originals share, with a
+is turned into images/treasures/t001_standard.jpg (1200 x 1600, for cards) and
+images/treasures/t001_large.jpg (up to 2400 x 3200, for the lightbox, never upscaled): a 3:4
+canvas, the ratio most originals share, with a
 uniform warm-white ground (#F3F0E8). Items listed in KEEP_BACKGROUND were photographed in
 or on their presentation boxes; their photograph is kept and only fitted to 3:4 by trimming
 the long sides and adding pure background where the object leaves room. Everything else has the object segmented out with rembg (ISNet),
@@ -21,7 +22,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BG = tuple(int(v) for v in os.environ.get("STANDARD_BG", "243,240,232").split(","))   # warm white by default
 OUT_ROOT = os.environ.get("STANDARD_OUT", ROOT)       # where the standard files are written (tests only)
 RATIO = 3 / 4                 # width / height shared by most of the original photographs
-W, H = 1200, 1600             # 3:4 canvas
+W, H = 1200, 1600             # 3:4 canvas of the _standard image (cards, grids)
+LARGE_H = 3200                # the _large image (lightbox) is at most 2400 x 3200 and never upscales the source
 FILL = 0.84                   # the object fills this fraction of the limiting dimension
 KEEP_BACKGROUND = {"t021", "t015", "t019", "t016", "t027", "t003", "t022", "t026", "t018",
                    "t014"}   # t014: tightly framed low-resolution photograph; kept so that it matches its reverse (c006b)
@@ -77,11 +79,11 @@ def background_band(im, side, size):
     return band.filter(ImageFilter.GaussianBlur(10))
 
 
-def fit_ratio(im, mask):
+def fit_ratio(im, mask, size=(W, H)):
     """Bring a photograph to RATIO without inventing content: first trim the long sides where
     the object leaves room, then add background on whichever side(s) the object does not touch."""
     im = im.convert("RGB"); w, h = im.size; r = RATIO
-    if abs(w / h - r) <= RATIO_TOL * r: return im.resize((W, H), Image.LANCZOS)
+    if abs(w / h - r) <= RATIO_TOL * r: return im.resize(size, Image.LANCZOS)
     ys, xs = np.where(mask)
     if len(xs) == 0: x0, x1, y0, y1 = 0, w, 0, h
     else: x0, x1, y0, y1 = xs.min(), xs.max() + 1, ys.min(), ys.max() + 1
@@ -114,7 +116,7 @@ def fit_ratio(im, mask):
             out.paste(im, (pl, 0))
             if pr: out.paste(background_band(im, "right", pr), (pl + w, 0))
             im = out
-    return im.resize((W, H), Image.LANCZOS)
+    return im.resize(size, Image.LANCZOS)
 
 
 def is_plain_background(im, mask):
@@ -166,18 +168,29 @@ def cut_out(im, iid, session):
     sub = cut.crop(bbox); alpha = sub.split()[3]
     rgb = stretch(sub.convert("RGB"), alpha)
     if iid in NEUTRALIZE: rgb = neutralize(rgb, alpha, NEUTRALIZE[iid])
-    sub = Image.merge("RGBA", (*rgb.split(), alpha))
-    scale = min(FILL * W / sub.width, FILL * H / sub.height)
-    sub = sub.resize((max(1, int(sub.width * scale)), max(1, int(sub.height * scale))), Image.LANCZOS)
-    x, y = (W - sub.width) // 2, (H - sub.height) // 2
+    return Image.merge("RGBA", (*rgb.split(), alpha))
+
+
+def compose(sub, iid, canvas_h):
+    """Place the cut object on a 3:4 canvas of the given height, filling FILL of it."""
+    cw, ch = int(round(canvas_h * RATIO)), canvas_h
+    scale = min(FILL * cw / sub.width, FILL * ch / sub.height)
+    obj = sub.resize((max(1, int(sub.width * scale)), max(1, int(sub.height * scale))), Image.LANCZOS) if abs(scale - 1) > 1e-3 else sub
+    x, y = (cw - obj.width) // 2, (ch - obj.height) // 2
     ground = BG_OVERRIDE.get(iid, BG)
-    canvas = Image.new("RGBA", (W, H), ground + (255,))
+    canvas = Image.new("RGBA", (cw, ch), ground + (255,))
     if sum(ground) > 300:   # a shadow only reads on a light ground
-        shadow = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-        shadow.paste(Image.new("RGBA", sub.size, (70, 55, 45, 70)), (x + 6, y + 14), sub.split()[3])
-        canvas = Image.alpha_composite(canvas, shadow.filter(ImageFilter.GaussianBlur(22)))
-    canvas.alpha_composite(sub, (x, y))
+        k = canvas_h / 1600
+        shadow = Image.new("RGBA", (cw, ch), (0, 0, 0, 0))
+        shadow.paste(Image.new("RGBA", obj.size, (70, 55, 45, 70)), (x + int(6 * k), y + int(14 * k)), obj.split()[3])
+        canvas = Image.alpha_composite(canvas, shadow.filter(ImageFilter.GaussianBlur(22 * k)))
+    canvas.alpha_composite(obj, (x, y))
     return canvas.convert("RGB")
+
+
+def large_height(obj_w, obj_h):
+    """Canvas height at which the object is shown at its native size, within 1600..LARGE_H."""
+    return int(min(LARGE_H, max(H, round(obj_h / FILL), round(obj_w / FILL / RATIO))))
 
 
 def chronicle_images():
@@ -195,7 +208,7 @@ def main(argv):
             src = os.path.join(ROOT, "images/chronicles", f"{cid}.jpg"); dst = os.path.join(OUT_ROOT, "images/chronicles", f"{cid}_standard.jpg")
             if not os.path.exists(src): continue
             if os.path.exists(dst) and not force: continue
-            im = ImageOps.exif_transpose(Image.open(src)).convert("RGB"); im.thumbnail((1600, 1600))
+            im = ImageOps.exif_transpose(Image.open(src)).convert("RGB"); im.thumbnail((4096, 4096))
             if im.width > im.height: continue                       # landscape close-ups stay as they are
             mask = object_mask(im, session)
             if not is_plain_background(im, mask): print(f"{cid}: textured background, left as it is"); continue
@@ -206,14 +219,20 @@ def main(argv):
         src = os.path.join(ROOT, "images", folder, f"{iid}.jpg"); dst = os.path.join(OUT_ROOT, "images", folder, f"{iid}_standard.jpg")
         if not os.path.exists(src): print(f"{iid}: original missing, skipped"); continue
         if os.path.exists(dst) and not force: continue
-        im = ImageOps.exif_transpose(Image.open(src)).convert("RGB"); im.thumbnail((1600, 1600))
+        im = ImageOps.exif_transpose(Image.open(src)).convert("RGB"); im.thumbnail((4096, 4096))   # full resolution
         if session is None:
             from rembg import new_session; session = new_session(MODEL)
+        large = dst.replace("_standard.jpg", "_large.jpg")
         if iid in KEEP_BACKGROUND:
-            out = fit_ratio(im, object_mask(im, session)); how = "background kept, fitted to 3:4"
+            mask = object_mask(im, session)
+            out = fit_ratio(im, mask); how = "background kept, fitted to 3:4"
+            lh = int(min(LARGE_H, max(H, im.height))); big = fit_ratio(im, mask, (int(round(lh * RATIO)), lh))
         else:
-            out = cut_out(im, iid, session); how = "cut out"
-        os.makedirs(os.path.dirname(dst), exist_ok=True); out.save(dst, quality=88, optimize=True); print(f"{iid}: {how} -> {os.path.relpath(dst, ROOT)}")
+            sub = cut_out(im, iid, session); how = "cut out"
+            out = compose(sub, iid, H); big = compose(sub, iid, large_height(sub.width, sub.height))
+        os.makedirs(os.path.dirname(dst), exist_ok=True)
+        out.save(dst, quality=88, optimize=True); big.save(large, quality=86, optimize=True)
+        print(f"{iid}: {how} -> {os.path.relpath(dst, ROOT)}, large {big.size[0]}x{big.size[1]}")
 
 
 if __name__ == "__main__":
