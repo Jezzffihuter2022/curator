@@ -2,10 +2,11 @@
 """Produce the *_standard.jpg cover images used by the site.
 
 For every item in assets/data.js the original photograph (e.g. images/treasures/t001.jpg)
-is turned into images/treasures/t001_standard.jpg: a 2:3 canvas (1200 x 1800) with a
+is turned into images/treasures/t001_standard.jpg: a 3:4 canvas (1200 x 1600), the ratio most
+originals share, with a
 uniform warm-white ground (#F3F0E8). Items listed in KEEP_BACKGROUND were photographed in
-or on their presentation boxes; their photograph is kept and only extended to 2:3 by
-mirroring its own edges. Everything else has the object segmented out with rembg (ISNet),
+or on their presentation boxes; their photograph is kept and only fitted to 3:4 by trimming
+the long sides and adding pure background where the object leaves room. Everything else has the object segmented out with rembg (ISNet),
 centred, given a soft shadow and a gentle luminance stretch. Originals are never modified.
 
 Usage:  python3 tools/standardize.py [item-id ...]      (no ids = every item without a standard file)
@@ -18,11 +19,12 @@ from PIL import Image, ImageFilter, ImageOps
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BG = (243, 240, 232)          # warm white, close to the site's --bg-warm
-W, H = 1200, 1800             # 2:3 canvas
+RATIO = 3 / 4                 # width / height shared by most of the original photographs
+W, H = 1200, 1600             # 3:4 canvas
 FILL = 0.84                   # the object fills this fraction of the limiting dimension
 KEEP_BACKGROUND = {"t021", "t015", "t019", "t016", "t027", "t003", "t022", "t026"}
 MODEL = "birefnet-general-lite"
-RATIO_TOL = 0.015            # an original within this of 2:3 is only resized
+RATIO_TOL = 0.015            # an original within this of RATIO is only resized
 # Per-item colour ranges (OpenCV HSV, H 0-179) removed from the segmentation mask, for
 # photographs where a second object lay under the item.
 STRIP_COLOUR = {"r015": ((5, 25), 60, 60)}   # tan overcoat under the trench coat
@@ -59,10 +61,10 @@ def background_band(im, side, size):
     return band.filter(ImageFilter.GaussianBlur(10))
 
 
-def fit_2_3(im, mask):
-    """Bring a photograph to 2:3 without inventing content: first trim the long sides where
+def fit_ratio(im, mask):
+    """Bring a photograph to RATIO without inventing content: first trim the long sides where
     the object leaves room, then add background on whichever side(s) the object does not touch."""
-    im = im.convert("RGB"); w, h = im.size; r = 2 / 3
+    im = im.convert("RGB"); w, h = im.size; r = RATIO
     if abs(w / h - r) <= RATIO_TOL * r: return im.resize((W, H), Image.LANCZOS)
     ys, xs = np.where(mask)
     if len(xs) == 0: x0, x1, y0, y1 = 0, w, 0, h
@@ -147,7 +149,7 @@ def main(argv):
     force = "--force" in argv; wanted = [a for a in argv if not a.startswith("--")]
     session = None
     if "--chronicles" in argv:
-        # detail photographs with a plain background are brought to 2:3 as well
+        # detail photographs with a plain background are brought to RATIO as well
         from rembg import new_session; session = new_session(MODEL)
         for cid in chronicle_images():
             src = os.path.join(ROOT, "images/chronicles", f"{cid}.jpg"); dst = os.path.join(ROOT, "images/chronicles", f"{cid}_standard.jpg")
@@ -157,7 +159,7 @@ def main(argv):
             if im.width > im.height: continue                       # landscape close-ups stay as they are
             mask = object_mask(im, session)
             if not is_plain_background(im, mask): print(f"{cid}: textured background, left as it is"); continue
-            fit_2_3(im, mask).save(dst, quality=88, optimize=True); print(f"{cid}: plain background, fitted to 2:3")
+            fit_ratio(im, mask).save(dst, quality=88, optimize=True); print(f"{cid}: plain background, fitted to 3:4")
         return
     for iid, folder in items():
         if wanted and iid not in wanted: continue
@@ -168,7 +170,7 @@ def main(argv):
         if session is None:
             from rembg import new_session; session = new_session(MODEL)
         if iid in KEEP_BACKGROUND:
-            out = fit_2_3(im, object_mask(im, session)); how = "background kept, fitted to 2:3"
+            out = fit_ratio(im, object_mask(im, session)); how = "background kept, fitted to 3:4"
         else:
             out = cut_out(im, iid, session); how = "cut out"
         out.save(dst, quality=88, optimize=True); print(f"{iid}: {how} -> {os.path.relpath(dst, ROOT)}")
