@@ -161,10 +161,19 @@ function renderCollection(key) {
     '<div class="featured-grid">' + sorted.map((i, n) => renderCard(i, n, false)).join("") + '</div>';
 }
 
-function renderChronicleCard(a, i) {
-  return '<div class="chronicle-card" style="animation:fadeIn 0.4s ease ' + (i * 0.06) + 's both" onclick="openArticle(\'' + a.id + '\')">' +
-    '<div class="card-info"><div class="card-title">' + a.title + '</div></div>' +
-    (a.image ? '<div class="card-img"><img src="' + a.image + '" alt="' + a.title + '" loading="lazy"></div>' : '') +
+function articleDeck(a) {
+  /* the objects an article is about, as "title · origin · year" */
+  const linked = allItems().filter(i => i.articleLink === a.id).sort((x, y) => parseYear(x.year) - parseYear(y.year));
+  if (linked.length === 0) return '';
+  if (linked.length > 2) return linked.map(i => i.title).join('、');
+  return linked.map(i => [i.title, i.origin, i.year].filter(Boolean).join(' · ')).join('；');
+}
+
+function renderChronicleRow(a) {
+  const deck = articleDeck(a);
+  return '<div class="chronicle-row" onclick="openArticle(\'' + a.id + '\')">' +
+    '<div class="chronicle-row-title">' + a.title + '</div>' +
+    (deck ? '<div class="chronicle-row-deck">' + deck + '</div>' : '') +
     '</div>';
 }
 
@@ -174,7 +183,6 @@ function renderChronicles() {
   const grouped = chronicleGroups.map(g => ({ ...g, items: collection.chronicles.filter(a => a.group === g.key) })).filter(g => g.items.length > 0);
   const ungrouped = collection.chronicles.filter(a => !chronicleGroups.some(g => g.key === a.group));
   if (ungrouped.length > 0) grouped.push({ key: "other", label: "其他", statement: "", items: ungrouped });
-  let n = 0;
   document.getElementById("page").innerHTML =
     '<div class="section-header"><div class="section-title">藏品札记</div></div>' +
     '<div class="type-statement">以器物解码<a class="group-link" href="#group-craft">审美</a>、<a class="group-link" href="#group-person">身份</a>与<a class="group-link" href="#group-power">权力</a></div>' +
@@ -183,7 +191,7 @@ function renderChronicles() {
       '<section class="chronicle-group" id="group-' + g.key + '">' +
         '<div class="chronicle-group-title">' + g.label + '</div>' +
         (g.statement ? '<div class="chronicle-group-statement">' + g.statement + '</div>' : '') +
-        '<div class="chronicle-grid">' + g.items.map(a => renderChronicleCard(a, n++)).join("") + '</div>' +
+        '<div class="chronicle-list">' + g.items.map(a => renderChronicleRow(a)).join("") + '</div>' +
       '</section>'
     ).join("");
 }
