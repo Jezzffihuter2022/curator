@@ -41,6 +41,8 @@ function renderChrome() {
 
     '<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">' +
       '<button class="lightbox-close" onclick="closeLightbox(event)">✕</button>' +
+      '<button class="lightbox-nav lightbox-prev" id="lightboxPrev" onclick="event.stopPropagation();stepLightbox(-1)" aria-label="上一件">‹</button>' +
+      '<button class="lightbox-nav lightbox-next" id="lightboxNext" onclick="event.stopPropagation();stepLightbox(1)" aria-label="下一件">›</button>' +
       '<img id="lightboxImg" src="" alt="">' +
       '<div class="lightbox-info"><div class="lightbox-title" id="lightboxTitle"></div><div class="lightbox-desc" id="lightboxDesc"></div>' +
         '<a id="lightboxArticleLink" href="#" style="display:none;margin-top:16px;padding:7px 20px;border:1px solid rgba(245,240,232,0.5);border-radius:2px;color:#F5F0E8;font-family:\'Noto Serif SC\',serif;font-size:15px;letter-spacing:2px;text-decoration:none;cursor:pointer;transition:background 0.2s;" onclick="event.stopPropagation()" onmouseover="this.style.background=\'rgba(245,240,232,0.1)\'" onmouseout="this.style.background=\'transparent\'">阅读札记</a>' +
@@ -123,15 +125,16 @@ function renderCard(item, index, hideTags) {
 
 /* ---------- Section renderers ---------- */
 let filters = { regalia: [], treasures: [] };
+let lightboxIds = [];   /* ids in the order the current page shows them */
+let lightboxCurrent = null;
 
 function renderCabinet() {
   const all = allItems();
   const featured = featuredIds.map(id => all.find(i => i.id === id)).filter(Boolean);
+  lightboxIds = featured.map(i => i.id);
   document.getElementById("page").innerHTML =
     '<div class="section-header" style="padding-top:20px;padding-bottom:8px"><div class="section-title">甄选珍奇</div></div>' +
-    '<div class="type-statement cabinet-intro">国家以金线与珐琅把等级铸成可见之物，时尚以同一套工艺把权威复制为风格</div>' +
-    divider +
-    '<div class="home-note"><div class="home-note-title">策展手记</div><div class="home-note-body">' + curatorNote + '</div></div>' +
+    '<div class="type-statement cabinet-intro">多类精品并置于此，以数件勾勒整体</div>' +
     divider +
     '<div class="featured-grid">' + featured.map((i, n) => renderCard(i, n, true)).join("") + '</div>';
 }
@@ -144,6 +147,7 @@ function renderCollection(key) {
   const af = filters[key] || [];
   const filtered = af.length === 0 ? items : items.filter(i => af.includes(i.type));
   const sorted = [...filtered].sort((a, b) => parseYear(a.year) - parseYear(b.year));
+  lightboxIds = sorted.map(i => i.id);
   const stmts = sectionStatements[key] || [];
   const sh = stmts.length > 0 ? '<div class="type-statement">' + stmts.join('<br>') + '</div>' : '';
   let fh = '';
@@ -185,6 +189,7 @@ function renderChronicles() {
 
 function renderDepartures() {
   const fs = allItems().filter(i => i.forSale);
+  lightboxIds = fs.map(i => i.id);
   document.getElementById("page").innerHTML =
     '<div class="section-header"><div class="section-title">甄选出让</div></div>' +
     divider +
@@ -198,6 +203,7 @@ function renderGallery() {
   /* Every item's cover image, in a fresh random order on each visit. */
   const items = allItems().filter(i => i.image);
   for (let i = items.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [items[i], items[j]] = [items[j], items[i]]; }
+  lightboxIds = items.map(i => i.id);
   document.getElementById("page").innerHTML =
     '<div class="section-header"><div class="section-title">藏品随览</div></div>' +
     '<div class="type-statement">打乱类别与年代，让藏品在偶然的并置中相遇</div>' +
@@ -241,9 +247,20 @@ function openLightbox(id) {
   const linkEl = document.getElementById("lightboxArticleLink");
   if (item.articleLink) { linkEl.style.display = 'inline-block'; linkEl.href = articleUrl(item.articleLink); }
   else { linkEl.style.display = 'none'; }
+  lightboxCurrent = id;
+  const canStep = lightboxIds.length > 1 && lightboxIds.includes(id);
+  document.getElementById("lightboxPrev").style.display = canStep ? 'block' : 'none';
+  document.getElementById("lightboxNext").style.display = canStep ? 'block' : 'none';
   document.getElementById("lightbox").classList.add("open");
   document.body.style.overflow = 'hidden';
   setHash(id);
+}
+
+/* Move to the previous (-1) or next (+1) item of the current page, wrapping round. */
+function stepLightbox(d) {
+  const i = lightboxIds.indexOf(lightboxCurrent);
+  if (i < 0) return;
+  openLightbox(lightboxIds[(i + d + lightboxIds.length) % lightboxIds.length]);
 }
 
 function closeLightbox(e) {
@@ -316,15 +333,16 @@ function openFromHash() {
 
 window.addEventListener("hashchange", openFromHash);
 document.addEventListener("keydown", e => {
-  if (e.key !== "Escape") return;
   const lb = document.getElementById("lightbox"), am = document.getElementById("articleModal");
+  if (lb.classList.contains("open") && (e.key === "ArrowLeft" || e.key === "ArrowRight")) { stepLightbox(e.key === "ArrowLeft" ? -1 : 1); return; }
+  if (e.key !== "Escape") return;
   if (lb.classList.contains("open")) closeLightbox({ target: lb });
   if (am.classList.contains("open")) closeArticle({ target: am });
   if (document.getElementById("curatorNoteModal").classList.contains("open")) closeCuratorNote();
   if (document.getElementById("convModal").classList.contains("open")) closeConvModal();
 });
 
-Object.assign(window, { openLightbox, closeLightbox, openArticle, closeArticle, toggleFilter,
+Object.assign(window, { openLightbox, closeLightbox, stepLightbox, openArticle, closeArticle, toggleFilter,
   openCuratorNote, closeCuratorNote, openConvModal, closeConvModal });
 
 renderChrome();

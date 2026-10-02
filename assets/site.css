@@ -97,10 +97,6 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg-primary);color:va
 .article-item-link-name{font-family:'Noto Serif SC',serif;font-size:17px;font-weight:600;color:var(--item-title);cursor:pointer;letter-spacing:1px;transition:color 0.2s;}
 .article-item-link-name:hover{color:var(--gold);}
 
-/* curator note on the home page */
-.home-note{max-width:580px;margin:0 auto;padding:4px 0 24px;}
-.home-note-title{font-family:'Noto Serif SC',serif;font-size:16px;font-weight:700;color:var(--heading-gold);letter-spacing:4px;text-align:center;margin-bottom:14px;}
-.home-note-body{font-family:'Noto Serif SC',serif;font-size:15px;line-height:2.2;color:var(--text-secondary);text-align:justify;letter-spacing:0.5px;}
 .inline-link{color:var(--gold);text-decoration:underline;}
 
 /* chronicle groups */
@@ -157,6 +153,9 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg-primary);color:va
 .lightbox-desc{font-size:17px;color:#A9A193;margin-top:8px;max-width:500px;line-height:1.8;font-family:'EB Garamond',serif;}
 .lightbox-close{position:absolute;top:24px;right:28px;font-size:32px;color:#999;cursor:pointer;background:none;border:none;transition:color 0.2s;}
 .lightbox-close:hover{color:#fff;}
+.lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);font-family:'EB Garamond',serif;font-size:56px;line-height:1;color:#999;background:none;border:none;cursor:pointer;padding:24px 18px;transition:color 0.2s;}
+.lightbox-nav:hover{color:#fff;}
+.lightbox-prev{left:16px;}.lightbox-next{right:16px;}
 
 .footer{text-align:center;padding:48px 24px;border-top:1px solid var(--border);}
 .footer p{font-family:'Noto Serif SC',serif;font-size:17px;font-weight:500;color:var(--gold);letter-spacing:2px;}
@@ -216,4 +215,5 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg-primary);color:va
   .featured-grid{grid-template-columns:repeat(2,1fr);gap:12px;}.chronicle-grid{grid-template-columns:repeat(2,1fr);gap:12px;}.gallery-grid{column-count:2;}
   .main{padding:0 14px 40px;}.item-info{padding:12px;}.item-title{font-size:15px;}
   .neo-divider{width:70%;}
+  .lightbox{padding:40px 8px;}.lightbox-nav{font-size:44px;padding:20px 8px;}.lightbox-prev{left:0;}.lightbox-next{right:0;}
 }
