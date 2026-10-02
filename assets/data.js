@@ -58,25 +58,6 @@ const collection = {
     { id:"c016", group:"power", title:"翻领上的礼序", image:"/images/treasures/t028.jpg", image2:"/images/chronicles/c016b.jpg", image3:"/images/chronicles/c016c.jpg", image4:"/images/chronicles/c016d.jpg", imageLayout:"grid4", excerpt:"<strong>形制</strong><br><br>三股狐尾细链，两端各缀别针，其下悬五枚微缩章，不系绶带。8.0×3.5厘米，9.9克。<br><br>自左而右。学术棕榈为1955年前式样，两枝叶枝交叉成开口花环，茎上施紫珐琅，叶间以银托镶玫瑰切钻，间以红紫色小石；吊环两侧与正中亦各镶一钻。农业功绩勋章为金质，白珐琅六角星外绕金色叶环，中心为共和国侧像，蓝珐琅环铭「法兰西共和国」，背面铭「农业功绩 1883」。互助会奖章为银质，正面浮雕长袍女子与男子执手，署Roty；背面铭「劳动与社会保障部」，边缘打巴黎造币厂丰饶角与「1 ARGENT」。突尼斯荣耀勋章以切面银芒为底，红绿珐琅星芒相间，中心绿地托贝伊花押，上接镶石花结。末端为柬埔寨莫尼萨拉蓬勋章，镂空叶环环抱高脚杯与书卷，顶上无冠。<br><br>劳动与社会保障部1906年设立，此链的组成不早于此。五枚合乎佩戴礼序：本国勋章在前，本国奖章居中，外国勋章殿后。<br><br><strong>本国荣典</strong><br><br>第三共和国不再册封爵位。荣誉军团之外，各部另设荣典：教育有学术棕榈，农业有功绩勋章，互助会有奖章。<br><br><strong>借来的君主</strong><br><br>后两枚出自君主。突尼斯荣耀勋章由贝伊颁授，法国人的提名则出自法国总驻扎官。莫尼萨拉蓬1905年由柬埔寨国王西索瓦敕令设立，形制与学术棕榈极为接近，法国军官与在柬教师亦在受者之列。1896年，共和国将五种保护国勋章收为法国殖民勋章，此二者不在其列，始终是外国勋章。以功绩取代血统的共和国，在保护国仍借君主之名授予功绩。" },
     { id:"c004", group:"power", title:"两枚面孔，两个拿破仑", image:"/images/treasures/t002.jpg", image2:"/images/chronicles/c004b.jpg", imageLayout:"side", excerpt:"<strong>正面：侧面像的政治学</strong><br><br>圣赫勒拿奖章正面，拿破仑一世以罗马皇帝的姿态出现：严格的侧面像，月桂花环加冕，头衔环绕。这套视觉语言有明确的历史来源。古罗马硬币以侧面像确认皇帝的神圣权威，启蒙时代的共和主义者用同样的图式重新激活了这一传统：自由女神、革命烈士、执政官，都以侧面像的形式在金属上留存。拿破仑继承了这套语言，将军事胜利与古典共和的正当性焊接在一起：我不是国王，我是凯撒。<br><br><strong>背面：一个假托的遗言</strong><br><br>背面铭文宣告：献给拿破仑的荣耀战友，他最后的思念。圣赫勒拿，1821年5月5日。外圈镌刻的是服役年限：1792至1815年诸战役。顶部是帝国皇冠。<br><br><strong>整体意图</strong><br><br>这套设计的意图是：拿破仑死于流放地，死前记挂的是他的士兵；三十六年后，他的继承者把这份&ldquo;最后的思念&rdquo;铸成金属，发到仍然在世的老兵手中。他们彼时已白发苍苍，在波旁王朝复辟后一度被历史遗忘。这枚奖章告诉他们：你们被当时和现在的拿破仑记得。<br><br>幕后的操盘者是拿破仑三世。他以拿破仑姓氏当选总统、政变称帝。1857年颁布圣赫勒拿奖章，时机算计精准：传说已发酵为神话，老兵正在凋零，此时给予承认，代价极小，收益极大。<br><br>与拿破仑一世相比，拿破仑三世并未重新创造传奇，而是在传奇已经沉淀为公共记忆之后，对其进行了一次精算过的再动员。但那些年迈的老兵，当他们接过这枚奖章时，触碰的仍是多年前真实流过的血与泥。宣传技术与真实情感在这枚奖章上重叠，这正是它作为历史物件最难被单一叙事收编的地方。" },
     { id:"c002", group:"craft", title:"精品项链的设计逻辑", image:"/images/treasures/t001.jpg", image2:"/images/chronicles/c002b.jpg", image3:"/images/chronicles/c002c.jpg", image4:"/images/chronicles/c002d.jpg", imageLayout:"grid4", excerpt:"自上而下观赏这件 Florenza 项链。视线首先遇到的是巴洛克掐丝心形小吊坠：体量细小，却以立体爪托与涡卷细节预告了整串的主题和工艺密度。视线继续下移，花瓣形中心座以铸造掐丝构成对称的放射骨架，将四重构图秩序带入视野；马耳他十字主吊坠随即展开，以徽章形制确立整串的历史语义重心。圆形宝石与马眼形宝石分布于各节点，深琥珀色调回应了伊特鲁里亚复兴的色彩传统，在维持视觉密度的同时锁定了情绪基调。<br><br>这件项链的设计核心策略，是以历史权威性抵消材料的非贵重属性，同时采用两条手段：以数量与密度压制对材料本身的注意力，以历史风格引导观者关注设计而非材料本身。风格上，它是四套历史传统的有意识融合：文艺复兴风格复兴提供构图骨架，伊特鲁里亚复兴提供工艺语言，维多利亚情感传统引入浪漫向度，巴洛克复兴赋予戏剧张力，四套语汇各自承担不同的设计功能。<br><br>通过将心形处理为承载宝石的建筑构件而非独立的情感符号，庄严与浪漫两种原本相悖的气质在同一构图中取得平衡。铸造掐丝与模制玻璃石决定了工艺的上限，而在自身目标与工艺约束之内，此件以罕见的完成度实现了它的设计意图。" },
-  ],
-  gallery: [
-    { id:"g012", image:"/images/gallery/g012.jpg", caption:"", category:"艺术掠影" },
-    { id:"g008", image:"/images/gallery/g008.jpg", caption:"", category:"藏品穿搭" },
-    { id:"g016", image:"/images/gallery/g016.jpg", caption:"", category:"艺术掠影" },
-    { id:"g006", image:"/images/gallery/g006.jpg", caption:"", category:"藏品穿搭" },
-    { id:"g010", image:"/images/gallery/g010.jpg", caption:"", category:"艺术掠影" },
-    { id:"g002", image:"/images/gallery/g002.jpg", caption:"", category:"藏品穿搭" },
-    { id:"g015", image:"/images/gallery/g015.jpg", caption:"", category:"艺术掠影" },
-    { id:"g003", image:"/images/gallery/g003.jpg", caption:"", category:"藏品穿搭" },
-    { id:"g011", image:"/images/gallery/g011.jpg", caption:"", category:"艺术掠影" },
-    { id:"g004", image:"/images/gallery/g004.jpg", caption:"", category:"藏品穿搭" },
-    { id:"g013", image:"/images/gallery/g013.jpg", caption:"", category:"艺术掠影" },
-    { id:"g005", image:"/images/gallery/g005.jpg", caption:"", category:"藏品穿搭" },
-    { id:"g014", image:"/images/gallery/g014.jpg", caption:"", category:"艺术掠影" },
-    { id:"g007", image:"/images/gallery/g007.jpg", caption:"", category:"藏品穿搭" },
-    { id:"g017", image:"/images/gallery/g017.jpg", caption:"", category:"艺术掠影" },
-    { id:"g001", image:"/images/gallery/g001.jpg", caption:"", category:"藏品穿搭" },
-    { id:"g009", image:"/images/gallery/g009.jpg", caption:"", category:"艺术掠影" },
   ]
 };
 
@@ -107,5 +88,3 @@ const sectionStatements = {
     "纪念章：铸章造像权力，将统治者肖像压入日常流通"
   ]
 };
-
-const galleryCategories = ["艺术掠影","藏品穿搭"];

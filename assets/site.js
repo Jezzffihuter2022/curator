@@ -9,7 +9,7 @@ const pages = [
   { key:"treasures",  path:"/orders-jewellery/", label:"勋章与珠宝" },
   { key:"regalia",    path:"/dress-couture/",    label:"礼服与华服" },
   { key:"chronicles", path:"/chronicles/",       label:"藏品札记" },
-  { key:"gallery",    path:"/gallery/",          label:"观看与穿戴" },
+  { key:"gallery",    path:"/gallery/",          label:"藏品随览" },
   { key:"departures", path:"/departures/",       label:"甄选出让" },
 ];
 const pageByKey = Object.fromEntries(pages.map(p => [p.key, p]));
@@ -121,7 +121,6 @@ function renderCard(item, index, hideTags) {
 
 /* ---------- Section renderers ---------- */
 let filters = { regalia: [], treasures: [] };
-let galleryFilter = null;
 
 function renderCabinet() {
   const all = allItems();
@@ -192,20 +191,16 @@ function renderDepartures() {
 }
 
 function renderGallery() {
-  const items = collection.gallery.filter(g => g.image && (galleryFilter === null || g.category === galleryFilter));
-  const filterHtml = '<div class="filter-bar">' +
-    '<button class="filter-btn ' + (galleryFilter === null ? 'active' : '') + '" onclick="toggleGalleryFilter(null)">全部</button>' +
-    galleryCategories.map(c => '<button class="filter-btn ' + (galleryFilter === c ? 'active' : '') + '" onclick="toggleGalleryFilter(\'' + c + '\')">' + c + '</button>').join("") +
-    '</div>';
+  /* Every item's cover image, in a fresh random order on each visit. */
+  const items = allItems().filter(i => i.image);
+  for (let i = items.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [items[i], items[j]] = [items[j], items[i]]; }
   document.getElementById("page").innerHTML =
-    '<div class="section-header"><div class="section-title">观看与穿戴</div></div>' +
-    '<div class="type-statement">藏品进入艺术空间与日常场景</div>' +
-    divider + filterHtml +
-    (items.length > 0
-      ? '<div class="gallery-grid">' +
-          items.map(g => '<div class="gallery-item" onclick="openLightbox(\'' + g.id + '\')"><img src="' + g.image + '" alt="' + (g.caption || '') + '" loading="lazy"></div>').join("") +
-        '</div>'
-      : '<div class="curator-statement" style="color:var(--text-muted)">该分类暂无内容</div>');
+    '<div class="section-header"><div class="section-title">藏品随览</div></div>' +
+    '<div class="type-statement">打乱类别与年代，让藏品在偶然的并置中相遇</div>' +
+    divider +
+    '<div class="gallery-grid">' +
+      items.map(i => '<div class="gallery-item" onclick="openLightbox(\'' + i.id + '\')"><img src="' + i.image + '" alt="' + i.title + '" loading="lazy"></div>').join("") +
+    '</div>';
 }
 
 function renderPage() {
@@ -220,14 +215,13 @@ function renderPage() {
 }
 
 function toggleFilter(k, v) { filters[k] = v === "all" ? [] : [v]; renderCollection(k); }
-function toggleGalleryFilter(cat) { galleryFilter = cat; renderGallery(); }
 
 /* ---------- Deep links ---------- */
 function setHash(id) { history.replaceState(null, "", id ? "#" + id : location.pathname + location.search); }
 
 /* ---------- Lightbox ---------- */
 function openLightbox(id) {
-  const item = [...allItems(), ...collection.gallery].find(i => i.id === id);
+  const item = allItems().find(i => i.id === id);
   if (!item || !item.image) return;
   document.getElementById("lightboxImg").src = item.image;
   document.getElementById("lightboxTitle").textContent = item.title || item.caption || '';
@@ -300,11 +294,11 @@ function openFromHash() {
   const id = location.hash.replace("#", "");
   if (!id) return;
   if (currentPage === "chronicles" && collection.chronicles.some(c => c.id === id)) { openArticle(id); return; }
-  const item = [...allItems(), ...collection.gallery].find(i => i.id === id);
+  const item = allItems().find(i => i.id === id);
   if (!item) return;
-  const here = collection.gallery.includes(item)
-    ? currentPage === "gallery"
-    : currentPage === (item.id.startsWith("r") ? "regalia" : "treasures") || (currentPage === "departures" && item.forSale);
+  const here = currentPage === "gallery" ||
+    currentPage === (item.id.startsWith("r") ? "regalia" : "treasures") ||
+    (currentPage === "departures" && item.forSale);
   if (here) openLightbox(id);
 }
 
@@ -318,7 +312,7 @@ document.addEventListener("keydown", e => {
   if (document.getElementById("convModal").classList.contains("open")) closeConvModal();
 });
 
-Object.assign(window, { openLightbox, closeLightbox, openArticle, closeArticle, toggleFilter, toggleGalleryFilter,
+Object.assign(window, { openLightbox, closeLightbox, openArticle, closeArticle, toggleFilter,
   openCuratorNote, closeCuratorNote, openConvModal, closeConvModal });
 
 renderChrome();
