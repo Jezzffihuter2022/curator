@@ -60,9 +60,9 @@ const collection = {
 
 /* Order and headings of the chronicle groups (審美 / 身份 / 權力). */
 const chronicleGroups = [
-  { key:"craft",  label:"审美 · 工艺与挪用", statement:"工艺把材料压入秩序，权威由此成为可见之物" },
-  { key:"person", label:"身份 · 人物与微观史", statement:"一件定制的礼服与一纸证书，把个人安置进制度的位置" },
-  { key:"power",  label:"权力 · 制度与主权", statement:"勋章的形制、铭文与改面，记录主权的宣称与让渡" },
+  { key:"craft",  label:"审美 · 工艺与挪用", statement:"" },
+  { key:"person", label:"身份 · 人物与微观史", statement:"" },
+  { key:"power",  label:"权力 · 制度与主权", statement:"" },
 ];
 
 /* Items shown on the home page, in display order. */
