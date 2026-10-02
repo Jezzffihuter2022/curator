@@ -52,9 +52,9 @@ function renderChrome() {
     '<div class="article-modal" id="articleModal" onclick="closeArticle(event)">' +
       '<div class="article-modal-inner" onclick="event.stopPropagation()">' +
         '<button class="article-modal-close" onclick="closeArticle(event)">✕</button>' +
-        '<div id="articleImgContainer"></div>' +
         '<div class="article-modal-title" id="articleTitle"></div>' +
         '<div class="article-modal-date" id="articleDate"></div>' +
+        '<div id="articleImgContainer"></div>' +
         '<div class="article-modal-body" id="articleBody"></div>' +
         '<div id="articleItemLink"></div>' +
       '</div>' +
@@ -176,7 +176,7 @@ function renderChronicles() {
   let n = 0;
   document.getElementById("page").innerHTML =
     '<div class="section-header"><div class="section-title">藏品札记</div></div>' +
-    '<div class="type-statement">以器物解码审美、身份与权力</div>' +
+    '<div class="type-statement">以器物解码<a class="group-link" href="#group-craft">审美</a>、<a class="group-link" href="#group-person">身份</a>与<a class="group-link" href="#group-power">权力</a></div>' +
     divider +
     grouped.map(g =>
       '<section class="chronicle-group" id="group-' + g.key + '">' +
@@ -205,8 +205,7 @@ function renderGallery() {
   for (let i = items.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [items[i], items[j]] = [items[j], items[i]]; }
   lightboxIds = items.map(i => i.id);
   document.getElementById("page").innerHTML =
-    '<div class="section-header"><div class="section-title">藏品随览</div></div>' +
-    '<div class="type-statement">打乱类别与年代，让藏品在偶然的并置中相遇</div>' +
+    '<div class="type-statement cabinet-intro" style="padding-top:28px">搁置类别与年代，让器物在偶然的邻接中互相说明</div>' +
     divider +
     '<div class="gallery-grid">' +
       items.map(i => '<div class="gallery-item" onclick="openLightbox(\'' + i.id + '\')"><img src="' + i.image + '" alt="' + i.title + '" loading="lazy" onerror="this.parentNode.style.display=\'none\'"></div>').join("") +
@@ -321,7 +320,7 @@ function closeArticle(e) {
 /* Open whatever the URL hash names, if it belongs to this page. */
 function openFromHash() {
   const id = location.hash.replace("#", "");
-  if (!id) return;
+  if (!id || id.startsWith("group-")) return;
   if (currentPage === "chronicles" && collection.chronicles.some(c => c.id === id)) { openArticle(id); return; }
   const item = allItems().find(i => i.id === id);
   if (!item) return;
