@@ -21,6 +21,8 @@ BG = (243, 240, 232)          # warm white, close to the site's --bg-warm
 W, H = 1200, 1800             # 2:3 canvas
 FILL = 0.84                   # the object fills this fraction of the limiting dimension
 KEEP_BACKGROUND = {"t021", "t015", "t019", "t016", "t027", "t003", "t022", "t026"}
+MODEL = "birefnet-general-lite"
+RATIO_TOL = 0.015            # an original within this of 2:3 is only resized
 # Per-item colour ranges (OpenCV HSV, H 0-179) removed from the segmentation mask, for
 # photographs where a second object lay under the item.
 STRIP_COLOUR = {"r015": ((5, 25), 60, 60)}   # tan overcoat under the trench coat
@@ -39,20 +41,70 @@ def stretch(rgb, alpha):
     return Image.fromarray(np.clip((a - lo) * (255.0 / max(hi - lo, 1)), 0, 255).astype(np.uint8))
 
 
-def extend_to_2_3(im):
-    """Mirror the photograph's own edges until it is 2:3, blurring the added strips slightly."""
-    im = im.convert("RGB"); w, h = im.size
-    if h / w < 1.5:
-        nh = int(round(w * 1.5)); pad = (nh - h) // 2
-        top = ImageOps.flip(im.crop((0, 0, w, pad))).filter(ImageFilter.GaussianBlur(3))
-        bot = ImageOps.flip(im.crop((0, h - (nh - h - pad), w, h))).filter(ImageFilter.GaussianBlur(3))
-        out = Image.new("RGB", (w, nh)); out.paste(top, (0, 0)); out.paste(im, (0, pad)); out.paste(bot, (0, pad + h))
-    else:
-        nw = int(round(h / 1.5)); pad = (nw - w) // 2
-        left = ImageOps.mirror(im.crop((0, 0, pad, h))).filter(ImageFilter.GaussianBlur(3))
-        right = ImageOps.mirror(im.crop((w - (nw - w - pad), 0, w, h))).filter(ImageFilter.GaussianBlur(3))
-        out = Image.new("RGB", (nw, h)); out.paste(left, (0, 0)); out.paste(im, (pad, 0)); out.paste(right, (pad + w, 0))
-    return out.resize((W, H), Image.LANCZOS)
+def object_mask(im, session):
+    """Binary mask of the main object, used only to decide where background can be added."""
+    from rembg import remove
+    a = np.asarray(remove(im, session=session, only_mask=True))
+    return a > 128
+
+
+def background_band(im, side, size):
+    """A strip of pure background, made from the image's outermost rows/columns on `side`,
+    stretched to `size` pixels and blurred so that no detail is invented."""
+    w, h = im.size; n = max(6, int(0.03 * (h if side in ("top", "bottom") else w)))
+    if side == "top": band = im.crop((0, 0, w, n)).resize((w, size), Image.LANCZOS)
+    elif side == "bottom": band = im.crop((0, h - n, w, h)).resize((w, size), Image.LANCZOS)
+    elif side == "left": band = im.crop((0, 0, n, h)).resize((size, h), Image.LANCZOS)
+    else: band = im.crop((w - n, 0, w, h)).resize((size, h), Image.LANCZOS)
+    return band.filter(ImageFilter.GaussianBlur(10))
+
+
+def fit_2_3(im, mask):
+    """Bring a photograph to 2:3 without inventing content: first trim the long sides where
+    the object leaves room, then add background on whichever side(s) the object does not touch."""
+    im = im.convert("RGB"); w, h = im.size; r = 2 / 3
+    if abs(w / h - r) <= RATIO_TOL * r: return im.resize((W, H), Image.LANCZOS)
+    ys, xs = np.where(mask)
+    if len(xs) == 0: x0, x1, y0, y1 = 0, w, 0, h
+    else: x0, x1, y0, y1 = xs.min(), xs.max() + 1, ys.min(), ys.max() + 1
+    mx, my = int(0.04 * w), int(0.04 * h)
+    if w / h > r:   # too wide: trim the sides, then add background above/below
+        need_w = int(round(h * r)); min_w = min(w, (x1 - x0) + 2 * mx)
+        new_w = max(need_w, min_w); cx = (x0 + x1) // 2
+        left = min(max(0, cx - new_w // 2), w - new_w); im = im.crop((left, 0, left + new_w, h)); mask = mask[:, left:left + new_w]
+        w = new_w; pad = int(round(w / r)) - h
+        if pad > 0:
+            top_free, bot_free = y0 > my, y1 < h - my
+            pt = pad if top_free and not bot_free else 0 if bot_free and not top_free else pad // 2
+            pb = pad - pt
+            out = Image.new("RGB", (w, h + pad))
+            if pt: out.paste(background_band(im, "top", pt), (0, 0))
+            out.paste(im, (0, pt))
+            if pb: out.paste(background_band(im, "bottom", pb), (0, pt + h))
+            im = out
+    else:           # too tall: trim top/bottom, then add background left/right
+        need_h = int(round(w / r)); min_h = min(h, (y1 - y0) + 2 * my)
+        new_h = max(need_h, min_h); cy = (y0 + y1) // 2
+        top = min(max(0, cy - new_h // 2), h - new_h); im = im.crop((0, top, w, top + new_h)); mask = mask[top:top + new_h, :]
+        h = new_h; pad = int(round(h * r)) - w
+        if pad > 0:
+            left_free, right_free = x0 > mx, x1 < w - mx
+            pl = pad if left_free and not right_free else 0 if right_free and not left_free else pad // 2
+            pr = pad - pl
+            out = Image.new("RGB", (w + pad, h))
+            if pl: out.paste(background_band(im, "left", pl), (0, 0))
+            out.paste(im, (pl, 0))
+            if pr: out.paste(background_band(im, "right", pr), (pl + w, 0))
+            im = out
+    return im.resize((W, H), Image.LANCZOS)
+
+
+def is_plain_background(im, mask):
+    """True when the outer 5% of the photograph, excluding the object, is close to one colour."""
+    a = np.asarray(im.convert("RGB")).astype(np.float32); h, w = a.shape[:2]; n = max(4, int(0.05 * min(h, w)))
+    border = np.zeros((h, w), bool); border[:n] = border[-n:] = True; border[:, :n] = border[:, -n:] = True
+    sel = border & ~mask
+    return sel.sum() > 0.6 * border.sum() and float(a[sel].std(axis=0).mean()) < 20
 
 
 def cut_out(im, iid, session):
@@ -86,20 +138,38 @@ def cut_out(im, iid, session):
     return canvas.convert("RGB")
 
 
+def chronicle_images():
+    src = open(os.path.join(ROOT, "assets/data.js"), encoding="utf-8").read()
+    return sorted(set(re.findall(r'image\d:"/images/chronicles/(c\d+[a-z])(?:_standard)?\.jpg"', src)))
+
+
 def main(argv):
     force = "--force" in argv; wanted = [a for a in argv if not a.startswith("--")]
     session = None
+    if "--chronicles" in argv:
+        # detail photographs with a plain background are brought to 2:3 as well
+        from rembg import new_session; session = new_session(MODEL)
+        for cid in chronicle_images():
+            src = os.path.join(ROOT, "images/chronicles", f"{cid}.jpg"); dst = os.path.join(ROOT, "images/chronicles", f"{cid}_standard.jpg")
+            if not os.path.exists(src): continue
+            if os.path.exists(dst) and not force: continue
+            im = ImageOps.exif_transpose(Image.open(src)).convert("RGB"); im.thumbnail((1600, 1600))
+            if im.width > im.height: continue                       # landscape close-ups stay as they are
+            mask = object_mask(im, session)
+            if not is_plain_background(im, mask): print(f"{cid}: textured background, left as it is"); continue
+            fit_2_3(im, mask).save(dst, quality=88, optimize=True); print(f"{cid}: plain background, fitted to 2:3")
+        return
     for iid, folder in items():
         if wanted and iid not in wanted: continue
         src = os.path.join(ROOT, "images", folder, f"{iid}.jpg"); dst = os.path.join(ROOT, "images", folder, f"{iid}_standard.jpg")
         if not os.path.exists(src): print(f"{iid}: original missing, skipped"); continue
         if os.path.exists(dst) and not force: continue
         im = ImageOps.exif_transpose(Image.open(src)).convert("RGB"); im.thumbnail((1600, 1600))
+        if session is None:
+            from rembg import new_session; session = new_session(MODEL)
         if iid in KEEP_BACKGROUND:
-            out = extend_to_2_3(im); how = "background kept, extended to 2:3"
+            out = fit_2_3(im, object_mask(im, session)); how = "background kept, fitted to 2:3"
         else:
-            if session is None:
-                from rembg import new_session; session = new_session("isnet-general-use")
             out = cut_out(im, iid, session); how = "cut out"
         out.save(dst, quality=88, optimize=True); print(f"{iid}: {how} -> {os.path.relpath(dst, ROOT)}")
 
