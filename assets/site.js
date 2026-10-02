@@ -209,7 +209,7 @@ function renderGallery() {
     '<div class="type-statement">打乱类别与年代，让藏品在偶然的并置中相遇</div>' +
     divider +
     '<div class="gallery-grid">' +
-      items.map(i => '<div class="gallery-item" onclick="openLightbox(\'' + i.id + '\')"><img src="' + i.image + '" alt="' + i.title + '" loading="lazy"></div>').join("") +
+      items.map(i => '<div class="gallery-item" onclick="openLightbox(\'' + i.id + '\')"><img src="' + i.image + '" alt="' + i.title + '" loading="lazy" onerror="this.parentNode.style.display=\'none\'"></div>').join("") +
     '</div>';
 }
 
