@@ -33,6 +33,8 @@ STRIP_COLOUR = {"r015": ((5, 25), 60, 60)}   # tan overcoat under the trench coa
 NEUTRALIZE = {}                               # id -> strength 0..1
 # Items too close in tone to the warm-white ground are set on their own colour instead.
 BG_OVERRIDE = {"r009": (22, 20, 20), "t005": (22, 20, 20)}   # pale or silver objects sit on black
+# Garments photographed on a hanger: the hook above the shoulders is removed.
+REMOVE_HANGER = {"r009", "r012", "r014"}
 
 
 def items():
@@ -122,6 +124,24 @@ def is_plain_background(im, mask):
     return sel.sum() > 0.6 * border.sum() and float(a[sel].std(axis=0).mean()) < 20
 
 
+def drop_hanger(cut):
+    """Clear the narrow rows above the shoulders (the hanger hook) from a garment's mask."""
+    from scipy import ndimage
+    a = np.asarray(cut).copy(); m = a[..., 3] > 128
+    rows = np.where(m.any(axis=1))[0]
+    if len(rows) == 0: return cut
+    width = m.sum(axis=1).astype(np.float32); full = np.percentile(width[rows], 95)
+    top = rows[0]
+    while top < rows[-1] and width[top] < 0.35 * full: top += 1
+    a[:top, :, 3] = 0
+    # anything still floating above the garment (a hook crossing the collar) goes with it
+    lab, n = ndimage.label(a[..., 3] > 128)
+    if n > 1:
+        keep = 1 + int(np.argmax(ndimage.sum(a[..., 3] > 128, lab, range(1, n + 1))))
+        a[lab != keep, 3] = 0
+    return Image.fromarray(a, "RGBA")
+
+
 def cut_out(im, iid, session):
     from rembg import remove
     import cv2
@@ -138,6 +158,8 @@ def cut_out(im, iid, session):
         keep = ndimage.binary_closing(ndimage.binary_fill_holes(keep), iterations=4)
         a = cv2.GaussianBlur((a * keep).astype(np.uint8), (0, 0), 1.2)
         cut = Image.fromarray(np.dstack([rgb, a]), "RGBA")
+    if iid in REMOVE_HANGER:
+        cut = drop_hanger(cut)
     bbox = cut.getbbox()
     if not bbox: raise RuntimeError(f"{iid}: no object found")
     sub = cut.crop(bbox); alpha = sub.split()[3]
