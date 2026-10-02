@@ -155,6 +155,7 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg-primary);color:va
 .lightbox-close:hover{color:#fff;}
 .lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);font-family:'EB Garamond',serif;font-size:56px;line-height:1;color:#999;background:none;border:none;cursor:pointer;padding:24px 18px;transition:color 0.2s;}
 .lightbox-nav:hover{color:#fff;}
+.lightbox-nav:focus{outline:none;}.lightbox-nav:focus-visible{color:#fff;}
 .lightbox-prev{left:16px;}.lightbox-next{right:16px;}
 
 .footer{text-align:center;padding:48px 24px;border-top:1px solid var(--border);}
