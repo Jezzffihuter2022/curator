@@ -25,7 +25,7 @@ RATIO = 3 / 4                 # width / height shared by most of the original ph
 W, H = 1200, 1600             # 3:4 canvas of the _standard image (cards, grids)
 LARGE_H = 3200                # the _large image (lightbox) is at most 2400 x 3200 and never upscales the source
 FILL = 0.84                   # the object fills this fraction of the limiting dimension
-KEEP_BACKGROUND = {"t021", "t015", "t019", "t016", "t027", "t003", "t022", "t026", "t018"}
+KEEP_BACKGROUND = {"t021", "t015", "t019", "t016", "t027", "t003", "t022", "t026", "t018", "t014"}
 MODEL = "birefnet-general-lite"
 RATIO_TOL = 0.015            # an original within this of RATIO is only resized
 # Per-item colour ranges (OpenCV HSV, H 0-179) removed from the segmentation mask, for
@@ -40,9 +40,11 @@ REMOVE_HANGER = {"r009", "r012", "r014"}
 # Garments photographed on a dress form: the pole and base below the form are removed, the form stays.
 REMOVE_STAND = {"r013"}
 # Detail photographs that show the whole object and whose cover is a cut-out are cut out the same way.
-CHRONICLE_CUT_OUT = {"c004b", "c012b", "c012c", "c012d", "c002b", "c002c", "c002d", "c006b"}
+CHRONICLE_CUT_OUT = {"c004b", "c012b", "c012c", "c012d", "c002b", "c002c", "c002d"}
+# detail photographs kept on their own (textured) ground but still brought to RATIO, like a KEEP_BACKGROUND cover
+CHRONICLE_FIT = {"c006b"}
 # objects photographed on a strongly coloured ground: the 1-2 px edge band carries that colour and is re-sampled from the interior
-DEFRINGE = {"t014", "c006b"}
+DEFRINGE = set()   # e.g. {"t014"} while t014 was cut out of its red case lining
 # Group photographs used as article covers that are cut out like item covers: id -> folder
 EXTRA_CUT_OUT = {"r016": "regalia"}
 
@@ -273,7 +275,7 @@ def main(argv):
                 os.makedirs(os.path.dirname(dst), exist_ok=True)
                 compose(cut_out(im, cid, session), cid, H).save(dst, quality=88, optimize=True); print(f"{cid}: cut out like its cover"); continue
             mask = object_mask(im, session)
-            if not is_plain_background(im, mask): print(f"{cid}: textured background, left as it is"); continue
+            if cid not in CHRONICLE_FIT and not is_plain_background(im, mask): print(f"{cid}: textured background, left as it is"); continue
             os.makedirs(os.path.dirname(dst), exist_ok=True); fit_ratio(im, mask).save(dst, quality=88, optimize=True); print(f"{cid}: plain background, fitted to 3:4")
         for xid, folder in EXTRA_CUT_OUT.items():
             src = source(folder, xid); dst = os.path.join(OUT_ROOT, "images", folder, f"{xid}_standard.jpg")
