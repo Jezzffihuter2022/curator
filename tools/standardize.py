@@ -41,7 +41,9 @@ REMOVE_HANGER = {"r009", "r012", "r014"}
 # Garments photographed on a dress form: the pole and base below the form are removed, the form stays.
 REMOVE_STAND = {"r013"}
 # Detail photographs that show the whole object and whose cover is a cut-out are cut out the same way.
-CHRONICLE_CUT_OUT = {"c004b", "c012c", "c002c"}
+CHRONICLE_CUT_OUT = {"c004b", "c012b", "c012c", "c012d", "c002b", "c002c", "c002d"}
+# Group photographs used as article covers that are cut out like item covers: id -> folder
+EXTRA_CUT_OUT = {"r016": "regalia"}
 
 
 def items():
@@ -246,6 +248,12 @@ def main(argv):
             mask = object_mask(im, session)
             if not is_plain_background(im, mask): print(f"{cid}: textured background, left as it is"); continue
             os.makedirs(os.path.dirname(dst), exist_ok=True); fit_ratio(im, mask).save(dst, quality=88, optimize=True); print(f"{cid}: plain background, fitted to 3:4")
+        for xid, folder in EXTRA_CUT_OUT.items():
+            src = os.path.join(ROOT, "images", folder, f"{xid}.jpg"); dst = os.path.join(OUT_ROOT, "images", folder, f"{xid}_standard.jpg")
+            if not os.path.exists(src) or (os.path.exists(dst) and not force): continue
+            im = ImageOps.exif_transpose(Image.open(src)).convert("RGB"); im.thumbnail((4096, 4096))
+            os.makedirs(os.path.dirname(dst), exist_ok=True)
+            compose(cut_out(im, xid, session), xid, H).save(dst, quality=88, optimize=True); print(f"{xid}: cut out (article cover)")
         return
     for iid, folder in items():
         if wanted and iid not in wanted: continue
