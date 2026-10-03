@@ -45,7 +45,7 @@ function renderChrome() {
       '<button class="lightbox-nav lightbox-next" id="lightboxNext" onclick="event.stopPropagation();stepLightbox(1)" aria-label="下一件">›</button>' +
       '<img id="lightboxImg" src="" alt="">' +
       '<div class="lightbox-info"><div class="lightbox-title" id="lightboxTitle"></div><div class="lightbox-desc" id="lightboxDesc"></div>' +
-        '<a id="lightboxArticleLink" href="#" style="display:none;margin-top:11px;padding:7px 20px;border:1px solid rgba(245,240,232,0.5);border-radius:2px;color:#F5F0E8;font-family:\'Noto Serif SC\',serif;font-size:15px;letter-spacing:2px;text-decoration:none;cursor:pointer;transition:background 0.2s;" onclick="event.stopPropagation()" onmouseover="this.style.background=\'rgba(245,240,232,0.1)\'" onmouseout="this.style.background=\'transparent\'">阅读札记</a>' +
+        '<a id="lightboxArticleLink" href="#" style="display:none;margin-top:11px;padding:7px 20px;border:1px solid rgba(245,240,232,0.5);border-radius:2px;color:#F5F0E8;font-family:var(--serif);font-size:var(--fs-small);letter-spacing:2px;text-decoration:none;cursor:pointer;transition:background 0.2s;" onclick="event.stopPropagation()" onmouseover="this.style.background=\'rgba(245,240,232,0.1)\'" onmouseout="this.style.background=\'transparent\'">阅读札记</a>' +
       '</div>' +
     '</div>' +
 
