@@ -33,10 +33,10 @@ const collection = {
     { id:"t007", title:"比特币镀金纪念币", year:"当代", origin:"美国", type:"纪念章", image:"/images/treasures/t007_standard.jpg", description:"镀金纪念章，含比特币符号、格言与电路板纹样。比特币以去中心化、非物质化为核心意识形态，其纪念章却沿用了最古老的中心化权力造像：镀金、圆形、铭文，以金币的形式为其竞争者黄金背书。", forSale:false },
     { id:"t009", title:"镂空三联项链", year:"约1930", origin:"捷克", type:"珠宝", image:"/images/treasures/t009_standard.jpg", description:"推测为1930年代捷克产。冲压黄铜镂空花卉三联构图，涡卷与花瓣骨架内嵌蓝色玻璃石，大中小分级排布。其工艺与配色符合二十世纪初波西米亚出口仿珠宝。", forSale:false },
     { id:"t012", title:"历史主义圆章项链", year:"约1960", origin:"美国", type:"珠宝", image:"/images/treasures/t012_standard.jpg", description:"Florenza制。镀金圆拱底座，爪托镶嵌深琥珀圆形主石居中，橄榄绿方形和圆形玻璃石环绕，白色仿珍珠分割冷暖色。卷草纹从中心向四方对称展开，颗粒纹边饰模拟伊特鲁里亚金工。8.2×5.8厘米，50克。", forSale:false },
-    { id:"t018", title:"爱德华—装饰艺术花簇项链", year:"约1920", origin:"德国", type:"珠宝", image:"/images/treasures/t018_standard.jpg", description:"Knoll & Pregizer制，普福尔茨海姆。爱德华与装饰艺术过渡风格。弧形连接向下渐窄，中心六瓣花簇密镶水晶，外由水晶勾勒菱形和圆形镂空轮廓，底垂梨形水晶坠。830银，6.4×1.9厘米，7克。", forSale:false },
+    { id:"t018", title:"爱德华—装饰艺术花簇项链", year:"约1920", origin:"德国", type:"珠宝", image:"/images/treasures/t018_standard.jpg", description:"推测为普福尔茨海姆产。爱德华与装饰艺术过渡风格。弧形连接向下渐窄，中心六瓣花簇密镶水晶，外由水晶勾勒菱形和圆形镂空轮廓，底垂梨形水晶坠。830银，6.4×1.9厘米，7克。", forSale:false },
     { id:"t022", title:"历史主义穹顶戒指", year:"约1960", origin:"美国", type:"珠宝", image:"/images/treasures/t022_standard.jpg", description:"Florenza制。镀金镂空穹顶戒指，同心结构：内层紫玻璃主石由虹彩水晶环绕，中层深蓝月牙填充制造视觉纵深，外层巴洛克涡卷与叶片镂空。围度可调，环带满覆卷草花卉压铸纹。戒面直径2.4厘米，11克。", forSale:false },
     { id:"t023", title:"香奈儿太阳勋章项链", year:"1983", origin:"法国", type:"珠宝", image:"/images/treasures/t023_standard.jpg", description:"香奈儿制，法国，1983年。铜镀金吊坠取勋章形制：中心双C与双头鹰纹章，外环十四道宽窄相间的尖芒；背面锤击纹，署品牌标记与年份。重型绞绳链。吊坠直径4.4厘米，链长89厘米，113克。", articleLink:"c012", forSale:false },
-    { id:"t024", title:"纹章累丝手链", year:"约1950", origin:"葡萄牙", type:"珠宝", image:"/images/treasures/t024_standard.jpg", description:"葡萄牙波尔图产。六枚穹面牌片，每片中心嵌珐琅徽记，四周填波尔图传统累丝。纹样牌片交替：三枚葡萄牙基督骑士团十字，三枚王冠葡萄牙国徽。以跳环串联、弹簧扣闭合。835银镀金，19×2.5厘米，32克。", forSale:false },
+    { id:"t024", title:"纹章累丝手链", year:"约1950", origin:"葡萄牙", type:"珠宝", image:"/images/treasures/t024_standard.jpg", description:"推测为葡萄牙波尔图产。六枚穹面牌片，每片中心嵌珐琅徽记，四周填波尔图传统累丝。纹样牌片交替：三枚葡萄牙基督骑士团十字，三枚王冠葡萄牙国徽。以跳环串联、弹簧扣闭合。835银镀金，19×2.5厘米，32克。", forSale:false },
     { id:"t025", title:"仿慈悲勋章项链", year:"约1955", origin:"美国", type:"珠宝", image:"/images/treasures/t025_standard.jpg", description:"Coro制。吊坠取法奥斯曼慈悲勋章。五角星缀镂空涡卷，中心红珐琅圆牌覆苏丹图拉式花押，外环绿珐琅饰带仿奥斯曼铭文，下铸年份「1790」。重型绞绳双链承之。直径6.2厘米。72克。", forSale:false },
   ],
   chronicles: [
