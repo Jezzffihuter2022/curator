@@ -260,7 +260,36 @@ function openLightbox(id) {
   document.getElementById("lightbox").classList.add("open");
   document.body.style.overflow = 'hidden';
   setHash(id);
+  fitLightbox();
 }
+
+/* Lay out the lightbox so that image, title, text and button share one screen:
+   the text block is exactly as wide as the image, and the image takes the height the text leaves. */
+function fitLightbox() {
+  const lb = document.getElementById("lightbox"), img = document.getElementById("lightboxImg"), info = lb.querySelector(".lightbox-info");
+  if (!lb.classList.contains("open")) return;
+  const apply = () => {
+    const ratio = (img.naturalWidth && img.naturalHeight) ? img.naturalWidth / img.naturalHeight : 0.75;
+    const cs = getComputedStyle(lb);
+    const availH = lb.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+    const availW = lb.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+    const gap = parseFloat(getComputedStyle(info).marginTop) || 0;
+    const minW = Math.round(Math.min(availW, availH * ratio) * 0.62);   /* never let a long text squeeze the image below this; the box then scrolls */
+    let width = Math.min(availW, Math.round((availH - gap) * ratio));
+    for (let i = 0; i < 12; i++) {              /* text width depends on image width and vice versa: iterate */
+      info.style.width = width + "px";
+      const h = Math.min(availH - gap - info.offsetHeight, window.innerWidth <= 640 ? availH : availH * 0.78);
+      const w = Math.max(minW, Math.min(availW, Math.round(h * ratio)));
+      if (Math.abs(w - width) < 2) break;
+      width = w;
+    }
+    img.style.width = width + "px"; img.style.height = Math.round(width / ratio) + "px"; img.style.maxHeight = "none"; img.style.maxWidth = "none";
+    info.style.width = width + "px";
+  };
+  if (img.complete && img.naturalWidth) apply(); else img.onload = apply;
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { if (lb.classList.contains("open")) apply(); });
+}
+window.addEventListener("resize", fitLightbox);
 
 /* Move to the previous (-1) or next (+1) item of the current page, wrapping round. */
 function stepLightbox(d) {
