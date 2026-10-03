@@ -277,19 +277,18 @@ function fitLightbox() {
   const availW = lb.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
   const key = availW + "x" + availH;
   if (!lightboxFit || lightboxFit.key !== key) {
-    /* measure the worst case: the longest description and the longest title, with the article button shown */
+    /* measure the worst case: every item's title and description rendered at the candidate width, with the article button shown */
     const title = document.getElementById("lightboxTitle"), desc = document.getElementById("lightboxDesc"), link = document.getElementById("lightboxArticleLink");
     const saved = [title.textContent, desc.textContent, link.style.display];
     const items = allItems();
-    title.textContent = items.reduce((a, i) => (i.title.length > a.length ? i.title : a), "");
-    desc.textContent = items.reduce((a, i) => ((i.description || "").length > a.length ? i.description : a), "");
     link.style.display = "inline-block";
     const gap = parseFloat(getComputedStyle(info).marginTop) || 0;
+    const tallest = () => items.reduce((m, i) => { title.textContent = i.title; desc.textContent = i.description || ""; return Math.max(m, info.offsetHeight); }, 0);
     const minW = Math.round(Math.min(availW, availH * ratio) * 0.58);
     let width = Math.min(availW, Math.round((availH - gap) * ratio));
     for (let i = 0; i < 12; i++) {
       info.style.width = width + "px";
-      const h = Math.min(availH - gap - info.offsetHeight - 3, window.innerWidth <= 640 ? availH : availH * 0.78);   /* 3 px: rounding safety */
+      const h = Math.min(availH - gap - tallest() - 3, window.innerWidth <= 640 ? availH : availH * 0.78);   /* 3 px: rounding safety */
       const w = Math.max(minW, Math.min(availW, Math.round(h * ratio)));
       if (Math.abs(w - width) < 2) break;
       width = w;
