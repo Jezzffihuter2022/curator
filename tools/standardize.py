@@ -25,8 +25,7 @@ RATIO = 3 / 4                 # width / height shared by most of the original ph
 W, H = 1200, 1600             # 3:4 canvas of the _standard image (cards, grids)
 LARGE_H = 3200                # the _large image (lightbox) is at most 2400 x 3200 and never upscales the source
 FILL = 0.84                   # the object fills this fraction of the limiting dimension
-KEEP_BACKGROUND = {"t021", "t015", "t019", "t016", "t027", "t003", "t022", "t026", "t018",
-                   "t014"}   # t014: tightly framed low-resolution photograph; kept so that it matches its reverse (c006b)
+KEEP_BACKGROUND = {"t021", "t015", "t019", "t016", "t027", "t003", "t022", "t026", "t018"}
 MODEL = "birefnet-general-lite"
 RATIO_TOL = 0.015            # an original within this of RATIO is only resized
 # Per-item colour ranges (OpenCV HSV, H 0-179) removed from the segmentation mask, for
@@ -41,7 +40,9 @@ REMOVE_HANGER = {"r009", "r012", "r014"}
 # Garments photographed on a dress form: the pole and base below the form are removed, the form stays.
 REMOVE_STAND = {"r013"}
 # Detail photographs that show the whole object and whose cover is a cut-out are cut out the same way.
-CHRONICLE_CUT_OUT = {"c004b", "c012b", "c012c", "c012d", "c002b", "c002c", "c002d"}
+CHRONICLE_CUT_OUT = {"c004b", "c012b", "c012c", "c012d", "c002b", "c002c", "c002d", "c006b"}
+# objects photographed on a strongly coloured ground: the 1-2 px edge band carries that colour and is re-sampled from the interior
+DEFRINGE = {"t014", "c006b"}
 # Group photographs used as article covers that are cut out like item covers: id -> folder
 EXTRA_CUT_OUT = {"r016": "regalia"}
 
@@ -175,6 +176,22 @@ def drop_stand(cut):
     return Image.fromarray(a, "RGBA")
 
 
+def defringe(cut, band=2, feather=0.8):
+    """Replace the outermost `band` px of the object with the colour of the nearest interior pixel and feather the edge."""
+    from scipy import ndimage
+    import cv2
+    rgba = np.asarray(cut).copy(); rgb, a = rgba[..., :3], rgba[..., 3]
+    obj = a > 0
+    interior = ndimage.binary_erosion(obj, iterations=band + 1)
+    if not interior.any(): return cut
+    _, (iy, ix) = ndimage.distance_transform_edt(~interior, return_indices=True)
+    edge = obj & ~interior
+    rgb[edge] = rgb[iy[edge], ix[edge]]
+    a2 = ndimage.binary_erosion(obj, iterations=1).astype(np.uint8) * 255
+    a2 = cv2.GaussianBlur(a2, (0, 0), feather)
+    return Image.fromarray(np.dstack([rgb, a2]), "RGBA")
+
+
 def cut_out(im, iid, session):
     from rembg import remove
     import cv2
@@ -195,6 +212,8 @@ def cut_out(im, iid, session):
         cut = drop_hanger(cut)
     if iid in REMOVE_STAND:
         cut = drop_stand(cut)
+    if iid in DEFRINGE:
+        cut = defringe(cut)
     bbox = cut.getbbox()
     if not bbox: raise RuntimeError(f"{iid}: no object found")
     sub = cut.crop(bbox); alpha = sub.split()[3]
