@@ -3,14 +3,14 @@
 
 const collection = {
   regalia: [
-    { id:"r001", title:"皇家海军少将常礼服外套", year:"1982", origin:"英国", type:"仪式礼服", image:"/images/regalia/r001_standard.jpg", description:"皇家海军。海军蓝礼服毛呢，双排8枚镀金扣，扣面铸皇冠、船锚与月桂花环。一道宽金袖环上加一道卷环标示少将，金线含2%黄金。Moseley & Pounsford在马岛战争中为谢菲尔德号驱逐舰舰长J.F.T.G.Salt定制。", articleLink:"c003", forSale:false },
+    { id:"r001", title:"皇家海军少将常礼服外套", year:"1982", origin:"英国", type:"仪式礼服", image:"/images/regalia/r001_standard.jpg", description:"皇家海军。海军蓝礼服毛呢，双排8枚镀金扣，扣面铸皇冠、船锚与月桂花环。一道宽金袖环上加一道卷环标示少将，金线含2%黄金。Moseley & Pounsford在马岛战争中为谢菲尔德号驱逐舰舰长J. F. T. G. Salt定制。", articleLink:"c003", forSale:false },
     { id:"r009", title:"巴尔曼巴洛克复兴刺绣长外套", year:"当代", origin:"法国", type:"高级时装", image:"/images/regalia/r009_standard.jpg", description:"巴尔曼。香槟色织物，珍珠与水晶逐粒手工缝缀：菱形网格为底，巴洛克涡卷纹自领口沿前襟与侧缘展开，前襟两道纵向镶边带密度最高。宽肩、收腰、直身下摆，长度过臀，丝绸全衬里。", articleLink:"c009", forSale:false },
-    { id:"r002", title:"皇家炮兵少校梅斯礼服外套", year:"1992", origin:"英国", type:"晚宴礼服", image:"/images/regalia/r002_standard.jpg", description:"皇家炮兵。黑色礼服毛呢，猩红翻领为该团标志色，前襟敞开，侧翼金扣，军衔标于肩章。红色丝绸内衬。短身剪裁。Gieves & Hawkes于1992年8月为L.D.Bird定制。", articleLink:"c010", forSale:false },
-    { id:"r004", title:"皇家陆军医疗军团少校梅斯礼服", year:"1965", origin:"英国", type:"晚宴礼服", image:"/images/regalia/r004_standard.jpg", description:"皇家陆军医疗军团。黑色礼服毛呢，紫色礼服领为该军团标志色，前敞开，侧翼金扣，马甲同色紫领。杖蛇徽章标明医务兵种。短身剪裁。含外套、长裤与马甲。Alkit在1965年，为少校C.Vaughan定制，其记录有诺曼底登陆口述史。", articleLink:"c014", forSale:false },
+    { id:"r002", title:"皇家炮兵少校梅斯礼服外套", year:"1992", origin:"英国", type:"晚宴礼服", image:"/images/regalia/r002_standard.jpg", description:"皇家炮兵。黑色礼服毛呢，猩红翻领为该团标志色，前襟敞开，侧翼金扣，军衔标于肩章。红色丝绸内衬。短身剪裁。Gieves & Hawkes于1992年8月为L. D. Bird定制。", articleLink:"c010", forSale:false },
+    { id:"r004", title:"皇家陆军医疗军团少校梅斯礼服", year:"1965", origin:"英国", type:"晚宴礼服", image:"/images/regalia/r004_standard.jpg", description:"皇家陆军医疗军团。黑色礼服毛呢，紫色礼服领为该军团标志色，前敞开，侧翼金扣，马甲同色紫领。杖蛇徽章标明医务兵种。短身剪裁。含外套、长裤与马甲。Alkit在1965年，为少校C. Vaughan定制，其记录有诺曼底登陆口述史。", articleLink:"c014", forSale:false },
     { id:"r006", title:"医务军官大礼服外套", year:"约1931", origin:"法国", type:"仪式礼服", image:"/images/regalia/r006_standard.jpg", description:"法国陆军医官礼服，1931年式。黑色礼服毛呢，直身长款。单排九粒镀金扣，扣面铸权杖缠蛇环以月桂。深红丝绒领与袖口，领片两侧金线手工刺绣，左橄榄枝、右蓟花；袖口两道金色织带。金线肩绊。Thorn制于巴黎第八区。", articleLink:"c005", forSale:false },
     { id:"r007", title:"陆军军需兵团礼服", year:"约1934", origin:"意大利", type:"仪式礼服", image:"/images/regalia/r007_standard.jpg", description:"意大利陆军军需兵团礼服。黑色礼服毛呢，双排14枚倒梯形金扣铸萨伏依王室纹章。紫丝绒领边，领片饰金属星徽，肩章嵌萨伏依王冠金属刺绣，深蓝丝绒袖口。紫色为军需兵团标志色。", forSale:false },
-    { id:"r003", title:"皇家空军上校梅斯礼服全套", year:"1956", origin:"英国", type:"晚宴礼服", image:"/images/regalia/r003_standard.jpg", description:"皇家空军。蓝灰色礼服毛呢，双排金扣铸皇冠下展翅鹰浮雕，黑色翻领。胸前飞行员刺绣徽章，对应空军基地指挥官身份。袖口四道金环标示上校军衔。短身剪裁。外套、长裤、马甲、腰封齐全。Gieves在1956年9月22日，为J.T.Jennings定制。", articleLink:"c010", forSale:false },
-    { id:"r005", title:"皇家海军少校梅斯礼服外套", year:"1945", origin:"英国", type:"晚宴礼服", image:"/images/regalia/r005_standard.jpg", description:"皇家海军。海军蓝礼服毛呢，镀金对扣闭合，双排镀金扣铸皇冠与船锚，尖翻领。一道窄金袖环上加一道卷环标示少校职级，金线含2%黄金。短身剪裁。Gieves在1945年12月22日于朴茨茅斯，为M.A.Smith定制。", articleLink:"c010", forSale:false },
+    { id:"r003", title:"皇家空军上校梅斯礼服全套", year:"1956", origin:"英国", type:"晚宴礼服", image:"/images/regalia/r003_standard.jpg", description:"皇家空军。蓝灰色礼服毛呢，双排金扣铸皇冠下展翅鹰浮雕，黑色翻领。胸前飞行员刺绣徽章，对应空军基地指挥官身份。袖口四道金环标示上校军衔。短身剪裁。外套、长裤、马甲、腰封齐全。Gieves在1956年9月22日，为J. T. Jennings定制。", articleLink:"c010", forSale:false },
+    { id:"r005", title:"皇家海军少校梅斯礼服外套", year:"1945", origin:"英国", type:"晚宴礼服", image:"/images/regalia/r005_standard.jpg", description:"皇家海军。海军蓝礼服毛呢，镀金对扣闭合，双排镀金扣铸皇冠与船锚，尖翻领。一道窄金袖环上加一道卷环标示少校职级，金线含2%黄金。短身剪裁。Gieves在1945年12月22日于朴茨茅斯，为M. A. Smith定制。", articleLink:"c010", forSale:false },
     { id:"r012", title:"巴宝莉军礼服式三排扣短外套", year:"当代", origin:"英国", type:"高级时装", image:"/images/regalia/r012_standard.jpg", description:"巴宝莉。羊绒羊毛混纺，拿破仑式立领，三排共15粒盾徽浮雕金扣，肩章，猩红色格纹衬里。形制取自英军骑兵与炮兵短夹克。", forSale:false },
     { id:"r014", title:"巴宝莉秀场款猩红骠骑兵短外套", year:"当代", origin:"英国", type:"高级时装", image:"/images/regalia/r014_standard.jpg", description:"巴宝莉秀场款。双排银质浮雕扣配横向编织扣绊，短身长臂剪裁，猩红色呼应拿破仑时代军装配色。形制取法骠骑兵制服。", forSale:false },
     { id:"r015", title:"巴宝莉切尔西款蓝灰战壕风衣", year:"当代", origin:"英国", type:"高级时装", image:"/images/regalia/r015_standard.jpg", description:"巴宝莉切尔西款。蓝灰色嘎巴甸细密棉织，近似一战制服配色。双排10粒牛角扣，小牛皮收紧带约束袖口与立领。右肩设枪挡，后背附雨挡，腰带配吊环，内衬为王室御用品牌纹章和经典巴宝莉格纹。", forSale:false },
@@ -19,7 +19,7 @@ const collection = {
   treasures: [
     { id:"t014", title:"伊莎贝拉天主教勋章指挥官级", year:"约1900", origin:"西班牙", type:"勋章", image:"/images/treasures/t014_standard.jpg", description:"1815年创设。主体为机刻红珐琅马耳他十字，其星芒氧化后幻出彩色。正面呈手绘珐琅，铭「致纯粹忠诚」；背面含王室花押，铭「为伊莎贝拉天主教女王」。顶部接绿色月桂环。银镀金，8.2×5.3厘米，50克。附Celada原盒。", articleLink:"c006", forSale:false },
     { id:"t021", title:"荣誉军团勋章指挥官级", year:"约1955", origin:"法国", type:"勋章", image:"/images/treasures/t021_standard.jpg", description:"1802年由拿破仑创设。四共珠宝商版。正反金质徽面，正面铸共和国拟人像，环铭「法兰西共和国」；背面交叉三色旗，环铭「荣誉与祖国」。五白珐琅臂镶金边，缀绿珐琅月桂、橡叶与红果，上承立体铰接叶冠。金和银镀金，9.0×6.4厘米，76克。附A. Bertrand盒。", articleLink:"c011", forSale:false },
-    { id:"t026", title:"尼罗河勋章指挥官级", year:"1928", origin:"埃及", type:"勋章", image:"/images/treasures/t026_standard.jpg", description:"1915年创设。II型（1926年后）。主体十角银星，刻面镀金芒簇放射，上叠白珐琅五臂星。中心铭「尼罗河惠予埃及者，乃其繁荣与幸福之本源」。顶承小巧镀金王冠悬饰。800银镀金，9.5×6.4厘米，58克。附J.Lattes原盒。", articleLink:"c013", forSale:false },
+    { id:"t026", title:"尼罗河勋章指挥官级", year:"1928", origin:"埃及", type:"勋章", image:"/images/treasures/t026_standard.jpg", description:"1915年创设。II型（1926年后）。主体十角银星，刻面镀金芒簇放射，上叠白珐琅五臂星。中心铭「尼罗河惠予埃及者，乃其繁荣与幸福之本源」。顶承小巧镀金王冠悬饰。800银镀金，9.5×6.4厘米，58克。附J. Lattes原盒。", articleLink:"c013", forSale:false },
     { id:"t015", title:"荣耀勋章指挥官级", year:"约1950", origin:"突尼斯/法国", type:"勋章", image:"/images/treasures/t015_standard.jpg", description:"1835年创设。顶部含花结式银质连接件，主体十角星形红绿珐琅交替，其间穿插切面碎银光。中心绿色珐琅底上，覆有立体阿拉伯书法贝伊签名花押，悬环标巴黎珠宝商A. Bertrand。银质，9.0×6.0厘米，57克。附原盒。", articleLink:"c007", forSale:false },
     { id:"t016", title:"荣誉功勋大金级勋章", year:"1990", origin:"奥地利", type:"勋章", image:"/images/treasures/t016_standard.jpg", description:"1952年创设。此枚为颈佩级大金质勋章。顶悬挂联邦鹰章，鹰胸环列九州省徽，下接红色珐琅马耳他十字和白色珐琅希腊十字。1990年由总统授予欧共体礼宾司司长。铜镀金，7.6×5.0厘米，31克。附原装襟扣花结及A. Reitterer原盒。", articleLink:"c008", forSale:false },
     { id:"t019", title:"功绩勋章指挥官级", year:"约1980", origin:"意大利", type:"勋章", image:"/images/treasures/t019_standard.jpg", description:"1951年创设。白色珐琅希腊十字，中心金色五角星浮雕，四臂夹角各有展翅罗马鹰，顶部城塑冠悬挂。银镀金，7.4×5.5厘米，44克。附原装微缩章、襟扣花结及Johnson原盒。", forSale:false },
@@ -60,9 +60,9 @@ const collection = {
 
 /* Order and headings of the chronicle groups (審美 / 身份 / 權力). */
 const chronicleGroups = [
-  { key:"craft",  label:"审美 · 工艺与挪用", statement:"" },
-  { key:"person", label:"身份 · 人物与微观史", statement:"" },
-  { key:"power",  label:"权力 · 制度与主权", statement:"" },
+  { key:"craft",  label:"审美", statement:"" },
+  { key:"person", label:"身份", statement:"" },
+  { key:"power",  label:"权力", statement:"" },
 ];
 
 /* Items shown on the home page, in display order. */
