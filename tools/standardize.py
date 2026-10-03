@@ -40,9 +40,12 @@ REMOVE_HANGER = {"r009", "r012", "r014"}
 # Garments photographed on a dress form: the pole and base below the form are removed, the form stays.
 REMOVE_STAND = {"r013"}
 # Detail photographs that show the whole object and whose cover is a cut-out are cut out the same way.
-CHRONICLE_CUT_OUT = {"c004b", "c012b", "c012c", "c012d", "c002b", "c002c", "c002d"}
+CHRONICLE_CUT_OUT = {"c004b", "c012b", "c012c", "c012d", "c002b", "c002c", "c002d", "c015d"}
+# photographs on dark velvet whose ground is cleaned before fitting: lint and fibres are inpainted, the box rim and
+# lighter patches are flattened down to the velvet level; the objects themselves are untouched
+CLEAN_GROUND = {"t027", "c015b"}
 # detail photographs kept on their own (textured) ground but still brought to RATIO, like a KEEP_BACKGROUND cover
-CHRONICLE_FIT = {"c006b"}
+CHRONICLE_FIT = {"c006b", "c015b"}
 # Group photographs used as article covers that are cut out like item covers: id -> folder
 EXTRA_CUT_OUT = {"r016": "regalia"}
 
@@ -132,6 +135,35 @@ def fit_ratio(im, mask, size=(W, H)):
             if pr: out.paste(background_band(im, "right", pr), (pl + w, 0))
             im = out
     return im.resize(size, Image.LANCZOS)
+
+
+def clean_ground(im, thresh=58, min_obj=20000, sigma=50):
+    """Dark-velvet photographs: inpaint lint outside the objects, then flatten the ground illumination (box rim, light patches)."""
+    import cv2
+    from scipy import ndimage
+    a = np.asarray(im).copy(); hsv = cv2.cvtColor(a, cv2.COLOR_RGB2HSV)
+    L = a.astype(int).mean(-1); sat = hsv[..., 1].astype(int)
+    notvelvet = L > thresh
+    lab, n = ndimage.label(notvelvet); idx = range(1, n + 1)
+    sizes = ndimage.sum(notvelvet, lab, idx); sats = ndimage.mean(sat, lab, idx)
+    border = np.zeros_like(notvelvet); border[:3, :] = border[-3:, :] = border[:, :3] = border[:, -3:] = True
+    touches = ndimage.sum(border, lab, idx)
+    obj = np.zeros_like(notvelvet); lint = np.zeros_like(notvelvet)
+    for k, (sz, st_, tb) in enumerate(zip(sizes, sats, touches), 1):
+        comp = lab == k
+        if sz >= min_obj and st_ >= 40: obj |= comp          # ribbons with the medals hanging from them
+        elif sz >= 4000 and tb == 0: obj |= comp              # a bright piece away from the frame edge (pin bar, medal)
+        elif sz < 4000: lint |= comp                          # specks and fibres
+    objp = ndimage.binary_dilation(obj, iterations=6)         # protects frayed ribbon threads
+    fix = ndimage.binary_dilation(lint, iterations=3) & ~objp
+    a = cv2.inpaint(a, fix.astype(np.uint8) * 255, 7, cv2.INPAINT_TELEA)
+    L2 = a.astype(float).mean(-1); bg = ~objp
+    target = np.percentile(L2[bg], 35)
+    base = cv2.GaussianBlur(np.where(bg, L2, target).astype(np.float32), (0, 0), sigma)
+    gain = np.clip(target / np.maximum(base, 1), 0.25, 1.0)   # only ever darkens
+    soft = cv2.GaussianBlur(bg.astype(np.float32), (0, 0), 4)
+    gain = 1 - soft * (1 - gain)
+    return Image.fromarray(np.clip(a.astype(float) * gain[..., None], 0, 255).astype(np.uint8))
 
 
 def is_plain_background(im, mask):
@@ -254,6 +286,7 @@ def main(argv):
             if cid in CHRONICLE_CUT_OUT:
                 os.makedirs(os.path.dirname(dst), exist_ok=True)
                 compose(cut_out(im, cid, session), cid, H).save(dst, quality=88, optimize=True); print(f"{cid}: cut out like its cover"); continue
+            if cid in CLEAN_GROUND: im = clean_ground(im)
             mask = object_mask(im, session)
             if cid not in CHRONICLE_FIT and not is_plain_background(im, mask): print(f"{cid}: textured background, left as it is"); continue
             os.makedirs(os.path.dirname(dst), exist_ok=True); fit_ratio(im, mask).save(dst, quality=88, optimize=True); print(f"{cid}: plain background, fitted to 3:4")
@@ -274,6 +307,7 @@ def main(argv):
             from rembg import new_session; session = new_session(MODEL)
         large = dst.replace("_standard.jpg", "_large.jpg")
         if iid in KEEP_BACKGROUND:
+            if iid in CLEAN_GROUND: im = clean_ground(im)
             mask = object_mask(im, session)
             out = fit_ratio(im, mask); how = "background kept, fitted to 3:4"
             lh = int(min(LARGE_H, max(H, im.height))); big = fit_ratio(im, mask, (int(round(lh * RATIO)), lh))
