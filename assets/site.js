@@ -263,33 +263,47 @@ function openLightbox(id) {
   fitLightbox();
 }
 
-/* Lay out the lightbox so that image, title, text and button share one screen:
-   the text block is exactly as wide as the image, and the image takes the height the text leaves. */
+/* Lay out the lightbox so that image, title, text and button share one screen. The text block is
+   exactly as wide as the image. The image size is the same for every item on a given screen: it is
+   computed once from the longest title and description in the collection, so that flipping through
+   items never changes the image size; shorter texts simply leave a little room below. */
+let lightboxFit = null;   /* { key, width } cached per viewport */
 function fitLightbox() {
   const lb = document.getElementById("lightbox"), img = document.getElementById("lightboxImg"), info = lb.querySelector(".lightbox-info");
   if (!lb.classList.contains("open")) return;
-  const apply = () => {
-    const ratio = (img.naturalWidth && img.naturalHeight) ? img.naturalWidth / img.naturalHeight : 0.75;
-    const cs = getComputedStyle(lb);
-    const availH = lb.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
-    const availW = lb.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+  const ratio = RATIO_W_H;
+  const cs = getComputedStyle(lb);
+  const availH = lb.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+  const availW = lb.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+  const key = availW + "x" + availH;
+  if (!lightboxFit || lightboxFit.key !== key) {
+    /* measure the worst case: the longest description and the longest title, with the article button shown */
+    const title = document.getElementById("lightboxTitle"), desc = document.getElementById("lightboxDesc"), link = document.getElementById("lightboxArticleLink");
+    const saved = [title.textContent, desc.textContent, link.style.display];
+    const items = allItems();
+    title.textContent = items.reduce((a, i) => (i.title.length > a.length ? i.title : a), "");
+    desc.textContent = items.reduce((a, i) => ((i.description || "").length > a.length ? i.description : a), "");
+    link.style.display = "inline-block";
     const gap = parseFloat(getComputedStyle(info).marginTop) || 0;
-    const minW = Math.round(Math.min(availW, availH * ratio) * 0.62);   /* never let a long text squeeze the image below this; the box then scrolls */
+    const minW = Math.round(Math.min(availW, availH * ratio) * 0.58);
     let width = Math.min(availW, Math.round((availH - gap) * ratio));
-    for (let i = 0; i < 12; i++) {              /* text width depends on image width and vice versa: iterate */
+    for (let i = 0; i < 12; i++) {
       info.style.width = width + "px";
-      const h = Math.min(availH - gap - info.offsetHeight, window.innerWidth <= 640 ? availH : availH * 0.78);
+      const h = Math.min(availH - gap - info.offsetHeight - 3, window.innerWidth <= 640 ? availH : availH * 0.78);   /* 3 px: rounding safety */
       const w = Math.max(minW, Math.min(availW, Math.round(h * ratio)));
       if (Math.abs(w - width) < 2) break;
       width = w;
     }
-    img.style.width = width + "px"; img.style.height = Math.round(width / ratio) + "px"; img.style.maxHeight = "none"; img.style.maxWidth = "none";
-    info.style.width = width + "px";
-  };
-  if (img.complete && img.naturalWidth) apply(); else img.onload = apply;
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { if (lb.classList.contains("open")) apply(); });
+    title.textContent = saved[0]; desc.textContent = saved[1]; link.style.display = saved[2];
+    lightboxFit = { key, width };
+  }
+  const width = lightboxFit.width;
+  img.style.width = width + "px"; img.style.height = Math.round(width / ratio) + "px"; img.style.maxHeight = "none"; img.style.maxWidth = "none";
+  info.style.width = width + "px";
 }
-window.addEventListener("resize", fitLightbox);
+const RATIO_W_H = 3 / 4;   /* every standard and large image is 3:4 */
+window.addEventListener("resize", () => { lightboxFit = null; fitLightbox(); });
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { lightboxFit = null; fitLightbox(); });
 
 /* Move to the previous (-1) or next (+1) item of the current page, wrapping round. */
 function stepLightbox(d) {
