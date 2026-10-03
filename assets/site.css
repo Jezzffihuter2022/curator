@@ -133,10 +133,10 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg-primary);color:va
 
 .lightbox{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:10000;background:rgba(0,0,0,0.88);backdrop-filter:blur(8px);align-items:center;justify-content:center;flex-direction:column;padding:40px;cursor:pointer;}
 .lightbox.open{display:flex;}
-.lightbox img{max-width:90%;max-height:75vh;object-fit:contain;}
-.lightbox-info{margin-top:20px;text-align:center;}
+.lightbox img{max-width:90%;max-height:75vh;object-fit:contain;display:block;}
+.lightbox-info{margin-top:18px;text-align:center;margin-left:auto;margin-right:auto;}
 .lightbox-title{font-family:'Noto Serif SC',serif;font-size:23px;color:#F5F0E8;}
-.lightbox-desc{font-size:17px;color:#A9A193;margin-top:8px;max-width:500px;line-height:1.8;font-family:'EB Garamond',serif;}
+.lightbox-desc{font-size:17px;color:#A9A193;margin-top:8px;line-height:1.8;font-family:'EB Garamond',serif;}
 .lightbox-close{position:absolute;top:24px;right:28px;font-size:32px;color:#999;cursor:pointer;background:none;border:none;transition:color 0.2s;}
 .lightbox-close:hover{color:#fff;}
 .lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);font-family:'EB Garamond',serif;font-size:56px;line-height:1;color:#999;background:none;border:none;cursor:pointer;padding:24px 18px;transition:color 0.2s;}
@@ -203,10 +203,11 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg-primary);color:va
   .main{padding:0 14px 40px;}.item-card{padding:7px;}.item-info{padding:9px 0 2px;}.item-title{font-size:16px;}.item-meta{font-size:15px;}
   .neo-divider{width:70%;}
   /* phone lightbox: image sized so that title, text and button fit on one screen; scrolls only if they cannot */
-  .lightbox{display:none;padding:52px 12px 20px;overflow-y:auto;justify-content:flex-start;}
+  .lightbox{display:none;padding:44px 12px 14px;overflow-y:auto;justify-content:flex-start;}
   .lightbox.open{display:flex;}
   .lightbox img{max-height:min(52vh, calc(100vh - 330px));max-width:100%;}
-  .lightbox-info{margin-top:14px;}.lightbox-title{font-size:19px;}.lightbox-desc{font-size:14px;line-height:1.7;margin-top:6px;}
+  .lightbox-info{margin-top:10px;}.lightbox-title{font-size:20px;}.lightbox-desc{font-size:15px;line-height:1.7;margin-top:6px;}
+  #lightboxArticleLink{margin-top:12px !important;padding:6px 18px !important;}
   .lightbox-nav{font-size:44px;padding:20px 8px;position:fixed;}.lightbox-prev{left:0;}.lightbox-next{right:0;}
   .lightbox-close{position:fixed;}
 }
