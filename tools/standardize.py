@@ -43,8 +43,6 @@ REMOVE_STAND = {"r013"}
 CHRONICLE_CUT_OUT = {"c004b", "c012b", "c012c", "c012d", "c002b", "c002c", "c002d"}
 # detail photographs kept on their own (textured) ground but still brought to RATIO, like a KEEP_BACKGROUND cover
 CHRONICLE_FIT = {"c006b"}
-# objects photographed on a strongly coloured ground: the 1-2 px edge band carries that colour and is re-sampled from the interior
-DEFRINGE = set()   # e.g. {"t014"} while t014 was cut out of its red case lining
 # Group photographs used as article covers that are cut out like item covers: id -> folder
 EXTRA_CUT_OUT = {"r016": "regalia"}
 
@@ -186,22 +184,6 @@ def drop_stand(cut):
     return Image.fromarray(a, "RGBA")
 
 
-def defringe(cut, band=2, feather=0.8):
-    """Replace the outermost `band` px of the object with the colour of the nearest interior pixel and feather the edge."""
-    from scipy import ndimage
-    import cv2
-    rgba = np.asarray(cut).copy(); rgb, a = rgba[..., :3], rgba[..., 3]
-    obj = a > 0
-    interior = ndimage.binary_erosion(obj, iterations=band + 1)
-    if not interior.any(): return cut
-    _, (iy, ix) = ndimage.distance_transform_edt(~interior, return_indices=True)
-    edge = obj & ~interior
-    rgb[edge] = rgb[iy[edge], ix[edge]]
-    a2 = ndimage.binary_erosion(obj, iterations=1).astype(np.uint8) * 255
-    a2 = cv2.GaussianBlur(a2, (0, 0), feather)
-    return Image.fromarray(np.dstack([rgb, a2]), "RGBA")
-
-
 def cut_out(im, iid, session):
     from rembg import remove
     import cv2
@@ -222,8 +204,6 @@ def cut_out(im, iid, session):
         cut = drop_hanger(cut)
     if iid in REMOVE_STAND:
         cut = drop_stand(cut)
-    if iid in DEFRINGE:
-        cut = defringe(cut)
     bbox = cut.getbbox()
     if not bbox: raise RuntimeError(f"{iid}: no object found")
     sub = cut.crop(bbox); alpha = sub.split()[3]
