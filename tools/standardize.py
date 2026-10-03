@@ -19,7 +19,7 @@ import numpy as np
 from PIL import Image, ImageFilter, ImageOps
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-BG = tuple(int(v) for v in os.environ.get("STANDARD_BG", "243,240,232").split(","))   # warm white by default
+BG = tuple(int(v) for v in os.environ.get("STANDARD_BG", "227,222,212").split(","))   # light grey-beige (浅灰米) by default; warm white 243,240,232 until 2026-10
 OUT_ROOT = os.environ.get("STANDARD_OUT", ROOT)       # where the standard files are written (tests only)
 RATIO = 3 / 4                 # width / height shared by most of the original photographs
 W, H = 1200, 1600             # 3:4 canvas of the _standard image (cards, grids)
