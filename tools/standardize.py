@@ -47,6 +47,14 @@ DEFRINGE = {"t014", "c006b"}
 EXTRA_CUT_OUT = {"r016": "regalia"}
 
 
+def source(folder, name):
+    """An original lives in images/<folder>/; one withdrawn from the served tree lives in _archive/<folder>/ (not published by Pages)."""
+    for base in ("images", "_archive"):
+        p = os.path.join(ROOT, base, folder, f"{name}.jpg")
+        if os.path.exists(p): return p
+    return os.path.join(ROOT, "images", folder, f"{name}.jpg")
+
+
 def items():
     src = open(os.path.join(ROOT, "assets/data.js"), encoding="utf-8").read()
     return re.findall(r'\{ id:"([rt]\d+)".*?image:"/images/([a-z]+)/\1(?:_standard)?\.jpg"', src)
@@ -256,7 +264,7 @@ def main(argv):
         # detail photographs with a plain background are brought to RATIO as well
         from rembg import new_session; session = new_session(MODEL)
         for cid in chronicle_images():
-            src = os.path.join(ROOT, "images/chronicles", f"{cid}.jpg"); dst = os.path.join(OUT_ROOT, "images/chronicles", f"{cid}_standard.jpg")
+            src = source("chronicles", cid); dst = os.path.join(OUT_ROOT, "images/chronicles", f"{cid}_standard.jpg")
             if not os.path.exists(src): continue
             if os.path.exists(dst) and not force: continue
             im = ImageOps.exif_transpose(Image.open(src)).convert("RGB"); im.thumbnail((4096, 4096))
@@ -268,7 +276,7 @@ def main(argv):
             if not is_plain_background(im, mask): print(f"{cid}: textured background, left as it is"); continue
             os.makedirs(os.path.dirname(dst), exist_ok=True); fit_ratio(im, mask).save(dst, quality=88, optimize=True); print(f"{cid}: plain background, fitted to 3:4")
         for xid, folder in EXTRA_CUT_OUT.items():
-            src = os.path.join(ROOT, "images", folder, f"{xid}.jpg"); dst = os.path.join(OUT_ROOT, "images", folder, f"{xid}_standard.jpg")
+            src = source(folder, xid); dst = os.path.join(OUT_ROOT, "images", folder, f"{xid}_standard.jpg")
             if not os.path.exists(src) or (os.path.exists(dst) and not force): continue
             im = ImageOps.exif_transpose(Image.open(src)).convert("RGB"); im.thumbnail((4096, 4096))
             os.makedirs(os.path.dirname(dst), exist_ok=True)
@@ -276,7 +284,7 @@ def main(argv):
         return
     for iid, folder in items():
         if wanted and iid not in wanted: continue
-        src = os.path.join(ROOT, "images", folder, f"{iid}.jpg"); dst = os.path.join(OUT_ROOT, "images", folder, f"{iid}_standard.jpg")
+        src = source(folder, iid); dst = os.path.join(OUT_ROOT, "images", folder, f"{iid}_standard.jpg")
         if not os.path.exists(src): print(f"{iid}: original missing, skipped"); continue
         if os.path.exists(dst) and not force: continue
         im = ImageOps.exif_transpose(Image.open(src)).convert("RGB"); im.thumbnail((4096, 4096))   # full resolution
