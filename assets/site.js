@@ -216,7 +216,7 @@ function renderGallery() {
   for (let i = items.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [items[i], items[j]] = [items[j], items[i]]; }
   lightboxIds = items.map(i => i.id);
   document.getElementById("page").innerHTML =
-    '<div class="gallery-grid" style="padding-top:24px">' +
+    '<div class="gallery-grid" style="padding-top:var(--edge)">' +
       items.map(i => '<div class="gallery-item" onclick="openLightbox(\'' + i.id + '\')"><img src="' + i.image + '" alt="' + i.title + '" loading="lazy" onerror="this.parentNode.style.display=\'none\'"></div>').join("") +
     '</div>';
 }
