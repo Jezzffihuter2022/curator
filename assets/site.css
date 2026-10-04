@@ -156,7 +156,7 @@ body{font-family:var(--serif);font-size:var(--fs-body);background:var(--bg-prima
 .gallery-item::after{content:'⊕';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:28px;color:rgba(250,248,243,0.9);opacity:0;transition:opacity 0.3s ease;pointer-events:none;text-shadow:0 1px 6px rgba(0,0,0,0.4);}
 .gallery-item:hover::after{opacity:1;}
 
-.lightbox{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:10000;background:rgba(0,0,0,0.88);backdrop-filter:blur(8px);align-items:center;justify-content:center;flex-direction:column;padding:18px 18px 40px;cursor:pointer;}
+.lightbox{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:10000;background:rgba(0,0,0,0.88);backdrop-filter:blur(8px);align-items:center;justify-content:center;flex-direction:column;padding:18px 9px 40px;cursor:pointer;}
 .lightbox.open{display:flex;}
 .lightbox img{max-width:90%;max-height:75vh;object-fit:contain;display:block;}
 .lightbox-info{margin-top:12px;text-align:center;margin-left:auto;margin-right:auto;}
@@ -229,10 +229,10 @@ body{font-family:var(--serif);font-size:var(--fs-body);background:var(--bg-prima
   .main{padding:0 var(--edge) 40px;}.item-card{padding:7px;}.item-info{padding:9px 0 2px;}
   .neo-divider{width:70%;}
   /* phone lightbox: image sized so that title, text and button fit on one screen; scrolls only if they cannot */
-  .lightbox{display:none;padding:19px 5px 14px;overflow-y:auto;justify-content:flex-start;}
+  .lightbox{display:none;padding:19px 3px 14px;overflow-y:auto;justify-content:flex-start;}
   .lightbox.open{display:flex;}
   .lightbox img{max-height:min(52vh, calc(100vh - 330px));max-width:100%;}
-  .lightbox-info{margin-top:7px;}.lightbox-desc{font-size:var(--fs-item);line-height:1.7;margin-top:4px;}
+  .lightbox-info{margin-top:7px;}.lightbox-desc{font-size:18px;line-height:1.7;margin-top:4px;}   /* largest size at which the longest entry still fits with a full-width image on 390 px phones */
   #lightboxArticleLink{margin-top:8px !important;padding:6px 18px !important;}
   .lightbox-nav{padding:20px 8px;position:fixed;}.lightbox-prev{left:0;}.lightbox-next{right:0;}
   .lightbox-close{position:fixed;}
