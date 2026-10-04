@@ -8,7 +8,7 @@
   /* type: two families, five sizes (小注 / 正文 / 条目 / 标题 / 站名) */
   --serif:'Noto Serif SC',serif; --latin:'EB Garamond','Noto Serif SC',serif;
   --fs-small:14px; --fs-body:17px; --fs-item:19px; --fs-title:22px; --fs-site:36px;
-  --edge:34px;   /* page edge: two body characters, same on every grid page */
+  --edge:17px;   /* page edge: one body character, same on every grid page */
   --ctrl:44px;   /* close crosses and lightbox arrows */
   --ctrl-nav:56px;
 }
@@ -222,7 +222,7 @@ body{font-family:var(--serif);font-size:var(--fs-body);background:var(--bg-prima
 .conv-loading{text-align:center;font-family:var(--serif);font-size:var(--fs-small);color:var(--text-muted);padding:20px 0;}
 
 @media(max-width:640px){
-  :root{--fs-small:13px; --fs-body:15px; --fs-item:16px; --fs-title:20px; --fs-site:24px; --ctrl:38px; --ctrl-nav:48px; --edge:30px;}
+  :root{--fs-small:13px; --fs-body:15px; --fs-item:16px; --fs-title:20px; --fs-site:24px; --ctrl:38px; --ctrl-nav:48px; --edge:15px;}
   .header{padding:36px 16px 24px;}.header h1{letter-spacing:4px;}
   .tabs-bar{justify-content:center;padding:0 8px;}.tab-btn{padding:13px 14px;font-size:var(--fs-body);}
   .featured-grid{grid-template-columns:repeat(2,1fr);gap:12px;}.chronicle-grid{grid-template-columns:repeat(2,1fr);gap:12px;}.gallery-grid{grid-template-columns:repeat(3,1fr);gap:6px;}
