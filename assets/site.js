@@ -311,7 +311,7 @@ function openLightbox(id) {
   document.getElementById("lightbox").classList.add("open");
   document.body.style.overflow = 'hidden';
   setHash(id);
-  fitLightbox();
+  prepareFonts().then(fitLightbox);
 }
 
 /* Lay out the lightbox so that image, title, text and button share one screen. The text block is
@@ -344,7 +344,7 @@ function fitLightbox() {
       info.style.width = width + "px";
       const h = Math.min(availH - gap - tallest() - 3, window.innerWidth <= 640 ? availH : availH * 0.78);   /* 3 px: rounding safety */
       const w = Math.max(minW, Math.min(availW, Math.round(h * ratio)));
-      if (Math.abs(w - width) < 2) break;
+      if (w >= width - 1) break;   /* only ever shrink: text can wrap into more lines at a narrower width, never fewer */
       width = w;
     }
     title.textContent = saved[0]; desc.textContent = saved[1]; link.style.display = saved[2];
@@ -370,12 +370,21 @@ window.addEventListener("resize", () => { fitLightbox(); });   /* the cache key 
    description can trigger a further download when the lightbox first opens. Load the slices for every
    title and description up front, and refit whenever any font finishes loading, so the first opening
    measures the same text as every later one. */
-if (document.fonts) {
+/* The fit is measured once per viewport, after every font slice the lightbox can need has been fetched
+   (Noto Serif SC is sliced by character range). Nothing recomputes it afterwards: no font event, no
+   height-only resize. One size per screen, however many times the lightbox is opened. */
+let fontsPrepared = null;
+function prepareFonts() {
+  if (fontsPrepared) return fontsPrepared;
+  if (!document.fonts || !document.fonts.load) return (fontsPrepared = Promise.resolve());
   const sample = allItems().map(i => (i.title || '') + (i.description || '')).join('');
-  try { document.fonts.load('17px "Noto Serif SC"', sample); document.fonts.load('17px "EB Garamond"', sample); } catch (e) {}
-  document.fonts.addEventListener('loadingdone', () => { lightboxFit = null; fitLightbox(); });
-  if (document.fonts.ready) document.fonts.ready.then(() => { lightboxFit = null; fitLightbox(); });
+  let loads;
+  try { loads = Promise.all([document.fonts.load('17px "Noto Serif SC"', sample), document.fonts.load('17px "EB Garamond"', sample)]); }
+  catch (e) { loads = Promise.resolve(); }
+  fontsPrepared = loads.catch(() => {}).then(() => document.fonts.ready).catch(() => {});
+  return fontsPrepared;
 }
+prepareFonts();
 
 /* Move to the previous (-1) or next (+1) item of the current page, wrapping round. */
 function stepLightbox(d) {
