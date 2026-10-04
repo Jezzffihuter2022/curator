@@ -324,7 +324,10 @@ function fitLightbox() {
   if (!lb.classList.contains("open")) return;
   const ratio = RATIO_W_H;
   const cs = getComputedStyle(lb);
-  const availH = lb.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+  /* On iPhone the fixed lightbox grows and shrinks as Safari's toolbar collapses and returns, so its own
+     height is not a stable basis: the size would change from one opening to the next. The small viewport
+     height (100svh: the height with the toolbars shown) is the same every time and always fits. */
+  const availH = smallViewportHeight() - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
   const availW = lb.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
   const key = availW + "x" + availH;
   if (!lightboxFit || lightboxFit.key !== key) {
@@ -352,7 +355,17 @@ function fitLightbox() {
   info.style.width = width + "px";
 }
 const RATIO_W_H = 3 / 4;   /* every standard and large image is 3:4 */
-window.addEventListener("resize", () => { lightboxFit = null; fitLightbox(); });
+function smallViewportHeight() {
+  let probe = document.getElementById("svhProbe");
+  if (!probe) {
+    probe = document.createElement("div"); probe.id = "svhProbe";
+    probe.style.cssText = "position:fixed;top:0;left:0;width:0;height:100svh;visibility:hidden;pointer-events:none;";
+    document.body.appendChild(probe);
+  }
+  const h = probe.getBoundingClientRect().height;
+  return h > 0 ? h : window.innerHeight;   /* browsers without svh units */
+}
+window.addEventListener("resize", () => { fitLightbox(); });   /* the cache key decides whether a refit is needed */
 /* Web fonts arrive after the first paint, and Noto Serif SC is sliced by character range, so the text of a
    description can trigger a further download when the lightbox first opens. Load the slices for every
    title and description up front, and refit whenever any font finishes loading, so the first opening
