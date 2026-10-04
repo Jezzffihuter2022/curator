@@ -353,7 +353,16 @@ function fitLightbox() {
 }
 const RATIO_W_H = 3 / 4;   /* every standard and large image is 3:4 */
 window.addEventListener("resize", () => { lightboxFit = null; fitLightbox(); });
-if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { lightboxFit = null; fitLightbox(); });
+/* Web fonts arrive after the first paint, and Noto Serif SC is sliced by character range, so the text of a
+   description can trigger a further download when the lightbox first opens. Load the slices for every
+   title and description up front, and refit whenever any font finishes loading, so the first opening
+   measures the same text as every later one. */
+if (document.fonts) {
+  const sample = allItems().map(i => (i.title || '') + (i.description || '')).join('');
+  try { document.fonts.load('17px "Noto Serif SC"', sample); document.fonts.load('17px "EB Garamond"', sample); } catch (e) {}
+  document.fonts.addEventListener('loadingdone', () => { lightboxFit = null; fitLightbox(); });
+  if (document.fonts.ready) document.fonts.ready.then(() => { lightboxFit = null; fitLightbox(); });
+}
 
 /* Move to the previous (-1) or next (+1) item of the current page, wrapping round. */
 function stepLightbox(d) {
