@@ -88,6 +88,25 @@ body{font-family:var(--serif);font-size:var(--fs-body);background:var(--bg-prima
 .article-img-grid3left-stack{display:flex;flex-direction:column;gap:12px;}
 .article-img-grid3left-stack img{width:100%;height:auto;display:block;border-radius:3px;border:1px solid var(--border);}
 .article-modal-img{width:100%;max-width:720px;display:block;margin:0 auto 24px;border-radius:3px;border:1px solid var(--border);}
+/* ---------- Full-text page (/text/, unlisted) ---------- */
+.text-page{max-width:720px;margin:0 auto;}
+.text-note,.text-toc{font-size:var(--fs-small);color:var(--text-muted);text-align:center;line-height:2;}
+.text-toc a{color:var(--gold);text-decoration:none;}
+.text-h2{font-size:var(--fs-title);font-weight:500;letter-spacing:4px;color:var(--heading-gold);text-align:center;margin:40px 0 10px;}
+.text-h3{font-size:var(--fs-item);font-weight:500;letter-spacing:2px;color:var(--item-title);margin:26px 0 6px;border-bottom:1px solid var(--border);padding-bottom:4px;}
+.text-statement{font-size:var(--fs-body);line-height:2;color:var(--text-muted);text-align:center;margin:0 0 10px;}
+.text-item,.text-article{padding:14px 0;border-bottom:1px solid var(--border-light);}
+.text-item-head{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline;margin-bottom:6px;}
+.text-id{font-family:var(--latin);font-size:var(--fs-small);color:var(--text-muted);}
+.text-title{font-size:var(--fs-item);font-weight:500;color:var(--item-title);}
+.text-meta{font-size:var(--fs-small);color:var(--text-muted);}
+.text-desc{font-size:var(--fs-body);line-height:2;color:var(--text-secondary);margin:0;text-align:justify;}
+.text-count{font-family:var(--latin);font-size:var(--fs-small);color:var(--text-muted);margin-left:8px;}
+.text-count-line{font-family:var(--latin);font-size:var(--fs-small);color:var(--text-muted);margin-top:6px;}
+.text-body{font-size:var(--fs-body);line-height:2.1;color:var(--text-secondary);text-align:justify;}
+.text-body strong{color:var(--item-title);font-weight:500;}
+.text-link{font-size:var(--fs-small);color:var(--text-muted);margin-top:6px;}
+
 @media(max-width:640px){.article-img-side,.article-img-grid4,.article-img-grid6,.article-img-grid3left{grid-template-columns:1fr;}}
 .article-modal-title{font-family:var(--serif);font-size:var(--fs-title);font-weight:700;color:var(--item-title);line-height:1.7;margin-bottom:8px;text-align:center;}
 .article-modal-date{font-family:var(--latin);font-size:var(--fs-body);color:var(--text-muted);font-style:italic;margin-bottom:20px;text-align:center;}

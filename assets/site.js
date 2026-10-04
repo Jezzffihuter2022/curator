@@ -15,6 +15,8 @@ const pages = [
 const pageByKey = Object.fromEntries(pages.map(p => [p.key, p]));
 const currentPage = document.body.dataset.page || "cabinet";
 
+const cabinetIntro = '多类精品并置于此，以数件勾勒整体';
+const chroniclesIntro = '以器物解码<a class="group-link" href="#group-craft">审美</a>、<a class="group-link" href="#group-person">身份</a>与<a class="group-link" href="#group-power">权力</a>';
 const curatorNote = '我对礼服、勋章与仪式器物的兴趣由来已久，到伦敦后才发现这些东西可以被实际收藏。通过这个网站，我把收藏的礼服、时装、勋章与珠宝放在同一视野中。当它们并置，审美趣味、制度等级与权力象征之间的关联会更容易被看见。器物不仅记录历史，也通过材质、造型和佩戴方式塑造观看者的判断。<br><br>这种呈现带有明确的个人取向。我偏爱承载密集历史与仪式感的器物，把制度性的威严转成可见、可感的视觉效果。一些有争议的历史符号，或许会被看成风格；某些沉重的等级秩序，也容易显得优雅。<br><br>因此，我想呈现的不只是器物本身，也包括观看它们的方式。它不试图给出标准答案，只保留一种仍在形成中的判断。';
 
 const divider = '<div class="neo-divider section-after-divider"><div class="nd-line"></div><div class="nd-dot"></div><div class="nd-line"></div></div>';
@@ -134,7 +136,7 @@ function renderCabinet() {
   lightboxIds = featured.map(i => i.id);
   document.getElementById("page").innerHTML =
     '<div class="section-header" style="padding-top:20px;padding-bottom:8px"><div class="section-title">甄选珍奇</div></div>' +
-    '<div class="type-statement cabinet-intro">多类精品并置于此，以数件勾勒整体</div>' +
+    '<div class="type-statement cabinet-intro">' + cabinetIntro + '</div>' +
     divider +
     '<div class="featured-grid">' + featured.map((i, n) => renderCard(i, n, true)).join("") + '</div>';
 }
@@ -185,7 +187,7 @@ function renderChronicles() {
   if (ungrouped.length > 0) grouped.push({ key: "other", label: "其他", statement: "", items: ungrouped });
   document.getElementById("page").innerHTML =
     '<div class="section-header"><div class="section-title">藏品札记</div></div>' +
-    '<div class="type-statement">以器物解码<a class="group-link" href="#group-craft">审美</a>、<a class="group-link" href="#group-person">身份</a>与<a class="group-link" href="#group-power">权力</a></div>' +
+    '<div class="type-statement">' + chroniclesIntro + '</div>' +
     divider +
     grouped.map(g =>
       '<section class="chronicle-group" id="group-' + g.key + '">' +
@@ -219,6 +221,54 @@ function renderGallery() {
     '</div>';
 }
 
+function renderText() {
+  /* /text/: every piece of site text in reading order, generated from data.js, for proofreading.
+     Not linked from the navigation. Character counts exclude spaces and punctuation-free
+     only in the sense of raw length, so they match the catalogue target (100-130). */
+  const strip = h => h.replace(/<[^>]+>/g, '');
+  const esc = t => (t || '');
+  const count = t => strip(t).replace(/\s/g, '').length;
+  const itemBlock = i => {
+    const art = i.articleLink ? collection.chronicles.find(c => c.id === i.articleLink) : null;
+    return '<div class="text-item" id="' + i.id + '"><div class="text-item-head"><span class="text-id">' + i.id + '</span>' +
+      '<span class="text-title">' + i.title + '</span><span class="text-meta">' + [i.year, i.origin, i.type].filter(Boolean).join(' · ') + '</span></div>' +
+      '<p class="text-desc">' + esc(i.description) + '<span class="text-count">' + count(i.description) + '</span></p>' +
+      (art ? '<div class="text-link">札记：' + art.title + '</div>' : '') + '</div>';
+  };
+  const section = key => {
+    const items = collection[key] || [];
+    const order = typeOrder[key] || [];
+    const types = [...order.filter(t => items.some(i => i.type === t)), ...[...new Set(items.map(i => i.type))].filter(t => !order.includes(t))];
+    return '<h2 class="text-h2" id="sec-' + key + '">' + pageByKey[key].label + '</h2>' +
+      '<p class="text-statement">' + (sectionStatements[key] || []).join('<br>') + '</p>' +
+      types.map(t => '<h3 class="text-h3">' + t + '</h3>' +
+        items.filter(i => i.type === t).sort((a, b) => parseYear(a.year) - parseYear(b.year)).map(itemBlock).join('')).join('');
+  };
+  const articleBlock = a => {
+    const linked = allItems().filter(i => i.articleLink === a.id).sort((x, y) => parseYear(x.year) - parseYear(y.year));
+    return '<div class="text-article" id="' + a.id + '"><div class="text-item-head"><span class="text-id">' + a.id + '</span>' +
+      '<span class="text-title">' + a.title + '</span><span class="text-meta">' + (articleDeck(a) || '') + (a.date ? ' · ' + a.date : '') + '</span></div>' +
+      '<div class="text-body">' + (a.excerpt || '') + '</div>' +
+      (linked.length ? '<div class="text-link">藏品：' + linked.map(i => i.title).join('、') + '</div>' : '') +
+      '<div class="text-count-line">' + count(a.excerpt || '') + ' 字</div></div>';
+  };
+  const groups = chronicleGroups.map(g => ({ ...g, items: collection.chronicles.filter(a => a.group === g.key) })).filter(g => g.items.length);
+  const n = allItems().length, m = collection.chronicles.length;
+  document.getElementById("page").innerHTML =
+    '<div class="text-page">' +
+    '<div class="section-header"><div class="section-title">全文</div></div>' +
+    '<p class="text-note">本页由 data.js 自动生成，与站点同步：' + n + ' 件藏品著录，' + m + ' 篇札记。著录末尾的数字为字数。</p>' +
+    '<p class="text-toc"><a href="#sec-intro">导语</a> · <a href="#sec-regalia">礼服与华服</a> · <a href="#sec-treasures">勋章与珠宝</a> · <a href="#sec-chronicles">藏品札记</a> · <a href="#sec-note">策展手记</a></p>' +
+    '<h2 class="text-h2" id="sec-intro">导语</h2>' +
+    '<p class="text-statement">首页：' + cabinetIntro + '</p>' +
+    '<p class="text-statement">札记：' + strip(chroniclesIntro) + '</p>' +
+    section("regalia") + section("treasures") +
+    '<h2 class="text-h2" id="sec-chronicles">藏品札记</h2>' +
+    groups.map(g => '<h3 class="text-h3">' + g.label + '</h3>' + g.items.map(articleBlock).join('')).join('') +
+    '<h2 class="text-h2" id="sec-note">策展手记</h2><div class="text-body">' + curatorNote + '</div>' +
+    '</div>';
+}
+
 function renderNotFound() {
   document.getElementById("page").innerHTML =
     '<div class="section-header"><div class="section-title">未找到页面</div></div>' +
@@ -234,6 +284,7 @@ function renderPage() {
     case "chronicles": renderChronicles(); break;
     case "departures": renderDepartures(); break;
     case "gallery": renderGallery(); break;
+    case "text": renderText(); break;
     default: renderNotFound();
   }
 }
