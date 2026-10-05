@@ -3,7 +3,7 @@
 
 const collection = {
   regalia: [
-    { id:"r001", title:"皇家海军少将常礼服外套", year:"1982", origin:"英国", type:"仪式礼服", image:"/images/regalia/r001_standard.jpg", description:"英国皇家海军制式。海军蓝礼服毛呢，双排8枚镀金扣，扣面铸皇冠、船锚与月桂花环。一道宽金袖环上加一道卷环标示少将，金线含2%黄金。Moseley & Pounsford在马岛战争中为谢菲尔德号驱逐舰舰长J. F. T. G. Salt定制。", articleLink:"c003", forSale:false },
+    { id:"r001", title:"皇家海军少将常礼服外套", year:"1982", origin:"英国", type:"仪式礼服", image:"/images/regalia/r001_standard.jpg", description:"英国皇家海军制式。海军蓝礼服毛呢，双排8枚镀金扣，扣面铸皇冠、船锚与月桂花环。一道宽金袖环上加一道带卷环的中等金环，标示少将，金线含2%黄金。Moseley & Pounsford在马岛战争中为谢菲尔德号驱逐舰舰长J. F. T. G. Salt定制。", articleLink:"c003", forSale:false },
     { id:"r009", title:"巴尔曼巴洛克复兴刺绣长外套", year:"当代", origin:"法国", type:"高级时装", image:"/images/regalia/r009_standard.jpg", description:"巴尔曼制。香槟色织物，珍珠与水晶逐粒手工缝缀：菱形网格为底，巴洛克涡卷纹自领口沿前襟与侧缘展开，前襟两道纵向镶边带密度最高，领缘与袖口以珠串收边。宽肩、收腰、直身下摆，长度过臀，丝绸全衬里。", articleLink:"c009", forSale:false },
     { id:"r002", title:"皇家炮兵少校梅斯礼服外套", year:"1992", origin:"英国", type:"晚宴礼服", image:"/images/regalia/r002_standard.jpg", description:"英国皇家炮兵制式。黑色礼服毛呢，猩红尖驳翻领为该团标志色，前襟敞开，两列各四粒金扣，袖口各三粒小扣，前摆收成尖角，军衔标于肩章。红色丝绸内衬。短身剪裁。Gieves & Hawkes于1992年8月为L. D. Bird定制。", articleLink:"c010", forSale:false },
     { id:"r004", title:"皇家陆军医疗军团少校梅斯礼服", year:"1965", origin:"英国", type:"晚宴礼服", image:"/images/regalia/r004_standard.jpg", description:"英国皇家陆军医疗军团制式。深蓝礼服毛呢，暗樱桃红（dull cherry）礼服领与袖口为该军团标志色，前敞开，侧翼金扣，马甲同色领。杖蛇徽章标明医务兵种。短身剪裁。含外套、长裤与马甲。Alkit在1965年，为少校C. Vaughan定制，其记录有诺曼底登陆口述史。", articleLink:"c014", forSale:false },
