@@ -65,7 +65,7 @@ function renderChrome() {
     '<footer class="footer">' +
       '<div class="neo-divider" style="margin-bottom:20px"><div class="nd-line"></div><div class="nd-dot"></div><div class="nd-line"></div></div>' +
       '<p>汪楚尧 <span class="en">Julian</span></p>' +
-      '<p style="margin-top:10px"><button class="footer-note-link" onclick="openCuratorNote()">策展手记</button><span style="display:inline-block;width:2em;"></span><span class="footer-note-link" onclick="openConvModal();">留言与对话</span></p>' +
+      '<p style="margin-top:10px"><button class="footer-note-link" onclick="openCuratorNote()">策展手记</button></p>' +
       '<p style="margin-top:8px">微信联系 <span class="en">LondonHKSZ</span></p>' +
       '<p><a href="https://curator.wangchuyao.com">curator.wangchuyao.com</a></p>' +
     '</footer>' +
@@ -76,39 +76,12 @@ function renderChrome() {
         '<div class="curator-note-modal-title">策展手记</div>' +
         curatorNote +
       '</div>' +
-    '</div>' +
-
-    '<div class="conv-modal" id="convModal" onclick="if(event.target===this)closeConvModal();">' +
-      '<div class="conv-modal-inner" onclick="event.stopPropagation()">' +
-        '<button class="conv-modal-close" onclick="closeConvModal()">✕</button>' +
-        '<div class="conv-modal-title" id="convTitle">留言与对话</div>' +
-        '<div class="conv-modal-intro">欢迎留下建议或意见，反馈将匿名发送至策展人</div>' +
-        '<div class="conv-admin-bar" id="convAdminBar" style="display:none;">' +
-          '<input class="conv-admin-input" id="convAdminPwd" type="password" placeholder="策展人入口">' +
-          '<button class="conv-admin-btn" onclick="convAdminLogin()">进入</button>' +
-        '</div>' +
-        '<div class="conv-compose">' +
-          '<textarea class="conv-textarea" id="convText" placeholder="请输入您的建议..."></textarea>' +
-          '<button class="conv-send" id="convSendBtn" onclick="convSendMsg()">发送</button>' +
-          '<div class="conv-toast" id="convToast"></div>' +
-        '</div>' +
-        '<div class="conv-threads" id="convThreads" style="display:none;"></div>' +
-      '</div>' +
     '</div>';
 }
 
 /* ---------- Footer modals ---------- */
 function openCuratorNote() { document.getElementById("curatorNoteModal").classList.add("open"); document.body.style.overflow = "hidden"; }
 function closeCuratorNote() { document.getElementById("curatorNoteModal").classList.remove("open"); document.body.style.overflow = ""; }
-function openConvModal() {
-  document.getElementById("convModal").classList.add("open");
-  document.body.style.overflow = "hidden";
-  if (typeof loadConversations === "function" && window._convAdmin) loadConversations();
-}
-function closeConvModal() {
-  document.getElementById("convModal").classList.remove("open");
-  document.body.style.overflow = "";
-}
 
 /* ---------- Helpers ---------- */
 function parseYear(y) {
@@ -122,7 +95,7 @@ function renderCard(item, index, hideTags) {
   const tag = (!hideTags && item.forSale) ? '<span class="item-tag sale">可出让</span>' : '';
   return '<div class="item-card" style="animation:fadeIn 0.4s ease ' + (index * 0.06) + 's both" onclick="openLightbox(\'' + item.id + '\')">' +
     '<div class="item-image">' + img + '</div><div class="item-info"><div class="item-title">' + item.title + '</div>' +
-    '<div class="item-meta"><span>' + (item.year || '') + '</span><span>' + (item.origin || '') + '</span>' + tag + '</div></div></div>';
+    '<div class="item-meta"><span>' + (item.origin || '') + '</span><span>' + (item.year || '') + '</span>' + tag + '</div></div></div>';
 }
 
 /* ---------- Section renderers ---------- */
@@ -231,7 +204,7 @@ function renderText() {
   const itemBlock = i => {
     const art = i.articleLink ? collection.chronicles.find(c => c.id === i.articleLink) : null;
     return '<div class="text-item" id="' + i.id + '"><div class="text-item-head"><span class="text-id">' + i.id + '</span>' +
-      '<span class="text-title">' + i.title + '</span><span class="text-meta">' + [i.year, i.origin, i.type].filter(Boolean).join(' · ') + '</span></div>' +
+      '<span class="text-title">' + i.title + '</span><span class="text-meta">' + [i.origin, i.year, i.type].filter(Boolean).join(' · ') + '</span></div>' +
       '<p class="text-desc">' + esc(i.description) + '<span class="text-count">' + count(i.description) + '</span></p>' +
       (art ? '<div class="text-link">札记：' + art.title + '</div>' : '') + '</div>';
   };
@@ -469,11 +442,10 @@ document.addEventListener("keydown", e => {
   if (lb.classList.contains("open")) closeLightbox({ target: lb });
   if (am.classList.contains("open")) closeArticle({ target: am });
   if (document.getElementById("curatorNoteModal").classList.contains("open")) closeCuratorNote();
-  if (document.getElementById("convModal").classList.contains("open")) closeConvModal();
 });
 
 Object.assign(window, { openLightbox, closeLightbox, stepLightbox, openArticle, closeArticle, toggleFilter,
-  openCuratorNote, closeCuratorNote, openConvModal, closeConvModal });
+  openCuratorNote, closeCuratorNote });
 
 renderChrome();
 renderPage();
