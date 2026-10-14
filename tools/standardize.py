@@ -47,7 +47,7 @@ CHRONICLE_CUT_OUT = {"c004b", "c012b", "c012c", "c012d", "c002b", "c002c", "c002
                      "c016b", "c016c", "c016d", "c016e", "c016f"}
 # Detail photographs whose top strip shows the chain the object hangs from: the fraction of the height cut off before
 # the cut-out, just above the object's own ring.
-CROP_TOP = {"c016b": 0.094, "c016f": 0.092}
+CROP_TOP = {}
 # photographs on dark velvet whose ground is cleaned before fitting: lint and fibres are inpainted, the box rim and
 # lighter patches are flattened down to the velvet level; the objects themselves are untouched
 CLEAN_GROUND = {"t027", "c015b"}
