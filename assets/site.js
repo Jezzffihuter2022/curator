@@ -339,12 +339,8 @@ function smallViewportHeight() {
   return h > 0 ? h : window.innerHeight;   /* browsers without svh units */
 }
 window.addEventListener("resize", () => { fitLightbox(); });   /* the cache key decides whether a refit is needed */
-/* Web fonts arrive after the first paint, and Noto Serif SC is sliced by character range, so the text of a
-   description can trigger a further download when the lightbox first opens. Load the slices for every
-   title and description up front, and refit whenever any font finishes loading, so the first opening
-   measures the same text as every later one. */
-/* The fit is measured once per viewport, after every font slice the lightbox can need has been fetched
-   (Noto Serif SC is sliced by character range). Nothing recomputes it afterwards: no font event, no
+/* Web fonts arrive after the first paint. The fit is measured once per viewport, after every face the lightbox
+   can need (self-hosted, see tools/fonts.py) has loaded. Nothing recomputes it afterwards: no font event, no
    height-only resize. One size per screen, however many times the lightbox is opened. */
 let fontsPrepared = null;
 function prepareFonts() {

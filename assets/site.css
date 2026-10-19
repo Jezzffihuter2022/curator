@@ -1,4 +1,13 @@
 /* Styles for curator.wangchuyao.com */
+/* Self-hosted web fonts, cut down to the characters the site uses (tools/fonts.py). Google Fonts is unreachable from
+   mainland China, so the fonts are served from this site. Re-run tools/fonts.py after adding text. */
+@font-face{font-family:'Noto Serif SC';src:url('/assets/fonts/noto-serif-sc-400.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:'Noto Serif SC';src:url('/assets/fonts/noto-serif-sc-500.woff2') format('woff2');font-weight:500;font-style:normal;font-display:swap;}
+@font-face{font-family:'Noto Serif SC';src:url('/assets/fonts/noto-serif-sc-700.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap;}
+@font-face{font-family:'EB Garamond';src:url('/assets/fonts/eb-garamond-400.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:'EB Garamond';src:url('/assets/fonts/eb-garamond-500.woff2') format('woff2');font-weight:500;font-style:normal;font-display:swap;}
+@font-face{font-family:'EB Garamond';src:url('/assets/fonts/eb-garamond-400-italic.woff2') format('woff2');font-weight:400;font-style:italic;font-display:swap;}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;}
 :root {
   --bg-primary:#FAF8F3; --bg-warm:#F5F2EB; --bg-card:#FFFFFF;
   --text-primary:#4A3728; --text-secondary:#5C4A3D; --text-muted:#9C948A;
@@ -187,6 +196,10 @@ body{font-family:var(--serif);font-size:var(--fs-body);background:var(--bg-prima
 /* conversation modal */
 
 @media(max-width:640px){
+  /* essays fill the phone screen: no grey margin, one body character of side padding as on the grid pages */
+  .article-modal{padding:0;}
+  .article-modal-inner{border-radius:0;min-height:100%;padding:56px var(--edge) 40px;}
+  .article-modal-body{font-size:16px;line-height:1.5;}
   :root{--fs-small:13px; --fs-body:15px; --fs-item:16px; --fs-title:20px; --fs-site:24px; --ctrl:38px; --ctrl-nav:48px; --edge:15px;}
   .header{padding:36px 16px 24px;}.header h1{letter-spacing:4px;}
   .tabs-bar{justify-content:center;padding:0 8px;}.tab-btn{padding:13px 14px;font-size:var(--fs-body);}
