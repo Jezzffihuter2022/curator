@@ -48,6 +48,10 @@ CHRONICLE_CUT_OUT = {"c004b", "c012b", "c012c", "c012d", "c002b", "c002c", "c002
 # Detail photographs whose top strip shows the chain the object hangs from: the fraction of the height cut off before
 # the cut-out, just above the object's own ring.
 CROP_TOP = {}
+# Photographs on black velvet kept in their own framing, with the velvet (and its lint) replaced by the site black
+# #161414: the object is cut out, dark velvet seen through openwork counts as ground, nothing is moved or rescaled.
+GROUND_SWAP = {"t018", "c017b", "c017c"}
+SWAP_GROUND = (22, 20, 20)
 # photographs on dark velvet whose ground is cleaned before fitting: lint and fibres are inpainted, the box rim and
 # lighter patches are flattened down to the velvet level; the objects themselves are untouched
 CLEAN_GROUND = {"t027", "c015b"}
@@ -173,6 +177,18 @@ def clean_ground(im, thresh=58, min_obj=20000, sigma=50):
     return Image.fromarray(np.clip(a.astype(float) * gain[..., None], 0, 255).astype(np.uint8))
 
 
+def ground_swap(im, session):
+    """Replace a dark velvet ground by SWAP_GROUND in place; the object keeps its position, size and framing."""
+    from rembg import remove
+    import cv2
+    a = np.asarray(remove(im, session=session, only_mask=True, post_process_mask=True)).astype(np.float32) / 255
+    rgb = np.asarray(im).astype(np.float32)
+    keep = a * np.clip((rgb.mean(2) - 45) / 30, 0, 1)        # velvet showing through the openwork is ground too
+    keep = cv2.GaussianBlur(keep, (0, 0), 1.0)[..., None]
+    out = rgb * keep + np.array(SWAP_GROUND, np.float32) * (1 - keep)
+    return Image.fromarray(out.clip(0, 255).astype(np.uint8))
+
+
 def is_plain_background(im, mask):
     """True when the outer 5% of the photograph, excluding the object, is close to one colour."""
     a = np.asarray(im.convert("RGB")).astype(np.float32); h, w = a.shape[:2]; n = max(4, int(0.05 * min(h, w)))
@@ -296,6 +312,7 @@ def main(argv):
             if cid in CHRONICLE_CUT_OUT:
                 os.makedirs(os.path.dirname(dst), exist_ok=True)
                 compose(cut_out(im, cid, session), cid, H).save(dst, quality=88, optimize=True); print(f"{cid}: cut out like its cover"); continue
+            if cid in GROUND_SWAP: im = ground_swap(im, session)
             if cid in CLEAN_GROUND: im = clean_ground(im)
             mask = object_mask(im, session)
             if cid not in CHRONICLE_FIT and not is_plain_background(im, mask): print(f"{cid}: textured background, left as it is"); continue
@@ -318,6 +335,7 @@ def main(argv):
             from rembg import new_session; session = new_session(MODEL)
         large = dst.replace("_standard.jpg", "_large.jpg")
         if iid in KEEP_BACKGROUND:
+            if iid in GROUND_SWAP: im = ground_swap(im, session)
             if iid in CLEAN_GROUND: im = clean_ground(im)
             mask = object_mask(im, session)
             out = fit_ratio(im, mask); how = "background kept, fitted to 3:4"
