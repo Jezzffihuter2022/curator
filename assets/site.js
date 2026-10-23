@@ -35,7 +35,7 @@ function renderChrome() {
 
   document.getElementById("site").innerHTML =
     '<header class="header">' +
-      '<h1>汪楚尧 · 收藏与策展</h1>' +
+      '<h1>星芒和刺绣 · 收藏与策展</h1>' +
       '<p class="header-subtitle">审美、身份与权力的器物叙事</p>' +
     '</header>' +
     '<nav class="tabs-container"><div class="tabs-bar">' + nav + '</div></nav>' +
@@ -64,7 +64,7 @@ function renderChrome() {
 
     '<footer class="footer">' +
       '<div class="neo-divider" style="margin-bottom:20px"><div class="nd-line"></div><div class="nd-dot"></div><div class="nd-line"></div></div>' +
-      '<p>汪楚尧 <span class="en">Julian</span></p>' +
+      '<p><span class="en">Julian</span></p>' +
       '<p style="margin-top:10px"><button class="footer-note-link" onclick="openCuratorNote()">策展手记</button></p>' +
       '<p style="margin-top:8px">微信联系 <span class="en">LondonHKSZ</span></p>' +
       '<p><a href="https://curator.wangchuyao.com">curator.wangchuyao.com</a></p>' +
