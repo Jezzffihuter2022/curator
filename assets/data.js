@@ -17,20 +17,18 @@ const collection = {
     { id:"r013", title:"西点军校学员大礼服", year:"约1950", origin:"美国", type:"仪式礼服", image:"/images/regalia/r013_standard.jpg", description:"美国西点军校学员制式。灰蓝色重磅羊毛，立领缀黑绳横饰，胸前三排金属扣，扣间以黑色丝绳横向连结，燕尾剪裁。袖口饰金线与黑绳结，燕尾缘饰金线，棉内衬。形制自十九世纪中期几乎未变。", forSale:false },
   ],
   treasures: [
-    { id:"t014", title:"伊莎贝拉天主教勋章指挥官级", year:"约1900", origin:"西班牙", type:"勋章", image:"/images/treasures/t014_standard.jpg", description:"1815年创设。主体为机刻红珐琅马耳他十字，其星芒氧化后幻出彩色。正面呈手绘珐琅，铭「致纯粹忠诚」；背面含王室花押，铭「为伊莎贝拉天主教女王」。顶部接绿色月桂环。银镀金，8.2×5.3厘米，50克。附Celada原盒。", articleLink:"c006", forSale:false },
-    { id:"t021", title:"荣誉军团勋章指挥官级", year:"1951–1962", origin:"法国", type:"勋章", image:"/images/treasures/t021_standard.jpg", description:"1802年由拿破仑创设。四共珠宝商版。正反金质徽面，正面铸共和国拟人像，环铭「法兰西共和国」；背面交叉三色旗，环铭「荣誉与祖国」。五白珐琅臂镶金边，缀绿珐琅月桂、橡叶与红果，上承立体铰接叶冠。金和银镀金，9.0×6.4厘米，76克。附Arthus Bertrand盒。", articleLink:"c011", forSale:false },
-    { id:"t026", title:"尼罗河勋章指挥官级", year:"1928", origin:"埃及", type:"勋章", image:"/images/treasures/t026_standard.jpg", description:"1915年创设。II型（1926年后）。主体十角银星，刻面镀金芒簇放射，上叠白珐琅五臂星。中心铭「尼罗河惠予埃及者，乃其繁荣与幸福之本源」。顶承小巧镀金王冠悬饰。800银镀金，9.5×6.4厘米，58克。附J. Lattes原盒。", articleLink:"c013", forSale:false },
-    { id:"t015", title:"荣耀勋章指挥官级", year:"约1950", origin:"突尼斯/法国", type:"勋章", image:"/images/treasures/t015_standard.jpg", description:"1835年创设。顶部含花结式银质连接件，主体十角星形红绿珐琅交替，其间穿插切面碎银光。中心绿色珐琅底上，覆有立体阿拉伯书法贝伊签名花押（1943–1957），悬环标巴黎珠宝商Arthus Bertrand。银质，9.0×6.0厘米，57克。附原盒。", articleLink:"c007", forSale:false },
-    { id:"t016", title:"荣誉功勋大金级勋章", year:"1990", origin:"奥地利", type:"勋章", image:"/images/treasures/t016_standard.jpg", description:"1952年创设。此枚为颈佩级大金质勋章。顶悬挂联邦鹰章，鹰胸环列九州省徽，下接红色珐琅马耳他十字和白色珐琅希腊十字。1990年由总统授予欧共体礼宾司司长。铜镀金，7.6×5.0厘米，31克。附原装襟扣花结及Wolfgang Reitterer原盒。", articleLink:"c008", forSale:false },
-    { id:"t019", title:"功绩勋章指挥官级", year:"约1980", origin:"意大利", type:"勋章", image:"/images/treasures/t019_standard.jpg", description:"1951年创设。白色珐琅希腊十字，臂端缀小球，中心金色五角星浮雕，四臂夹角各有展翅罗马鹰，顶部城塑冠悬挂，冠带嵌红白绿三色珐琅。绿色绶带镶红边。银镀金，7.4×5.5厘米，44克。附原装微缩章、襟扣花结及Johnson原盒。", forSale:false },
-    { id:"t027", title:"巴斯与大英帝国微缩勋章联排", year:"约1920", origin:"英国", type:"勋章", image:"/images/treasures/t027_standard.jpg", description:"左为巴斯勋章文职版，三王冠与玫瑰、蓟、三叶草同茎，环铭「三合为一」；右为大英帝国勋章I型（1937年前）指挥官级，淡蓝珐琅覆机刻底纹，中心不列颠尼亚坐像，铭「为上帝与帝国」，背面乔治五世花押。银镀金，各2.5×1.8厘米，共15克。附Spink盒。", articleLink:"c015", forSale:false },
-    { id:"t028", title:"第三共和国微缩勋章链", year:"约1910", origin:"法国/突尼斯/柬埔寨", type:"勋章", image:"/images/treasures/t028_standard.jpg", description:"五枚微缩章串于三股狐尾链，两端别针。自左至右：官员级学术棕榈勋章（镶玫瑰切钻与红色宝石）；官员级农业功绩勋章（金质）；劳动与社会保障部互助会银质奖章；突尼斯荣耀勋章；柬埔寨莫尼萨拉蓬勋章。8.0×3.5厘米，9.9克。", articleLink:"c016", forSale:false },
-    { id:"t017", title:"利奥波德二世纪念章", year:"1905", origin:"比利时", type:"纪念章", image:"/images/treasures/t017_standard.jpg", description:"1905年发行，纪念利奥波德二世在位四十年。铜镀金，十字放射纹底上椭圆框内浮雕国王左向侧面像，左橡叶、右月桂分列十字臂间，顶饰蝴蝶结承悬环。红色丝带配黑黄中线。此章正与利奥波德二世的殖民暴行同期。", forSale:false },
-    { id:"t002", title:"拿破仑圣赫勒拿奖章", year:"1857", origin:"法国", type:"纪念章", image:"/images/treasures/t002_standard.jpg", description:"1857年拿破仑三世创设，授予1792至1815年间服役的拿破仑一世麾下幸存老兵。正面为拿破仑一世罗马式侧面像，头戴月桂花环，顶部帝国皇冠。背面铭文假托拿破仑遗言献给「荣耀的战友」，环以诸战役年份。法国首枚正式战役纪念章。", articleLink:"c004", forSale:false },
-    { id:"t020", title:"军事功勋铜级奖章", year:"1914–1916", origin:"奥匈帝国", type:"纪念章", image:"/images/treasures/t020_standard.jpg", description:"1890年皇帝弗朗茨·约瑟夫一世设立，表彰军事功勋与卓越服务；铜级为创设时的唯一等级，1911年增银级。铜镀金，正面为皇帝右向侧面像，头戴月桂冠，环绕拉丁帝国全衔；背面铭「赞誉之标」，以月桂橡树混合花环环绕。由帝国皇冠悬挂，配战时红白梯纹三角绶带，无剑饰；1917年起改用卡尔一世像新型。", forSale:false },
+    { id:"t014", title:"伊莎贝拉天主教勋章指挥官级", year:"约1900", origin:"西班牙", type:"勋奖章", image:"/images/treasures/t014_standard.jpg", description:"1815年创设。主体为机刻红珐琅马耳他十字，其星芒氧化后幻出彩色。正面呈手绘珐琅，铭「致纯粹忠诚」；背面含王室花押，铭「为伊莎贝拉天主教女王」。顶部接绿色月桂环。银镀金，8.2×5.3厘米，50克。附Celada原盒。", articleLink:"c006", forSale:false },
+    { id:"t021", title:"荣誉军团勋章指挥官级", year:"1951–1962", origin:"法国", type:"勋奖章", image:"/images/treasures/t021_standard.jpg", description:"1802年由拿破仑创设。四共珠宝商版。正反金质徽面，正面铸共和国拟人像，环铭「法兰西共和国」；背面交叉三色旗，环铭「荣誉与祖国」。五白珐琅臂镶金边，缀绿珐琅月桂、橡叶与红果，上承立体铰接叶冠。金和银镀金，9.0×6.4厘米，76克。附Arthus Bertrand盒。", articleLink:"c011", forSale:false },
+    { id:"t026", title:"尼罗河勋章指挥官级", year:"1928", origin:"埃及", type:"勋奖章", image:"/images/treasures/t026_standard.jpg", description:"1915年创设。II型（1926年后）。主体十角银星，刻面镀金芒簇放射，上叠白珐琅五臂星。中心铭「尼罗河惠予埃及者，乃其繁荣与幸福之本源」。顶承小巧镀金王冠悬饰。800银镀金，9.5×6.4厘米，58克。附J. Lattes原盒。", articleLink:"c013", forSale:false },
+    { id:"t015", title:"荣耀勋章指挥官级", year:"约1950", origin:"突尼斯/法国", type:"勋奖章", image:"/images/treasures/t015_standard.jpg", description:"1835年创设。顶部含花结式银质连接件，主体十角星形红绿珐琅交替，其间穿插切面碎银光。中心绿色珐琅底上，覆有立体阿拉伯书法贝伊签名花押（1943–1957），悬环标巴黎珠宝商Arthus Bertrand。银质，9.0×6.0厘米，57克。附原盒。", articleLink:"c007", forSale:false },
+    { id:"t016", title:"荣誉功勋大金级勋章", year:"1990", origin:"奥地利", type:"勋奖章", image:"/images/treasures/t016_standard.jpg", description:"1952年创设。此枚为颈佩级大金质勋章。顶悬挂联邦鹰章，鹰胸环列九州省徽，下接红色珐琅马耳他十字和白色珐琅希腊十字。1990年由总统授予欧共体礼宾司司长。铜镀金，7.6×5.0厘米，31克。附原装襟扣花结及Wolfgang Reitterer原盒。", articleLink:"c008", forSale:false },
+    { id:"t019", title:"功绩勋章指挥官级", year:"约1980", origin:"意大利", type:"勋奖章", image:"/images/treasures/t019_standard.jpg", description:"1951年创设。白色珐琅希腊十字，臂端缀小球，中心金色五角星浮雕，四臂夹角各有展翅罗马鹰，顶部城塑冠悬挂，冠带嵌红白绿三色珐琅。绿色绶带镶红边。银镀金，7.4×5.5厘米，44克。附原装微缩章、襟扣花结及Johnson原盒。", forSale:false },
+    { id:"t027", title:"巴斯与大英帝国微缩勋章联排", year:"约1920", origin:"英国", type:"勋奖章", image:"/images/treasures/t027_standard.jpg", description:"左为巴斯勋章文职版，三王冠与玫瑰、蓟、三叶草同茎，环铭「三合为一」；右为大英帝国勋章I型（1937年前）指挥官级，淡蓝珐琅覆机刻底纹，中心不列颠尼亚坐像，铭「为上帝与帝国」，背面乔治五世花押。银镀金，各2.5×1.8厘米，共15克。附Spink盒。", articleLink:"c015", forSale:false },
+    { id:"t028", title:"第三共和国微缩勋章链", year:"约1910", origin:"法国/突尼斯/柬埔寨", type:"勋奖章", image:"/images/treasures/t028_standard.jpg", description:"五枚微缩章串于三股狐尾链，两端别针。自左至右：官员级学术棕榈勋章（镶玫瑰切钻与红色宝石）；官员级农业功绩勋章（金质）；劳动与社会保障部互助会银质奖章；突尼斯荣耀勋章；柬埔寨莫尼萨拉蓬勋章。8.0×3.5厘米，9.9克。", articleLink:"c016", forSale:false },
+    { id:"t002", title:"拿破仑圣赫勒拿奖章", year:"1857", origin:"法国", type:"勋奖章", image:"/images/treasures/t002_standard.jpg", description:"1857年拿破仑三世创设，授予1792至1815年间服役的拿破仑一世麾下幸存老兵。正面为拿破仑一世罗马式侧面像，头戴月桂花环，顶部帝国皇冠。背面铭文假托拿破仑遗言献给「荣耀的战友」，环以诸战役年份。法国首枚正式战役纪念章。", articleLink:"c004", forSale:false },
+    { id:"t020", title:"军事功勋铜级奖章", year:"1914–1916", origin:"奥匈帝国", type:"勋奖章", image:"/images/treasures/t020_standard.jpg", description:"1890年皇帝弗朗茨·约瑟夫一世设立，表彰军事功勋与卓越服务；铜级为创设时的唯一等级，1911年增银级。铜镀金，正面为皇帝右向侧面像，头戴月桂冠，环绕拉丁帝国全衔；背面铭「赞誉之标」，以月桂橡树混合花环环绕。由帝国皇冠悬挂，配战时红白梯纹三角绶带，无剑饰；1917年起改用卡尔一世像新型。", forSale:false },
     { id:"t003", title:"伊丽莎白二世纪念章项链", year:"1977", origin:"英国", type:"珠宝", image:"/images/treasures/t003_standard.jpg", description:"英国皇家铸币局发行，22K镀金纪念章项链，纪念1977年伊丽莎白二世登基银禧。正面为女王骑马像，环铭女王名号与年份；背面呈现帝国皇冠，辅以繁复花饰。以四爪金属框镶嵌，上接涡卷形挂环与绞绳链。附原盒。直径4.5厘米，48克。", forSale:false },
     { id:"t001", title:"历史主义十字项链", year:"约1960", origin:"美国", type:"珠宝", image:"/images/treasures/t001_standard.jpg", description:"Florenza制。镀金铸造掐丝，立体爪托，历史主义风格。自上而下为心形小吊坠、花瓣形中心座与马耳他十字主吊坠：四臂各嵌圆形琥珀色玻璃石，臂间夹马眼形同色石，中心一朵浮雕小花，边缘缀颗粒；多股链。8.1×5.1厘米，45克。", articleLink:"c002", forSale:false },
-    { id:"t007", title:"比特币镀金纪念币", year:"当代", origin:"美国", type:"纪念章", image:"/images/treasures/t007_standard.jpg", description:"镀金纪念章，正面比特币符号覆于电路板纹样之上，边缘环以英文格言。比特币以去中心化、非物质化为核心意识形态，其纪念章却沿用了最古老的中心化权力造像：镀金、圆形、铭文，以金币的形式为其竞争者黄金背书。", forSale:false },
     { id:"t009", title:"镂空三联项链", year:"约1930", origin:"捷克", type:"珠宝", image:"/images/treasures/t009_standard.jpg", description:"推测为1930年代捷克产。冲压黄铜镂空花卉三联构图，涡卷与花瓣骨架内嵌蓝色玻璃石，大中小分级排布：中央圆牌最大，嵌一粒深蓝主石与数粒浅蓝小石，两侧小牌各一粒主石，三牌相连，两端接细链。其工艺与配色符合二十世纪初波西米亚出口仿珠宝。", forSale:false },
     { id:"t012", title:"历史主义圆章项链", year:"约1960", origin:"美国", type:"珠宝", image:"/images/treasures/t012_standard.jpg", description:"Florenza制。镀金圆拱底座，爪托镶嵌深琥珀圆形主石居中，橄榄绿方形和圆形玻璃石环绕，白色仿珍珠分割冷暖色。卷草纹从中心向四方对称展开，颗粒纹边饰模拟伊特鲁里亚金工。顶接扇形镂空挂环，嵌一粒绿石，绞绳链。8.2×5.8厘米，50克。", forSale:false },
     { id:"t018", title:"镂空菱框花簇垂坠项链", year:"约1920", origin:"德国", type:"珠宝", image:"/images/treasures/t018_standard.jpg", description:"Knoll & Pregizer制，普福尔茨海姆。爱德华与装饰艺术过渡风格。链下接V形弧臂，臂面满镶铅玻璃仿钻，边缘起颗粒纹；下承单粒圆仿钻与渐窄的镂空长坠，坠内两对叶形饰托起中心六瓣花簇，簇外以仿钻勾出菱形与圆形轮廓，底垂梨形仿钻。830银，6.4×1.9厘米，7克。", articleLink:"c017", forSale:false },
@@ -72,7 +70,7 @@ const featuredIds = ["t014","r009","t018","r001","t021","t023"];
 
 const typeOrder = {
   regalia: ["仪式礼服","晚宴礼服","高级时装"],
-  treasures: ["勋章","珠宝","纪念章"]
+  treasures: ["勋奖章","珠宝"]
 };
 
 const sectionStatements = {
@@ -82,8 +80,7 @@ const sectionStatements = {
     "高级时装：军礼服语汇经由时尚工业的挪用隐入日常"
   ],
   treasures: [
-    "勋章：国家以金银、珐琅和绶带将功绩固定成为等级",
-    "珠宝：设计以历史语汇与工艺而非贵金属来说服观者",
-    "纪念章：铸章造像权力，将统治者肖像压入日常流通"
+    "勋奖章：国家以金银、珐琅和绶带将功绩固定成为等级",
+    "珠宝：设计以历史语汇与工艺而非贵金属来说服观者"
   ]
 };
