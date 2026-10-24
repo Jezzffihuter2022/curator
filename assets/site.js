@@ -374,7 +374,7 @@ function openArticle(id) {
   const a = collection.chronicles.find(c => c.id === id); if (!a) return;
   const container = document.getElementById("articleImgContainer");
   const imgEl = src => '<img src="' + src + '" alt="" loading="lazy">';
-  const imgs = [a.image, a.image2, a.image3, a.image4, a.image5, a.image6].filter(Boolean);
+  const imgs = [a.image, a.image2, a.image3, a.image4, a.image5, a.image6, a.image7, a.image8].filter(Boolean);
   if (a.imageLayout === "stack") {
     container.innerHTML = '<div class="article-img-stack">' + imgs.slice(0, 2).map(imgEl).join('') + '</div>';
   } else if (a.imageLayout === "side") {
