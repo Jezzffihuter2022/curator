@@ -60,8 +60,10 @@ CHRONICLE_FIT = {"c006b", "c015b"}
 # Group photographs used as article covers that are cut out like item covers: id -> folder
 EXTRA_CUT_OUT = {"r016": "regalia"}
 # Cut-outs that drop a part close to the ground tone (white enamel): source-pixel seeds whose enclosed transparent
-# region is filled back in. c016g: the upper arm of the Merite agricole star, enclosed by the suspension legs.
-FILL_HOLE = {"c016g": [(1436, 1500)]}
+# region is filled back in. c016g: the upper arm of the Merite agricole star, enclosed by the suspension legs;
+# c016d: the six arms of the same star seen from the front.
+FILL_HOLE = {"c016g": [(1436, 1500)],
+             "c016d": [(900, 1570), (640, 1700), (1180, 1710), (600, 2090), (1220, 2090), (900, 2250)]}
 
 
 def source(folder, name):
