@@ -3,18 +3,18 @@
 
 const collection = {
   regalia: [
-    { id:"r001", title:"皇家海军少将常礼服", year:"1982", origin:"英国", type:"仪式礼服", image:"/images/regalia/r001_standard.jpg", description:"英国皇家海军制式。海军蓝礼服毛呢，双排8枚镀金扣，扣面铸皇冠、船锚与月桂花环。一道宽金袖环上加一道带卷环的中等金环，标示少将，金线含2%黄金。Moseley & Pounsford在马岛战争中为谢菲尔德号驱逐舰舰长J. F. T. G. Salt定制。", articleLink:"c003", forSale:false },
-    { id:"r009", title:"巴尔曼珍珠刺绣长外套", year:"当代", origin:"法国", type:"高级时装", image:"/images/regalia/r009_standard.jpg", description:"巴尔曼制。香槟色织物，珍珠与水晶逐粒手工缝缀：菱形网格为底，巴洛克涡卷纹自领口沿前襟与侧缘展开，前襟两道纵向镶边带密度最高，领缘与袖口以珠串收边。宽肩、收腰、直身下摆，长度过臀，丝绸全衬里。", articleLink:"c009", forSale:false },
-    { id:"r002", title:"皇家炮兵少校梅斯礼服", year:"1992", origin:"英国", type:"晚宴礼服", image:"/images/regalia/r002_standard.jpg", description:"英国皇家炮兵制式。黑色礼服毛呢，猩红尖驳翻领为该团标志色，前襟敞开，两列各四粒金扣，袖口各三粒小扣，前摆收成尖角，军衔标于肩章。红色丝绸内衬。短身剪裁。Gieves & Hawkes于1992年8月为L. D. Bird定制。", articleLink:"c010", forSale:false },
-    { id:"r004", title:"皇家陆军医疗军团少校梅斯礼服", year:"1965", origin:"英国", type:"晚宴礼服", image:"/images/regalia/r004_standard.jpg", description:"英国皇家陆军医疗军团制式。深蓝礼服毛呢，暗樱桃红（dull cherry）礼服领与袖口为该军团标志色，前敞开，侧翼金扣，马甲同色领。杖蛇徽章标明医务兵种。短身剪裁。含外套、长裤与马甲。Alkit在1965年，为少校C. Vaughan定制，其记录有诺曼底登陆口述史。", articleLink:"c014", forSale:false },
-    { id:"r006", title:"医务军官大礼服", year:"约1931", origin:"法国", type:"仪式礼服", image:"/images/regalia/r006_standard.jpg", description:"法国陆军医务军官制式，1931年式。黑色礼服毛呢，直身长款。单排九粒镀金扣，扣面铸权杖缠蛇环以月桂。深红丝绒领与袖口，领片两侧金线手工刺绣，左橄榄枝、右蓟花；袖口三道金色织带，丝绒袖袢缀三粒小扣。金线肩绊。Thorn制于巴黎第八区。", articleLink:"c005", forSale:false },
-    { id:"r007", title:"陆军军需兵团礼服", year:"约1934", origin:"意大利", type:"仪式礼服", image:"/images/regalia/r007_standard.jpg", description:"意大利陆军军需兵团制式。黑色礼服毛呢，双排14枚倒梯形金扣铸萨伏依王室纹章，两列自上而下渐收。紫丝绒领边，领片饰金属星徽，肩章嵌萨伏依王冠金属刺绣，深蓝丝绒尖形袖口镶紫色滚边，各缀三粒小扣。紫色为军需兵团标志色。", forSale:false },
-    { id:"r003", title:"皇家空军上校梅斯礼服", year:"1956", origin:"英国", type:"晚宴礼服", image:"/images/regalia/r003_standard.jpg", description:"英国皇家空军制式。蓝灰色礼服毛呢，双排金扣铸皇冠下展翅鹰浮雕，黑色翻领。胸前飞行员刺绣徽章，对应空军基地指挥官身份。袖口四道金环标示上校军衔。短身剪裁。外套、长裤、马甲、腰封齐全。Gieves在1956年9月22日，为J. T. Jennings定制。", articleLink:"c010", forSale:false },
-    { id:"r005", title:"皇家海军少校梅斯礼服", year:"1945", origin:"英国", type:"晚宴礼服", image:"/images/regalia/r005_standard.jpg", description:"英国皇家海军制式。海军蓝礼服毛呢，镀金对扣闭合，双排镀金扣铸皇冠与船锚，尖翻领。袖口三道金环，自下而上为中、窄、中，顶环带卷环，标示少校职级，金线含2%黄金。短身剪裁。Gieves在1945年12月22日于朴茨茅斯，为M. A. Smith定制。", articleLink:"c010", forSale:false },
-    { id:"r012", title:"巴宝莉三排扣短外套", year:"当代", origin:"英国", type:"高级时装", image:"/images/regalia/r012_standard.jpg", description:"巴宝莉制。羊绒羊毛混纺，拿破仑式立领，三排共15粒盾徽浮雕金扣，肩章以单扣固定，腰侧两只盖袋，短身及腰，猩红色格纹衬里自领口内侧露出。形制取自英军骑兵与炮兵短夹克。", forSale:false },
-    { id:"r014", title:"巴宝莉骠骑兵短外套", year:"当代", origin:"英国", type:"高级时装", image:"/images/regalia/r014_standard.jpg", description:"巴宝莉制，秀场款。无领，前襟不闭合，双排各八粒银质浮雕扣配横向编织扣绊，腰侧两只盖袋，袖口各四粒小扣；短身长臂剪裁，猩红色呼应拿破仑时代军装配色。形制取法骠骑兵制服。", forSale:false },
-    { id:"r015", title:"巴宝莉切尔西战壕风衣", year:"当代", origin:"英国", type:"高级时装", image:"/images/regalia/r015_standard.jpg", description:"巴宝莉制，切尔西款。蓝灰色嘎巴甸细密棉织，近似一战制服配色。双排10粒牛角扣，小牛皮收紧带约束袖口与立领。右肩设枪挡，后背附雨挡，腰带配吊环，两侧盖袋，内衬为王室御用品牌纹章和经典巴宝莉格纹。", forSale:false },
-    { id:"r013", title:"西点军校学员大礼服", year:"约1950", origin:"美国", type:"仪式礼服", image:"/images/regalia/r013_standard.jpg", description:"美国西点军校学员制式。灰蓝色重磅羊毛，立领缀黑绳横饰，胸前三排金属扣，扣间以黑色丝绳横向连结，燕尾剪裁。袖口饰金线与黑绳结，燕尾缘饰金线，棉内衬。形制自十九世纪中期几乎未变。", forSale:false },
+    { id:"r001", title:"皇家海军少将常礼服", year:"1982", origin:"英国", type:"礼服", image:"/images/regalia/r001_standard.jpg", description:"英国皇家海军制式。海军蓝礼服毛呢，双排8枚镀金扣，扣面铸皇冠、船锚与月桂花环。一道宽金袖环上加一道带卷环的中等金环，标示少将，金线含2%黄金。Moseley & Pounsford在马岛战争中为谢菲尔德号驱逐舰舰长J. F. T. G. Salt定制。", articleLink:"c003", forSale:false },
+    { id:"r009", title:"巴尔曼珍珠刺绣长外套", year:"当代", origin:"法国", type:"时装", image:"/images/regalia/r009_standard.jpg", description:"巴尔曼制。香槟色织物，珍珠与水晶逐粒手工缝缀：菱形网格为底，巴洛克涡卷纹自领口沿前襟与侧缘展开，前襟两道纵向镶边带密度最高，领缘与袖口以珠串收边。宽肩、收腰、直身下摆，长度过臀，丝绸全衬里。", articleLink:"c009", forSale:false },
+    { id:"r002", title:"皇家炮兵少校梅斯礼服", year:"1992", origin:"英国", type:"礼服", image:"/images/regalia/r002_standard.jpg", description:"英国皇家炮兵制式。黑色礼服毛呢，猩红尖驳翻领为该团标志色，前襟敞开，两列各四粒金扣，袖口各三粒小扣，前摆收成尖角，军衔标于肩章。红色丝绸内衬。短身剪裁。Gieves & Hawkes于1992年8月为L. D. Bird定制。", articleLink:"c010", forSale:false },
+    { id:"r004", title:"皇家陆军医疗军团少校梅斯礼服", year:"1965", origin:"英国", type:"礼服", image:"/images/regalia/r004_standard.jpg", description:"英国皇家陆军医疗军团制式。深蓝礼服毛呢，暗樱桃红（dull cherry）礼服领与袖口为该军团标志色，前敞开，侧翼金扣，马甲同色领。杖蛇徽章标明医务兵种。短身剪裁。含外套、长裤与马甲。Alkit在1965年，为少校C. Vaughan定制，其记录有诺曼底登陆口述史。", articleLink:"c014", forSale:false },
+    { id:"r006", title:"医务军官大礼服", year:"约1931", origin:"法国", type:"礼服", image:"/images/regalia/r006_standard.jpg", description:"法国陆军医务军官制式，1931年式。黑色礼服毛呢，直身长款。单排九粒镀金扣，扣面铸权杖缠蛇环以月桂。深红丝绒领与袖口，领片两侧金线手工刺绣，左橄榄枝、右蓟花；袖口三道金色织带，丝绒袖袢缀三粒小扣。金线肩绊。Thorn制于巴黎第八区。", articleLink:"c005", forSale:false },
+    { id:"r007", title:"陆军军需兵团礼服", year:"约1934", origin:"意大利", type:"礼服", image:"/images/regalia/r007_standard.jpg", description:"意大利陆军军需兵团制式。黑色礼服毛呢，双排14枚倒梯形金扣铸萨伏依王室纹章，两列自上而下渐收。紫丝绒领边，领片饰金属星徽，肩章嵌萨伏依王冠金属刺绣，深蓝丝绒尖形袖口镶紫色滚边，各缀三粒小扣。紫色为军需兵团标志色。", forSale:false },
+    { id:"r003", title:"皇家空军上校梅斯礼服", year:"1956", origin:"英国", type:"礼服", image:"/images/regalia/r003_standard.jpg", description:"英国皇家空军制式。蓝灰色礼服毛呢，双排金扣铸皇冠下展翅鹰浮雕，黑色翻领。胸前飞行员刺绣徽章，对应空军基地指挥官身份。袖口四道金环标示上校军衔。短身剪裁。外套、长裤、马甲、腰封齐全。Gieves在1956年9月22日，为J. T. Jennings定制。", articleLink:"c010", forSale:false },
+    { id:"r005", title:"皇家海军少校梅斯礼服", year:"1945", origin:"英国", type:"礼服", image:"/images/regalia/r005_standard.jpg", description:"英国皇家海军制式。海军蓝礼服毛呢，镀金对扣闭合，双排镀金扣铸皇冠与船锚，尖翻领。袖口三道金环，自下而上为中、窄、中，顶环带卷环，标示少校职级，金线含2%黄金。短身剪裁。Gieves在1945年12月22日于朴茨茅斯，为M. A. Smith定制。", articleLink:"c010", forSale:false },
+    { id:"r012", title:"巴宝莉三排扣短外套", year:"当代", origin:"英国", type:"时装", image:"/images/regalia/r012_standard.jpg", description:"巴宝莉制。羊绒羊毛混纺，拿破仑式立领，三排共15粒盾徽浮雕金扣，肩章以单扣固定，腰侧两只盖袋，短身及腰，猩红色格纹衬里自领口内侧露出。形制取自英军骑兵与炮兵短夹克。", forSale:false },
+    { id:"r014", title:"巴宝莉骠骑兵短外套", year:"当代", origin:"英国", type:"时装", image:"/images/regalia/r014_standard.jpg", description:"巴宝莉制，秀场款。无领，前襟不闭合，双排各八粒银质浮雕扣配横向编织扣绊，腰侧两只盖袋，袖口各四粒小扣；短身长臂剪裁，猩红色呼应拿破仑时代军装配色。形制取法骠骑兵制服。", forSale:false },
+    { id:"r015", title:"巴宝莉切尔西战壕风衣", year:"当代", origin:"英国", type:"时装", image:"/images/regalia/r015_standard.jpg", description:"巴宝莉制，切尔西款。蓝灰色嘎巴甸细密棉织，近似一战制服配色。双排10粒牛角扣，小牛皮收紧带约束袖口与立领。右肩设枪挡，后背附雨挡，腰带配吊环，两侧盖袋，内衬为王室御用品牌纹章和经典巴宝莉格纹。", forSale:false },
+    { id:"r013", title:"西点军校学员大礼服", year:"约1950", origin:"美国", type:"礼服", image:"/images/regalia/r013_standard.jpg", description:"美国西点军校学员制式。灰蓝色重磅羊毛，立领缀黑绳横饰，胸前三排金属扣，扣间以黑色丝绳横向连结，燕尾剪裁。袖口饰金线与黑绳结，燕尾缘饰金线，棉内衬。形制自十九世纪中期几乎未变。", forSale:false },
   ],
   treasures: [
     { id:"t014", title:"伊莎贝拉天主教勋章指挥官级", year:"约1900", origin:"西班牙", type:"勋奖章", image:"/images/treasures/t014_standard.jpg", description:"1815年创设。主体为机刻红珐琅马耳他十字，其星芒氧化后幻出彩色。正面呈手绘珐琅，铭「致纯粹忠诚」；背面含王室花押，铭「为伊莎贝拉天主教女王」。顶部接绿色月桂环。银镀金，8.2×5.3厘米，50克。附Celada原盒。", articleLink:"c006", forSale:false },
@@ -69,15 +69,14 @@ const chronicleGroups = [
 const featuredIds = ["t014","r009","t018","r001","t021","t023"];
 
 const typeOrder = {
-  regalia: ["仪式礼服","晚宴礼服","高级时装"],
+  regalia: ["礼服","时装"],
   treasures: ["勋奖章","珠宝"]
 };
 
 const sectionStatements = {
   regalia: [
-    "仪式礼服：国家将权威织入礼服，通过身体完成宣示",
-    "晚宴礼服：仪式融入晚宴，权威与归属在烛光下互认",
-    "高级时装：军礼服语汇经由时尚工业的挪用隐入日常"
+    "礼服：国家将权威织入礼服，归属在烛光下互认",
+    "时装：军礼服语汇经由时尚工业的挪用隐入日常"
   ],
   treasures: [
     "勋奖章：国家以金银、珐琅和绶带将功绩固定成为等级",
