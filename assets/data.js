@@ -75,7 +75,7 @@ const typeOrder = {
 
 const sectionStatements = {
   regalia: [
-    "礼服：权威织入礼服，于典礼与烛光中宣示归属",
+    "礼服：权威织入礼服，于典礼和烛光中宣示归属",
     "时装：制服语汇经由时尚工业的挪用隐入日常"
   ],
   treasures: [
