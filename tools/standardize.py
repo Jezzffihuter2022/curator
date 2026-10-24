@@ -44,10 +44,10 @@ REMOVE_HANGER = {"r009", "r012", "r014"}
 REMOVE_STAND = {"r013"}
 # Detail photographs that show the whole object and whose cover is a cut-out are cut out the same way.
 CHRONICLE_CUT_OUT = {"c004b", "c012b", "c012c", "c012d", "c002b", "c002c", "c002d", "c015d",
-                     "c016b", "c016c", "c016d", "c016e", "c016f", "c016g"}
+                     "c016b", "c016c", "c016d", "c016e", "c016f", "c016g", "c016h"}
 # Detail photographs whose top strip shows the chain the object hangs from: the fraction of the height cut off before
 # the cut-out, just above the object's own ring.
-CROP_TOP = {}
+CROP_TOP = {"c016h": 0.04}
 # Photographs on black velvet kept in their own framing, with the velvet (and its lint) replaced by the site black
 # #161414: the object is cut out, dark velvet seen through openwork counts as ground, nothing is moved or rescaled.
 GROUND_SWAP = {"t018", "c017b", "c017c"}
