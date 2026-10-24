@@ -66,8 +66,7 @@ function renderChrome() {
       '<div class="neo-divider" style="margin-bottom:20px"><div class="nd-line"></div><div class="nd-dot"></div><div class="nd-line"></div></div>' +
       '<p><span class="en">Julian</span></p>' +
       '<p style="margin-top:10px"><button class="footer-note-link" onclick="openCuratorNote()">策展手记</button></p>' +
-      '<p style="margin-top:8px">微信联系 <span class="en">LondonHKSZ</span></p>' +
-      '<p><a href="https://curator.wangchuyao.com">curator.wangchuyao.com</a></p>' +
+      '<p style="margin-top:8px"><a href="https://curator.wangchuyao.com">curator.wangchuyao.com</a></p>' +
     '</footer>' +
 
     '<div class="curator-note-modal" id="curatorNoteModal" onclick="if(event.target===this||event.target.classList.contains(\'curator-note-modal-close\')){closeCuratorNote();}">' +
