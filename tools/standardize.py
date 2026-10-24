@@ -44,7 +44,7 @@ REMOVE_HANGER = {"r009", "r012", "r014"}
 REMOVE_STAND = {"r013"}
 # Detail photographs that show the whole object and whose cover is a cut-out are cut out the same way.
 CHRONICLE_CUT_OUT = {"c004b", "c012b", "c012c", "c012d", "c002b", "c002c", "c002d", "c015d",
-                     "c016b", "c016c", "c016d", "c016e", "c016f"}
+                     "c016b", "c016c", "c016d", "c016e", "c016f", "c016g"}
 # Detail photographs whose top strip shows the chain the object hangs from: the fraction of the height cut off before
 # the cut-out, just above the object's own ring.
 CROP_TOP = {}
@@ -59,6 +59,9 @@ CLEAN_GROUND = {"t027", "c015b"}
 CHRONICLE_FIT = {"c006b", "c015b"}
 # Group photographs used as article covers that are cut out like item covers: id -> folder
 EXTRA_CUT_OUT = {"r016": "regalia"}
+# Cut-outs that drop a part close to the ground tone (white enamel): source-pixel seeds whose enclosed transparent
+# region is filled back in. c016g: the upper arm of the Merite agricole star, enclosed by the suspension legs.
+FILL_HOLE = {"c016g": [(1436, 1500)]}
 
 
 def source(folder, name):
@@ -254,6 +257,14 @@ def cut_out(im, iid, session):
         if n: keep = lab == (1 + int(np.argmax(ndimage.sum(keep, lab, range(1, n + 1)))))
         keep = ndimage.binary_closing(ndimage.binary_fill_holes(keep), iterations=4)
         a = cv2.GaussianBlur((a * keep).astype(np.uint8), (0, 0), 1.2)
+        cut = Image.fromarray(np.dstack([rgb, a]), "RGBA")
+    if iid in FILL_HOLE:
+        lab, _ = ndimage.label(a < 128); src = np.asarray(im.convert("RGB"))
+        for x, y in FILL_HOLE[iid]:
+            hole = lab == lab[y, x]
+            if hole.any() and not (hole[0].any() or hole[-1].any() or hole[:, 0].any() or hole[:, -1].any()):
+                hole = ndimage.binary_dilation(hole, iterations=2)   # rembg blanks the colour it drops: restore it from the source
+                a = np.where(hole, 255, a).astype(np.uint8); rgb = np.where(hole[..., None], src, rgb).astype(np.uint8)
         cut = Image.fromarray(np.dstack([rgb, a]), "RGBA")
     if iid in REMOVE_HANGER:
         cut = drop_hanger(cut)
