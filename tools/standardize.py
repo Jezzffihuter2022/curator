@@ -33,11 +33,13 @@ RATIO_TOL = 0.015            # an original within this of RATIO is only resized
 STRIP_COLOUR = {"r015": ((5, 25), 60, 60)}   # tan overcoat under the trench coat
 # Items whose photograph carries a colour cast: the object's average is pulled towards neutral grey.
 NEUTRALIZE = {}                               # id -> strength 0..1
+# Cut-outs kept at the photograph's own tone: the gentle levels stretch is skipped (curator's request for t030).
+KEEP_TONE = {"t030"}
 # Items too close in tone to the warm-white ground are set on their own colour instead.
 BG_OVERRIDE = {"r009": (22, 20, 20), "t029": (22, 20, 20), "t030": (22, 20, 20)}   # pale or silver objects sit on black
 # Pendants whose chain left the photograph at the top edge: the object is set against the top of the canvas so the chain
 # runs off the frame instead of ending in the ground.
-TOP_ALIGN = {"t029"}
+TOP_ALIGN = {"t029", "t030"}
 # Garments photographed on a hanger: the hook above the shoulders is removed.
 REMOVE_HANGER = {"r009", "r012", "r014"}
 # Garments photographed on a dress form: the pole and base below the form are removed, the form stays.
@@ -275,7 +277,7 @@ def cut_out(im, iid, session):
     bbox = cut.getbbox()
     if not bbox: raise RuntimeError(f"{iid}: no object found")
     sub = cut.crop(bbox); alpha = sub.split()[3]
-    rgb = stretch(sub.convert("RGB"), alpha)
+    rgb = sub.convert("RGB") if iid in KEEP_TONE else stretch(sub.convert("RGB"), alpha)
     if iid in NEUTRALIZE: rgb = neutralize(rgb, alpha, NEUTRALIZE[iid])
     return Image.merge("RGBA", (*rgb.split(), alpha))
 
