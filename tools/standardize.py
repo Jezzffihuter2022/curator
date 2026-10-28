@@ -34,7 +34,7 @@ STRIP_COLOUR = {"r015": ((5, 25), 60, 60)}   # tan overcoat under the trench coa
 # Items whose photograph carries a colour cast: the object's average is pulled towards neutral grey.
 NEUTRALIZE = {}                               # id -> strength 0..1
 # Items too close in tone to the warm-white ground are set on their own colour instead.
-BG_OVERRIDE = {"r009": (22, 20, 20), "t029": (22, 20, 20)}   # pale or silver objects sit on black
+BG_OVERRIDE = {"r009": (22, 20, 20), "t029": (22, 20, 20), "t030": (22, 20, 20)}   # pale or silver objects sit on black
 # Pendants whose chain left the photograph at the top edge: the object is set against the top of the canvas so the chain
 # runs off the frame instead of ending in the ground.
 TOP_ALIGN = {"t029"}
