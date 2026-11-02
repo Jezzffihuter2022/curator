@@ -60,7 +60,7 @@ CLEAN_GROUND = {"t027", "c015b"}
 # detail photographs kept on their own (textured) ground but still brought to RATIO, like a KEEP_BACKGROUND cover
 CHRONICLE_FIT = {"c006b", "c015b"}
 # Group photographs used as article covers that are cut out like item covers: id -> folder
-EXTRA_CUT_OUT = {"r016": "regalia", "c018c": "chronicles"}   # c018c: back of t031, a landscape whole-object view cut out like its cover
+EXTRA_CUT_OUT = {"r016": "regalia"}   # c018c (back of t031) is cut out by hand onto a 3:2 canvas, see the site manual
 # Convex objects whose mask loses a bite at the edge (dark leather read as ground): fill the mask to its convex hull and take the colour from the source.
 CONVEX_FILL = {"c018c"}
 # Cut-outs that drop a part close to the ground tone (white enamel): source-pixel seeds whose enclosed transparent
