@@ -60,7 +60,9 @@ CLEAN_GROUND = {"t027", "c015b"}
 # detail photographs kept on their own (textured) ground but still brought to RATIO, like a KEEP_BACKGROUND cover
 CHRONICLE_FIT = {"c006b", "c015b"}
 # Group photographs used as article covers that are cut out like item covers: id -> folder
-EXTRA_CUT_OUT = {"r016": "regalia"}
+EXTRA_CUT_OUT = {"r016": "regalia", "c018c": "chronicles"}   # c018c: back of t031, a landscape whole-object view cut out like its cover
+# Convex objects whose mask loses a bite at the edge (dark leather read as ground): fill the mask to its convex hull and take the colour from the source.
+CONVEX_FILL = {"c018c"}
 # Cut-outs that drop a part close to the ground tone (white enamel): source-pixel seeds whose enclosed transparent
 # region is filled back in. c016g: the upper arm of the Merite agricole star, enclosed by the suspension legs;
 # c016d: the six arms of the same star seen from the front.
@@ -269,6 +271,12 @@ def cut_out(im, iid, session):
             if hole.any() and not (hole[0].any() or hole[-1].any() or hole[:, 0].any() or hole[:, -1].any()):
                 hole = ndimage.binary_dilation(hole, iterations=2)   # rembg blanks the colour it drops: restore it from the source
                 a = np.where(hole, 255, a).astype(np.uint8); rgb = np.where(hole[..., None], src, rgb).astype(np.uint8)
+        cut = Image.fromarray(np.dstack([rgb, a]), "RGBA")
+    if iid in CONVEX_FILL:
+        hull = cv2.convexHull(cv2.findNonZero((a >= 128).astype(np.uint8)))
+        full = np.zeros_like(a); cv2.fillConvexPoly(full, hull, 255)
+        gap = (full > 0) & (a < 255); src = np.asarray(im.convert("RGB"))
+        a = np.where(gap, 255, a).astype(np.uint8); rgb = np.where(gap[..., None], src, rgb).astype(np.uint8)
         cut = Image.fromarray(np.dstack([rgb, a]), "RGBA")
     if iid in REMOVE_HANGER:
         cut = drop_hanger(cut)
