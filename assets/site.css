@@ -50,8 +50,6 @@ body{font-family:var(--serif);font-size:var(--fs-body);background:var(--bg-prima
 .section-after-divider{padding-bottom:20px;}
 
 .curator-statement{font-family:var(--serif);font-size:var(--fs-body);line-height:2.2;color:var(--heading-gold);max-width:580px;margin:0 auto;text-align:center;padding:12px 0 28px;}
-.cabinet-statement{font-family:var(--serif);font-size:var(--fs-body);line-height:2;color:var(--heading-gold);max-width:580px;margin:0 auto;text-align:center;padding:14px 0 0;}
-.cabinet-section-header{text-align:center;padding:12px 0 8px;}
 
 .featured-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding:8px 0;}
 /* home page: eight items. Wide screens: four per row in a wider container, so each card (and its title) is as wide as a
@@ -69,6 +67,9 @@ body{font-family:var(--serif);font-size:var(--fs-body);background:var(--bg-prima
 .item-image{width:100%;background:var(--bg-warm);display:block;overflow:hidden;}
 .item-image img{width:100%;height:auto;display:block;transition:transform 0.6s;}
 .item-card:hover .item-image img{transform:scale(1.03);}
+/* keyboard focus ring for cards, gallery tiles and article rows (a11y); mouse and touch show none */
+.item-card:focus,.gallery-item:focus,.chronicle-row:focus{outline:none;}
+.item-card:focus-visible,.gallery-item:focus-visible,.chronicle-row:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
 .item-placeholder{font-family:var(--latin);font-size:42px;color:var(--border);}
 .item-info{padding:13px 0 4px;}
 .item-title{font-family:var(--serif);font-size:var(--fs-item);font-weight:500;color:var(--item-title);line-height:1.65;}
@@ -82,14 +83,6 @@ body{font-family:var(--serif);font-size:var(--fs-body);background:var(--bg-prima
 .filter-btn:hover{border-color:var(--text-muted);color:var(--text-secondary);}
 .filter-btn.active{border-color:var(--gold);color:var(--gold);background:var(--gold-glow);}
 
-.chronicle-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding:8px 0;}
-.chronicle-card{background:var(--bg-card);border:1px solid var(--border);border-radius:3px;overflow:hidden;cursor:pointer;transition:all 0.35s;}
-.chronicle-card:hover{border-color:var(--gold);box-shadow:0 6px 24px rgba(0,0,0,0.06);transform:translateY(-3px);}
-.chronicle-card .card-img{width:100%;aspect-ratio:1/1;overflow:hidden;background:var(--bg-warm);}
-.chronicle-card .card-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s;}
-.chronicle-card:hover .card-img img{transform:scale(1.03);}
-.chronicle-card .card-info{padding:14px 16px 12px;border-bottom:1px solid var(--border-light);}
-.chronicle-card .card-title{font-family:var(--serif);font-size:var(--fs-body);font-weight:500;color:var(--item-title);line-height:1.7;}
 .article-modal{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:10000;background:rgba(0,0,0,0.6);backdrop-filter:blur(6px);overflow-y:auto;padding:40px 20px;}
 .article-modal.open{display:block;}
 .article-modal-inner{max-width:1080px;margin:0 auto;background:var(--bg-primary);border-radius:4px;padding:40px 36px;position:relative;box-shadow:0 20px 60px rgba(0,0,0,0.2);}
@@ -201,8 +194,6 @@ body{font-family:var(--serif);font-size:var(--fs-body);background:var(--bg-prima
 .curator-note-modal-close{position:absolute;top:24px;right:28px;font-size:var(--ctrl);line-height:1;color:var(--text-muted);cursor:pointer;background:none;border:none;transition:color 0.2s;}
 .curator-note-modal-close:hover{color:var(--text-primary);}
 
-/* conversation modal */
-
 @media(max-width:640px){
   /* essays fill the phone screen: no grey margin, one body character of side padding as on the grid pages */
   .article-modal{padding:0;}
@@ -213,7 +204,7 @@ body{font-family:var(--serif);font-size:var(--fs-body);background:var(--bg-prima
   :root{--fs-small:13px; --fs-body:15px; --fs-item:16px; --fs-title:20px; --fs-site:24px; --ctrl:38px; --ctrl-nav:48px; --edge:15px;}
   .header{padding:36px 16px 24px;}.header h1{letter-spacing:4px;}
   .tabs-bar{justify-content:center;padding:0 8px;}.tab-btn{padding:13px 14px;font-size:var(--fs-body);}
-  .featured-grid,.featured-grid.cabinet-grid{grid-template-columns:repeat(2,1fr);gap:12px;}.chronicle-grid{grid-template-columns:repeat(2,1fr);gap:12px;}.gallery-grid{grid-template-columns:repeat(3,1fr);gap:6px;}
+  .featured-grid,.featured-grid.cabinet-grid{grid-template-columns:repeat(2,1fr);gap:12px;}.gallery-grid{grid-template-columns:repeat(3,1fr);gap:6px;}
   .main{padding:0 var(--edge) 40px;}.item-card{padding:7px;}.item-info{padding:9px 0 2px;}
   .neo-divider{width:70%;}
   /* phone lightbox: image sized so that title, text and button fit on one screen; scrolls only if they cannot */
@@ -226,3 +217,4 @@ body{font-family:var(--serif);font-size:var(--fs-body);background:var(--bg-prima
   .lightbox-close{position:fixed;}
 }
 @media(max-width:380px){ .lightbox-desc{font-size:var(--fs-body);} }
+.lightbox.compact .lightbox-desc{font-size:var(--fs-body);}   /* phones under 720 px tall, see fitLightbox */

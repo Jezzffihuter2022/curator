@@ -41,8 +41,8 @@ function renderChrome() {
     '<nav class="tabs-container"><div class="tabs-bar">' + nav + '</div></nav>' +
     '<div class="main"><div class="tab-content" id="page"></div></div>' +
 
-    '<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">' +
-      '<button class="lightbox-close" onclick="closeLightbox(event)">✕</button>' +
+    '<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-labelledby="lightboxTitle" onclick="closeLightbox(event)">' +   /* a11y: dialog semantics */
+      '<button class="lightbox-close" onclick="closeLightbox(event)" aria-label="关闭">✕</button>' +
       '<button class="lightbox-nav lightbox-prev" id="lightboxPrev" onclick="event.stopPropagation();stepLightbox(-1)" aria-label="上一件">‹</button>' +
       '<button class="lightbox-nav lightbox-next" id="lightboxNext" onclick="event.stopPropagation();stepLightbox(1)" aria-label="下一件">›</button>' +
       '<img id="lightboxImg" src="" alt="">' +
@@ -51,9 +51,9 @@ function renderChrome() {
       '</div>' +
     '</div>' +
 
-    '<div class="article-modal" id="articleModal" onclick="closeArticle(event)">' +
+    '<div class="article-modal" id="articleModal" role="dialog" aria-modal="true" aria-labelledby="articleTitle" onclick="closeArticle(event)">' +   /* a11y: dialog semantics */
       '<div class="article-modal-inner" onclick="event.stopPropagation()">' +
-        '<button class="article-modal-close" onclick="closeArticle(event)">✕</button>' +
+        '<button class="article-modal-close" onclick="closeArticle(event)" aria-label="关闭">✕</button>' +
         '<div class="article-modal-title" id="articleTitle"></div>' +
         '<div class="article-modal-date" id="articleDate"></div>' +
         '<div id="articleImgContainer"></div>' +
@@ -69,8 +69,8 @@ function renderChrome() {
       '<p style="margin-top:8px"><a href="https://curator.wangchuyao.com">curator.wangchuyao.com</a></p>' +
     '</footer>' +
 
-    '<div class="curator-note-modal" id="curatorNoteModal" onclick="if(event.target===this||event.target.classList.contains(\'curator-note-modal-close\')){closeCuratorNote();}">' +
-      '<button class="curator-note-modal-close">✕</button>' +
+    '<div class="curator-note-modal" id="curatorNoteModal" role="dialog" aria-modal="true" aria-label="策展手记" onclick="if(event.target===this||event.target.classList.contains(\'curator-note-modal-close\')){closeCuratorNote();}">' +   /* a11y: dialog semantics */
+      '<button class="curator-note-modal-close" aria-label="关闭">✕</button>' +
       '<div class="curator-note-modal-inner" onclick="event.stopPropagation()">' +
         '<div class="curator-note-modal-title">策展手记</div>' +
         curatorNote +
@@ -79,8 +79,35 @@ function renderChrome() {
 }
 
 /* ---------- Footer modals ---------- */
-function openCuratorNote() { document.getElementById("curatorNoteModal").classList.add("open"); document.body.style.overflow = "hidden"; }
-function closeCuratorNote() { document.getElementById("curatorNoteModal").classList.remove("open"); document.body.style.overflow = ""; }
+function openCuratorNote() { document.getElementById("curatorNoteModal").classList.add("open"); document.body.style.overflow = "hidden"; focusDialog("curatorNoteModal"); }
+function closeCuratorNote() { document.getElementById("curatorNoteModal").classList.remove("open"); document.body.style.overflow = ""; restoreFocus(); }
+
+/* ---------- Keyboard focus for dialogs (a11y) ----------
+   Opening a dialog moves focus to its close button; closing returns focus to the card or link
+   that opened it. Tab and Shift+Tab cycle within the open dialog. */
+let focusBeforeDialog = null;
+const dialogIds = ["lightbox", "articleModal", "curatorNoteModal"];
+function focusDialog(id) {
+  if (document.getElementById(id).contains(document.activeElement)) return;   /* stepping inside the lightbox keeps focus where it is */
+  if (!document.activeElement || document.activeElement === document.body) return;   /* opened from a link on load: no opener, and a focus ring on the cross would look stray */
+  if (!dialogIds.some(d => d !== id && document.getElementById(d).contains(document.activeElement))) focusBeforeDialog = document.activeElement;
+  const close = document.getElementById(id).querySelector("button");
+  if (close) close.focus({ preventScroll: true });
+}
+function restoreFocus() {
+  if (dialogIds.some(d => document.getElementById(d).classList.contains("open"))) return;
+  if (focusBeforeDialog && document.contains(focusBeforeDialog)) focusBeforeDialog.focus({ preventScroll: true });
+  focusBeforeDialog = null;
+}
+function openDialog() { return dialogIds.map(d => document.getElementById(d)).find(el => el.classList.contains("open")) || null; }
+function trapTab(e, dialog) {
+  const items = [...dialog.querySelectorAll('button, a[href], [tabindex="0"]')].filter(el => el.offsetParent !== null || el === document.activeElement);
+  if (items.length === 0) return;
+  const first = items[0], last = items[items.length - 1];
+  if (!dialog.contains(document.activeElement)) { e.preventDefault(); first.focus(); }
+  else if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+  else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+}
 
 /* ---------- Helpers ---------- */
 function parseYear(y) {
@@ -92,7 +119,7 @@ function parseYear(y) {
 function renderCard(item, index, hideTags) {
   const img = item.image ? '<img src="' + item.image + '" alt="' + item.title + '" loading="lazy">' : '<span class="item-placeholder">✦</span>';
   const tag = (!hideTags && item.forSale) ? '<span class="item-tag sale">可出让</span>' : '';
-  return '<div class="item-card" style="animation:fadeIn 0.4s ease ' + (index * 0.06) + 's both" onclick="openLightbox(\'' + item.id + '\')">' +
+  return '<div class="item-card" tabindex="0" role="button" style="animation:fadeIn 0.4s ease ' + (index * 0.06) + 's both" onclick="openLightbox(\'' + item.id + '\')">' +
     '<div class="item-image">' + img + '</div><div class="item-info"><div class="item-title">' + item.title + '</div>' +
     '<div class="item-meta"><span>' + (item.origin || '') + '</span><span>' + (item.year || '') + '</span>' + tag + '</div></div></div>';
 }
@@ -145,7 +172,7 @@ function articleDeck(a) {
 
 function renderChronicleRow(a) {
   const deck = articleDeck(a);
-  return '<div class="chronicle-row" onclick="openArticle(\'' + a.id + '\')">' +
+  return '<div class="chronicle-row" tabindex="0" role="button" onclick="openArticle(\'' + a.id + '\')">' +
     '<div class="chronicle-row-title">' + a.title + '</div>' +
     (deck ? '<div class="chronicle-row-deck">' + deck + '</div>' : '') +
     '</div>';
@@ -189,7 +216,7 @@ function renderGallery() {
   lightboxIds = items.map(i => i.id);
   document.getElementById("page").innerHTML =
     '<div class="gallery-grid" style="padding-top:var(--edge)">' +
-      items.map(i => '<div class="gallery-item" onclick="openLightbox(\'' + i.id + '\')"><img src="' + i.image + '" alt="' + i.title + '" loading="lazy" onerror="this.parentNode.style.display=\'none\'"></div>').join("") +
+      items.map(i => '<div class="gallery-item" tabindex="0" role="button" onclick="openLightbox(\'' + i.id + '\')"><img src="' + i.image + '" alt="' + i.title + '" loading="lazy" onerror="this.parentNode.style.display=\'none\'"></div>').join("") +
     '</div>';
 }
 
@@ -283,6 +310,7 @@ function openLightbox(id) {
   document.getElementById("lightbox").classList.add("open");
   document.body.style.overflow = 'hidden';
   setHash(id);
+  focusDialog("lightbox");   /* a11y */
   prepareFonts().then(fitLightbox);
 }
 
@@ -301,6 +329,10 @@ function fitLightbox() {
      height (100svh: the height with the toolbars shown) is the same every time and always fits. */
   const availH = smallViewportHeight() - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
   const availW = lb.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+  /* Phones whose small viewport is under 720 px tall (most iPhones with Safari's toolbars shown, e.g. 390x664) cannot fit the
+     longest entry at 18 px without the image hitting its 58% floor, which pushed the button below the screen. There the
+     description drops to the phone body size (15 px), as on phones 380 px wide or less. */
+  lb.classList.toggle("compact", window.innerWidth <= 640 && availH + parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom) < 720);
   const key = availW + "x" + availH;
   if (!lightboxFit || lightboxFit.key !== key) {
     /* measure the worst case: every item's title and description rendered at the candidate width, with the article button shown */
@@ -365,6 +397,7 @@ function closeLightbox(e) {
   if (e.target === document.getElementById("lightbox") || e.target.classList.contains('lightbox-close')) {
     document.getElementById("lightbox").classList.remove("open"); document.body.style.overflow = '';
     setHash("");
+    restoreFocus();   /* a11y */
   }
 }
 
@@ -372,7 +405,7 @@ function closeLightbox(e) {
 function openArticle(id) {
   const a = collection.chronicles.find(c => c.id === id); if (!a) return;
   const container = document.getElementById("articleImgContainer");
-  const imgEl = src => '<img src="' + src + '" alt="" loading="lazy">';
+  const imgEl = src => '<img src="' + src + '" alt="' + a.title + '" loading="lazy">';   /* a11y: was alt="" */
   const imgs = [a.image, a.image2, a.image3, a.image4, a.image5, a.image6, a.image7, a.image8].filter(Boolean);
   if (a.imageLayout === "stack") {
     container.innerHTML = '<div class="article-img-stack">' + imgs.slice(0, 2).map(imgEl).join('') + '</div>';
@@ -388,7 +421,7 @@ function openArticle(id) {
       '<div class="article-img-grid3left-stack">' + imgs.slice(1, 3).map(imgEl).join('') + '</div>' +
     '</div>';
   } else if (a.image) {
-    container.innerHTML = '<img class="article-modal-img" src="' + a.image + '" alt="">';
+    container.innerHTML = '<img class="article-modal-img" src="' + a.image + '" alt="' + a.title + '">';   /* a11y: was alt="" */
   } else {
     container.innerHTML = '';
   }
@@ -407,12 +440,14 @@ function openArticle(id) {
   document.getElementById("articleModal").classList.add("open");
   document.body.style.overflow = "hidden";
   setHash(id);
+  focusDialog("articleModal");   /* a11y */
 }
 
 function closeArticle(e) {
   if (e.target === document.getElementById("articleModal") || e.target.classList.contains("article-modal-close")) {
     document.getElementById("articleModal").classList.remove("open"); document.body.style.overflow = "";
     setHash("");
+    restoreFocus();   /* a11y */
   }
 }
 
@@ -431,6 +466,9 @@ function openFromHash() {
 
 window.addEventListener("hashchange", openFromHash);
 document.addEventListener("keydown", e => {
+  /* a11y: Enter or Space opens a focused card, gallery tile or article row; Tab stays inside an open dialog */
+  if ((e.key === "Enter" || e.key === " ") && e.target.getAttribute && e.target.getAttribute("role") === "button") { e.preventDefault(); e.target.click(); return; }
+  if (e.key === "Tab") { const d = openDialog(); if (d) trapTab(e, d); return; }
   const lb = document.getElementById("lightbox"), am = document.getElementById("articleModal");
   if (lb.classList.contains("open") && (e.key === "ArrowLeft" || e.key === "ArrowRight")) { stepLightbox(e.key === "ArrowLeft" ? -1 : 1); return; }
   if (e.key !== "Escape") return;
