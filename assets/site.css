@@ -54,7 +54,14 @@ body{font-family:var(--serif);font-size:var(--fs-body);background:var(--bg-prima
 .cabinet-section-header{text-align:center;padding:12px 0 8px;}
 
 .featured-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding:8px 0;}
-.featured-grid.cabinet-grid{grid-template-columns:repeat(4,1fr);}   /* home page: eight items, four per row on desktop */
+/* home page: eight items. Wide screens: four per row in a wider container, so each card (and its title) is as wide as a
+   three-column card elsewhere (960 - 2x17 edge - 2x18 gap)/3 = 297px; 4x297 + 3x18 + 2x17 = 1276px.
+   Below 1240px four cards would be too narrow for a one-line title, so two per row (no empty cell with eight items). */
+.featured-grid.cabinet-grid{grid-template-columns:repeat(2,1fr);}
+@media(min-width:1240px){
+  body[data-page="cabinet"] .main{max-width:1276px;}
+  .featured-grid.cabinet-grid{grid-template-columns:repeat(4,1fr);}
+}
 .item-card{background:var(--bg-card);border:1px solid var(--border);border-radius:3px;overflow:hidden;cursor:pointer;transition:all 0.35s;position:relative;padding:10px;}
 .item-card:hover{border-color:var(--gold);box-shadow:0 6px 24px rgba(0,0,0,0.06),0 0 0 1px var(--gold);transform:translateY(-3px);}
 .item-card::before{content:'';position:absolute;top:0;left:15%;right:15%;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0;transition:opacity 0.35s;}
