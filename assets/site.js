@@ -110,7 +110,7 @@ function renderCabinet() {
     '<div class="section-header" style="padding-top:20px;padding-bottom:8px"><div class="section-title">甄选珍奇</div></div>' +
     '<div class="type-statement cabinet-intro">' + cabinetIntro + '</div>' +
     divider +
-    '<div class="featured-grid">' + featured.map((i, n) => renderCard(i, n, true)).join("") + '</div>';
+    '<div class="featured-grid cabinet-grid">' + featured.map((i, n) => renderCard(i, n, true)).join("") + '</div>';
 }
 
 function renderCollection(key) {

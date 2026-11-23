@@ -70,7 +70,7 @@ const chronicleGroups = [
 ];
 
 /* Items shown on the home page, in display order. */
-const featuredIds = ["t014","r009","t018","r001","t021","t023"];
+const featuredIds = ["t014","r009","t018","r001","t021","t023","t026","r004"];
 
 const typeOrder = {
   regalia: ["礼服","时装"],
