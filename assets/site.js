@@ -16,7 +16,6 @@ const pageByKey = Object.fromEntries(pages.map(p => [p.key, p]));
 const currentPage = document.body.dataset.page || "cabinet";
 
 const cabinetIntro = '多类精品并置于此，以数件勾勒整体';
-const chroniclesIntro = '以器物解码<a class="group-link" href="#group-craft">审美</a>、<a class="group-link" href="#group-person">身份</a>与<a class="group-link" href="#group-power">权力</a>';
 const curatorNote = '我对礼服、勋章与仪式器物的兴趣由来已久，到伦敦后才发现这些东西可以被实际收藏。通过这个网站，我把收藏的礼服、时装、勋章与珠宝放在同一视野中。当它们并置，审美趣味、制度等级与权力象征之间的关联会更容易被看见。器物不仅记录历史，也通过材质、造型和佩戴方式塑造观看者的判断。<br><br>这种呈现带有明确的个人取向。我偏爱承载密集历史与仪式感的器物，把制度性的威严转成可见、可感的视觉效果。一些有争议的历史符号，或许会被看成风格；某些沉重的等级秩序，也容易显得优雅。<br><br>因此，我想呈现的不只是器物本身，也包括观看它们的方式。它不试图给出标准答案，只保留一种仍在形成中的判断。';
 
 const divider = '<div class="neo-divider section-after-divider"><div class="nd-line"></div><div class="nd-dot"></div><div class="nd-line"></div></div>';
@@ -161,8 +160,7 @@ function renderChronicles() {
   const ungrouped = collection.chronicles.filter(a => !chronicleGroups.some(g => g.key === a.group));
   if (ungrouped.length > 0) grouped.push({ key: "other", label: "其他", statement: "", items: ungrouped });
   document.getElementById("page").innerHTML =
-    '<div class="section-header"><div class="section-title">藏品札记</div></div>' +
-    '<div class="type-statement">' + chroniclesIntro + '</div>' +
+    '<div class="section-header" style="padding-bottom:22px"><div class="section-title">藏品札记</div></div>' +   /* no intro line: a little room before the divider */
     divider +
     '<div class="chronicle-columns">' + grouped.map(g =>
       '<section class="chronicle-group" id="group-' + g.key + '">' +
@@ -236,7 +234,6 @@ function renderText() {
     '<p class="text-toc"><a href="#sec-intro">导语</a> · <a href="#sec-regalia">礼服与华服</a> · <a href="#sec-treasures">勋章与珠宝</a> · <a href="#sec-chronicles">藏品札记</a> · <a href="#sec-note">策展手记</a></p>' +
     '<h2 class="text-h2" id="sec-intro">导语</h2>' +
     '<p class="text-statement">首页：' + cabinetIntro + '</p>' +
-    '<p class="text-statement">札记：' + strip(chroniclesIntro) + '</p>' +
     section("regalia") + section("treasures") +
     '<h2 class="text-h2" id="sec-chronicles">藏品札记</h2>' +
     groups.map(g => '<h3 class="text-h3">' + g.label + '</h3>' + g.items.map(articleBlock).join('')).join('') +
