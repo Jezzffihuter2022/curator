@@ -148,8 +148,6 @@ body{font-family:var(--serif);font-size:var(--fs-body);background:var(--bg-prima
 
 .inline-link{color:var(--gold);text-decoration:underline;}
 
-.group-link{color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(138,64,56,0.35);transition:border-color 0.2s;}
-.group-link:hover{border-bottom-color:var(--gold);}
 
 /* chronicle lists */
 .chronicle-list{max-width:640px;margin:0 auto;padding:6px 0 4px;}
