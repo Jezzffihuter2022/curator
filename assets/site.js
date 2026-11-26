@@ -136,10 +136,13 @@ function renderCollection(key) {
 }
 
 function articleDeck(a) {
-  /* the objects an article is about, as "title · origin · year" */
+  /* the objects an article is about: one object "title · origin · year"; two objects "title · origin" each (no year,
+     to keep one line); three or more, the titles. An article's own `deck` field, when present, replaces all of this. */
+  if (a.deck) return a.deck;
   const linked = allItems().filter(i => i.articleLink === a.id).sort((x, y) => parseYear(x.year) - parseYear(y.year));
   if (linked.length === 0) return '';
   if (linked.length > 2) return linked.map(i => i.title).join('、');
+  if (linked.length === 2) return linked.map(i => [i.title, i.origin].filter(Boolean).join(' · ')).join('；');
   return linked.map(i => [i.title, i.origin, i.year].filter(Boolean).join(' · ')).join('；');
 }
 
