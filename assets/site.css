@@ -59,8 +59,14 @@ body{font-family:var(--serif);font-size:var(--fs-body);background:var(--bg-prima
    Below 1240px four cards would be too narrow for a one-line title, so two per row (no empty cell with eight items). */
 .featured-grid.cabinet-grid{grid-template-columns:repeat(2,1fr);}
 @media(min-width:1240px){
-  body[data-page="cabinet"] .main{max-width:1276px;}
-  .featured-grid.cabinet-grid{grid-template-columns:repeat(4,1fr);}
+  /* wide screens: home, both section pages, the gallery and the articles share the 1276px container;
+     item grids are four per row, cards as wide as on the home page; articles sit in three columns, one per group */
+  body[data-page="cabinet"] .main,body[data-page="treasures"] .main,body[data-page="regalia"] .main,
+  body[data-page="gallery"] .main,body[data-page="chronicles"] .main{max-width:1276px;}
+  .featured-grid.cabinet-grid,body[data-page="treasures"] .featured-grid,body[data-page="regalia"] .featured-grid{grid-template-columns:repeat(4,1fr);}
+  .chronicle-columns{display:grid;grid-template-columns:repeat(3,1fr);gap:0 40px;align-items:start;}
+  .chronicle-columns .chronicle-group{padding-top:4px;}
+  .chronicle-columns .chronicle-list{max-width:none;}
 }
 .item-card{background:var(--bg-card);border:1px solid var(--border);border-radius:3px;overflow:hidden;cursor:pointer;transition:all 0.35s;position:relative;padding:10px;}
 .item-card:hover{border-color:var(--gold);box-shadow:0 6px 24px rgba(0,0,0,0.06),0 0 0 1px var(--gold);transform:translateY(-3px);}

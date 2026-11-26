@@ -161,13 +161,13 @@ function renderChronicles() {
     '<div class="section-header"><div class="section-title">藏品札记</div></div>' +
     '<div class="type-statement">' + chroniclesIntro + '</div>' +
     divider +
-    grouped.map(g =>
+    '<div class="chronicle-columns">' + grouped.map(g =>
       '<section class="chronicle-group" id="group-' + g.key + '">' +
         '<div class="chronicle-group-title">' + g.label + '</div>' +
         (g.statement ? '<div class="chronicle-group-statement">' + g.statement + '</div>' : '') +
         '<div class="chronicle-list">' + g.items.map(a => renderChronicleRow(a)).join("") + '</div>' +
       '</section>'
-    ).join("");
+    ).join("") + '</div>';
 }
 
 function renderDepartures() {
