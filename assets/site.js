@@ -160,9 +160,7 @@ function renderChronicles() {
   const ungrouped = collection.chronicles.filter(a => !chronicleGroups.some(g => g.key === a.group));
   if (ungrouped.length > 0) grouped.push({ key: "other", label: "其他", statement: "", items: ungrouped });
   document.getElementById("page").innerHTML =
-    '<div class="section-header" style="padding-bottom:22px"><div class="section-title">藏品札记</div></div>' +   /* no intro line: a little room before the divider */
-    divider +
-    '<div class="chronicle-columns">' + grouped.map(g =>
+    '<div class="chronicle-columns" style="padding-top:var(--edge)">'   /* no page title or divider: the three group headings open the page, as on the gallery */ + grouped.map(g =>
       '<section class="chronicle-group" id="group-' + g.key + '">' +
         '<div class="chronicle-group-title">' + g.label + '</div>' +
         (g.statement ? '<div class="chronicle-group-statement">' + g.statement + '</div>' : '') +
